@@ -16,17 +16,15 @@ def stl_to_npz(filepath_info):
 
     # STL laden
     stl_mesh = mesh.Mesh.from_file(filepath)
-    triangles = stl_mesh.vectors
-    vertices = triangles.reshape(-1, 3)
+    vertices = np.array(stl_mesh.vectors).reshape(-1, 3)
     faces = np.arange(len(vertices)).reshape(-1, 3)
 
-    unique_vertices, inverse_indices = np.unique(vertices, axis=0, return_inverse=True)
-    indices = inverse_indices.reshape(-1, 3)
+    
+    indices = faces.flatten().astype(np.uint32)
 
-    normals = util.compute_normals(unique_vertices, indices.flatten())
 
     output_filepath = os.path.join(target_dir, f"{filename}.npz")
-    np.savez(output_filepath, vertices=unique_vertices, indices= faces.flatten().astype(np.uint32), normals=normals)
+    np.savez(output_filepath, vertices=vertices, indices=indices, normals=[1,2,3])
     print(f"...parsed {robot_name}/{filename}.stl")
 
 if __name__ == "__main__":
