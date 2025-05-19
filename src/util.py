@@ -7,8 +7,9 @@ from pythreejs import *
 from pythreejs import SpriteMaterial, Sprite
 import time
 from scipy.spatial.transform import Rotation as R, Slerp
-from stl import mesh
 import os
+import manager
+from collections.abc import Iterable
 
 
 
@@ -391,11 +392,14 @@ def create_grid_XZ(size, density):
 
 
 
-def apply_rot_matrix(mesh, rot_mat):
+def apply_rot_matrix(obj, rot_mat):
     '''
-    Wendet eine Rotationsmatrix auf ein Mesh-Objekt an, indem die Matrix in ein Quaternion umgewandelt wird und auf das bestehende Quaternion des Meshs angewendet wird.
+    Wendet eine Rotationsmatrix auf ein Objekt an, indem die Matrix in ein Quaternion umgewandelt wird und auf das bestehende Quaternion des Meshs angewendet wird.
+    Das Objekt musse entweder:
+    - ein Attribut oder eine Methode `get_renderable()` besitzen, das ein pythreejs-kompatibles Objekt zurückgibt,
+    - oder selbst direkt ein pythreejs-kompatibles Objekt sein (z.B. Mesh, Group, Line, etc.).
 
-    :param mesh: Das Mesh-Objekt, auf das die Rotation angewendet werden soll. Erwartet wird, dass das Mesh ein `quaternion`-Attribut besitzt.
+    :param obj: Ein renderbares Objekt oder ein Wrapper mit `get_renderable()`, auf das die Rotation angewendet werden soll. Erwartet wird, dass das Mesh ein `quaternion`-Attribut besitzt.
     :param rot_mat: Die Rotationsmatrix, die auf das Mesh angewendet werden soll. Muss eine 3x3 Matrix sein.
     '''
     if isinstance(rot_mat,(sp.Basic, sp.MatrixBase)):
@@ -404,8 +408,12 @@ def apply_rot_matrix(mesh, rot_mat):
     r = R.from_matrix(rot_mat)
     q = r.as_quat()  # Reihenfolge: [x, y, z, w]
 
+    renderable = obj
+    if (hasattr(obj, 'get_renderable')):
+        renderable = obj.get_renderable()
+
     # Setze Quaternion (pythreejs erwartet [w, x, y, z])
-    mesh.quaternion = quaternion_multiply((q[0], q[1], q[2], q[3]), mesh.quaternion)
+    renderable.quaternion = quaternion_multiply((q[0], q[1], q[2], q[3]), renderable.quaternion)
 
 
 
@@ -483,18 +491,26 @@ def create_cylinder(pos, radiusTop=1, radiusBottom=1, height=2, radialSegments=3
 
 
 
-def apply_rot_matrix_animated(mesh, rot_mat, speed=100, show_rot_axis=True):
+def apply_rot_matrix_animated(obj, rot_mat, speed=100, show_rot_axis=True):
     '''
-    Wendet eine Rotationsmatrix auf ein Mesh an und rotiert es animiert mit einer gegebenen Geschwindigkeit.
+    Wendet eine Rotationsmatrix auf ein Objekt an und rotiert es animiert mit einer gegebenen Geschwindigkeit.
     Dabei kann optional eine Rotationsachse angezeigt werden.
 
-    :param mesh: Das Mesh, das rotiert werden soll.
+    Das Objekt musse entweder:
+    - ein Attribut oder eine Methode `get_renderable()` besitzen, das ein pythreejs-kompatibles Objekt zurückgibt,
+    - oder selbst direkt ein pythreejs-kompatibles Objekt sein (z.B. Mesh, Group, Line, etc.).
+
+    :param obj: Das Objekt, das rotiert werden soll.
     :param rot_mat: Die Rotationsmatrix, die auf das Mesh angewendet werden soll.
     :param speed: Die Geschwindigkeit der Animation, angegeben als Anzahl der Frames pro Sekunde. Standardwert ist 100.
     :param show_rot_axis: Ein Boolean-Wert, der angibt, ob die Rotationsachse angezeigt werden soll. Standardwert ist `True`.
     '''
     if isinstance(rot_mat,(sp.Basic, sp.MatrixBase)):
         rot_mat.evalf()
+
+    renderable = obj
+    if (hasattr(obj, 'get_renderable')):
+        renderable = obj.get_renderable()
     if show_rot_axis==True:
         a = rot_axis_from_rot_mat(rot_mat)
         material_axis = three.LineBasicMaterial(color='black')
@@ -502,21 +518,21 @@ def apply_rot_matrix_animated(mesh, rot_mat, speed=100, show_rot_axis=True):
         geometry_axis = three.BufferGeometry(attributes={'position' : three.BufferAttribute(points_axis, False)})
         axis = three.Line(geometry_axis, material_axis)
 
-    mesh.add(axis)
+    renderable.add(axis)
     q = R.from_matrix(rot_mat).as_quat() 
-    old_quat = mesh.quaternion
-    new_quat = quaternion_multiply(mesh.quaternion, (q[0], q[1], q[2], q[3]))
+    old_quat = renderable.quaternion
+    new_quat = quaternion_multiply(renderable.quaternion, (q[0], q[1], q[2], q[3]))
     t = 0
     delta = 0.002
     while(t <= 1):
         n = slerp_quaternion(old_quat, new_quat, t)
-        mesh.quaternion = [n[0], n[1], n[2], n[3]]
+        renderable.quaternion = [n[0], n[1], n[2], n[3]]
         t += delta
         time.sleep(1/speed)
     n = slerp_quaternion(old_quat, new_quat, 1)
-    mesh.quaternion = [n[0], n[1], n[2], n[3]]
+    renderable.quaternion = [n[0], n[1], n[2], n[3]]
 
-    mesh.remove(axis)
+    renderable.remove(axis)
 
 
 
@@ -601,57 +617,80 @@ def line_wheel_driven_robot(dummy, vel, steps):
 
 
 
-def set_scale(mesh, scale):
+def set_scale(obj, scale):
     '''
-    Setzt die Skalierung eines Mesh-Objekts.
+    Setzt die Skalierung eines Objekts.
 
-    :param mesh: Das Mesh-Objekt, dessen Skalierung angepasst werden soll.
+    Das Objekt muss entweder:
+    - ein Attribut oder eine Methode `get_renderable()` besitzen, das ein pythreejs-kompatibles Objekt zurückgibt,
+    - oder selbst direkt ein pythreejs-kompatibles Objekt sein (z.B. Mesh, Group, Line, etc.).
+
+    :param obj: Ein renderbares Objekt oder ein Wrapper mit `get_renderable()`, dessen Skalierung angepasst werden soll.
     :param scale: Ein Array, das den Skalierungsfaktor für jede Achse (x, y, z) angibt, z.B. [1, 2, 1].
     '''
-    mesh.scale = scale
+
+    renderable = obj
+    if (hasattr(obj, 'get_renderable')):
+        renderable = obj.get_renderable()
+    renderable.scale = scale
     
 
 
 
 
-def set_scale_animated(mesh, scale):
+def set_scale_animated(obj, scale):
     '''
-    Setzt die Skalierung eines Mesh-Objekts animiert, indem es schrittweise die Größe verändert.
+    Setzt die Skalierung eines Objekts animiert, indem es schrittweise die Größe verändert.
 
-    :param mesh: Das Mesh-Objekt, dessen Skalierung angepasst werden soll.
+    Das Objekt muss entweder:
+    - ein Attribut oder eine Methode `get_renderable()` besitzen, das ein pythreejs-kompatibles Objekt zurückgibt,
+    - oder selbst direkt ein pythreejs-kompatibles Objekt sein (z.B. Mesh, Group, Line, etc.).
+
+    :param obj: Ein renderbares Objekt oder ein Wrapper mit `get_renderable()`, dessen Skalierung angepasst werden soll.
     :param scale: Ein Array, das die Ziel-Skalierungswerte für jede Achse (x, y, z) angibt, z.B. [1, 2, 1].
     '''
-    old_x = mesh.scale[0]
-    old_y = mesh.scale[1]
-    old_z = mesh.scale[2]
+    renderable = obj
+    if (hasattr(obj, 'get_renderable')):
+        renderable = obj.get_renderable()
+    old_x = renderable.scale[0]
+    old_y = renderable.scale[1]
+    old_z = renderable.scale[2]
     t = 0
     delta = 0.02
     while(t<=1):
         current_x = (scale[0]-old_x)*t + old_x
         current_y = (scale[0]-old_y)*t + old_y
         current_z = (scale[0]-old_z)*t + old_z
-        mesh.scale = (current_x, current_y, current_z)
+        renderable.scale = (current_x, current_y, current_z)
         t+=delta
         time.sleep(0.01)
 
 
 #die angles müssen in der Reihenfolge angegeben werden wie es in der order steht bsp: angles=[y,x,z] order="YXZ"
-def rotate_animated(mesh, angles, order="ZYZ"):
+def rotate_animated(obj, angles, order="ZYZ"):
     '''
-    Führt eine animierte lokale Rotation eines Mesh-Objekts durch. Die Rotation erfolgt achsweise entsprechend der angegebenen Reihenfolge.
+    Führt eine animierte lokale Rotation eines Objekts durch. Die Rotation erfolgt achsweise entsprechend der angegebenen Reihenfolge.
+
+    Das Objekt muss entweder:
+    - ein Attribut oder eine Methode `get_renderable()` besitzen, das ein pythreejs-kompatibles Objekt zurückgibt,
+    - oder selbst direkt ein pythreejs-kompatibles Objekt sein (z.B. Mesh, Group, Line, etc.).
 
     Beispiel: order="YXZ" → angles=[Winkel um Y, Winkel um X, Winkel um Z]
 
     Während der Animation wird die Rotation in drei Schritten durchgeführt – einer pro Achse – und am Ende exakt auf das Ziel-Quaternion gesetzt,
     um numerische Fehler auszugleichen.
 
-    :param mesh: Das 3D-Mesh-Objekt, das rotiert werden soll.
+    :param obj: Ein renderbares Objekt oder ein Wrapper mit `get_renderable()`, das rotiert werden soll.
     :param angles: Eine Liste mit Rotationswinkeln (in Grad), die in der Reihenfolge `order` angegeben sind.
     :param order: Die Rotationsreihenfolge (z. B. "ZYZ", "YXZ", etc.)
     '''
+    renderable = obj
+    if (hasattr(obj, 'get_renderable')):
+        renderable = obj.get_renderable()
+
     if isinstance(angles,(sp.Basic, sp.MatrixBase)):
         angles.evalf()
-    q_final = quaternion_multiply(mesh.quaternion, euler_to_quaternion(angles, order))
+    q_final = quaternion_multiply(renderable.quaternion, euler_to_quaternion(angles, order))
     time.sleep(0.5)
     delta = 0.5
     if angles[0] < 0:
@@ -659,7 +698,7 @@ def rotate_animated(mesh, angles, order="ZYZ"):
     counter = delta
     while counter <= abs(angles[0]):
         q = euler_to_quaternion([delta, 0, 0], order)
-        mesh.quaternion = quaternion_multiply(mesh.quaternion, q)
+        renderable.quaternion = quaternion_multiply(renderable.quaternion, q)
         counter+=abs(delta)
         time.sleep(0.01)
     time.sleep(0.5)
@@ -669,7 +708,7 @@ def rotate_animated(mesh, angles, order="ZYZ"):
     counter = delta
     while counter <= abs(angles[1]):
         q = euler_to_quaternion([0, delta, 0], order)
-        mesh.quaternion = quaternion_multiply(mesh.quaternion, q)
+        renderable.quaternion = quaternion_multiply(renderable.quaternion, q)
         counter+=abs(delta)
         time.sleep(0.01)
     time.sleep(0.5)
@@ -679,29 +718,37 @@ def rotate_animated(mesh, angles, order="ZYZ"):
     counter = delta
     while counter <= abs(angles[2]):
         q = euler_to_quaternion([0, 0, delta], order)
-        mesh.quaternion = quaternion_multiply(mesh.quaternion, q)
+        renderable.quaternion = quaternion_multiply(renderable.quaternion, q)
         counter+=abs(delta)
         time.sleep(0.01)
-    mesh.quaternion = q_final
+    renderable.quaternion = q_final
     time.sleep(0.5)
     
 
 
 
 #die angles müssen in der Reihenfolge angegeben werden wie es in der order steht bsp: angles=[y,x,z] order="YXZ"
-def rotate_global_animated(mesh, angles, order="ZYZ"):
+def rotate_global_animated(obj, angles, order="ZYZ"):
     '''
-    Führt eine animierte globale Rotation eines Mesh-Objekts durch. Die Drehung erfolgt achsweise gemäß der angegebenen Rotationsreihenfolge (z. B. "ZYZ").
+    Führt eine animierte globale Rotation eines Objekts durch. Die Drehung erfolgt achsweise gemäß der angegebenen Rotationsreihenfolge (z. B. "ZYZ").
     Die Winkel in `angles` müssen in der **Reihenfolge der `order`-Zeichen** angegeben werden.
+
+    Das Objekt muss entweder:
+    - ein Attribut oder eine Methode `get_renderable()` besitzen, das ein pythreejs-kompatibles Objekt zurückgibt,
+    - oder selbst direkt ein pythreejs-kompatibles Objekt sein (z.B. Mesh, Group, Line, etc.).
 
     Beispiel: Bei order="YXZ" → angles=[Winkel um Y, Winkel um X, Winkel um Z]
 
     Die Funktion führt die Rotation in drei separaten animierten Phasen durch – jeweils eine für jede Achse in `order`.
 
-    :param mesh: Das 3D-Objekt (Mesh), das rotiert werden soll.
+    :param obj: Ein renderbares Objekt oder ein Wrapper mit `get_renderable()`, das rotiert werden soll.
     :param angles: Eine Liste von Rotationswinkeln (in Grad), entsprechend der Reihenfolge in `order`.
     :param order: Die Rotationsreihenfolge als String, z. B. "ZYZ", "YXZ", etc.
     '''
+    renderable = obj
+    if (hasattr(obj, 'get_renderable')):
+        renderable = obj.get_renderable()
+
     if isinstance(angles,(sp.Basic, sp.MatrixBase)):
         angles.evalf()
     time.sleep(0.5)
@@ -711,7 +758,7 @@ def rotate_global_animated(mesh, angles, order="ZYZ"):
     counter = delta
     while counter < abs(angles[0]):
         q = euler_to_quaternion([delta, 0, 0], order)
-        mesh.quaternion = quaternion_multiply(q, mesh.quaternion)
+        renderable.quaternion = quaternion_multiply(q, renderable.quaternion)
         counter+=abs(delta)
         time.sleep(0.01)
     time.sleep(0.5)
@@ -721,7 +768,7 @@ def rotate_global_animated(mesh, angles, order="ZYZ"):
     counter = delta
     while counter < abs(angles[1]):
         q = euler_to_quaternion([0, delta, 0], order)
-        mesh.quaternion = quaternion_multiply(q, mesh.quaternion)
+        renderable.quaternion = quaternion_multiply(q, renderable.quaternion)
         counter+=abs(delta)
         time.sleep(0.01)
     time.sleep(0.5)
@@ -731,7 +778,7 @@ def rotate_global_animated(mesh, angles, order="ZYZ"):
     counter = delta
     while counter < abs(angles[2]):
         q = euler_to_quaternion([0, 0, delta], order)
-        mesh.quaternion = quaternion_multiply(q, mesh.quaternion)
+        renderable.quaternion = quaternion_multiply(q, renderable.quaternion)
         counter+=abs(delta)
         time.sleep(0.01)
     time.sleep(0.5)
@@ -748,12 +795,16 @@ def move(robot, vel, steps=1):
     - Die Bewegung wird für eine angegebene Anzahl von Schritten (`steps`) wiederholt.
     - Nach jeweils 4 Schritten erfolgt eine kurze Pause zur visuellen Glättung.
 
-    :param robot: Das Objekt (z. B. ein Mesh), das bewegt werden soll. Es muss `quaternion` und `position` Attribute besitzen.
+    :param robot: Ein renderbares Objekt oder ein Wrapper mit `get_renderable()`, das bewegt werden soll.
     :param vel: Ein Geschwindigkeitsvektor `[v_x, v_y, ω_z]`, wobei `v_x` und `v_y` die Translation in der lokalen X- und Y-Richtung und `ω_z` die Rotation um die Z-Achse ist (in Radiant).
     :param steps: Die Anzahl der Schritte, die die Bewegung ausführen soll (Standard: 1).
 
     :return: Die finale Position des Roboters nach der Bewegung.
     '''
+    renderable = robot
+    if (hasattr(robot, 'get_renderable')):
+        renderable = robot.get_renderable()
+
     if isinstance(vel,(sp.Basic, sp.MatrixBase)):
         vel.evalf()
     for i in range(steps):
@@ -763,19 +814,19 @@ def move(robot, vel, steps=1):
         [0,             0,             1]
         ])
 
-        apply_rot_matrix(robot, rot_mat_z)
-        x = robot.quaternion[0]
-        y = robot.quaternion[1]
-        z = robot.quaternion[2]
-        w = robot.quaternion[3]
+        apply_rot_matrix(renderable, rot_mat_z)
+        x = renderable.quaternion[0]
+        y = renderable.quaternion[1]
+        z = renderable.quaternion[2]
+        w = renderable.quaternion[3]
 
         z_angle = quaternion_to_euler(x,y,z,w,"XYZ")[2]
         cos_z = np.cos(np.radians(z_angle))
         sin_z = np.sin(np.radians(z_angle))
-        translate(robot, [cos_z*vel[0] + sin_z*vel[1], sin_z*vel[0] + cos_z*vel[1], 0])
+        translate(renderable, [cos_z*vel[0] + sin_z*vel[1], sin_z*vel[0] + cos_z*vel[1], 0])
         if (i%4==0 and i!=0):
             time.sleep(0.01)
-    return robot.position
+    return renderable.position
 
 
 
@@ -784,160 +835,220 @@ def move(robot, vel, steps=1):
 
 
 
-def rotate_global(mesh, angles, order="ZYZ"):
+def rotate_global(obj, angles, order="ZYZ"):
     '''
-    Führt eine globale Rotation eines Mesh-Objekts durch, basierend auf den übergebenen Eulerwinkeln und einer Rotationsreihenfolge.
+    Führt eine globale Rotation eines Objekts durch, basierend auf den übergebenen Eulerwinkeln und einer Rotationsreihenfolge.
 
-    :param mesh: Das Mesh-Objekt, das rotiert werden soll.
+    Das Objekt muss entweder:
+    - ein Attribut oder eine Methode `get_renderable()` besitzen, das ein pythreejs-kompatibles Objekt zurückgibt,
+    - oder selbst direkt ein pythreejs-kompatibles Objekt sein (z.B. Mesh, Group, Line, etc.).
+
+    :param obj: Ein renderbares Objekt oder ein Wrapper mit `get_renderable()`, das rotiert werden soll.
     :param angles: Die Eulerwinkel in Grad, die die Rotation definieren. Die Reihenfolge muss dem angegebenen "order"-Parameter entsprechen.
     :param order: Die Rotationsreihenfolge als String (z.B. "ZYZ", "XYZ", etc.). Standardmäßig "ZYZ".
     '''
-    mesh.quaternion = quaternion_multiply(euler_to_quaternion(angles, order[::-1]), mesh.quaternion)
+    renderable = obj
+    if (hasattr(obj, 'get_renderable')):
+        renderable = obj.get_renderable()
+    renderable.quaternion = quaternion_multiply(euler_to_quaternion(angles, order[::-1]), renderable.quaternion)
 
 
 
 
 
 
-def rotate(mesh, angles, order="ZYZ"):
+def rotate(obj, angles, order="ZYZ"):
     '''
-    Führt eine Rotation eines Mesh-Objekts basierend auf den übergebenen Eulerwinkeln und einer Rotationsreihenfolge durch.
+    Führt eine Rotation eines Objekts basierend auf den übergebenen Eulerwinkeln und einer Rotationsreihenfolge durch.
 
-    :param mesh: Das Mesh-Objekt, das rotiert werden soll.
+    Das Objekt muss entweder:
+    - ein Attribut oder eine Methode `get_renderable()` besitzen, das ein pythreejs-kompatibles Objekt zurückgibt,
+    - oder selbst direkt ein pythreejs-kompatibles Objekt sein (z.B. Mesh, Group, Line, etc.).
+
+    :param obj: Ein renderbares Objekt oder ein Wrapper mit `get_renderable()`, das rotiert werden soll.
     :param angles: Die Eulerwinkel in Grad, die die Rotation definieren. Die Reihenfolge muss dem angegebenen "order"-Parameter entsprechen.
     :param order: Die Rotationsreihenfolge als String (z.B. "ZYZ", "XYZ", etc.). Standardmäßig "ZYZ".
 
     :return: Keine Rückgabe. Das Mesh wird direkt rotiert.
     '''
+    renderable = obj
+    if (hasattr(obj, 'get_renderable')):
+        renderable = obj.get_renderable()
     q = euler_to_quaternion(angles, order)
-    mesh.quaternion = quaternion_multiply(mesh.quaternion, q)
+    renderable.quaternion = quaternion_multiply(renderable.quaternion, q)
 
 
 
 
 
 
-def set_rotation(mesh, angles, order="ZYZ"):
+def set_rotation(obj, angles, order="ZYZ"):
     '''
-    Setzt die Rotation eines Mesh-Objekts auf die übergebenen Eulerwinkel und die Rotationsreihenfolge.
+    Setzt die Rotation eines Objekts auf die übergebenen Eulerwinkel und die Rotationsreihenfolge.
 
-    :param mesh: Das Mesh-Objekt, dessen Rotation gesetzt werden soll.
+    Das Objekt muss entweder:
+    - ein Attribut oder eine Methode `get_renderable()` besitzen, das ein pythreejs-kompatibles Objekt zurückgibt,
+    - oder selbst direkt ein pythreejs-kompatibles Objekt sein (z.B. Mesh, Group, Line, etc.).
+
+    :param obj: Ein renderbares Objekt oder ein Wrapper mit `get_renderable()`, dessen Rotation gesetzt werden soll.
     :param angles: Die Eulerwinkel in Grad, die die gewünschte Rotation definieren. Die Reihenfolge muss dem angegebenen "order"-Parameter entsprechen.
     :param order: Die Rotationsreihenfolge als String (z.B. "ZYZ", "XYZ", etc.). Standardmäßig "ZYZ".
     '''
+    renderable = obj
+    if (hasattr(obj, 'get_renderable')):
+        renderable = obj.get_renderable()
     q = euler_to_quaternion(angles, order=order)
-    mesh.quaternion = [q[0], q[1], q[2], q[3]]
+    renderable.quaternion = [q[0], q[1], q[2], q[3]]
 
 
 
 
 
 
-def set_rotation_global(mesh, angles, order="ZYZ"):
+def set_rotation_global(obj, angles, order="ZYZ"):
     '''
-    Setzt die globale Rotation eines Mesh-Objekts auf die übergebenen Eulerwinkel und die Rotationsreihenfolge. 
+    Setzt die globale Rotation eines Objekts auf die übergebenen Eulerwinkel und die Rotationsreihenfolge. 
 
-    :param mesh: Das Mesh-Objekt, dessen globale Rotation gesetzt werden soll.
+    Das Objekt muss entweder:
+    - ein Attribut oder eine Methode `get_renderable()` besitzen, das ein pythreejs-kompatibles Objekt zurückgibt,
+    - oder selbst direkt ein pythreejs-kompatibles Objekt sein (z.B. Mesh, Group, Line, etc.).
+
+    :param obj: Ein renderbares Objekt oder ein Wrapper mit `get_renderable()`, dessen globale Rotation gesetzt werden soll.
     :param angles: Die Eulerwinkel in Grad, die die gewünschte Rotation definieren. Die Reihenfolge muss dem angegebenen "order"-Parameter entsprechen.
     :param order: Die Rotationsreihenfolge als String (z.B. "ZYZ", "XYZ", etc.). Standardmäßig "ZYZ".
     '''
-    set_rotation(mesh, angles[::-1], order[::-1])
+    renderable = obj
+    if (hasattr(obj, 'get_renderable')):
+        renderable = obj.get_renderable()
+    set_rotation(renderable, angles[::-1], order[::-1])
 
 
 
 
 
 
-def translate(mesh, vec):
+def translate(obj, vec):
     '''
-    Verschiebt ein Mesh-Objekt um einen gegebenen Vektor in den drei Raumachsen.
+    Verschiebt ein Objekt um einen gegebenen Vektor in den drei Raumachsen.
 
-    :param mesh: Das Mesh-Objekt, das verschoben werden soll.
+    Das Objekt muss entweder:
+    - ein Attribut oder eine Methode `get_renderable()` besitzen, das ein pythreejs-kompatibles Objekt zurückgibt,
+    - oder selbst direkt ein pythreejs-kompatibles Objekt sein (z.B. Mesh, Group, Line, etc.).
+
+    :param obj: Ein renderbares Objekt oder ein Wrapper mit `get_renderable()`, das verschoben werden soll.
     :param vec: Der Verschiebungsvektor als Array oder Liste [x, y, z], der die Verschiebung in den jeweiligen Raumachsen angibt.
     '''
+    renderable = obj
+    if (hasattr(obj, 'get_renderable')):
+        renderable = obj.get_renderable()
     if isinstance(vec,(sp.Basic, sp.MatrixBase)):
         vec.evalf()
-    mesh.position = (mesh.position[0]+vec[0], mesh.position[1]+vec[1], mesh.position[2]+vec[2])
+    renderable.position = (renderable.position[0]+vec[0], renderable.position[1]+vec[1], renderable.position[2]+vec[2])
 
 
 
 
 
 
-def set_translation(mesh, vec):
+def set_translation(obj, vec):
     '''
-    Setzt die Position eines Mesh-Objekts auf die angegebenen Koordinaten.
+    Setzt die Position eines Objekts auf die angegebenen Koordinaten.
 
-    :param mesh: Das Mesh-Objekt, dessen Position gesetzt werden soll.
+    Das Objekt muss entweder:
+    - ein Attribut oder eine Methode `get_renderable()` besitzen, das ein pythreejs-kompatibles Objekt zurückgibt,
+    - oder selbst direkt ein pythreejs-kompatibles Objekt sein (z.B. Mesh, Group, Line, etc.).
+
+    :param obj: Ein renderbares Objekt oder ein Wrapper mit `get_renderable()`, dessen Position gesetzt werden soll.
     :param vec: Der Ziel-Vektor als Array oder Liste [x, y, z], der die neue Position des Meshs im Raum angibt.
     '''
+    renderable = obj
+    if (hasattr(obj, 'get_renderable')):
+        renderable = obj.get_renderable()
     if isinstance(vec,(sp.Basic, sp.MatrixBase)):
         vec.evalf()
-    mesh.position = vec
+    renderable.position = vec
 
 
 
 
 
 
-def set_translation_animated(mesh, vec, speed=50.0):
+def set_translation_animated(obj, vec, speed=50.0):
     '''
-    Bewegt die Position eines Mesh-Objekts animiert von der aktuellen Position zu einer angegebenen Zielposition.
+    Bewegt die Position eines Objekts animiert von der aktuellen Position zu einer angegebenen Zielposition.
 
-    :param mesh: Das Mesh-Objekt, dessen Position animiert geändert werden soll.
+    Das Objekt muss entweder:
+    - ein Attribut oder eine Methode `get_renderable()` besitzen, das ein pythreejs-kompatibles Objekt zurückgibt,
+    - oder selbst direkt ein pythreejs-kompatibles Objekt sein (z.B. Mesh, Group, Line, etc.).
+
+    :param obj: Ein renderbares Objekt oder ein Wrapper mit `get_renderable()`, dessen Position animiert geändert werden soll.
     :param vec: Der Ziel-Vektor als Array oder Liste [x, y, z], zu dem die Position des Meshs bewegt werden soll.
     :param speed: Die Geschwindigkeit der Animation. Ein höherer Wert bedeutet eine schnellere Bewegung.
     '''
+
+    renderable = obj
+    if (hasattr(obj, 'get_renderable')):
+        renderable = obj.get_renderable()
+
     if isinstance(vec,(sp.Basic, sp.MatrixBase)):
         vec.evalf()
     t = 0
     delta = 0.01
-    old_x = mesh.position[0]
-    old_y = mesh.position[1]
-    old_z = mesh.position[2]
+    old_x = renderable.position[0]
+    old_y = renderable.position[1]
+    old_z = renderable.position[2]
     while(t<=1):
         current_x = ((vec[0]-old_x)*t + old_x)
         current_y = ((vec[1]-old_y)*t + old_y)
         current_z = ((vec[2]-old_z)*t + old_z)
-        mesh.position = (current_x, current_y, current_z)
+        renderable.position = (current_x, current_y, current_z)
         t+=delta
         time.sleep(1.0/speed)
     current_x = ((vec[0]-old_x)*1 + old_x)
     current_y = ((vec[1]-old_y)*1 + old_y)
     current_z = ((vec[2]-old_z)*1 + old_z)
-    mesh.position = (current_x, current_y, current_z)
+    renderable.position = (current_x, current_y, current_z)
     time.sleep(1.0/speed)
 
 
 
 
 
-def translate_animated(mesh, vec, speed=50.0):
+def translate_animated(obj, vec, speed=50.0):
     '''
-    Bewegt die Position eines Mesh-Objekts animiert um einen angegebenen Vektor von der aktuellen Position.
+    Bewegt die Position eines Objekts animiert um einen angegebenen Vektor von der aktuellen Position.
 
-    :param mesh: Das Mesh-Objekt, dessen Position animiert geändert werden soll.
+    Das Objekt muss entweder:
+    - ein Attribut oder eine Methode `get_renderable()` besitzen, das ein pythreejs-kompatibles Objekt zurückgibt,
+    - oder selbst direkt ein pythreejs-kompatibles Objekt sein (z.B. Mesh, Group, Line, etc.).
+
+    :param obj: Ein renderbares Objekt oder ein Wrapper mit `get_renderable()`, dessen Position animiert geändert werden soll.
     :param vec: Der Verschiebungs-Vektor als Array oder Liste [dx, dy, dz], um den die Position des Meshs verändert werden soll.
     :param speed: Die Geschwindigkeit der Animation. Ein höherer Wert bedeutet eine schnellere Bewegung.
     '''
+
+    renderable = obj
+    if (hasattr(obj, 'get_renderable')):
+        renderable = obj.get_renderable()
+
     if isinstance(vec,(sp.Basic, sp.MatrixBase)):
         vec.evalf()
     t = 0
     delta = 0.01
-    old_x = mesh.position[0]
-    old_y = mesh.position[1]
-    old_z = mesh.position[2]
+    old_x = renderable.position[0]
+    old_y = renderable.position[1]
+    old_z = renderable.position[2]
     while(t<=1):
         current_x = ((vec[0])*t + old_x)
         current_y = ((vec[1])*t + old_y)
         current_z = ((vec[2])*t + old_z)
-        mesh.position = (current_x, current_y, current_z)
+        renderable.position = (current_x, current_y, current_z)
         t+=delta
         time.sleep(1.0/speed)
     current_x = ((vec[0])*1 + old_x)
     current_y = ((vec[1])*1 + old_y)
     current_z = ((vec[2])*1 + old_z)
-    mesh.position = (current_x, current_y, current_z)
+    renderable.position = (current_x, current_y, current_z)
     time.sleep(1.0/speed)
         
 
@@ -1080,12 +1191,27 @@ class Environment:
 
 
     def add(self, objekts):
-        '''
-        Fügt ein oder mehrere Objekte zur Szene hinzu.
+        """
+        Fügt ein oder mehrere Objekte zur Environment hinzu.
 
-        :param objekts: Ein einzelnes Objekt oder eine Liste von Objekten, die zur Szene hinzugefügt werden.
-        '''
-        self.scene.add(objekts)
+        Die Objekte müssen entweder:
+        - ein Attribut oder eine Methode `get_renderable()` besitzen, das ein pythreejs-kompatibles Objekt zurückgibt,
+        - oder selbst direkt ein pythreejs-kompatibles Objekt sein (z. B. Mesh, Group, Line, etc.).
+
+        Hinweis: Es erfolgt keine explizite Typprüfung. Es wird davon ausgegangen, dass übergebene Objekte entweder
+        direkt von pythreejs unterstützt werden oder über `get_renderable()` ein entsprechendes Objekt liefern.
+
+        :param objekts: Ein einzelnes Objekt oder eine Liste von Objekten, die zur Environment hinzugefügt werden sollen.
+        :raises AttributeError: Wenn `get_renderable()` aufgerufen wird, aber nicht vorhanden ist.
+        :raises TraitError / TypeError: Wenn ein nicht unterstützter Objekttyp der Szene hinzugefügt wird.
+        """
+        if not isinstance(objekts, Iterable) or isinstance(objekts, (str, dict)):
+            objekts = [objekts]
+        for obj in objekts:
+            if (hasattr(obj, 'get_renderable')):
+                self.scene.add(obj.get_renderable())
+            else:
+                self.scene.add(obj)
 
 
 
@@ -1108,6 +1234,10 @@ class Environment:
         :param rotation: Wenn True, werden Schieberegler für die Rotation angezeigt.
         :param scale: Wenn True, werden Schieberegler für die Skalierung angezeigt.
         '''
+        renderable = obj
+        if hasattr(obj, "get_renderable"):
+            renderable = obj.get_renderable()
+
         # Schieberegler
         x_rot_slider = FloatSlider(min=-180, max=180, step=0.1, description='Rotate X')
         y_rot_slider = FloatSlider(min=-180, max=180, step=0.1, description='Rotate Y')
@@ -1144,7 +1274,7 @@ class Environment:
 
 
         def _on_trans_slider(change):#noch fehler drin
-            set_translation(obj, [x_trans_slider.value, y_trans_slider.value, z_trans_slider.value])
+            set_translation(renderable, [x_trans_slider.value, y_trans_slider.value, z_trans_slider.value])
 
         def _on_rot_slider(change):
             o = rotation_order_dropdown.value
@@ -1154,14 +1284,14 @@ class Environment:
                 o == "yxy" or o == "YXY" or
                 o == "yzy" or o == "YZY" or
                 o == "zxz" or o == "ZXZ"):
-                set_rotation(obj, [x_rot_slider.value, y_rot_slider.value, z_rot_slider.value], rotation_order_dropdown.value)
+                set_rotation(renderable, [x_rot_slider.value, y_rot_slider.value, z_rot_slider.value], rotation_order_dropdown.value)
             else:
                 angles = order_angles(x_rot_slider.value, y_rot_slider.value, z_rot_slider.value, rotation_order_dropdown.value)
-                set_rotation(obj, angles, rotation_order_dropdown.value)
+                set_rotation(renderable, angles, rotation_order_dropdown.value)
     
 
         def _on_scale_slider(change):
-            set_scale(obj, [x_scale_slider.value, y_scale_slider.value, z_scale_slider.value])
+            set_scale(renderable, [x_scale_slider.value, y_scale_slider.value, z_scale_slider.value])
 
 
         def _on_rotation_order_change(change):
@@ -1214,6 +1344,68 @@ class Environment:
 
 
 
+class Link:
+    def __init__(self, name, mesh, parent=Undefined):
+        self.name = name
+        self.mesh = mesh
+        self.parent = parent
+        self.children = []
+
+    def get_renderable(self):
+        return self.mesh
+    
+    def add(self, object):
+        renderable = object
+        if hasattr(object, "get_renderable"):
+            renderable = object.get_renderable()
+        if isinstance(renderable, Object3D):
+            self.mesh.add(renderable)
+        self.children.append(object)
+
+    def remove(self, object):
+        self.children.remove(object)
+        if hasattr(object, "get_renderable"):
+            self.mesh.remove(object.get_renderable())
+        elif isinstance(object, Object3D):
+            self.mesh.children.remove(object)
+        
 
 
+
+class Manipulator:
+    def __init__(self, name):
+        self.name=name
+        self.mesh = Undefined
+        self.links = []
+        xacro_filepath = manager.find_xacro_filepath_by_robot_name(name)
+        urdf = manager.xacro_to_urdf_string(xacro_filepath)
+        #print(urdf)
+        parsed = manager.parse_urdf(urdf)
+        parsed = json.dumps(parsed, indent=4)
+        print(parsed)
+        parsed = json.loads(parsed)
+
+        prev = Undefined
+        for i in range(len(parsed["links"])):
+            if len(parsed["links"][i]["visual"]) > 0:
+                mesh_path = parsed["links"][i]["visual"][0]["geometry"]["filename"]
+                meshi = manager.load_mesh_auto(mesh_path)
+                l = Link(parsed["links"][i]["name"], meshi)
+                self.links.append(l)
+                if prev is not Undefined:
+                    prev.add(l)
+                else:
+                    self.mesh = meshi
+                prev = l
+                if i > 0 and i <= len(parsed["joints"]):
+                    values = parsed["joints"][i-1]["origin"]["xyz"].split()
+                    values = [float(x) for x in values]
+                    angles = parsed["joints"][i-1]["origin"]["rpy"].split()
+                    angles = [np.radians(float(x)) for x in angles]
+                    translate(meshi, values)
+                    rotate(meshi, angles)
+
+    
+    def get_renderable(self):
+        return self.mesh
 
