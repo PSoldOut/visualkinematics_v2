@@ -1206,7 +1206,7 @@ class Environment:
         :raises TraitError / TypeError: Wenn ein nicht unterstützter Objekttyp der Szene hinzugefügt wird.
         """
         if not isinstance(objekts, Iterable) or isinstance(objekts, (str, dict)):
-            objekts = [objekts]
+            
         for obj in objekts:
             if (hasattr(obj, 'get_renderable')):
                 self.scene.add(obj.get_renderable())
@@ -1343,31 +1343,77 @@ class Environment:
 
 
 
-
-class Link:
-    def __init__(self, name, mesh, parent=Undefined):
+class Kinematic_Chain_Element:
+    def __init__(self, name):
         self.name = name
-        self.mesh = mesh
-        self.parent = parent
         self.children = []
+        self.parent = None
 
-    def get_renderable(self):
-        return self.mesh
-    
+        
     def add(self, object):
         renderable = object
         if hasattr(object, "get_renderable"):
             renderable = object.get_renderable()
-        if isinstance(renderable, Object3D):
-            self.mesh.add(renderable)
+        self.point.add(renderable)
         self.children.append(object)
+        if isinstance(object, Kinematic_Chain_Element):
+            object.parent = self
+
 
     def remove(self, object):
         self.children.remove(object)
         if hasattr(object, "get_renderable"):
-            self.mesh.remove(object.get_renderable())
+            self.point.remove(object.get_renderable())
         elif isinstance(object, Object3D):
-            self.mesh.children.remove(object)
+            self.point.remove(object)
+        if isinstance(object, Kinematic_Chain_Element):
+            object.parent = None
+
+
+
+class Joint(Kinematic_Chain_Element):
+    def __init__(self, name, position=[0,0,0], rotation=[0,0,0]):
+        super().__init__(name)
+        self.point = None
+
+        position = np.array([position], dtype=np.float32)
+        geometry = BufferGeometry(attributes={
+            'position': BufferAttribute(position, normalized=False)
+        })
+        material = PointsMaterial(size=10, color='red')
+        self.point = Points(geometry=geometry, material=material)
+        self.set_rotation(rotation)
+        self.point.visible = False
+
+    def get_renderable(self):
+        return self.point
+    
+    def set_position(self, vec):
+        set_translation(self.point, vec)
+
+    def get_position(self):
+        return self.point.position
+
+    def set_rotation(self, vec):
+        set_rotation(self.point, vec)
+
+    def get_rotation(self):
+        return self.point.rotation#todo das muss noch (wahrscheunlich mit scipy) richtig gemacht werden
+
+
+
+
+
+class Link(Kinematic_Chain_Element):
+    def __init__(self, name, mesh):
+        super().__init__(name)
+
+        self.mesh = mesh
+
+    def get_renderable(self):
+        return self.mesh
+    
+
         
 
 
@@ -1377,6 +1423,7 @@ class Manipulator:
         self.name=name
         self.mesh = Undefined
         self.links = []
+        self.joints = []
         xacro_filepath = manager.find_xacro_filepath_by_robot_name(name)
         urdf = manager.xacro_to_urdf_string(xacro_filepath)
         #print(urdf)
@@ -1385,27 +1432,32 @@ class Manipulator:
         print(parsed)
         parsed = json.loads(parsed)
 
-        prev = Undefined
+        
         for i in range(len(parsed["links"])):
             if len(parsed["links"][i]["visual"]) > 0:
                 mesh_path = parsed["links"][i]["visual"][0]["geometry"]["filename"]
                 meshi = manager.load_mesh_auto(mesh_path)
                 l = Link(parsed["links"][i]["name"], meshi)
                 self.links.append(l)
-                if prev is not Undefined:
-                    prev.add(l)
-                else:
-                    self.mesh = meshi
-                prev = l
-                if i > 0 and i <= len(parsed["joints"]):
-                    values = parsed["joints"][i-1]["origin"]["xyz"].split()
-                    values = [float(x) for x in values]
-                    angles = parsed["joints"][i-1]["origin"]["rpy"].split()
-                    angles = [np.radians(float(x)) for x in angles]
-                    translate(meshi, values)
-                    rotate(meshi, angles)
+                
+                
+        for i in range(len(parsed["joints"])):
+            joint_element = parsed["joints"][i]
+            pos = joint_element["origin"]["xyz"].split()
+            pos = [float(x) for x in pos]
+            angles = joint_element["origin"]["rpy"].split()
+            angles = [np.rad2deg(float(x)) for x in angles]
+            joint_parent = self.get_link_by_name(joint_element["parent"])
+            joint = Joint(joint_element["name"], pos, angles)
+
+            
 
     
     def get_renderable(self):
         return self.mesh
-
+    
+    def get_link_by_name(self, name : str):
+        for l in self.links:
+            if l.name == name:
+                return l
+        return None
