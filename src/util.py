@@ -8,65 +8,11 @@ from pythreejs import SpriteMaterial, Sprite
 import time
 from scipy.spatial.transform import Rotation as R, Slerp
 from stl import mesh
+import os
 
 
 
 
-
-
-def load_mesh_from_stl(filepath):
-    # STL laden
-    your_mesh = mesh.Mesh.from_file(filepath)
-
-    # Vertices & Faces extrahieren
-    vertices = np.array(your_mesh.vectors).reshape(-1, 3)
-    faces = np.arange(len(vertices)).reshape(-1, 3)
-
-    # BufferGeometry bauen
-    geometry = BufferGeometry(
-        attributes={
-            'position': BufferAttribute(vertices, normalized=False),
-            'index': three.BufferAttribute(faces.flatten().astype(np.uint32), normalized=False),  # Indices der Dreiecke
-        },
-        
-    )
-    geometry.exec_three_obj_method('computeVertexNormals')
-
-    # Mesh erstellen
-    material = MeshStandardMaterial(color='orange')
-    mesh_obj = Mesh(geometry=geometry, material=material)
-    set_scale(mesh_obj, [0.002,0.002,0.002])
-    return mesh_obj
-
-
-
-
-def load_mesh_from_npz(filepath):
-    data = np.load(filepath)
-    vertices = data["vertices"]
-    indices = data["indices"]
-    normals = data["normals"]
-
-    obj_geometry = three.BufferGeometry(
-        attributes={
-            'position': three.BufferAttribute(vertices, normalized=False),  # Positionsdaten
-            'index': three.BufferAttribute(indices, normalized=False),  # Indices der Dreiecke
-            #'normal': three.BufferAttribute(normals, normalized=False),  # Hinzufügen der Normalen
-            'real': three.BufferAttribute(vertices, normalized=False)
-        }
-    )
-    obj_geometry.exec_three_obj_method('computeVertexNormals')
-
-    obj_material = MeshStandardMaterial(color='orange')
-    #mat = list(obj_model.materials.values())[0]
-    #obj_material = MeshStandardMaterial(
-    #    color = to_hex(mat.diffuse),
-    #    metalness=0.2,
-    #    roughness=1 - mat.shininess / 100 if mat.shininess else 0.5
-    #)
-    obj_mesh = three.Mesh(obj_geometry, material=obj_material)
-
-    return obj_mesh
 
 
 
