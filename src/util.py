@@ -1134,6 +1134,7 @@ class Environment:
         self.grid = grid
         self.light = PointLight(color='white', intensity=1.5, position=[5, 5, 5])
         self.scene.add([self.camera, self.light, self.frame, self.grid, AmbientLight(intensity=0.5)])
+        self.children = []
         # Renderer mit Orbit-Steuerung
         self.renderer = Renderer(camera=self.camera, scene=self.scene, controls=[OrbitControls(controlling=self.camera)], width=width, height=height, background_color="#87CEEB", background_opacity=1.0, antialias=True, precision='highp')
         self.frame_widgets = True
@@ -1190,7 +1191,7 @@ class Environment:
         self.frame_widgets = bool
 
 
-    def add(self, objekts):
+    def add(self, objects):
         """
         Fügt ein oder mehrere Objekte zur Environment hinzu.
 
@@ -1205,13 +1206,21 @@ class Environment:
         :raises AttributeError: Wenn `get_renderable()` aufgerufen wird, aber nicht vorhanden ist.
         :raises TraitError / TypeError: Wenn ein nicht unterstützter Objekttyp der Szene hinzugefügt wird.
         """
-        if not isinstance(objekts, Iterable) or isinstance(objekts, (str, dict)):
-            
-        for obj in objekts:
-            if (hasattr(obj, 'get_renderable')):
-                self.scene.add(obj.get_renderable())
-            else:
-                self.scene.add(obj)
+        if isinstance(objects, Object3D):
+            self.scene.add(objects)
+            self.children.add(objects)
+        elif hasattr(objects, "get_renderable"):
+            self.scene.add(objects.get_renderable())
+            self.scene.add(objects)
+        elif isinstance(objects, Iterable):
+            for obj in objects:
+                if isinstance(objects, Object3D):
+                    self.scene.add(objects)
+                    self.children.add(objects)
+                elif hasattr(objects, "get_renderable"):
+                    self.scene.add(objects.get_renderable())
+                    self.scene.add(objects)
+
 
 
 
@@ -1348,13 +1357,14 @@ class Kinematic_Chain_Element:
         self.name = name
         self.children = []
         self.parent = None
+        self.renderable = None
 
         
     def add(self, object):
         renderable = object
         if hasattr(object, "get_renderable"):
             renderable = object.get_renderable()
-        self.point.add(renderable)
+        self.renderable.add(renderable)
         self.children.append(object)
         if isinstance(object, Kinematic_Chain_Element):
             object.parent = self
@@ -1363,9 +1373,9 @@ class Kinematic_Chain_Element:
     def remove(self, object):
         self.children.remove(object)
         if hasattr(object, "get_renderable"):
-            self.point.remove(object.get_renderable())
+            self.renderable.remove(object.get_renderable())
         elif isinstance(object, Object3D):
-            self.point.remove(object)
+            self.renderable.remove(object)
         if isinstance(object, Kinematic_Chain_Element):
             object.parent = None
 
@@ -1374,31 +1384,30 @@ class Kinematic_Chain_Element:
 class Joint(Kinematic_Chain_Element):
     def __init__(self, name, position=[0,0,0], rotation=[0,0,0]):
         super().__init__(name)
-        self.point = None
 
         position = np.array([position], dtype=np.float32)
         geometry = BufferGeometry(attributes={
             'position': BufferAttribute(position, normalized=False)
         })
         material = PointsMaterial(size=10, color='red')
-        self.point = Points(geometry=geometry, material=material)
+        self.renderable = Points(geometry=geometry, material=material)
         self.set_rotation(rotation)
-        self.point.visible = False
+        self.renderable.visible = False
 
     def get_renderable(self):
-        return self.point
+        return self.renderable
     
     def set_position(self, vec):
-        set_translation(self.point, vec)
+        set_translation(self.renderable, vec)
 
     def get_position(self):
-        return self.point.position
+        return self.renderable.position
 
     def set_rotation(self, vec):
-        set_rotation(self.point, vec)
+        set_rotation(self.renderable, vec)
 
     def get_rotation(self):
-        return self.point.rotation#todo das muss noch (wahrscheunlich mit scipy) richtig gemacht werden
+        return self.renderable.rotation#todo das muss noch (wahrscheunlich mit scipy) richtig gemacht werden
 
 
 
@@ -1408,10 +1417,10 @@ class Link(Kinematic_Chain_Element):
     def __init__(self, name, mesh):
         super().__init__(name)
 
-        self.mesh = mesh
+        self.renderable = mesh
 
     def get_renderable(self):
-        return self.mesh
+        return self.renderable
     
 
         
@@ -1421,7 +1430,7 @@ class Link(Kinematic_Chain_Element):
 class Manipulator:
     def __init__(self, name):
         self.name=name
-        self.mesh = Undefined
+        self.mesh = None
         self.links = []
         self.joints = []
         xacro_filepath = manager.find_xacro_filepath_by_robot_name(name)
@@ -1434,12 +1443,21 @@ class Manipulator:
 
         
         for i in range(len(parsed["links"])):
+            meshi = None
             if len(parsed["links"][i]["visual"]) > 0:
                 mesh_path = parsed["links"][i]["visual"][0]["geometry"]["filename"]
                 meshi = manager.load_mesh_auto(mesh_path)
-                l = Link(parsed["links"][i]["name"], meshi)
-                self.links.append(l)
+            else:
+                position = np.array([0,0,0], dtype=np.float32)
+                geometry = BufferGeometry(attributes={
+                    'position': BufferAttribute(position, normalized=False)
+                })
+                material = PointsMaterial(size=10, color='red')
+                meshi = Points(geometry=geometry, material=material)
+            l = Link(parsed["links"][i]["name"], meshi)
+            self.links.append(l)
                 
+        self.print_links()
                 
         for i in range(len(parsed["joints"])):
             joint_element = parsed["joints"][i]
@@ -1448,9 +1466,16 @@ class Manipulator:
             angles = joint_element["origin"]["rpy"].split()
             angles = [np.rad2deg(float(x)) for x in angles]
             joint_parent = self.get_link_by_name(joint_element["parent"])
+            joint_child = self.get_link_by_name(joint_element["child"])
             joint = Joint(joint_element["name"], pos, angles)
-
             
+            #print(joint_parent)
+            #print(joint_child)
+            joint.add(joint_child)
+            joint_parent.add(joint)
+            self.joints.append(joint)
+
+        self.mesh = self.links[0].get_renderable()
 
     
     def get_renderable(self):
@@ -1461,3 +1486,9 @@ class Manipulator:
             if l.name == name:
                 return l
         return None
+    
+    def print_links(self):
+        for link in self.links:
+            print(link.name)
+
+    
