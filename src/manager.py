@@ -136,7 +136,8 @@ def parse_urdf(urdf_str: str) -> dict:
                 "parent": None,
                 "child": None,
                 "origin": None,
-                "axis": None
+                "axis": None,
+                "mimic": None
             }
 
             for child in elem:
@@ -148,6 +149,10 @@ def parse_urdf(urdf_str: str) -> dict:
                     joint_info["origin"] = child.attrib
                 elif child.tag == "axis":
                     joint_info["axis"] = child.attrib
+                elif child.tag == "mimic":
+                    joint_info["mimic"] = child.attrib
+
+
 
             joints.append(joint_info)
 
@@ -196,7 +201,7 @@ def parse_geometry_block(tag):
 
 
 
-def load_mesh_auto(filepath):
+def load_mesh_auto(filepath, color="lightgray"):
     if not os.path.isfile(filepath):
         raise FileNotFoundError(f"Mesh-Datei nicht gefunden: {filepath}")
     
@@ -219,7 +224,7 @@ def load_mesh_auto(filepath):
     )
     geometry.exec_three_obj_method('computeVertexNormals')
     # Mesh erstellen
-    material = MeshStandardMaterial(color='orange')
+    material = MeshStandardMaterial(color=color)
     mesh_obj = Mesh(geometry=geometry, material=material)
     return mesh_obj
 

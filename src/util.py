@@ -1,3 +1,4 @@
+from __future__ import annotations
 import numpy as np
 import sympy as sp
 import pythreejs as three
@@ -10,6 +11,8 @@ from scipy.spatial.transform import Rotation as R, Slerp
 import os
 import manager
 from collections.abc import Iterable
+import typing
+
 
 
 
@@ -1208,18 +1211,18 @@ class Environment:
         """
         if isinstance(objects, Object3D):
             self.scene.add(objects)
-            self.children.add(objects)
+            self.children.append(objects)
         elif hasattr(objects, "get_renderable"):
             self.scene.add(objects.get_renderable())
-            self.scene.add(objects)
+            self.children.append(objects)
         elif isinstance(objects, Iterable):
             for obj in objects:
-                if isinstance(objects, Object3D):
-                    self.scene.add(objects)
-                    self.children.add(objects)
-                elif hasattr(objects, "get_renderable"):
-                    self.scene.add(objects.get_renderable())
-                    self.scene.add(objects)
+                if isinstance(obj, Object3D):
+                    self.scene.add(obj)
+                    self.children.append(obj)
+                elif hasattr(obj, "get_renderable"):
+                    self.scene.add(obj.get_renderable())
+                    self.children.append(obj)
 
 
 
@@ -1382,17 +1385,18 @@ class Kinematic_Chain_Element:
 
 
 class Joint(Kinematic_Chain_Element):
-    def __init__(self, name, position=[0,0,0], rotation=[0,0,0]):
+    def __init__(self, name, axis, position=[0,0,0], rotation=[0,0,0]):
         super().__init__(name)
-
-        position = np.array([position], dtype=np.float32)
-        geometry = BufferGeometry(attributes={
-            'position': BufferAttribute(position, normalized=False)
-        })
-        material = PointsMaterial(size=10, color='red')
-        self.renderable = Points(geometry=geometry, material=material)
+        self.renderable = three.Group()
+        self.axis = axis
+        self.mimicers : List[List] = []
+        self.set_position(position)
         self.set_rotation(rotation)
-        self.renderable.visible = False
+
+    def add_mimicer(self, mimicer_and_multiplier : List):
+        self.mimicers.append(mimicer_and_multiplier)
+        
+
 
     def get_renderable(self):
         return self.renderable
@@ -1404,10 +1408,18 @@ class Joint(Kinematic_Chain_Element):
         return self.renderable.position
 
     def set_rotation(self, vec):
-        set_rotation(self.renderable, vec)
+        set_rotation(self.renderable, vec, "ZYX")
 
     def get_rotation(self):
-        return self.renderable.rotation#todo das muss noch (wahrscheunlich mit scipy) richtig gemacht werden
+        """
+        Gibt die aktuelle Rotation als Euler-Winkel in Grad im 'ZYX'-Format zurück.
+
+        :return: Liste von drei Winkeln [z, y, x] in Grad.
+        """
+        q = self.renderable.quaternion  # Quaternion: [x, y, z, w]
+        r = R.from_quat([q[0], q[1], q[2], q[3]])
+        euler_deg = r.as_euler("ZYX", degrees=True)
+        return euler_deg.tolist()
 
 
 
@@ -1442,22 +1454,24 @@ class Manipulator:
         parsed = json.loads(parsed)
 
         
-        for i in range(len(parsed["links"])):
+        for link_element in parsed["links"]:
             meshi = None
-            if len(parsed["links"][i]["visual"]) > 0:
-                mesh_path = parsed["links"][i]["visual"][0]["geometry"]["filename"]
-                meshi = manager.load_mesh_auto(mesh_path)
+            if len(link_element["visual"]) > 0:
+                mesh_path = link_element["visual"][0]["geometry"]["filename"]
+                if link_element["visual"][0]["material"] is not None:
+                    material_name : str = link_element["visual"][0]["material"]["name"]
+                    rgba = None
+                    if material_name == "":
+                        rgba : str
+                    else:
+                        meshi = manager.load_mesh_auto(mesh_path, link_element["visual"][0]["material"]["name"])
+                else:
+                    meshi = manager.load_mesh_auto(mesh_path)
             else:
-                position = np.array([0,0,0], dtype=np.float32)
-                geometry = BufferGeometry(attributes={
-                    'position': BufferAttribute(position, normalized=False)
-                })
-                material = PointsMaterial(size=10, color='red')
-                meshi = Points(geometry=geometry, material=material)
-            l = Link(parsed["links"][i]["name"], meshi)
+                meshi = three.Group()
+            l = Link(link_element["name"], meshi)
             self.links.append(l)
                 
-        self.print_links()
                 
         for i in range(len(parsed["joints"])):
             joint_element = parsed["joints"][i]
@@ -1467,13 +1481,22 @@ class Manipulator:
             angles = [np.rad2deg(float(x)) for x in angles]
             joint_parent = self.get_link_by_name(joint_element["parent"])
             joint_child = self.get_link_by_name(joint_element["child"])
-            joint = Joint(joint_element["name"], pos, angles)
-            
-            #print(joint_parent)
-            #print(joint_child)
+            joint_axis = joint_element["axis"]
+            if joint_axis is not None:
+                joint_axis = joint_axis["xyz"].split()
+                joint_axis = [float(x) for x in joint_axis]
+            joint : Joint = Joint(joint_element["name"], joint_axis, pos, angles)
             joint.add(joint_child)
-            joint_parent.add(joint)
+            joint_parent.add(joint) 
+            if joint_element["mimic"] is not None:
+                multiplier : float = float(joint_element["mimic"]["multiplier"])
+                gets_mimiced : Joint = self.get_joint_by_name(joint_element["mimic"]["joint"])
+                gets_mimiced.add_mimicer([joint, multiplier])
             self.joints.append(joint)
+            print("mimicer:")
+            for m in joint.mimicers:
+                print(m[0].name, " name")
+                print(m[1], " mult")
 
         self.mesh = self.links[0].get_renderable()
 
@@ -1486,9 +1509,97 @@ class Manipulator:
             if l.name == name:
                 return l
         return None
+
+    def get_joint_by_name(self, name : str):
+        for j in self.joints:
+            if j.name == name:
+                return j
+        return None
     
     def print_links(self):
         for link in self.links:
             print(link.name)
+
+    def print_joints(self):
+        for joint in self.joints:
+            print(joint.name)
+
+    def print_kinematic_chain(self):
+        current = self.links[0]
+        print(current.name)
+        while(len(current.children) > 0):
+            current = current.children[0]
+            print(current.name)
+
+
+
+
+
+
+
+
+def apply_joint_angle(joint: Joint, axis, angle_rad):
+    """
+    Wendet eine Rotation um eine gegebene Achse auf das Joint-Objekt an.
+
+    :param joint: Joint-Instanz
+    :param axis: 3D-Achse als Liste [x, y, z]
+    :param angle_rad: Winkel in Radiant
+    """
+    axis = np.array(axis, dtype=float)
+    axis = axis / np.linalg.norm(axis)  # Normalisieren
+    r = R.from_rotvec(axis * angle_rad)  # Rotationsvektor → Quaternion
+    
+
+    quat = r.as_quat()  # [x, y, z, w] Reihenfolge!
+    joint.get_renderable().quaternion = (quat[0], quat[1], quat[2], quat[3])
+    for m in joint.mimicers:
+        r = R.from_rotvec(axis * (angle_rad*m[1]))
+        q = r.as_quat()
+        m[0].get_renderable().quaternion = (q[0], q[1], q[2], q[3])
+
+
+
+def apply_joint_rotation(joint : Joint, axis, angle_rad):
+    """
+    Wendet eine Rotation um eine gegebene Achse und Winkel auf das Joint-Objekt an.
+
+    Die Rotation wird relativ zur bestehenden Grundrotation des Joints berechnet.
+
+    :param joint: Das Joint-Objekt (Instanz von Joint), dessen Rotation gesetzt werden soll.
+    :param axis: Die Rotationsachse als Liste oder np.array mit 3 Elementen, z. B. [0, 0, 1].
+                 Sollte idealerweise normiert sein (wird intern aber auch normalisiert).
+    :param angle_rad: Der Rotationswinkel in Radiant.
+    """
+    axis = np.array(axis, dtype=np.float64)
+    if np.linalg.norm(axis) == 0:
+        raise ValueError("Rotationsachse darf nicht der Nullvektor sein.")
+    axis = axis / np.linalg.norm(axis)
+
+    # Ausgangsrotation (aus URDF z. B.)
+    base_rot = R.from_euler("ZYX", joint.get_rotation(), degrees=True)
+
+    # Neue Rotation um die Achse
+    axis_rot = R.from_rotvec(axis * angle_rad)
+
+    # Reihenfolge ist entscheidend: zuerst lokale Basisrotation, dann Gelenkwinkel
+    final_rot = axis_rot * base_rot
+
+    # Quaternion setzen
+    q = final_rot.as_quat()
+    joint.get_renderable().quaternion = (q[0], q[1], q[2], q[3])
+
+    #mimicers
+    print(len(joint.mimicers))
+    for m in joint.mimicers:
+        print("drinnnnnneeeeee")
+        base_rot = R.from_euler("ZYX", m[0].get_rotation(), degrees=True)
+        axis_rot = R.from_rotvec(axis * (angle_rad*m[1]))
+        final_rot = axis_rot * base_rot
+        q = final_rot.as_quat()
+        m[0].get_renderable().quaternion = (q[0], q[1], q[2], q[3])
+        if m[0].name == "joint_piston":
+            print(m[0].get_renderable().quaternion)
+
 
     
