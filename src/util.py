@@ -1590,16 +1590,13 @@ def apply_joint_rotation(joint : Joint, axis, angle_rad):
     joint.get_renderable().quaternion = (q[0], q[1], q[2], q[3])
 
     #mimicers
-    print(len(joint.mimicers))
     for m in joint.mimicers:
-        print("drinnnnnneeeeee")
         base_rot = R.from_euler("ZYX", m[0].get_rotation(), degrees=True)
         axis_rot = R.from_rotvec(axis * (angle_rad*m[1]))
         final_rot = axis_rot * base_rot
         q = final_rot.as_quat()
         m[0].get_renderable().quaternion = (q[0], q[1], q[2], q[3])
-        if m[0].name == "joint_piston":
-            print(m[0].get_renderable().quaternion)
+        
 
 
     
