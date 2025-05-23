@@ -1598,5 +1598,24 @@ def apply_joint_rotation(joint : Joint, axis, angle_rad):
         m[0].get_renderable().quaternion = (q[0], q[1], q[2], q[3])
         
 
+def animation(joint : Joint, axis, angle_rad):
+    axis = np.array(axis, dtype=np.float64)
+    if np.linalg.norm(axis) == 0:
+        raise ValueError("Rotationsachse darf nicht der Nullvektor sein.")
+    axis = axis / np.linalg.norm(axis)
+    base_rot = R.from_euler("ZYX", joint.get_rotation(), degrees=True)
+    axis_rot = R.from_rotvec(axis * angle_rad)
+    final_rot = axis_rot * base_rot
+
+    q1 = joint.get_renderable().quaternion
+    q2 = final_rot.as_quat()
+    tracks = [
+        QuaternionKeyframeTrack(name="lol", times=[0,3], values=q1+q2)
+    ]
+    clip : AnimationClip = AnimationClip(tracks=tracks, duration=2)
+    action = AnimationAction(AnimationMixer(joint.get_renderable()), clip, joint.get_renderable())
+    return action
+    
+
 
     
