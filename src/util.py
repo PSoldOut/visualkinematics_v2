@@ -1610,11 +1610,11 @@ def animation(joint : Joint, axis, angle_rad):
     q1 = joint.get_renderable().quaternion
     q2 = final_rot.as_quat()
     tracks = [
-        QuaternionKeyframeTrack(name="lol", times=[0,3], values=q1+q2)
+        QuaternionKeyframeTrack(name='.quaternion', times=[0,4], values=[q1[0], q1[1], q1[2], q1[3], q2[0], q2[1], q2[2], q2[3]]), 
     ]
-    clip : AnimationClip = AnimationClip(tracks=tracks, duration=2)
-    action = AnimationAction(AnimationMixer(joint.get_renderable()), clip, joint.get_renderable())
-    return action
+    clip : AnimationClip = AnimationClip(tracks=tracks, duration=4)
+    action : AnimationAction = AnimationAction(AnimationMixer(joint.get_renderable()), clip, joint.get_renderable())
+    action.play()
     
 
 
