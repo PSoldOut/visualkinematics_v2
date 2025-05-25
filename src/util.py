@@ -242,7 +242,7 @@ def quaternion_multiply(q1, q2):
 
 
 
-def create_axes(len, font_scale=0.4, show_labels=True, name=""):
+def create_axes(len, font_scale=0.4, show_labels=True, name="", arrow_size=1, transparent_arrows=True):
     '''
     Erstellt ein 3D-Koordinatensystem mit den Achsen X, Y, Z und optionalen Beschriftungen.
 
@@ -304,15 +304,15 @@ def create_axes(len, font_scale=0.4, show_labels=True, name=""):
     axes_group.add([x_label, y_label, z_label])
 
 
-    cyl_x = create_cylinder([len,0,0], radiusTop=0.1, radiusBottom=0.01, height=0.3, color=[255,0,0])
+    cyl_x = create_cylinder([len,0,0], radiusTop=0.1*arrow_size, radiusBottom=0.01*arrow_size, height=0.3*arrow_size, color=[255,0,0], transparent=transparent_arrows)
     rotate(cyl_x, [0,0,90], "XYZ")
     axes_group.add(cyl_x)
 
-    cyl_y = create_cylinder([0,len,0], radiusTop=0.1, radiusBottom=0.01, height=0.3, color=[0,255,0])
+    cyl_y = create_cylinder([0,len,0], radiusTop=0.1*arrow_size, radiusBottom=0.01*arrow_size, height=0.3*arrow_size, color=[0,255,0], transparent=transparent_arrows)
     rotate(cyl_y, [180,0,0], "XYZ")
     axes_group.add(cyl_y)
 
-    cyl_z = create_cylinder([0,0,len], radiusTop=0.1, radiusBottom=0.01, height=0.3, color=[0,0,255])
+    cyl_z = create_cylinder([0,0,len], radiusTop=0.1*arrow_size, radiusBottom=0.01*arrow_size, height=0.3*arrow_size, color=[0,0,255], transparent=transparent_arrows)
     rotate(cyl_z, [-90,0,0], "XYZ")
     axes_group.add(cyl_z)
 
@@ -392,6 +392,20 @@ def create_grid_XZ(size, density):
         grid_group.add(line2)
     return grid_group
 
+
+
+
+def apply_transformation_matrix(obj, transform_matrix):
+    if isinstance(transform_matrix,(sp.Basic, sp.MatrixBase)):
+        transform_matrix.evalf()
+    pos = transform_matrix[:3, 3]
+    rot = R.from_matrix(transform_matrix[:3, :3]).as_quat()
+
+    renderable = obj
+    if (hasattr(obj, 'get_renderable')):
+        renderable = obj.get_renderable()
+    renderable.position = tuple(pos)
+    renderable.quaternion = tuple(rot)
 
 
 
@@ -1354,267 +1368,6 @@ class Environment:
 
 
 
-
-class Kinematic_Chain_Element:
-    def __init__(self, name):
-        self.name = name
-        self.children = []
-        self.parent = None
-        self.renderable = None
-
-        
-    def add(self, object):
-        renderable = object
-        if hasattr(object, "get_renderable"):
-            renderable = object.get_renderable()
-        self.renderable.add(renderable)
-        self.children.append(object)
-        if isinstance(object, Kinematic_Chain_Element):
-            object.parent = self
-
-
-    def remove(self, object):
-        self.children.remove(object)
-        if hasattr(object, "get_renderable"):
-            self.renderable.remove(object.get_renderable())
-        elif isinstance(object, Object3D):
-            self.renderable.remove(object)
-        if isinstance(object, Kinematic_Chain_Element):
-            object.parent = None
-
-
-
-class Joint(Kinematic_Chain_Element):
-    def __init__(self, name, axis, position=[0,0,0], rotation=[0,0,0]):
-        super().__init__(name)
-        self.renderable = three.Group()
-        self.axis = axis
-        self.mimicers : List[List] = []
-        self.set_position(position)
-        self.set_rotation(rotation)
-
-    def add_mimicer(self, mimicer_and_multiplier : List):
-        self.mimicers.append(mimicer_and_multiplier)
-        
-
-
-    def get_renderable(self):
-        return self.renderable
-    
-    def set_position(self, vec):
-        set_translation(self.renderable, vec)
-
-    def get_position(self):
-        return self.renderable.position
-
-    def set_rotation(self, vec):
-        set_rotation(self.renderable, vec, "ZYX")
-
-    def get_rotation(self):
-        """
-        Gibt die aktuelle Rotation als Euler-Winkel in Grad im 'ZYX'-Format zurück.
-
-        :return: Liste von drei Winkeln [z, y, x] in Grad.
-        """
-        q = self.renderable.quaternion  # Quaternion: [x, y, z, w]
-        r = R.from_quat([q[0], q[1], q[2], q[3]])
-        euler_deg = r.as_euler("ZYX", degrees=True)
-        return euler_deg.tolist()
-
-
-
-
-
-class Link(Kinematic_Chain_Element):
-    def __init__(self, name, mesh):
-        super().__init__(name)
-
-        self.renderable = mesh
-
-    def get_renderable(self):
-        return self.renderable
-    
-
-        
-
-
-
-class Manipulator:
-    def __init__(self, name):
-        self.name=name
-        self.mesh = None
-        self.links = []
-        self.joints = []
-        xacro_filepath = manager.find_xacro_filepath_by_robot_name(name)
-        urdf = manager.xacro_to_urdf_string(xacro_filepath)
-        #print(urdf)
-        parsed = manager.parse_urdf(urdf)
-        parsed = json.dumps(parsed, indent=4)
-        print(parsed)
-        parsed = json.loads(parsed)
-
-        
-        for link_element in parsed["links"]:
-            meshi = None
-            if len(link_element["visual"]) > 0:
-                mesh_path = link_element["visual"][0]["geometry"]["filename"]
-                if link_element["visual"][0]["material"] is not None:
-                    material_name : str = link_element["visual"][0]["material"]["name"]
-                    rgba = None
-                    if material_name == "":
-                        rgba : str
-                    else:
-                        meshi = manager.load_mesh_auto(mesh_path, link_element["visual"][0]["material"]["name"])
-                else:
-                    meshi = manager.load_mesh_auto(mesh_path)
-            else:
-                meshi = three.Group()
-            l = Link(link_element["name"], meshi)
-            self.links.append(l)
-                
-                
-        for i in range(len(parsed["joints"])):
-            joint_element = parsed["joints"][i]
-            pos = joint_element["origin"]["xyz"].split()
-            pos = [float(x) for x in pos]
-            angles = joint_element["origin"]["rpy"].split()
-            angles = [np.rad2deg(float(x)) for x in angles]
-            joint_parent = self.get_link_by_name(joint_element["parent"])
-            joint_child = self.get_link_by_name(joint_element["child"])
-            joint_axis = joint_element["axis"]
-            if joint_axis is not None:
-                joint_axis = joint_axis["xyz"].split()
-                joint_axis = [float(x) for x in joint_axis]
-            joint : Joint = Joint(joint_element["name"], joint_axis, pos, angles)
-            joint.add(joint_child)
-            joint_parent.add(joint) 
-            if joint_element["mimic"] is not None:
-                multiplier : float = float(joint_element["mimic"]["multiplier"])
-                gets_mimiced : Joint = self.get_joint_by_name(joint_element["mimic"]["joint"])
-                gets_mimiced.add_mimicer([joint, multiplier])
-            self.joints.append(joint)
-            print("mimicer:")
-            for m in joint.mimicers:
-                print(m[0].name, " name")
-                print(m[1], " mult")
-
-        self.mesh = self.links[0].get_renderable()
-
-    
-    def get_renderable(self):
-        return self.mesh
-    
-    def get_link_by_name(self, name : str):
-        for l in self.links:
-            if l.name == name:
-                return l
-        return None
-
-    def get_joint_by_name(self, name : str):
-        for j in self.joints:
-            if j.name == name:
-                return j
-        return None
-    
-    def print_links(self):
-        for link in self.links:
-            print(link.name)
-
-    def print_joints(self):
-        for joint in self.joints:
-            print(joint.name)
-
-    def print_kinematic_chain(self):
-        current = self.links[0]
-        print(current.name)
-        while(len(current.children) > 0):
-            current = current.children[0]
-            print(current.name)
-
-
-
-
-
-
-
-
-def apply_joint_angle(joint: Joint, axis, angle_rad):
-    """
-    Wendet eine Rotation um eine gegebene Achse auf das Joint-Objekt an.
-
-    :param joint: Joint-Instanz
-    :param axis: 3D-Achse als Liste [x, y, z]
-    :param angle_rad: Winkel in Radiant
-    """
-    axis = np.array(axis, dtype=float)
-    axis = axis / np.linalg.norm(axis)  # Normalisieren
-    r = R.from_rotvec(axis * angle_rad)  # Rotationsvektor → Quaternion
-    
-
-    quat = r.as_quat()  # [x, y, z, w] Reihenfolge!
-    joint.get_renderable().quaternion = (quat[0], quat[1], quat[2], quat[3])
-    for m in joint.mimicers:
-        r = R.from_rotvec(axis * (angle_rad*m[1]))
-        q = r.as_quat()
-        m[0].get_renderable().quaternion = (q[0], q[1], q[2], q[3])
-
-
-
-def apply_joint_rotation(joint : Joint, axis, angle_rad):
-    """
-    Wendet eine Rotation um eine gegebene Achse und Winkel auf das Joint-Objekt an.
-
-    Die Rotation wird relativ zur bestehenden Grundrotation des Joints berechnet.
-
-    :param joint: Das Joint-Objekt (Instanz von Joint), dessen Rotation gesetzt werden soll.
-    :param axis: Die Rotationsachse als Liste oder np.array mit 3 Elementen, z. B. [0, 0, 1].
-                 Sollte idealerweise normiert sein (wird intern aber auch normalisiert).
-    :param angle_rad: Der Rotationswinkel in Radiant.
-    """
-    axis = np.array(axis, dtype=np.float64)
-    if np.linalg.norm(axis) == 0:
-        raise ValueError("Rotationsachse darf nicht der Nullvektor sein.")
-    axis = axis / np.linalg.norm(axis)
-
-    # Ausgangsrotation (aus URDF z. B.)
-    base_rot = R.from_euler("ZYX", joint.get_rotation(), degrees=True)
-
-    # Neue Rotation um die Achse
-    axis_rot = R.from_rotvec(axis * angle_rad)
-
-    # Reihenfolge ist entscheidend: zuerst lokale Basisrotation, dann Gelenkwinkel
-    final_rot = axis_rot * base_rot
-
-    # Quaternion setzen
-    q = final_rot.as_quat()
-    joint.get_renderable().quaternion = (q[0], q[1], q[2], q[3])
-
-    #mimicers
-    for m in joint.mimicers:
-        base_rot = R.from_euler("ZYX", m[0].get_rotation(), degrees=True)
-        axis_rot = R.from_rotvec(axis * (angle_rad*m[1]))
-        final_rot = axis_rot * base_rot
-        q = final_rot.as_quat()
-        m[0].get_renderable().quaternion = (q[0], q[1], q[2], q[3])
-        
-
-def animation(joint : Joint, axis, angle_rad):
-    axis = np.array(axis, dtype=np.float64)
-    if np.linalg.norm(axis) == 0:
-        raise ValueError("Rotationsachse darf nicht der Nullvektor sein.")
-    axis = axis / np.linalg.norm(axis)
-    base_rot = R.from_euler("ZYX", joint.get_rotation(), degrees=True)
-    axis_rot = R.from_rotvec(axis * angle_rad)
-    final_rot = axis_rot * base_rot
-
-    q1 = joint.get_renderable().quaternion
-    q2 = final_rot.as_quat()
-    tracks = [
-        QuaternionKeyframeTrack(name='.quaternion', times=[0,4], values=[q1[0], q1[1], q1[2], q1[3], q2[0], q2[1], q2[2], q2[3]]), 
-    ]
-    clip : AnimationClip = AnimationClip(tracks=tracks, duration=4)
-    action : AnimationAction = AnimationAction(AnimationMixer(joint.get_renderable()), clip, joint.get_renderable())
-    action.play()
     
 
 

@@ -191,7 +191,16 @@ def parse_geometry_block(tag):
                     }
 
         elif child.tag == "material":
-            info["material"] = child.attrib
+            name = child.attrib.get("name")
+            rgba = None
+            for subChild in child:
+                if subChild.tag == "color":
+                    rgba = subChild.attrib.get("rgba")
+            info["material"] = {
+                "name" : name,
+                "rgba" : rgba
+            }
+            
 
     return info if info["geometry"] else None
 
@@ -201,7 +210,7 @@ def parse_geometry_block(tag):
 
 
 
-def load_mesh_auto(filepath, color="lightgray"):
+def load_mesh_auto(filepath, color="lightgray", opacity=1.0):
     if not os.path.isfile(filepath):
         raise FileNotFoundError(f"Mesh-Datei nicht gefunden: {filepath}")
     
@@ -224,7 +233,7 @@ def load_mesh_auto(filepath, color="lightgray"):
     )
     geometry.exec_three_obj_method('computeVertexNormals')
     # Mesh erstellen
-    material = MeshStandardMaterial(color=color)
+    material = MeshStandardMaterial(color=color, opacity=opacity, transparent=True)
     mesh_obj = Mesh(geometry=geometry, material=material)
     return mesh_obj
 
