@@ -49,22 +49,24 @@ def compute_dh_matrix(theta, d, a, alpha):
 
 
 class DHKinematicModel:
-    def __init__(self, dh_parameters):  # dh_parameters ist Liste von dicts mit theta, d, a, alpha
+    def __init__(self, dh_parameters : dict):  # dh_parameters ist dict von dicts mit theta, d, a, alpha
         self.dh_parameters = dh_parameters
-        self.joint_angles = [0.0 for _ in dh_parameters]  # Startwinkel
+        self.joint_angles : dict = {}
+        for name, _ in dh_parameters.items():
+            self.joint_angles[name] = 0.0
 
     def compute_transforms(self):
-        T_list = []
+        T_dict : dict = {}
         T = np.eye(4)
-        for i, param in enumerate(self.dh_parameters):
-            theta = self.joint_angles[i] + param.get('theta', 0.0)
+        for name, param in self.dh_parameters.items():
+            theta = self.joint_angles[name] + param["theta"]
             d = param['d']
             alpha = param['alpha']
             a = param['a']
             T_i = compute_dh_matrix(theta, d, a, alpha)
             T = T @ T_i
-            T_list.append(T)
-        return T_list
+            T_dict[name] = T
+        return T_dict
 
 
 
@@ -76,7 +78,7 @@ class Kinematic_Chain_Element:
         self.children = []
         self.parent = None
         self.renderable = None
-        self.frame = util.create_axes(0.2, show_labels=False, arrow_size=0.1, transparent_arrows=False)
+        self.frame = util.create_axes(0.3, show_labels=False, arrow_size=0.1, transparent_arrows=False)
         self.frame.visible=False
 
 
@@ -169,6 +171,7 @@ class Manipulator:
         self.links = []
         self.joints = []
         self.base_link = None
+        self.dh_model = None
         xacro_filepath = manager.find_xacro_filepath_by_robot_name(name)
         urdf = manager.xacro_to_urdf_string(xacro_filepath)
         self.urdf_dictionary = manager.parse_urdf(urdf)
@@ -181,6 +184,13 @@ class Manipulator:
         self.base_link = self.links[0]
 
     
+    def apply_DH_model(self, dh : DHKinematicModel):
+        self.dh = dh
+        DH_transforms : dict = dh.compute_transforms()
+        global_transforms : dict = self.compute_global_transform()
+        for name, transform in DH_transforms.items():
+            joint : Joint = self.get_joint_by_name(name)
+            joint.dh_alignment = np.linalg.inv(global_transforms[name]) @ transform
     
 
     def init_links(self):
@@ -250,13 +260,15 @@ class Manipulator:
             l.frame.visible=show
 
     def show_DH_frames(self, show=True):
-        current = self.links[0]
+        current = self.base_link
         if isinstance(current, Joint):
             current.frame.visible=show
+            util.apply_transformation_matrix(current.frame, current.dh_alignment)
         while(len(current.children) > 0):
             current = current.children[0]
             if isinstance(current, Joint):
                 current.frame.visible=show
+                util.apply_transformation_matrix(current.frame, current.dh_alignment)
 
     def get_renderable(self):
         return self.mesh
@@ -307,25 +319,19 @@ class Manipulator:
             print(current.name)
         print()
 
-    def compute_global_transform(self, current : Kinematic_Chain_Element=None, parent_transform=np.eye(4), global_transforms=None):
+
+    def compute_global_transform(self, current : Kinematic_Chain_Element=None, parent_transform=np.eye(4), global_transforms : dict=None, with_print=False):
         if global_transforms is None:
-            global_transforms = []
+            global_transforms : dict = {}
         if current is None:
             current : Kinematic_Chain_Element = self.base_link
-        current_transform = pose_to_matrix(current.get_position(), current.get_rotation(False))
-        old_transform = current_transform
-        print("pose:", current.get_position(), " , ", current.get_rotation(False), " becomes to: ")
-        print(current_transform)
-        while(len(current.children) > 0):
-            #if len(current.children) != 1:
-                #raise ValueError(f"Nicht-lineare Kette oder fehlerhafte Struktur. {current.name} hat {len(current.children)} Kinder" )
-            current = current.children[0]
-            current_transform = pose_to_matrix(current.get_position(), current.get_rotation(False), False)
-            current_transform = old_transform @ current_transform
-            old_transform = current_transform
-            global_transforms.append({current.name:current_transform.copy()})
-            print("pose:", current.get_position(), " , ", current.get_rotation(False), " becomes to: ", "current is:", current.name)
+        current_transform = parent_transform @ pose_to_matrix(current.get_position(), current.get_rotation(False), False)
+        global_transforms[current.name] = current_transform.copy()
+        if with_print:
+            print(current.name,":  pose:", current.get_position(), " , ", current.get_rotation(False), " becomes to: ")
             print(current_transform)
+        for child in current.children:
+            self.compute_global_transform(child, current_transform, global_transforms)
         return global_transforms
 
 
