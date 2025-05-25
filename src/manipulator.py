@@ -316,7 +316,9 @@ class Manipulator:
         old_transform = current_transform
         print("pose:", current.get_position(), " , ", current.get_rotation(False), " becomes to: ")
         print(current_transform)
-        for child in current.children:
+        while(len(current.children) > 0):
+            #if len(current.children) != 1:
+                #raise ValueError(f"Nicht-lineare Kette oder fehlerhafte Struktur. {current.name} hat {len(current.children)} Kinder" )
             current = current.children[0]
             current_transform = pose_to_matrix(current.get_position(), current.get_rotation(False), False)
             current_transform = old_transform @ current_transform
