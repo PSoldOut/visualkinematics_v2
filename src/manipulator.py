@@ -13,7 +13,19 @@ import manager
 from collections.abc import Iterable
 import typing
 import util
+from threading import Timer
 
+pending_actions = []
+max_pending_actions = 100
+
+def add_pending_action(action : AnimationAction):
+    global pending_actions
+    pending_actions.append(action)
+    display(f"pending actions: {len(pending_actions)}")
+    if len(pending_actions) > max_pending_actions:
+        for action in pending_actions:
+            action.stop()
+        pending_actions = []
 
 
 def pose_to_matrix(xyz, rpy, degrees=True):
@@ -184,6 +196,41 @@ class Manipulator:
         self.base_link = self.links[0]
 
     
+
+
+
+
+    def animate(self, joints : list, angle_rads : list, duration : float = 1.0, loop=False):
+        q1s : list = []
+        q2s : list = []
+        for joint, angle_rad in zip(joints, angle_rads):
+            axis = joint.axis
+            axis = np.array(axis, dtype=np.float64)
+            if np.linalg.norm(axis) == 0:
+                raise ValueError("Rotationsachse darf nicht der Nullvektor sein.")
+            axis = axis / np.linalg.norm(axis)
+            base_rot = R.from_euler("ZYX", joint.get_rotation(), degrees=True)
+            axis_rot = R.from_rotvec(axis * angle_rad)
+            final_rot = axis_rot * base_rot
+            q1s.append(list(joint.get_renderable().quaternion))
+            q2s.append(final_rot.as_quat())
+        
+        delta = 0.001
+        t = 0.1
+
+        while(t < duration):
+            start = time.perf_counter()
+            for joint, q1, q2 in zip(joints, q1s, q2s):
+                joint.get_renderable().quaternion = tuple(util.slerp_quaternion(q1, q2, t/duration))
+            end = time.perf_counter()
+            t += end - start
+        for joint, q1, q2 in zip(joints, q1s, q2s):
+                joint.get_renderable().quaternion = tuple(util.slerp_quaternion(q1, q2, 1))
+        
+
+
+
+
     def apply_DH_model(self, dh : DHKinematicModel):
         self.dh = dh
         DH_transforms : dict = dh.compute_transforms()
@@ -399,16 +446,47 @@ def apply_joint_rotation_animated(joint : Joint, axis, angle_rad, loop=False):
     axis_rot = R.from_rotvec(axis * angle_rad)
     final_rot = axis_rot * base_rot
 
+
+    def on_animation_finished(action : AnimationAction, mixer : AnimationMixer, joint : Joint, q2):
+        #display("DRINNE")
+        if action.time <= 0.000001:
+            #action.stop()
+            add_pending_action(action)
+            joint.get_renderable().quaternion = (q2[0],q2[1],q2[2],q2[3])
+            #display("animation finished!")
+        else:
+            i = 0
+            while(action.time > 0.000001 and i < 99):
+                time.sleep(0.001)
+                i+=1
+            #action.stop()
+            add_pending_action(action)
+            joint.get_renderable().quaternion = (q2[0],q2[1],q2[2],q2[3])
+            #display("animation finished! aber aus schleife")
+        
+        
     q1 = joint.get_renderable().quaternion
     q2 = final_rot.as_quat()
     tracks = [
         QuaternionKeyframeTrack(name='.quaternion', times=[0,4], values=[q1[0], q1[1], q1[2], q1[3], q2[0], q2[1], q2[2], q2[3]]), 
     ]
     clip : AnimationClip = AnimationClip(tracks=tracks, duration=4)
-    action : AnimationAction = AnimationAction(AnimationMixer(joint.get_renderable()), clip, joint.get_renderable())
+    mixer : AnimationMixer = AnimationMixer(joint.get_renderable())
+    action : AnimationAction = AnimationAction(mixer, clip, joint.get_renderable())
     if loop==False:
         action.loop = 'LoopOnce'
     action.clampWhenFinished = True
     action.play()
+
+    Timer(clip.duration, on_animation_finished, args=[action, mixer, joint, q2]).start()
+
     for mimicer in joint.mimicers:
         apply_joint_rotation_animated(mimicer[0], mimicer[0].axis, angle_rad*mimicer[1], loop=loop)
+
+
+
+
+
+
+
+

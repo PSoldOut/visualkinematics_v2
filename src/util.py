@@ -574,7 +574,7 @@ def slerp_quaternion(q1, q2, t):
     if isinstance(q2,(sp.Basic, sp.MatrixBase)):
         q2.evalf()
     if not (0.0 <= t <= 1.0):
-        raise ValueError("Der Interpolationswert t muss zwischen 0 und 1 liegen.")
+        raise ValueError(f"Der Interpolationswert t muss zwischen 0 und 1 liegen. t ist aber {t}")
     
     # Erstelle Rotationsobjekte
     key_times = np.array([0, 1])  # Start (0) und Ende (1)
