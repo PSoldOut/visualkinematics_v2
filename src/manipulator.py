@@ -18,6 +18,16 @@ from threading import Timer
 pending_actions = []
 max_pending_actions = 100
 
+
+def block(data, current : Kinematic_Chain_Element, func, depth=0):
+    with Widget.hold_sync(current.get_renderable()):
+        if len(current.children) > 0:
+            for children in current.children:
+                block(data, children, func, depth+1)
+        else:
+            func(data)
+
+
 def add_pending_action(action : AnimationAction):
     global pending_actions
     pending_actions.append(action)
@@ -198,12 +208,28 @@ class Manipulator:
     
 
 
+    def animate_stable_but_flickering(self, joints : list, angles_rad : list, duration : float = 2):
+        for joint, angle_rad in zip(joints, angles_rad):
+            apply_joint_rotation_animated(joint=joint, axis=joint.axis, angle_rad=angle_rad, duration=duration)
 
 
-    def animate(self, joints : list, angle_rads : list, duration : float = 1.0, loop=False):
+
+    def animate(self, joints : list, angles_rad : list, duration : float = 1.0, quality=1):
+
+        def add_mimicers(current : Joint, current_angle_rad, joints : list):
+            joints.append(current)
+            angles_rad.append(current_angle_rad)
+            for m in current.mimicers:
+                add_mimicers(current=m[0], current_angle_rad=m[1] * current_angle_rad, joints=joints)
+
         q1s : list = []
         q2s : list = []
-        for joint, angle_rad in zip(joints, angle_rads):
+
+        for j, angle in zip(joints, angles_rad):
+            for m in j.mimicers:
+                add_mimicers(current=m[0], current_angle_rad=m[1]*angle, joints=joints)
+    
+        for joint, angle_rad in zip(joints, angles_rad):
             axis = joint.axis
             axis = np.array(axis, dtype=np.float64)
             if np.linalg.norm(axis) == 0:
@@ -215,17 +241,20 @@ class Manipulator:
             q1s.append(list(joint.get_renderable().quaternion))
             q2s.append(final_rot.as_quat())
         
-        delta = 0.001
-        t = 0.1
+        t = 0
+
+        def step(data):
+            for joint, q1, q2, angle_rad in zip(joints, q1s, q2s, angles_rad):
+                joint.get_renderable().quaternion = tuple(util.slerp_quaternion(q1, q2, data))
+                
 
         while(t < duration):
             start = time.perf_counter()
-            for joint, q1, q2 in zip(joints, q1s, q2s):
-                joint.get_renderable().quaternion = tuple(util.slerp_quaternion(q1, q2, t/duration))
+            block(t/duration, self.base_link, step)
+            time.sleep(0.01/quality)
             end = time.perf_counter()
             t += end - start
-        for joint, q1, q2 in zip(joints, q1s, q2s):
-                joint.get_renderable().quaternion = tuple(util.slerp_quaternion(q1, q2, 1))
+        block(1, self.base_link, step)
         
 
 
@@ -437,7 +466,7 @@ def apply_joint_rotation(joint : Joint, axis, angle_rad):
         
 
 
-def apply_joint_rotation_animated(joint : Joint, axis, angle_rad, loop=False):
+def apply_joint_rotation_animated(joint : Joint, axis, angle_rad, loop=False, duration : float = 2):
     axis = np.array(axis, dtype=np.float64)
     if np.linalg.norm(axis) == 0:
         raise ValueError("Rotationsachse darf nicht der Nullvektor sein.")
@@ -446,31 +475,30 @@ def apply_joint_rotation_animated(joint : Joint, axis, angle_rad, loop=False):
     axis_rot = R.from_rotvec(axis * angle_rad)
     final_rot = axis_rot * base_rot
 
+        
 
     def on_animation_finished(action : AnimationAction, mixer : AnimationMixer, joint : Joint, q2):
         #display("DRINNE")
         if action.time <= 0.000001:
-            #action.stop()
-            add_pending_action(action)
+            action.stop()
             joint.get_renderable().quaternion = (q2[0],q2[1],q2[2],q2[3])
-            #display("animation finished!")
+            display("animation finished!")
         else:
             i = 0
             while(action.time > 0.000001 and i < 99):
                 time.sleep(0.001)
                 i+=1
-            #action.stop()
-            add_pending_action(action)
+            action.stop()
             joint.get_renderable().quaternion = (q2[0],q2[1],q2[2],q2[3])
-            #display("animation finished! aber aus schleife")
+            display("animation finished!")
         
         
     q1 = joint.get_renderable().quaternion
     q2 = final_rot.as_quat()
     tracks = [
-        QuaternionKeyframeTrack(name='.quaternion', times=[0,4], values=[q1[0], q1[1], q1[2], q1[3], q2[0], q2[1], q2[2], q2[3]]), 
+        QuaternionKeyframeTrack(name='.quaternion', times=[0,duration], values=[q1[0], q1[1], q1[2], q1[3], q2[0], q2[1], q2[2], q2[3]]), 
     ]
-    clip : AnimationClip = AnimationClip(tracks=tracks, duration=4)
+    clip : AnimationClip = AnimationClip(tracks=tracks, duration=duration)
     mixer : AnimationMixer = AnimationMixer(joint.get_renderable())
     action : AnimationAction = AnimationAction(mixer, clip, joint.get_renderable())
     if loop==False:
