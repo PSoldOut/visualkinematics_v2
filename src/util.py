@@ -12,6 +12,7 @@ import os
 import manager
 from collections.abc import Iterable
 import typing
+from numba import njit
 
 
 
@@ -569,6 +570,7 @@ def slerp_quaternion(q1, q2, t):
     
     :raises ValueError: Wenn der Interpolationswert t nicht zwischen 0 und 1 liegt.
     '''
+
     if isinstance(q1,(sp.Basic, sp.MatrixBase)):
         q1.evalf()
     if isinstance(q2,(sp.Basic, sp.MatrixBase)):
@@ -576,6 +578,7 @@ def slerp_quaternion(q1, q2, t):
     if not (0.0 <= t <= 1.0):
         raise ValueError(f"Der Interpolationswert t muss zwischen 0 und 1 liegen. t ist aber {t}")
     
+
     # Erstelle Rotationsobjekte
     key_times = np.array([0, 1])  # Start (0) und Ende (1)
     key_rots = R.from_quat([q1, q2])  # Quaternionen als Rotation-Objekte
