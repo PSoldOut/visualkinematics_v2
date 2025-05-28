@@ -232,9 +232,12 @@ class Manipulator:
 
 
             def do(action_q2_joint_array):
+                base.get_renderable().visible = False
+                time.sleep(0.02)
                 for i in range(len(action_q2_joint)):
                     action_q2_joint[i][0].stop()
                     action_q2_joint[i][2].get_renderable().quaternion = tuple(action_q2_joint[i][1])
+                base.get_renderable().visible = True
                     #display("jauuuuuu")
 
 
