@@ -1130,7 +1130,7 @@ class Environment:
     - Die Umgebung kann mit einer interaktiven Steuerung für Kamera und Objekte angezeigt werden.
     - Widgets für die Manipulation von Objekten (Translation, Rotation, Skalierung) können zur Szene hinzugefügt werden.
     '''
-    def __init__(self, width=700, height=500, frame=None, grid=None, up=[0,0,1]):
+    def __init__(self, width=700, height=500, frame=None, grid=None, up=[0,0,1], widgets_on_bottom=False):
         '''
         Initialisiert eine neue 3D-Umgebung.
 
@@ -1155,6 +1155,7 @@ class Environment:
         self.light = PointLight(color='white', intensity=1.5, position=[5, 5, 5])
         self.scene.add([self.camera, self.light, self.frame, self.grid, AmbientLight(intensity=0.5)])
         self.children = []
+        self.widgets_on_bottom = widgets_on_bottom
         # Renderer mit Orbit-Steuerung
         self.renderer = Renderer(camera=self.camera, scene=self.scene, controls=[OrbitControls(controlling=self.camera)], width=width, height=height, background_color="#87CEEB", background_opacity=1.0, antialias=True, precision='highp')
         self.frame_widgets = True
@@ -1188,18 +1189,46 @@ class Environment:
         '''
         Zeigt die Umgebung mit Renderer und interaktiven Widgets an, wenn sie in einem Jupyter-Notebook verwendet wird.
         '''
-        display(self.renderer)
+        layout2 = widgets.Layout(
+            #border='1px solid gray',
+            padding='5px',
+            flex='none' 
+        )
+
+        mainbox = VBox([self.renderer], layout = layout2)
         if self.frame_widgets:
             checkbox_grid = Checkbox(value=True, description='Show Grid')
             checkbox_axes = Checkbox(value=True, description='Show Axes')
             #interactive_control_scale = widgets.interactive(update_cube_scale, x=x_scale_slider, y=y_scale_slider, z=z_scale_slider)
             checkbox_grid.observe(self.toggle_grid, names='value')
             checkbox_axes.observe(self.toggle_axes, names='value')
-            display(HBox([checkbox_grid, checkbox_axes]))
+            frame_widget_box = HBox([checkbox_grid, checkbox_axes])
+            mainbox.children = mainbox.children + (frame_widget_box,)
 
-        for w in self.widgets:
-            display(w)
+
+        layout1 = widgets.Layout(
+            #border='1px solid gray',
+            padding='5px',
+            height='600px',
+            #width ='1600px',
+            overflow_y='auto',
+            overflow_x = "auto",
+            flex="none"
+        )
+
         
+
+        widget_box = VBox(children=[], layout = layout1)
+        for w in self.widgets:
+            widget_box.children = widget_box.children + (w,)
+            w.layout.overvlow="hidden"
+
+        #lol_box = HBox(children = [widget_box], layout=layout2)
+        
+        if self.widgets_on_bottom:
+            display(VBox(children = [mainbox, widget_box]))
+        else:
+            display(HBox(children = [mainbox, widget_box]))
 
         
     def set_frame_widgets(self, bool):
@@ -1254,7 +1283,7 @@ class Environment:
     
 
     
-    def add_gizmo_controls(self, obj, translation=True, rotation=True, scale=True):
+    def add_gizmo_controls(self, obj, translation=True, rotation=True, scale=False, name=""):
         '''
         Fügt ein Gizmo-Steuerelement zur Manipulation eines Objekts in der Umgebung hinzu (Translation, Rotation, Skalierung).
 
@@ -1263,111 +1292,152 @@ class Environment:
         :param rotation: Wenn True, werden Schieberegler für die Rotation angezeigt.
         :param scale: Wenn True, werden Schieberegler für die Skalierung angezeigt.
         '''
+        content = []
+        if name != "":
+            content.append(Label(name))
         renderable = obj
         if hasattr(obj, "get_renderable"):
             renderable = obj.get_renderable()
 
-        # Schieberegler
-        x_rot_slider = FloatSlider(min=-180, max=180, step=0.1, description='Rotate X')
-        y_rot_slider = FloatSlider(min=-180, max=180, step=0.1, description='Rotate Y')
-        z_rot_slider = FloatSlider(min=-180, max=180, step=0.1, description='Rotate Z')
-
-        x_scale_slider = FloatSlider(min=0, max=5, step=0.001, description="Scale X", value=1)
-        y_scale_slider = FloatSlider(min=0, max=5, step=0.001, description="Scale Y", value=1)
-        z_scale_slider = FloatSlider(min=0, max=5, step=0.001, description="Scale Z", value=1)
-
-        x_trans_slider = FloatSlider(min=0, max = 10, step=0.001, description="Translation X")
-        y_trans_slider = FloatSlider(min=0, max = 10, step=0.001, description="Translation Y")
-        z_trans_slider = FloatSlider(min=0, max = 10, step=0.001, description="Translation Z")
-
-
-        #ZYX ist Roll Nick Gier wie in der Vorlesung, ZYZ ist Euler wie in der Vorlesung
-        rotation_order_dropdown = Dropdown(
-            options=['XYZ', 'XZY', 'YXZ', 'YZX', 'ZXY', 'ZYX', "ZYZ", "XYX", "XZX", "YXY", "YZY", "ZXZ"],
-            value='ZYX',
-            description='Rotation Order:',
-        )
-
         
 
-        trans_box = VBox([x_trans_slider, y_trans_slider, z_trans_slider])
-        rot_box = VBox([x_rot_slider, y_rot_slider, z_rot_slider])
-        scale_box = VBox([x_scale_slider, y_scale_slider, z_scale_slider])
 
-        box = HBox([trans_box, rot_box, scale_box])
-
-
-        self.add_widget(box)
-        self.add_widget(rotation_order_dropdown)
-
-
-
-        def _on_trans_slider(change):#noch fehler drin
-            set_translation(renderable, [x_trans_slider.value, y_trans_slider.value, z_trans_slider.value])
-
-        def _on_rot_slider(change):
-            o = rotation_order_dropdown.value
-            if (o == "zyz" or o == "ZYZ" or
-                o == "xyx" or o == "XYX" or
-                o == "xzx" or o == "XZX" or
-                o == "yxy" or o == "YXY" or
-                o == "yzy" or o == "YZY" or
-                o == "zxz" or o == "ZXZ"):
-                set_rotation(renderable, [x_rot_slider.value, y_rot_slider.value, z_rot_slider.value], rotation_order_dropdown.value)
-            else:
-                angles = order_angles(x_rot_slider.value, y_rot_slider.value, z_rot_slider.value, rotation_order_dropdown.value)
-                set_rotation(renderable, angles, rotation_order_dropdown.value)
-    
-
-        def _on_scale_slider(change):
-            set_scale(renderable, [x_scale_slider.value, y_scale_slider.value, z_scale_slider.value])
-
-
-        def _on_rotation_order_change(change):
-            o = rotation_order_dropdown.value
-            if (o=="ZYZ" or o=="zyz"):
-                x_rot_slider.description="Rotate Z"
-                y_rot_slider.description="Rotate Y"
-                z_rot_slider.description="Rotate Z"
-            elif (o=="XYX" or o=="xyx"):
-                x_rot_slider.description="Rotate X"
-                y_rot_slider.description="Rotate Y"
-                z_rot_slider.description="Rotate X"
-            elif (o=="XZX" or o=="xzx"):
-                x_rot_slider.description="Rotate X"
-                y_rot_slider.description="Rotate Z"
-                z_rot_slider.description="Rotate X"
-            elif (o=="YXY" or o=="yxy"):
-                x_rot_slider.description="Rotate Y"
-                y_rot_slider.description="Rotate X"
-                z_rot_slider.description="Rotate Y"
-            elif (o=="YZY" or o=="yzy"):
-                x_rot_slider.description="Rotate Y"
-                y_rot_slider.description="Rotate Z"
-                z_rot_slider.description="Rotate Y"
-            elif (o=="ZXZ" or o=="zxz"):
-                x_rot_slider.description="Rotate Z"
-                y_rot_slider.description="Rotate X"
-                z_rot_slider.description="Rotate Z"
-            else:
-                x_rot_slider.description="Rotate X"
-                y_rot_slider.description="Rotate Y"
-                z_rot_slider.description="Rotate Z"
-
-            _on_rot_slider(None)
-       
+        layout1 = widgets.Layout(
+                #border='1px solid gray',
+                padding='5px',
+                height='125px',
+                overflow='hidden',  # Scrollen deaktivieren
+                flex='none'
+            )
         
-        x_trans_slider.observe(_on_trans_slider, names='value')
-        y_trans_slider.observe(_on_trans_slider, names="value")
-        z_trans_slider.observe(_on_trans_slider, names="value")
-        x_rot_slider.observe(_on_rot_slider, names="value")
-        y_rot_slider.observe(_on_rot_slider, names="value")
-        z_rot_slider.observe(_on_rot_slider, names="value")
-        x_scale_slider.observe(_on_scale_slider, names="value")
-        y_scale_slider.observe(_on_scale_slider, names="value")
-        z_scale_slider.observe(_on_scale_slider, names="value")
+        layout2 = widgets.Layout(
+                border='1px solid gray',
+                padding='5px',
+                height='200px',
+                overflow='hidden',  # Scrollen deaktivieren
+                flex='none'
+            )
 
-        rotation_order_dropdown.observe(_on_rotation_order_change, names='value')    
+        if translation:
+            x_trans_slider = FloatSlider(min=-10, max = 10, step=0.001, description="Translation X")
+            y_trans_slider = FloatSlider(min=-10, max = 10, step=0.001, description="Translation Y")
+            z_trans_slider = FloatSlider(min=-10, max = 10, step=0.001, description="Translation Z")
+            x_trans_slider.value = renderable.position[0]
+            y_trans_slider.value = renderable.position[1]
+            z_trans_slider.value = renderable.position[2]
+
+            
+
+            trans_box = VBox(children=[x_trans_slider, y_trans_slider, z_trans_slider], layout=layout1)
+            
+            content.append(trans_box)
+
+            def _on_trans_slider(change):#noch fehler drin
+                set_translation(renderable, [x_trans_slider.value, y_trans_slider.value, z_trans_slider.value])
+            x_trans_slider.observe(_on_trans_slider, names='value')
+            y_trans_slider.observe(_on_trans_slider, names="value")
+            z_trans_slider.observe(_on_trans_slider, names="value")
+
+        if rotation:
+            x_rot_slider = FloatSlider(min=-180, max=180, step=0.1, description='Rotate X')
+            y_rot_slider = FloatSlider(min=-180, max=180, step=0.1, description='Rotate Y')
+            z_rot_slider = FloatSlider(min=-180, max=180, step=0.1, description='Rotate Z')
+            rot = R.from_quat(list(renderable.quaternion))
+            euler = rot.as_euler("XYZ", degrees=True) 
+            x_rot_slider.value = euler[0]
+            y_rot_slider.value = euler[1]
+            z_rot_slider.value = euler[2]
+            rot_box = VBox(children=[x_rot_slider, y_rot_slider, z_rot_slider], layout=layout1)
+            content.append(rot_box)
+
+            def _on_rot_slider(change):
+                o = rotation_order_dropdown.value
+                if (o == "zyz" or o == "ZYZ" or
+                    o == "xyx" or o == "XYX" or
+                    o == "xzx" or o == "XZX" or
+                    o == "yxy" or o == "YXY" or
+                    o == "yzy" or o == "YZY" or
+                    o == "zxz" or o == "ZXZ"):
+                    set_rotation(renderable, [x_rot_slider.value, y_rot_slider.value, z_rot_slider.value], rotation_order_dropdown.value)
+                else:
+                    angles = order_angles(x_rot_slider.value, y_rot_slider.value, z_rot_slider.value, rotation_order_dropdown.value)
+                    set_rotation(renderable, angles, rotation_order_dropdown.value)
+            
+
+
+            x_rot_slider.observe(_on_rot_slider, names="value")
+            y_rot_slider.observe(_on_rot_slider, names="value")
+            z_rot_slider.observe(_on_rot_slider, names="value")
+
+            
+
+        if scale:
+            x_scale_slider = FloatSlider(min=0, max=5, step=0.001, description="Scale X", value=1)
+            y_scale_slider = FloatSlider(min=0, max=5, step=0.001, description="Scale Y", value=1)
+            z_scale_slider = FloatSlider(min=0, max=5, step=0.001, description="Scale Z", value=1)
+            scale_box = VBox(children=[x_scale_slider, y_scale_slider, z_scale_slider], layout=layout1)
+            content.append(scale_box)
+
+            def _on_scale_slider(change):
+                set_scale(renderable, [x_scale_slider.value, y_scale_slider.value, z_scale_slider.value])
+
+            x_scale_slider.observe(_on_scale_slider, names="value")
+            y_scale_slider.observe(_on_scale_slider, names="value")
+            z_scale_slider.observe(_on_scale_slider, names="value")
+
+
+
+        if rotation:
+            #ZYX ist Roll Nick Gier wie in der Vorlesung, ZYZ ist Euler wie in der Vorlesung
+            rotation_order_dropdown = Dropdown(
+                options=['XYZ', 'XZY', 'YXZ', 'YZX', 'ZXY', 'ZYX', "ZYZ", "XYX", "XZX", "YXY", "YZY", "ZXZ"],
+                value='ZYX',
+                description='Rotation Order:',
+            )
+
+            def _on_rotation_order_change(change):
+                o = rotation_order_dropdown.value
+                if (o=="ZYZ" or o=="zyz"):
+                    x_rot_slider.description="Rotate Z"
+                    y_rot_slider.description="Rotate Y"
+                    z_rot_slider.description="Rotate Z"
+                elif (o=="XYX" or o=="xyx"):
+                    x_rot_slider.description="Rotate X"
+                    y_rot_slider.description="Rotate Y"
+                    z_rot_slider.description="Rotate X"
+                elif (o=="XZX" or o=="xzx"):
+                    x_rot_slider.description="Rotate X"
+                    y_rot_slider.description="Rotate Z"
+                    z_rot_slider.description="Rotate X"
+                elif (o=="YXY" or o=="yxy"):
+                    x_rot_slider.description="Rotate Y"
+                    y_rot_slider.description="Rotate X"
+                    z_rot_slider.description="Rotate Y"
+                elif (o=="YZY" or o=="yzy"):
+                    x_rot_slider.description="Rotate Y"
+                    y_rot_slider.description="Rotate Z"
+                    z_rot_slider.description="Rotate Y"
+                elif (o=="ZXZ" or o=="zxz"):
+                    x_rot_slider.description="Rotate Z"
+                    y_rot_slider.description="Rotate X"
+                    z_rot_slider.description="Rotate Z"
+                else:
+                    x_rot_slider.description="Rotate X"
+                    y_rot_slider.description="Rotate Y"
+                    z_rot_slider.description="Rotate Z"
+
+                _on_rot_slider(None)
+            rotation_order_dropdown.observe(_on_rotation_order_change, names='value')  
+            
+
+            
+            box = HBox(children = content, layout = layout1)
+            main_box = VBox(children = [box, rotation_order_dropdown], layout=layout2)
+            self.add_widget(main_box)
+
+
+
+  
 
 
 
