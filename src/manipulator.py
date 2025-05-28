@@ -155,6 +155,10 @@ class Kinematic_Chain_Element:
         r = R.from_quat([q[0], q[1], q[2], q[3]])
         euler_deg = r.as_euler("ZYX", degrees=degrees)
         return euler_deg.tolist()
+    
+
+    def get_rotation_as_quaternion(self):
+        return list(self.get_renderable().quaternion)
 
 
 
@@ -215,9 +219,36 @@ class Manipulator:
 
 
     def animate_stable(self, joints : list, angles_rad : list, duration : float = 2):
+        action_q2_joint : list = []
         for joint, angle_rad in zip(joints, angles_rad):
-            apply_joint_rotation_animated(joint=joint, axis=joint.axis, angle_rad=angle_rad, duration=duration)
-            time.sleep(0.08)
+            action_q2_joint.append(apply_joint_rotation_animated(joint=joint, axis=joint.axis, angle_rad=angle_rad, duration=duration))
+
+        print(len(action_q2_joint))
+        def on_animation_finished():
+            #display("DRINNE")
+            base = joints[0]
+            while(base.parent is not None):
+                base = base.parent
+
+
+            def do(action_q2_joint_array):
+                for i in range(len(action_q2_joint)):
+                    action_q2_joint[i][0].stop()
+                    action_q2_joint[i][2].get_renderable().quaternion = tuple(action_q2_joint[i][1])
+                    #display("jauuuuuu")
+
+
+            if action_q2_joint[0][0].time <= 0.000001:
+                block([action_q2_joint], base, do)
+                #display("animation finished!")
+            else:
+                i = 0
+                while(action_q2_joint[0][0].time > 0.000001 and i < 99):
+                    time.sleep(0.001)
+                    i+=1
+                block(action_q2_joint, base, do)
+                #display("animation finished!")
+        Timer(duration, on_animation_finished).start()
 
 
 
@@ -242,7 +273,8 @@ class Manipulator:
             if np.linalg.norm(axis) == 0:
                 raise ValueError("Rotationsachse darf nicht der Nullvektor sein.")
             axis = axis / np.linalg.norm(axis)
-            base_rot = R.from_euler("ZYX", joint.get_rotation(), degrees=True)
+            base_rot = R.from_quat(joint.get_rotation_as_quaternion())
+            #base_rot = R.from_euler("ZYX", joint.get_rotation(), degrees=True)
             axis_rot = R.from_rotvec(axis * angle_rad)
             final_rot = axis_rot * base_rot
             #q1s.append(list(joint.get_renderable().quaternion))
@@ -304,11 +336,11 @@ class Manipulator:
                         rgba : str = link_element["visual"][0]["material"]["rgba"].split()
                         rgba = [float(x) for x in rgba]
                         hex_color = '#%02x%02x%02x' % (int(rgba[0]*255), int(rgba[1]*255), int(rgba[2]*255))
-                        meshi = manager.load_mesh_auto(mesh_path, hex_color, rgba[3])
+                        meshi = manager.load_mesh_auto_compatibility(mesh_path, hex_color, rgba[3])
                     else:
-                        meshi = manager.load_mesh_auto(mesh_path, link_element["visual"][0]["material"]["name"])
+                        meshi = manager.load_mesh_auto_compatibility(mesh_path, link_element["visual"][0]["material"]["name"])
                 else:
-                    meshi = manager.load_mesh_auto(mesh_path)
+                    meshi = manager.load_mesh_auto_compatibility(mesh_path)
             else:
                 meshi = three.Group()
             l = Link(link_element["name"], meshi, xyz, rpy)
@@ -488,32 +520,6 @@ def apply_joint_rotation_animated(joint : Joint, axis, angle_rad, loop=False, du
     base_rot = R.from_euler("ZYX", joint.get_rotation(), degrees=True)
     axis_rot = R.from_rotvec(axis * angle_rad)
     final_rot = axis_rot * base_rot
-
-        
-
-    def on_animation_finished(action : AnimationAction, mixer : AnimationMixer, joint : Joint, q2):
-        #display("DRINNE")
-        base = joint
-        while(base.parent is not None):
-            base = base.parent
-
-
-        def do(action_joint_array):
-            action_joint_array[0].stop()
-            action_joint_array[1].get_renderable().quaternion = (q2[0],q2[1],q2[2],q2[3])
-
-
-        if action.time <= 0.000001:
-            block([action, joint], base, do)
-            #display("animation finished!")
-        else:
-            i = 0
-            while(action.time > 0.000001 and i < 99):
-                time.sleep(0.001)
-                i+=1
-            block([action, joint], base, do)
-            #display("animation finished!")
-        
         
     q1 = joint.get_renderable().quaternion
     q2 = final_rot.as_quat()
@@ -528,11 +534,10 @@ def apply_joint_rotation_animated(joint : Joint, axis, angle_rad, loop=False, du
     action.clampWhenFinished = True
     action.play()
 
-    Timer(clip.duration, on_animation_finished, args=[action, mixer, joint, q2]).start()
 
     for mimicer in joint.mimicers:
         apply_joint_rotation_animated(mimicer[0], mimicer[0].axis, angle_rad*mimicer[1], loop=loop)
-
+    return action, q2 , joint
 
 
 

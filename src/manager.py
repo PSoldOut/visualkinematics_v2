@@ -20,7 +20,8 @@ from xacrodoc import XacroDoc
 import xacrodoc as xd
 from typing import List
 import trimesh
-
+from lxml.etree import XMLSyntaxError
+from collada.common import DaeMalformedError
 
 
 base_paths = [
@@ -236,6 +237,83 @@ def load_mesh_auto(filepath, color="lightgray", opacity=1.0):
     material = MeshStandardMaterial(color=color, opacity=opacity, transparent=True)
     mesh_obj = Mesh(geometry=geometry, material=material)
     return mesh_obj
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def load_mesh_auto_compatibility(filepath, color="lightgray", opacity=1.0):
+    if not os.path.isfile(filepath):
+        raise FileNotFoundError(f"Mesh-Datei nicht gefunden: {filepath}")
+    
+    try:
+        mesh = trimesh.load(filepath, force='mesh')
+    except (XMLSyntaxError, DaeMalformedError) as e:
+        print(f"[WARN] Fehler beim Laden von {filepath}: {e}")
+        print("[INFO] Versuche, Datei zu bereinigen ...")
+        
+        # Nur versuchen, DAE-Dateien zu bereinigen
+        if filepath.endswith(".dae"):
+            with open(filepath, "r", encoding="utf-8") as f:
+                lines = f.readlines()
+
+            clean_lines = []
+            for line in lines:
+                clean_lines.append(line)
+                if "</COLLADA>" in line:
+                    break
+
+            # Temporäre saubere Datei erzeugen
+            temp_path = filepath.replace(".dae", "_cleaned.dae")
+            with open(temp_path, "w", encoding="utf-8") as f:
+                f.writelines(clean_lines)
+
+            print(f"[INFO] Neuversuch mit bereinigter Datei: {temp_path}")
+            mesh = trimesh.load(temp_path, force='mesh')
+        else:
+            raise e  # andere Dateiformate nicht behandeln
+
+    if mesh.is_empty:
+        raise ValueError(f"Fehler beim Laden der Mesh-Datei (leer oder ungültig): {filepath}")
+    
+    # Vertices & Faces extrahieren
+    vertices = np.array(mesh.vertices, dtype=np.float32)
+    faces = np.array(mesh.faces, dtype=np.uint32)
+    
+    # BufferGeometry bauen
+    geometry = BufferGeometry(
+        attributes={
+            'position': BufferAttribute(vertices, normalized=False),
+            'index': BufferAttribute(faces.flatten(), normalized=False),
+        }
+    )
+    geometry.exec_three_obj_method('computeVertexNormals')
+
+    # Mesh erstellen
+    material = MeshStandardMaterial(color=color, opacity=opacity, transparent=True)
+    mesh_obj = Mesh(geometry=geometry, material=material)
+    return mesh_obj
+
+
+
+
+
+
+
+
+
 
 
 
