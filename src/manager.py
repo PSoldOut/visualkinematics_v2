@@ -257,41 +257,41 @@ def load_mesh_auto(filepath, color="lightgray", opacity=1.0):
 def load_mesh_auto_compatibility(filepath, color="lightgray", opacity=1.0):
     if not os.path.isfile(filepath):
         raise FileNotFoundError(f"Mesh-Datei nicht gefunden: {filepath}")
-    
+
     try:
         mesh = trimesh.load(filepath, force='mesh')
     except (XMLSyntaxError, DaeMalformedError) as e:
         print(f"[WARN] Fehler beim Laden von {filepath}: {e}")
         print("[INFO] Versuche, Datei zu bereinigen ...")
-        
-        # Nur versuchen, DAE-Dateien zu bereinigen
+
         if filepath.endswith(".dae"):
             with open(filepath, "r", encoding="utf-8") as f:
-                lines = f.readlines()
+                content = f.read()
 
-            clean_lines = []
-            for line in lines:
-                clean_lines.append(line)
-                if "</COLLADA>" in line:
-                    break
+            # Nur bis zum Ende des </COLLADA>-Tags behalten
+            end_index = content.find("</COLLADA>")
+            if end_index != -1:
+                clean_content = content[:end_index + len("</COLLADA>")]
 
-            # Temporäre saubere Datei erzeugen
-            temp_path = filepath.replace(".dae", "_cleaned.dae")
-            with open(temp_path, "w", encoding="utf-8") as f:
-                f.writelines(clean_lines)
+                # Temporäre Datei erzeugen
+                temp_path = filepath.replace(".dae", "_cleaned.dae")
+                with open(temp_path, "w", encoding="utf-8") as f:
+                    f.write(clean_content)
 
-            print(f"[INFO] Neuversuch mit bereinigter Datei: {temp_path}")
-            mesh = trimesh.load(temp_path, force='mesh')
+                print(f"[INFO] Neuversuch mit bereinigter Datei: {temp_path}")
+                mesh = trimesh.load(temp_path, force='mesh')
+            else:
+                raise RuntimeError("Kein </COLLADA>-Tag gefunden. Datei ist möglicherweise komplett beschädigt.")
         else:
-            raise e  # andere Dateiformate nicht behandeln
+            raise e
 
     if mesh.is_empty:
         raise ValueError(f"Fehler beim Laden der Mesh-Datei (leer oder ungültig): {filepath}")
-    
+
     # Vertices & Faces extrahieren
     vertices = np.array(mesh.vertices, dtype=np.float32)
     faces = np.array(mesh.faces, dtype=np.uint32)
-    
+
     # BufferGeometry bauen
     geometry = BufferGeometry(
         attributes={
@@ -301,10 +301,10 @@ def load_mesh_auto_compatibility(filepath, color="lightgray", opacity=1.0):
     )
     geometry.exec_three_obj_method('computeVertexNormals')
 
-    # Mesh erstellen
     material = MeshStandardMaterial(color=color, opacity=opacity, transparent=True)
     mesh_obj = Mesh(geometry=geometry, material=material)
     return mesh_obj
+
 
 
 
