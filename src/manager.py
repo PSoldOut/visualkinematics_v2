@@ -177,7 +177,9 @@ def parse_geometry_block(tag):
         elif child.tag == "geometry":
             for geo in child:
                 filename = geo.attrib.get("filename")
-                clean_filename = filename.replace("file://", "")
+                clean_filename = "unbekannt"
+                if filename is not None:
+                    clean_filename = filename.replace("file://", "")
                 if geo.tag == "mesh":
                     info["geometry"] = {
                         "type": "mesh",

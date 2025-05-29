@@ -197,7 +197,7 @@ class Link(Kinematic_Chain_Element):
 
 
 class Manipulator:
-    def __init__(self, name):
+    def __init__(self, name, tool_name):
         self.name=name
         self.mesh = None
         self.links = []
@@ -207,9 +207,17 @@ class Manipulator:
         xacro_filepath = manager.find_xacro_filepath_by_robot_name(name)
         urdf = manager.xacro_to_urdf_string(xacro_filepath)
         self.urdf_dictionary = manager.parse_urdf(urdf)
+        xacro_filepath = manager.find_xacro_filepath_by_robot_name(tool_name)
+        urdf = manager.xacro_to_urdf_string(xacro_filepath)
+        self.urdf_tool_dictionary = manager.parse_urdf(urdf)
+
         #self.urdf_dictionary = json.dumps(self.urdf_dictionary, indent=4)
         #print(self.urdf_dictionary)
         #self.urdf_dictionary = json.loads(self.urdf_dictionary)
+
+        self.urdf_tool_dictionary = json.dumps(self.urdf_tool_dictionary, indent=4)
+        print(self.urdf_tool_dictionary)
+        self.urdf_tool_dictionary = json.loads(self.urdf_tool_dictionary)
 
         self.init_links()
         self.init_joints()
@@ -330,8 +338,7 @@ class Manipulator:
                     xyz = link_element["visual"][0]["origin"]["xyz"].split()
                     xyz = [float(x) for x in xyz]
                     rpy = link_element["visual"][0]["origin"]["rpy"].split()
-                    rpy = [np.rad2deg(float(x)) for x in rpy]
-
+                    rpy = [np.rad2deg(float(x)) for x in rpy]                
                 mesh_path = link_element["visual"][0]["geometry"]["filename"]
                 if link_element["visual"][0]["material"] is not None:
                     material_name : str = link_element["visual"][0]["material"]["name"]
@@ -369,7 +376,9 @@ class Manipulator:
             joint.add(joint_child)
             joint_parent.add(joint) 
             if joint_element["mimic"] is not None:
-                multiplier : float = float(joint_element["mimic"]["multiplier"])
+                multiplier:float=1
+                if "multiplier" in joint_element["mimic"] and joint_element["mimic"]["multiplier"] is not None:
+                    multiplier : float = float(joint_element["mimic"]["multiplier"])
                 gets_mimiced : Joint = self.get_joint_by_name(joint_element["mimic"]["joint"])
                 gets_mimiced.add_mimicer([joint, multiplier])
             self.joints.append(joint)
