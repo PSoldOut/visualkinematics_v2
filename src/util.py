@@ -243,7 +243,7 @@ def quaternion_multiply(q1, q2):
 
 
 
-def create_axes(len, font_scale=0.4, show_labels=True, name="", arrow_size=1, transparent_arrows=True):
+def create_axes(len, font_scale=0.4, show_labels=True, name="", arrow_size:float = 1.0, transparent_arrows=True):
     '''
     Erstellt ein 3D-Koordinatensystem mit den Achsen X, Y, Z und optionalen Beschriftungen.
 
@@ -918,7 +918,7 @@ def set_rotation(obj, angles, order="ZYZ"):
     if (hasattr(obj, 'get_renderable')):
         renderable = obj.get_renderable()
     q = euler_to_quaternion(angles, order=order)
-    renderable.quaternion = [q[0], q[1], q[2], q[3]]
+    renderable.quaternion = tuple(q)
 
 
 
@@ -986,7 +986,7 @@ def set_translation(obj, vec):
         renderable = obj.get_renderable()
     if isinstance(vec,(sp.Basic, sp.MatrixBase)):
         vec.evalf()
-    renderable.position = vec
+    renderable.position = tuple(vec)
 
 
 
@@ -1391,7 +1391,7 @@ class Environment:
             #ZYX ist Roll Nick Gier wie in der Vorlesung, ZYZ ist Euler wie in der Vorlesung
             rotation_order_dropdown = Dropdown(
                 options=['XYZ', 'XZY', 'YXZ', 'YZX', 'ZXY', 'ZYX', "ZYZ", "XYX", "XZX", "YXY", "YZY", "ZXZ"],
-                value='ZYX',
+                value='XYZ',
                 description='Rotation Order:',
             )
 
