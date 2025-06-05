@@ -335,7 +335,7 @@ def create_axes(len, font_scale=0.4, show_labels=True, name="", arrow_size:float
 
 
 
-def create_grid_XY(size, density):
+def create_grid_XY(size, density, pos=[0,0,0], color='#777777'):
     '''
     Erstellt ein 3D-Gitter im XY-Plane mit der angegebenen Größe und Dichte.
 
@@ -344,7 +344,7 @@ def create_grid_XY(size, density):
 
     :return: Ein 3D-Objekt (Group), das das Gitter mit Linien im XY-Plane enthält.
     '''
-    line_material = three.LineBasicMaterial(color='#777777')
+    line_material = three.LineBasicMaterial(color = color)
     line_material.transparent = True
     line_material.opacity = 0.5
 
@@ -361,11 +361,12 @@ def create_grid_XY(size, density):
         line2 = three.Line(line_geometry2, line_material)
         grid_group.add(line1)
         grid_group.add(line2)
+        grid_group.position = pos
     return grid_group
 
 
 
-def create_grid_XZ(size, density):
+def create_grid_XZ(size, density, pos=[0,0,0], color='#777777'):
     '''
     Erstellt ein 3D-Gitter im XZ-Plane mit der angegebenen Größe und Dichte.
 
@@ -374,7 +375,7 @@ def create_grid_XZ(size, density):
 
     :return: Ein 3D-Objekt (Group), das das Gitter mit Linien im XZ-Plane enthält.
     '''
-    line_material = three.LineBasicMaterial(color='#777777')
+    line_material = three.LineBasicMaterial(color = color)
     line_material.transparent = True
     line_material.opacity = 0.5
 
@@ -391,6 +392,7 @@ def create_grid_XZ(size, density):
         line2 = three.Line(line_geometry2, line_material)
         grid_group.add(line1)
         grid_group.add(line2)
+        grid_group.position = pos
     return grid_group
 
 

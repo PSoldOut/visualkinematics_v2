@@ -70,11 +70,14 @@ def compute_dh_matrix(theta:float, d:float, a:float, alpha:float) -> np.ndarray:
 
 
 class DHKinematicModel:
-    def __init__(self, dh_parameters:dict):  # dh_parameters ist dict von dicts mit theta, d, a, alpha
+    def __init__(self, dh_parameters:dict, base_to_dh:np.ndarray = np.eye(4), dh_to_tool:np.ndarray = np.eye(4)):  # dh_parameters ist dict von dicts mit theta, d, a, alpha
         self.dh_parameters:dict = dh_parameters
         self.joint_angles:dict = {}
+        self.base_to_dh:np.ndarray = base_to_dh
+        self.dh_to_tool:np.ndarray = dh_to_tool
         for name, _ in dh_parameters.items():
             self.joint_angles[name] = 0.0
+        
 
     def compute_transforms(self) -> dict: 
         T_dict:dict = {}
@@ -98,10 +101,18 @@ class DHKinematicModel:
         return compute_dh_matrix(theta, d, a, alpha)
 
 
+    def compute_dh_to_tool(self, global_transform_tool:np.ndarray):
+        dh_transforms = self.compute_transforms()
+        last_key = next(reversed(dh_transforms))
+        last_dh = self.base_to_dh @ dh_transforms[last_key]
+        return np.linalg.inv(last_dh) @ global_transform_tool
 
 
-
-
+    def forward_kinematics(self) -> np.ndarray:
+        dh_transforms = self.compute_transforms()
+        last_key = next(reversed(dh_transforms))
+        last_dh = dh_transforms[last_key]
+        return self.base_to_dh @ last_dh @ self.dh_to_tool
 
 
 #----------------------------------------------------------------------------------------------------------------
@@ -169,11 +180,11 @@ class Kinematic_Chain_Element:
     def set_rotation(self, vec_degree):
         util.set_rotation(self.renderable, vec_degree, "ZYX")
 
-    def get_rotation(self, degrees=True):
+    def get_rotation(self, degrees=True) -> np.ndarray:
         q = self.renderable.quaternion  # Quaternion: [x, y, z, w]
         r = R.from_quat([q[0], q[1], q[2], q[3]])
         euler_deg = r.as_euler("ZYX", degrees=degrees)
-        return euler_deg.tolist()
+        return np.array(euler_deg.tolist())
     
 
     def get_rotation_as_quaternion(self):
@@ -433,7 +444,7 @@ class Link(Kinematic_Chain_Element):
 
 
 
-#----------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------MANIPULATOR-------------------------------------------------------------------------
 
 
 
@@ -449,8 +460,6 @@ class Manipulator:
         self.links:list[Link] = []
         self.joints:list[Joint] = []
         self.dh_model:DHKinematicModel|None = None
-        self.base_to_dh:np.ndarray = np.eye(4)
-        self.dh_to_tool:np.ndarray = np.eye(4)
         xacro_filepath:str = manager.find_xacro_filepath_by_robot_name(name)
         urdf:str = manager.xacro_to_urdf_string(xacro_filepath)
         self.urdf_dictionary:dict = manager.parse_urdf(urdf)
@@ -487,14 +496,18 @@ class Manipulator:
             t.add(self.tool)
         
         
-    def compute_base_to_dh_transformation():
-        pass
-    def compute_dh_to_tool_transformation():
-        pass
+    
 
-    def get_global_tcp_position(self):
-        trans = self.dh.compute_transforms()
-        return trans["tool0"]
+    def get_global_tcp_transform(self) -> np.ndarray:
+        for name, _ in self.dh.joint_angles.items():
+            current_joint = self.get_joint_by_name(name)
+            new_angle = current_joint.get_rotation(False)
+            if current_joint is None or current_joint.axis is None:
+                    new_angle = 0.0
+            else:
+                new_angle =  np.array(current_joint.axis) @ np.array(new_angle)
+            self.dh.update_joint_angle(name, new_angle)
+        return self.dh.forward_kinematics()
 
 
     def animate_stable(self, joints:list, angles_rad:list, duration:float = 2) -> None:
@@ -595,14 +608,10 @@ class Manipulator:
         global_transforms:dict = self.compute_global_transform()
         for name, transform in DH_transforms.items():
             joint:Joint = self.get_joint_by_name(name)
-            joint.dh_alignment = np.linalg.inv(global_transforms[name]) @ transform
+            joint.dh_alignment = np.linalg.inv(global_transforms[name]) @ (dh.base_to_dh @ transform)
         
 
-        
-        self.dh_to_tool = global_transforms[self.flange_to_tool_joint.name] @ np.linalg.inv(DH_transforms[self.link_to_flange_joint.name]) 
 
-        base_transform:np.ndarray = pose_to_matrix(self.base_to_baselink_joint.get_position(), self.base_to_baselink_joint.get_rotation(False), False)
-        self.base_to_dh = DH_transforms[self.base_link_to_link_1_joint.name] @ np.linalg.inv(base_transform)
         
 
 
@@ -657,6 +666,9 @@ class Manipulator:
             if joint_axis is not None:
                 joint_axis = joint_axis["xyz"].split()
                 joint_axis = [float(x) for x in joint_axis]
+
+            if joint_axis is not None:
+                joint_axis = np.array(joint_axis)
             joint:Joint = Joint(joint_element["name"], joint_axis, pos, angles)
             joint.add(joint_child)
             joint_parent.add(joint) 
