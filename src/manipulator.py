@@ -419,6 +419,14 @@ class Joint(Kinematic_Chain_Element):
         self.mimicers.append(mimicer_and_multiplier)
     
 
+    def get_previous_joint_in_chain(self) -> Joint|None:
+        current = self.parent
+        while current is not None:
+            if isinstance(current, Joint):
+                return current
+            current = current.parent
+        return current
+
 
 
 
@@ -501,12 +509,14 @@ class Manipulator:
     def get_global_tcp_transform(self) -> np.ndarray:
         for name, _ in self.dh.joint_angles.items():
             current_joint = self.get_joint_by_name(name)
-            new_angle = current_joint.get_rotation(False)
-            if current_joint is None or current_joint.axis is None:
+            prev_joint = current_joint.get_previous_joint_in_chain()
+            new_angle = prev_joint.get_rotation(False)
+            if prev_joint is None or prev_joint.axis is None:
                     new_angle = 0.0
             else:
-                new_angle =  np.array(current_joint.axis) @ np.array(new_angle)
+                new_angle =  np.array(prev_joint.axis) @ np.array(new_angle)
             self.dh.update_joint_angle(name, new_angle)
+            print(f"joint: {name}      prev_joint: {prev_joint.name}     new_angle: {new_angle}    rotation: {prev_joint.get_rotation(False)}     prev_axis: {prev_joint.axis}      axis: {current_joint.axis}")
         return self.dh.forward_kinematics()
 
 
@@ -609,7 +619,10 @@ class Manipulator:
         for name, transform in DH_transforms.items():
             joint:Joint = self.get_joint_by_name(name)
             joint.dh_alignment = np.linalg.inv(global_transforms[name]) @ (dh.base_to_dh @ transform)
-        
+
+
+
+
 
 
         
@@ -700,6 +713,12 @@ class Manipulator:
             if isinstance(current, Joint):
                 current.frame.visible=show
                 util.apply_transformation_matrix(current.frame, current.dh_alignment)
+
+
+
+
+
+
 
     def get_renderable(self):
         return self.mesh
