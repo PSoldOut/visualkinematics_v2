@@ -12,6 +12,7 @@ from threading import Timer
 from numba import njit
 from typing import *
 import re
+import threading
 
 pending_actions = []
 max_pending_actions = 100
@@ -40,7 +41,7 @@ def add_pending_action(action:AnimationAction) -> None:
 
 
 def pose_to_matrix(xyz:np.ndarray, rpy:np.ndarray, degrees:bool = True) -> np.ndarray:
-    r = R.from_euler('ZYX', rpy, degrees=degrees)
+    r = R.from_euler('ZYX', rpy[::-1], degrees=degrees)
     T = np.eye(4)
     T[:3, :3] = r.as_matrix()
     T[:3, 3] = xyz
@@ -184,11 +185,15 @@ class Kinematic_Chain_Element:
         q = self.renderable.quaternion  # Quaternion: [x, y, z, w]
         r = R.from_quat([q[0], q[1], q[2], q[3]])
         euler_deg = r.as_euler("ZYX", degrees=degrees)
-        return np.array(euler_deg.tolist())
+        return np.array(euler_deg.tolist()[::-1])
     
 
-    def get_rotation_as_quaternion(self):
+    def get_quaternion(self):
         return list(self.get_renderable().quaternion)
+    
+    def get_rotvec(self):
+        return R.from_quat(self.get_quaternion()).as_rotvec()
+        
 
 
 
@@ -510,13 +515,18 @@ class Manipulator:
         for name, _ in self.dh.joint_angles.items():
             current_joint = self.get_joint_by_name(name)
             prev_joint = current_joint.get_previous_joint_in_chain()
-            new_angle = prev_joint.get_rotation(False)
+            
+            new_angle = 0.0
+
             if prev_joint is None or prev_joint.axis is None:
                     new_angle = 0.0
             else:
-                new_angle =  np.array(prev_joint.axis) @ np.array(new_angle)
+                rotvec = prev_joint.get_rotvec()
+                new_angle = np.linalg.norm(rotvec)
             self.dh.update_joint_angle(name, new_angle)
-            print(f"joint: {name}      prev_joint: {prev_joint.name}     new_angle: {new_angle}    rotation: {prev_joint.get_rotation(False)}     prev_axis: {prev_joint.axis}      axis: {current_joint.axis}")
+            print(f"joint: {name:<15}\t\tprev_joint: {prev_joint.name:<15}\t\tnew_angle: {new_angle}\t\trotation: {prev_joint.get_rotation(False)}\t\tprev_axis: {prev_joint.axis}\t\taxis: {current_joint.axis}")
+
+            
         return self.dh.forward_kinematics()
 
 
@@ -558,57 +568,59 @@ class Manipulator:
 
 
 
-        
     def animate_experimental(self, joints:list, angles_rad:list, duration:float = 1.0, quality:float = 1):
+        def _animate_experimental_task(joints:list, angles_rad:list, duration:float = 1.0, quality:float = 1):
+            def add_mimicers(current:Joint, current_angle_rad, joints:list):
+                joints.append(current)
+                angles_rad.append(current_angle_rad)
+                for m in current.mimicers:
+                    add_mimicers(current=m[0], current_angle_rad=m[1] * current_angle_rad, joints=joints)
 
-        def add_mimicers(current:Joint, current_angle_rad, joints:list):
-            joints.append(current)
-            angles_rad.append(current_angle_rad)
-            for m in current.mimicers:
-                add_mimicers(current=m[0], current_angle_rad=m[1] * current_angle_rad, joints=joints)
+            slerps:list = []
 
-        slerps:list = []
-
-        for j, angle in zip(joints, angles_rad):
-            for m in j.mimicers:
-                add_mimicers(current=m[0], current_angle_rad=m[1]*angle, joints=joints)
-    
-        for joint, angle_rad in zip(joints, angles_rad):
-            axis = joint.axis
-            axis = np.array(axis, dtype=np.float64)
-            if np.linalg.norm(axis) == 0:
-                raise ValueError("Rotationsachse darf nicht der Nullvektor sein.")
-            axis = axis / np.linalg.norm(axis)
-            base_rot = R.from_quat(joint.get_rotation_as_quaternion())
-            #base_rot = R.from_euler("ZYX", joint.get_rotation(), degrees=True)
-            axis_rot = R.from_rotvec(axis * angle_rad)
-            final_rot = axis_rot * base_rot
-            #q1s.append(list(joint.get_renderable().quaternion))
-            #q2s.append(final_rot.as_quat())
-            q1 = list(joint.get_renderable().quaternion)
-            q2 = final_rot.as_quat()
-            key_times = np.array([0, 1])  
-            key_rots = R.from_quat([q1, q2]) 
-            slerp = Slerp(key_times, key_rots)
-            slerps.append(slerp)
+            for j, angle in zip(joints, angles_rad):
+                for m in j.mimicers:
+                    add_mimicers(current=m[0], current_angle_rad=m[1]*angle, joints=joints)
         
-        t = 0
+            for joint, angle_rad in zip(joints, angles_rad):
+                axis = joint.axis
+                axis = np.array(axis, dtype=np.float64)
+                if np.linalg.norm(axis) == 0:
+                    raise ValueError("Rotationsachse darf nicht der Nullvektor sein.")
+                axis = axis / np.linalg.norm(axis)
+                base_rot = R.from_quat(joint.get_quaternion())
+                #base_rot = R.from_euler("ZYX", joint.get_rotation(), degrees=True)
+                axis_rot = R.from_rotvec(axis * angle_rad)
+                final_rot = axis_rot * base_rot
+                #q1s.append(list(joint.get_renderable().quaternion))
+                #q2s.append(final_rot.as_quat())
+                q1 = list(joint.get_renderable().quaternion)
+                q2 = final_rot.as_quat()
+                key_times = np.array([0, 1])  
+                key_rots = R.from_quat([q1, q2]) 
+                slerp = Slerp(key_times, key_rots)
+                slerps.append(slerp)
+            
+            t = 0
+
+            def step(data):
+                for joint, slerp, angle_rad in zip(joints, slerps, angles_rad):
+                    joint.get_renderable().quaternion = tuple(slerp(data).as_quat())
+                    
+            while(t < duration):
+                start = time.perf_counter()
+                block(t/duration, self.base_link, step)
+                time.sleep(0.01/quality)
+                end = time.perf_counter()
+                t += end - start
+            block(1, self.base_link, step)
+
+        thread = threading.Thread(target=_animate_experimental_task, args=(joints, angles_rad, duration, quality))
+        thread.start()
 
 
 
 
-        def step(data):
-            for joint, slerp, angle_rad in zip(joints, slerps, angles_rad):
-                joint.get_renderable().quaternion = tuple(slerp(data).as_quat())
-                
-
-        while(t < duration):
-            start = time.perf_counter()
-            block(t/duration, self.base_link, step)
-            time.sleep(0.01/quality)
-            end = time.perf_counter()
-            t += end - start
-        block(1, self.base_link, step)
 
 
 
@@ -888,7 +900,7 @@ def apply_joint_rotation(joint:Joint, axis, angle_rad):
     if np.linalg.norm(axis) == 0:
         raise ValueError("Rotationsachse darf nicht der Nullvektor sein.")
     axis = axis / np.linalg.norm(axis)
-    base_rot = R.from_euler("ZYX", joint.get_rotation(), degrees=True)
+    base_rot = R.from_euler("ZYX", joint.get_rotation()[::-1], degrees=True)
     axis_rot = R.from_rotvec(axis * angle_rad)
     final_rot = axis_rot * base_rot
     q = final_rot.as_quat()
@@ -906,7 +918,7 @@ def apply_joint_rotation_animated(joint:Joint, axis, angle_rad, loop=False, dura
     if np.linalg.norm(axis) == 0:
         raise ValueError("Rotationsachse darf nicht der Nullvektor sein.")
     axis = axis / np.linalg.norm(axis)
-    base_rot = R.from_euler("ZYX", joint.get_rotation(), degrees=True)
+    base_rot = R.from_euler("ZYX", joint.get_rotation()[::-1], degrees=True)
     axis_rot = R.from_rotvec(axis * angle_rad)
     final_rot = axis_rot * base_rot
         
