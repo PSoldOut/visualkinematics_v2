@@ -496,11 +496,7 @@ class Manipulator:
         if self.base is None: raise AssertionError("Base wurde nicht gefunden")
 
         self.mesh:Object3D = self.base_link.get_renderable()
-        self.flange:Link = self.find_flange()
-        self.link_to_flange_joint:Joint = self.flange.parent
-
         
-        self.flange_to_tool_joint:Joint = self.find_flange_to_tool_joint()
 
         self.base_to_baselink_joint:Joint = self.base.parent
         self.baselink_to_base_joint:Joint = self.base.parent
@@ -508,7 +504,9 @@ class Manipulator:
             t = self.get_link_by_name("tool0")
             t.add(self.tool)
         
-        
+
+        self.link_to_tool_joint:Joint = self.find_link_to_tool_joint()
+
     
 
     def get_global_tcp_transform(self) -> np.ndarray:
@@ -517,16 +515,18 @@ class Manipulator:
             prev_joint = current_joint.get_previous_joint_in_chain()
             
             new_angle = 0.0
-
+            sign = 1
+            z = prev_joint.dh_alignment[:3, -2]     #vorletzte spalte, erste 3 elemente (Spaltenvektor z-achse)
             if prev_joint is None or prev_joint.axis is None:
                     new_angle = 0.0
             else:
                 rotvec = prev_joint.get_rotvec()
                 new_angle = np.linalg.norm(rotvec)
-            self.dh.update_joint_angle(name, new_angle)
-            print(f"joint: {name:<15}\t\tprev_joint: {prev_joint.name:<15}\t\tnew_angle: {new_angle}\t\trotation: {prev_joint.get_rotation(False)}\t\tprev_axis: {prev_joint.axis}\t\taxis: {current_joint.axis}")
-
-            
+                if sum(rotvec) < 0: sign *=-1
+                if sum(z) < 0: sign *= -1
+            self.dh.update_joint_angle(name, new_angle * sign)
+            #print(f"joint:{name:<15}\t\tprev_joint:{prev_joint.name:<15}\t\trad:{new_angle}\t\tdeg:{new_angle*(180/np.pi)}\t\trotvec:{rotvec}\t\trotation:{prev_joint.get_rotation(False)}\t\tprev_axis:{prev_joint.axis}\t\taxis:{current_joint.axis}")
+            #print(f"DH_align:\n{prev_joint.dh_alignment}")
         return self.dh.forward_kinematics()
 
 
@@ -765,23 +765,13 @@ class Manipulator:
                 result.append(l)
         return result
 
-    def find_flange(self) -> Link:
-        arr:list[Link]= []
-        for l in self.links:
-            if "flange" in l.name and "tool0" not in l.name:
-                arr.append(l)
-        if len(arr) != 1:
-            raise AssertionError("mehr als zwei flange-links gefunden")
-        return arr[0]
+    
+
+    def find_link_to_tool_joint(self):
+        return self.get_link_by_name("tool0").parent
+        
         
 
-    def find_flange_to_tool_joint(self) -> Joint:
-        matching_flange_children = self.find_flange().get_matching_children(".*tool0.*")
-        if len(matching_flange_children)!=1:
-            raise AssertionError(f"Es wurden {len(matching_flange_children)} kinder vom Flange gefunden statt nur eines.")
-        elif not isinstance(matching_flange_children[0], Joint):
-            raise TypeError(f"joint zwischen flange und tool nicht gefunden. stadessen wurde {matching_flange_children[0].name} gefunden")
-        return matching_flange_children[0]
 
     def find_base_link_to_link_1_joint(self) -> Joint:
         matching_base_link_children = self.base_link.get_matching_children(".*joint.*1.*")
