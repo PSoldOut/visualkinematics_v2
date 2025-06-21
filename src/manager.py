@@ -152,7 +152,8 @@ def parse_urdf(urdf_str: str) -> dict:
                     joint_info["axis"] = child.attrib
                 elif child.tag == "mimic":
                     joint_info["mimic"] = child.attrib
-
+                elif child.tag == "limit":
+                    joint_info["limit"] = child.attrib
 
 
             joints.append(joint_info)

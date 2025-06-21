@@ -1,5 +1,6 @@
 from __future__ import annotations
 import numpy as np
+import sympy as sp
 import pythreejs as three
 from ipywidgets import *
 from IPython.display import display
@@ -13,6 +14,7 @@ from numba import njit
 from typing import *
 import re
 import threading
+
 
 pending_actions = []
 max_pending_actions = 100
@@ -64,6 +66,17 @@ def compute_dh_matrix(theta:float, d:float, a:float, alpha:float) -> np.ndarray:
 
 
 
+def compute_dh_matrix_symbolic(theta, d, a, alpha):
+    """Erzeuge symbolische DH-Transformationsmatrix"""
+    return sp.Matrix([
+        [sp.cos(theta), -sp.sin(theta)*sp.cos(alpha),  sp.sin(theta)*sp.sin(alpha), a*sp.cos(theta)],
+        [sp.sin(theta),  sp.cos(theta)*sp.cos(alpha), -sp.cos(theta)*sp.sin(alpha), a*sp.sin(theta)],
+        [0,              sp.sin(alpha),                sp.cos(alpha),               d],
+        [0,              0,                            0,                           1]
+    ])
+
+
+
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -73,11 +86,15 @@ def compute_dh_matrix(theta:float, d:float, a:float, alpha:float) -> np.ndarray:
 class DHKinematicModel:
     def __init__(self, dh_parameters:dict, base_to_dh:np.ndarray = np.eye(4), dh_to_tool:np.ndarray = np.eye(4)):  # dh_parameters ist dict von dicts mit theta, d, a, alpha
         self.dh_parameters:dict = dh_parameters
+        self.symbolic_thetas:dict = {}
         self.joint_angles:dict = {}
         self.base_to_dh:np.ndarray = base_to_dh
         self.dh_to_tool:np.ndarray = dh_to_tool
         for name, _ in dh_parameters.items():
             self.joint_angles[name] = 0.0
+            theta_sym = sp.Symbol(name)
+            self.symbolic_thetas[name] = theta_sym
+            #print(f"hier: {name}")
         
 
     def compute_transforms(self) -> dict: 
@@ -94,12 +111,34 @@ class DHKinematicModel:
         return T_dict
     
 
+    def compute_transforms_symbolic(self):
+        """Erzeuge symbolische Transformationsmatrizen für jeden Joint"""
+        T_dict = {}
+        T = sp.eye(4)
+        
+
+        for name, param in self.dh_parameters.items():
+            theta_total = self.symbolic_thetas[name] + param["theta"]
+            d = param["d"]
+            a = param["a"]
+            alpha = param["alpha"]
+
+            T_i = self.compute_dh_matrix_symbolic(theta_total, d, a, alpha)
+            T = T * T_i
+            T_dict[name] = T
+
+        return T_dict
+    
+
     def update_joint_angle(self, name:str, angle_rad:float) -> None:
         self.joint_angles[name] = angle_rad
 
 
     def compute_dh_matrix(self, theta:float, d:float, a:float, alpha:float) -> np.ndarray:
         return compute_dh_matrix(theta, d, a, alpha)
+    
+    def compute_dh_matrix_symbolic(self, theta, d, a, alpha):
+        return compute_dh_matrix_symbolic(theta, d, a, alpha)
 
 
     def compute_dh_to_tool(self, global_transform_tool:np.ndarray):
@@ -107,6 +146,186 @@ class DHKinematicModel:
         last_key = next(reversed(dh_transforms))
         last_dh = self.base_to_dh @ dh_transforms[last_key]
         return np.linalg.inv(last_dh) @ global_transform_tool
+
+
+    def inverse_kinematics(self, target_position: np.ndarray, q0: np.ndarray, max_iters=100, tol=1e-4):
+        # 1. Symbolisch aufbauen
+        dh_transforms = self.compute_transforms_symbolic()
+        last_key = next(reversed(dh_transforms))
+        last_dh = dh_transforms[last_key]
+
+        base_to_dh_sym = sp.Matrix(self.base_to_dh)
+        dh_to_tool_sym = sp.Matrix(self.dh_to_tool)
+        full_transform = base_to_dh_sym * last_dh * dh_to_tool_sym
+
+        position = full_transform[:3, 3]
+
+        # 2. Liste der symbolischen Variablen
+        q_syms = list(self.symbolic_thetas.values())
+
+        # 3. Symbolische Jacobi-Matrix
+        J = sp.Matrix.hstack(*[position.diff(qi) for qi in q_syms])
+
+        # 4. Lambdify: numerische Funktionen erzeugen
+        fk_func = sp.lambdify(q_syms, position, 'numpy')
+        jacobian_func = sp.lambdify(q_syms, J, 'numpy')
+
+        # 5. Iterativer IK-Algorithmus (Newton-Raphson)
+        q = np.array(q0, dtype=float)
+        for i in range(max_iters):
+            current_pos = np.array(fk_func(*q), dtype=float).flatten()
+            error = target_position - current_pos
+            #print(f"Iter {i}: Error Norm = {np.linalg.norm(error):.5f}")
+
+            if np.linalg.norm(error) < tol:
+                return q  # Lösung gefunden
+
+            J_num = np.array(jacobian_func(*q), dtype=float)
+            dq = np.linalg.pinv(J_num, rcond=1e-3) @ error
+            q += dq
+
+        raise ValueError("Inverse Kinematik konvergiert nicht")
+    
+
+    
+    
+
+    def inverse_kinematics6D(self, target_position, target_rotation, q0, max_iters=100, tol=1e-4):
+        # Symbolischer Aufbau
+        dh_transforms = self.compute_transforms_symbolic()
+        last_key = next(reversed(dh_transforms))
+        last_dh = dh_transforms[last_key]
+
+        base_to_dh_sym = sp.Matrix(self.base_to_dh)
+        dh_to_tool_sym = sp.Matrix(self.dh_to_tool)
+        full_transform = base_to_dh_sym * last_dh * dh_to_tool_sym
+
+        pos_expr = full_transform[:3, 3]
+        rot_expr = full_transform[:3, :3]
+
+        q_syms = list(self.symbolic_thetas.values())
+
+        # Symbolische Jacobi-Teilmatrix (nur Position)
+        J_pos = sp.Matrix.hstack(*[pos_expr.diff(qi) for qi in q_syms])
+        fk_pos_func = sp.lambdify(q_syms, pos_expr, 'numpy')
+        fk_rot_func = sp.lambdify(q_syms, rot_expr, 'numpy')
+        jacobian_func = sp.lambdify(q_syms, J_pos, 'numpy')
+
+        q = np.array(q0, dtype=float)
+        for i in range(max_iters):
+            pos = np.array(fk_pos_func(*q), dtype=float).flatten()
+            rot_mat = np.array(fk_rot_func(*q), dtype=float)
+
+            pos_error = target_position - pos
+
+            # Orientierungsfehler: als Rotationsvektor
+            R_current = R.from_matrix(rot_mat)
+            R_target = R.from_matrix(target_rotation)
+            R_error = R_target * R_current.inv()
+            rot_error = R_error.as_rotvec()  # shape: (3,)
+
+            # Gesamtfehlervektor
+            error = np.concatenate([pos_error, rot_error])
+
+            if np.linalg.norm(error) < tol:
+                return q  # Lösung gefunden
+
+            # Numerischer Jacobian erweitern: Positionsteil + Orientierungsteil
+            J_pos_num = np.array(jacobian_func(*q), dtype=float)
+
+            # Approximierter Rotations-Jacobian: numerisch per finite differences
+            delta = 1e-6
+            J_rot_num = np.zeros((3, len(q)))
+            for j in range(len(q)):
+                dq = np.zeros_like(q)
+                dq[j] = delta
+
+                q_plus = q + dq
+                R_plus = R.from_matrix(np.array(fk_rot_func(*q_plus), dtype=float))
+                R_diff = R_plus * R_current.inv()
+                rot_vec = R_diff.as_rotvec()
+                J_rot_num[:, j] = rot_vec / delta
+
+            J_full = np.vstack((J_pos_num, J_rot_num))
+
+            dq = np.linalg.pinv(J_full, rcond=1e-3) @ error
+            q += dq
+
+        raise ValueError("Inverse Kinematik (6D) konvergiert nicht")
+
+
+
+    def inverse_kinematics6D_with_limits(self, target_position, target_rotation, q0, max_iters=100, tol=1e-4, joint_mins=None, joint_maxs=None):
+        print(f"joint mins: {joint_mins}")
+        print(f"joint maxs: {joint_maxs}")
+        # Symbolischer Aufbau
+        dh_transforms = self.compute_transforms_symbolic()
+        last_key = next(reversed(dh_transforms))
+        last_dh = dh_transforms[last_key]
+
+        base_to_dh_sym = sp.Matrix(self.base_to_dh)
+        dh_to_tool_sym = sp.Matrix(self.dh_to_tool)
+        full_transform = base_to_dh_sym * last_dh * dh_to_tool_sym
+
+        pos_expr = full_transform[:3, 3]
+        rot_expr = full_transform[:3, :3]
+
+        q_syms = list(self.symbolic_thetas.values())
+
+        # Symbolische Jacobi-Teilmatrix (nur Position)
+        J_pos = sp.Matrix.hstack(*[pos_expr.diff(qi) for qi in q_syms])
+        fk_pos_func = sp.lambdify(q_syms, pos_expr, 'numpy')
+        fk_rot_func = sp.lambdify(q_syms, rot_expr, 'numpy')
+        jacobian_func = sp.lambdify(q_syms, J_pos, 'numpy')
+
+        q = np.array(q0, dtype=float)
+        for i in range(max_iters):
+            pos = np.array(fk_pos_func(*q), dtype=float).flatten()
+            rot_mat = np.array(fk_rot_func(*q), dtype=float)
+
+            pos_error = target_position - pos
+
+            # Orientierungsfehler: als Rotationsvektor
+            R_current = R.from_matrix(rot_mat)
+            R_target = R.from_matrix(target_rotation)
+            R_error = R_target * R_current.inv()
+            rot_error = R_error.as_rotvec()  # shape: (3,)
+
+            # Gesamtfehlervektor
+            error = np.concatenate([pos_error, rot_error])
+
+            if np.linalg.norm(error) < tol:
+                return q  # Lösung gefunden
+
+            # Numerischer Jacobian erweitern: Positionsteil + Orientierungsteil
+            J_pos_num = np.array(jacobian_func(*q), dtype=float)
+
+            # Approximierter Rotations-Jacobian: numerisch per finite differences
+            delta = 1e-6
+            J_rot_num = np.zeros((3, len(q)))
+            for j in range(len(q)):
+                dq = np.zeros_like(q)
+                dq[j] = delta
+
+                q_plus = q + dq
+                R_plus = R.from_matrix(np.array(fk_rot_func(*q_plus), dtype=float))
+                R_diff = R_plus * R_current.inv()
+                rot_vec = R_diff.as_rotvec()
+                J_rot_num[:, j] = rot_vec / delta
+
+            J_full = np.vstack((J_pos_num, J_rot_num))
+
+            dq = np.linalg.pinv(J_full, rcond=1e-3) @ error
+            q += dq
+
+            # Gelenkgrenzen beachten (falls angegeben)
+            if joint_mins is not None and joint_maxs is not None:
+                q = np.clip(q, joint_mins, joint_maxs)
+
+        raise ValueError("Inverse Kinematik (6D) konvergiert nicht")
+
+
+
 
 
     def forward_kinematics(self) -> np.ndarray:
@@ -178,10 +397,10 @@ class Kinematic_Chain_Element:
     def get_position(self):
         return self.renderable.position
 
-    def set_rotation(self, vec_degree):
+    def set_rotation(self, vec_degree): 
         util.set_rotation(self.renderable, vec_degree, "ZYX")
 
-    def get_rotation(self, degrees=True) -> np.ndarray:
+    def get_rotation(self, degrees=True) -> np.ndarray:   #INKONSISTENZ MIT DEM KOMPLETTEN REST DER API WEGEN DER REIHENFOLGE DES RÜCKGABEVEKTORS
         q = self.renderable.quaternion  # Quaternion: [x, y, z, w]
         r = R.from_quat([q[0], q[1], q[2], q[3]])
         euler_deg = r.as_euler("ZYX", degrees=degrees)
@@ -369,10 +588,19 @@ class Tool(Kinematic_Chain_Element):
             joint_parent = self.get_link_by_name(joint_element["parent"])
             joint_child = self.get_link_by_name(joint_element["child"])
             joint_axis = joint_element["axis"]
+
+            joint_lower_limit = None
+            joint_upper_limit = None
+            if "limit" in joint_element:
+                if "lower" in joint_element["limit"]:
+                    joint_lower_limit = float(joint_element["limit"]["lower"])
+                if "upper" in joint_element["limit"]:
+                    joint_upper_limit = float(joint_element["limit"]["upper"])
+
             if joint_axis is not None:
                 joint_axis = joint_axis["xyz"].split()
                 joint_axis = [float(x) for x in joint_axis]
-            joint : Joint = Joint(joint_element["name"], np.array(joint_axis), np.array(pos), np.array(angles))
+            joint : Joint = Joint(joint_element["name"], np.array(joint_axis), np.array(pos), np.array(angles), joint_lower_limit, joint_upper_limit)
             joint.add(joint_child)
             joint_parent.add(joint) 
             if joint_element["mimic"] is not None:
@@ -409,8 +637,10 @@ class Tool(Kinematic_Chain_Element):
 
 
 class Joint(Kinematic_Chain_Element):
-    def __init__(self, name:str, axis:np.ndarray, position:np.ndarray = np.array([0,0,0]), rotation:np.ndarray = np.array([0,0,0])):
+    def __init__(self, name:str, axis:np.ndarray, position:np.ndarray = np.array([0,0,0]), rotation:np.ndarray = np.array([0,0,0]), lower_limit:float|None = None, upper_limit:float|None = None):
         super().__init__(name)
+        self.lower_limit = lower_limit
+        self.upper_limit = upper_limit
         self.renderable : Object3D = three.Group()
         self.axis:np.ndarray = axis
         self.mimicers:list[tuple[Kinematic_Chain_Element, float]] = []
@@ -432,7 +662,60 @@ class Joint(Kinematic_Chain_Element):
             current = current.parent
         return current
 
+    def _create_theta_slider(self, num):
+        content = []
+        #content.append(Label(self.name))
+        renderable = self
+        if hasattr(self, "get_renderable"):
+            renderable = self.get_renderable()
 
+        layout1 = widgets.Layout(
+                #border='1px solid gray',
+                padding='5px',
+                height='50px',
+                overflow='hidden',  # Scrollen deaktivieren
+                flex='none'
+            )  
+        layout2 = widgets.Layout(
+                border='1px solid gray',
+                padding='5px',
+                height='100px',
+                overflow='hidden',  # Scrollen deaktivieren
+                flex='none'
+            )
+        
+        theta_rot_slider = FloatSlider(min=-180, max=180, step=0.1, description=f'Theta {num}')
+        rot = R.from_quat(list(renderable.quaternion))
+        euler = rot.as_euler("XYZ", degrees=True) 
+        if self.axis is None : return None
+        elif abs(self.axis[0]) == 1: theta_rot_slider.value = euler[0]
+        elif abs(self.axis[1]) == 1: theta_rot_slider.value = euler[1]
+        elif abs(self.axis[2]) == 1: theta_rot_slider.value = euler[2]
+        
+        rot_box = VBox(children=[theta_rot_slider], layout=layout1)
+        content.append(rot_box)
+
+        rot = R.from_quat(list(renderable.quaternion))
+        euler = rot.as_euler("XYZ", degrees=True)
+
+        def _on_rot_slider(change):
+            sign = 1
+            if sum(self.axis) < 0 : sign *= -1
+            z = self.dh_alignment[:3, -2]     #vorletzte spalte, erste 3 elemente (Spaltenvektor z-achse)
+            if sum(z) < 0 : sign *= -1
+
+            if abs(self.axis[0]) == 1:
+                util.set_rotation(renderable, [theta_rot_slider.value * sign, euler[1], euler[2]], "XYZ")
+            elif abs(self.axis[1]) == 1:
+                util.set_rotation(renderable, [euler[0], theta_rot_slider.value * sign, euler[2]], "XYZ")
+            elif abs(self.axis[2]) == 1:
+                util.set_rotation(renderable, [euler[0], euler[1], theta_rot_slider.value * sign], "XYZ")
+        
+        theta_rot_slider.observe(_on_rot_slider, names="value")
+
+        box = HBox(children = content, layout = layout1)
+        main_box = VBox(children = [box], layout=layout2)
+        return main_box
 
 
 
@@ -509,6 +792,19 @@ class Manipulator:
 
     
 
+    def _create_inspector(self):
+        result = []
+        num = 1
+        for j in self.joints:
+            slider = j._create_theta_slider(num)
+            if slider != None : result.append(slider)
+            num += 1
+        box = VBox(children=result)
+        return box
+    
+        
+
+
     def get_global_tcp_transform(self) -> np.ndarray:
         for name, _ in self.dh.joint_angles.items():
             current_joint = self.get_joint_by_name(name)
@@ -568,7 +864,25 @@ class Manipulator:
 
 
 
-    def animate_experimental(self, joints:list, angles_rad:list, duration:float = 1.0, quality:float = 1):
+    def animate_by_theta(self, theta:list, duration:float = 1.0, quality:float = 1):
+        joints:list = []
+        angles_rad:list = []
+        i = 0
+        for name, _ in self.dh.joint_angles.items():
+            current_joint = self.get_joint_by_name(name)
+            prev_joint = current_joint.get_previous_joint_in_chain()
+            sign = 1
+            z = prev_joint.dh_alignment[:3, -2]     #vorletzte spalte, erste 3 elemente (Spaltenvektor z-achse)
+            
+            if sum(z) < 0: sign *= -1
+            if sum(prev_joint.axis) < 0: sign *= -1
+            joints.append(prev_joint)
+            angles_rad.append(theta[i]*sign)
+            i+=1
+        self.animate_experimental(joints, angles_rad, duration, quality, False)
+
+
+    def animate_experimental(self, joints:list, angles_rad:list, duration:float = 1.0, quality:float = 1, add_on_baserotation:bool = True):
         def _animate_experimental_task(joints:list, angles_rad:list, duration:float = 1.0, quality:float = 1):
             def add_mimicers(current:Joint, current_angle_rad, joints:list):
                 joints.append(current)
@@ -591,7 +905,9 @@ class Manipulator:
                 base_rot = R.from_quat(joint.get_quaternion())
                 #base_rot = R.from_euler("ZYX", joint.get_rotation(), degrees=True)
                 axis_rot = R.from_rotvec(axis * angle_rad)
-                final_rot = axis_rot * base_rot
+                final_rot = None
+                if add_on_baserotation : final_rot = axis_rot * base_rot
+                else : final_rot = axis_rot
                 #q1s.append(list(joint.get_renderable().quaternion))
                 #q2s.append(final_rot.as_quat())
                 q1 = list(joint.get_renderable().quaternion)
@@ -619,7 +935,7 @@ class Manipulator:
         thread.start()
 
 
-
+    
 
 
 
@@ -688,13 +1004,20 @@ class Manipulator:
             joint_parent = self.get_link_by_name(joint_element["parent"])
             joint_child = self.get_link_by_name(joint_element["child"])
             joint_axis = joint_element["axis"]
+            joint_lower_limit = None
+            joint_upper_limit = None
+            if "limit" in joint_element:
+                if "lower" in joint_element["limit"]:
+                    joint_lower_limit = float(joint_element["limit"]["lower"])
+                if "upper" in joint_element["limit"]:
+                    joint_upper_limit = float(joint_element["limit"]["upper"])
             if joint_axis is not None:
                 joint_axis = joint_axis["xyz"].split()
                 joint_axis = [float(x) for x in joint_axis]
 
             if joint_axis is not None:
                 joint_axis = np.array(joint_axis)
-            joint:Joint = Joint(joint_element["name"], joint_axis, pos, angles)
+            joint:Joint = Joint(joint_element["name"], joint_axis, pos, angles, joint_lower_limit, joint_upper_limit)
             joint.add(joint_child)
             joint_parent.add(joint) 
             if joint_element["mimic"] is not None:

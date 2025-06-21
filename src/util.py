@@ -1439,7 +1439,10 @@ class Environment:
 
 
 
-  
+    def add_inspector(self, obj):
+            if hasattr(obj, "_create_inspector"):
+                self.add_widget(obj._create_inspector())
+            
 
 
 
