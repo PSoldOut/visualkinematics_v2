@@ -639,6 +639,7 @@ class Tool(Kinematic_Chain_Element):
 class Joint(Kinematic_Chain_Element):
     def __init__(self, name:str, axis:np.ndarray, position:np.ndarray = np.array([0,0,0]), rotation:np.ndarray = np.array([0,0,0]), lower_limit:float|None = None, upper_limit:float|None = None):
         super().__init__(name)
+        self.is_mimicer:Bool = False
         self.lower_limit = lower_limit
         self.upper_limit = upper_limit
         self.renderable : Object3D = three.Group()
@@ -651,6 +652,8 @@ class Joint(Kinematic_Chain_Element):
         self.dh_alignment:np.ndarray = np.eye(4)  # später ggf. mit echten Werten setzen
 
     def add_mimicer(self, mimicer_and_multiplier:tuple[Kinematic_Chain_Element, float]):
+        if not isinstance(mimicer_and_multiplier[0], Joint) : raise RuntimeError(f"jetzt ist klar, dass nicht nur Joints Mimicer sein können, sondern auch {type(mimicer_and_multiplier[0])}")
+        mimicer_and_multiplier[0].is_mimicer = True
         self.mimicers.append(mimicer_and_multiplier)
     
 
@@ -671,15 +674,15 @@ class Joint(Kinematic_Chain_Element):
 
         layout1 = widgets.Layout(
                 #border='1px solid gray',
-                padding='5px',
-                height='50px',
+                padding='2px',
+                height='40px',
                 overflow='hidden',  # Scrollen deaktivieren
                 flex='none'
             )  
         layout2 = widgets.Layout(
                 border='1px solid gray',
                 padding='5px',
-                height='100px',
+                height='50px',
                 overflow='hidden',  # Scrollen deaktivieren
                 flex='none'
             )
@@ -755,11 +758,12 @@ class Manipulator:
         self.name:str = name
         self.links:list[Link] = []
         self.joints:list[Joint] = []
-        self.dh_model:DHKinematicModel|None = None
+        self.dh:DHKinematicModel|None = None
         xacro_filepath:str = manager.find_xacro_filepath_by_robot_name(name)
         urdf:str = manager.xacro_to_urdf_string(xacro_filepath)
         self.urdf_dictionary:dict = manager.parse_urdf(urdf)
         self.tool:Tool|None = None
+        self.learned_poses = self._load_learned_poses()
         if tool_name!="":
             self.tool = Tool(tool_name)
         
@@ -792,20 +796,171 @@ class Manipulator:
 
     
 
-    def _create_inspector(self):
-        result = []
+    def _create_inspector(self, env:util.Environment):
+        pose_names = sorted(set(obj["name"] for obj in self.learned_poses))
+        dropdown:widgets.Dropdown = widgets.Dropdown(
+            options=pose_names,
+            style={'description_width': 'initial'})
+
+        layout = widgets.Layout(
+                #border='1px solid gray',
+                padding='2px',
+                height='40px',
+                overflow='hidden',  # Scrollen deaktivieren
+                flex='none'
+            )
+
+        textfield:widgets.Text = widgets.Text(
+            value='',
+            placeholder='Name für Pose',
+            #description='Eingabe:',
+            disabled=False
+        )
+
+        feedback_label:widgets.Label = widgets.Label(value = "", layout=layout)
+        
+
+        button_save:widgets.Button = widgets.Button(
+            description='Pose Speichern',
+            disabled=False,
+            button_style='',
+            tooltip='Speichert Die Pose, sodass sie in Zukunft wieder eingenommen werden kann.',
+            icon='save'
+        )
+
+        def on_click1(button:widgets.Button):
+            try:
+                self.learn(pose_name=textfield.value)
+                opts = list(dropdown.options)
+                opts.append(textfield.value)
+                dropdown.options = opts
+                button.description = "Gespeichert!"
+                button.icon='check'
+            
+            except Exception as e:
+                feedback_label.value = f"Beim Speichern der Pose ist ein Fehler aufgetreten!: {e}"
+            def reset():
+                time.sleep(1.5)
+                button.description = "Pose Speichern"
+                button.icon='save'
+                feedback_label.value = ""
+
+            threading.Thread(target=reset).start() 
+
+        button_save.on_click(on_click1)
+
+
+        
+        
+        button_take_pos:widgets.Button = widgets.Button(
+            description='Pose Einnehmen',
+            disabled=False,
+            button_style='',
+            tooltip='Überführt den Roboter in die Ausgewählte Pose!',
+            icon='play'
+        )
+
+        def on_click2(button:widgets.Button):
+            try:
+                button.description = "Pose Einnehmen"
+                button.icon='pause'
+                self.animate_by_learned_pose(name = dropdown.value, synchronous=True, duation=4)
+                
+            except Exception as e:
+                feedback_label.value = f"Beim Einnehmen der Pose ist ein Fehler aufgetreten!: {e}"
+            
+            button.description = "Pose Einnehmen"
+            button.icon='play'
+            feedback_label.value = ""
+
+
+        button_take_pos.on_click(on_click2)
+
+
+        hbox2 = widgets.HBox([dropdown, button_take_pos], layout=layout)
+
+        # Horizontal anordnen
+        hbox1 = widgets.HBox([textfield, button_save], layout=layout)
+        env.add_widget(hbox1)
+        env.add_widget(hbox2)
+        env.add_widget(feedback_label)
+        
+
         num = 1
         for j in self.joints:
+            if j.is_mimicer: continue
             slider = j._create_theta_slider(num)
-            if slider != None : result.append(slider)
+            if slider != None : env.add_widget(slider)
             num += 1
-        box = VBox(children=result)
-        return box
+
+        env.add_gizmo_controls(self.tool.parent.parent, True, False, False, "Tool", 3, 3, 3, -3, -3, -3)
+        env.add_gizmo_controls(self.tool.parent.parent, False, True, False, "Tool")
+
+        
+        
     
+
+
+
+
+    def learn(self, pose_name: str, thetas:list|None = None):
+        display(f"POSEN: {self.learned_poses}")
+        exists = any(obj["name"] == pose_name for obj in self.learned_poses)
+        if exists : raise RuntimeError("Pose mit diesem Namen existiert bereits")
+        filepath = f"{manager.learn_path}/{self.name}.json"
+        q = []
+        if thetas is None:
+            self.update_dh_angles()
+            for key, value in self.dh.joint_angles.items():
+                q.append(value)
+        else : q = thetas
+        # Neue Pose
+        new_pose = {
+            "name": pose_name,
+            "theta": list(q)  # z. B. [0.1, -1.2, ...]
+        }
+
+        # Ordner erstellen, falls nicht vorhanden
+        os.makedirs(os.path.dirname(filepath), exist_ok=True)
+
+        # Bestehende Datei einlesen, falls vorhanden
+        if os.path.exists(filepath):
+            with open(filepath, 'r') as f:
+                data = json.load(f)
+        else:
+            data = []
+
+        # Neue Pose anhängen
+        data.append(new_pose)
+
+        # Zurückschreiben
+        with open(filepath, 'w') as f:
+            json.dump(data, f, indent=2)
+        self.learned_poses = self._load_learned_poses()
         
 
 
-    def get_global_tcp_transform(self) -> np.ndarray:
+
+    def _load_learned_poses(self):
+        filepath = f"{manager.learn_path}/{self.name}.json"
+        if os.path.exists(filepath):
+            try:
+                with open(filepath, 'r') as f:
+                    return json.load(f)
+            except json.JSONDecodeError:
+                print(f"[WARN] Lern-Datei '{filepath}' ist beschädigt oder leer.")
+                return []
+        else:
+            return []
+
+
+    def get_learned_pose(self, name: str):
+        for pose in self.learned_poses:
+            if pose["name"] == name:
+                return pose["theta"]
+        raise ValueError(f"Pose '{name}' nicht gefunden.")
+
+    def update_dh_angles(self):
         for name, _ in self.dh.joint_angles.items():
             current_joint = self.get_joint_by_name(name)
             prev_joint = current_joint.get_previous_joint_in_chain()
@@ -823,6 +978,10 @@ class Manipulator:
             self.dh.update_joint_angle(name, new_angle * sign)
             #print(f"joint:{name:<15}\t\tprev_joint:{prev_joint.name:<15}\t\trad:{new_angle}\t\tdeg:{new_angle*(180/np.pi)}\t\trotvec:{rotvec}\t\trotation:{prev_joint.get_rotation(False)}\t\tprev_axis:{prev_joint.axis}\t\taxis:{current_joint.axis}")
             #print(f"DH_align:\n{prev_joint.dh_alignment}")
+
+
+    def get_global_tcp_transform(self) -> np.ndarray:
+        self.update_dh_angles()
         return self.dh.forward_kinematics()
 
 
@@ -863,8 +1022,12 @@ class Manipulator:
         Timer(duration, on_animation_finished).start()
 
 
+    def animate_by_learned_pose(self, name:str, duation:float = 1.0, quality:float = 1.0, synchronous:bool = False):
+        pose = self.get_learned_pose(name)
+        self.animate_by_theta(pose, duation, quality, synchronous)
+        
 
-    def animate_by_theta(self, theta:list, duration:float = 1.0, quality:float = 1):
+    def animate_by_theta(self, theta:list, duration:float = 1.0, quality:float = 1.0, synchronous:bool = False):
         joints:list = []
         angles_rad:list = []
         i = 0
@@ -879,10 +1042,10 @@ class Manipulator:
             joints.append(prev_joint)
             angles_rad.append(theta[i]*sign)
             i+=1
-        self.animate_experimental(joints, angles_rad, duration, quality, False)
+        self.animate_experimental(joints, angles_rad, duration, quality, False, synchronous)
 
 
-    def animate_experimental(self, joints:list, angles_rad:list, duration:float = 1.0, quality:float = 1, add_on_baserotation:bool = True):
+    def animate_experimental(self, joints:list, angles_rad:list, duration:float = 1.0, quality:float = 1, add_on_baserotation:bool = True, synchronous:bool = False):
         def _animate_experimental_task(joints:list, angles_rad:list, duration:float = 1.0, quality:float = 1):
             def add_mimicers(current:Joint, current_angle_rad, joints:list):
                 joints.append(current)
@@ -933,7 +1096,7 @@ class Manipulator:
 
         thread = threading.Thread(target=_animate_experimental_task, args=(joints, angles_rad, duration, quality))
         thread.start()
-
+        if synchronous : thread.join()        
 
     
 
@@ -1150,7 +1313,7 @@ class Manipulator:
             print(current.name,":  pose:", current.get_position(), " , ", current.get_rotation(False), " becomes to: ")
             print(current_transform)
         for child in current.children:
-            self.compute_global_transform(child, current_transform, global_transforms)
+            self.compute_global_transform(child, current_transform, global_transforms, with_print)
         return global_transforms
 
 

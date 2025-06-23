@@ -1285,7 +1285,10 @@ class Environment:
     
 
     
-    def add_gizmo_controls(self, obj, translation=True, rotation=True, scale=False, name=""):
+    def add_gizmo_controls(
+            self, obj, translation=True, rotation=True, scale=False, name="",
+            max_trans_x:float = 1, max_trans_y:float = 1, max_trans_z:float = 1,
+            min_trans_x:float = -1, min_trans_y:float = -1, min_trans_z:float = -1):
         '''
         Fügt ein Gizmo-Steuerelement zur Manipulation eines Objekts in der Umgebung hinzu (Translation, Rotation, Skalierung).
 
@@ -1307,6 +1310,7 @@ class Environment:
         layout1 = widgets.Layout(
                 #border='1px solid gray',
                 padding='5px',
+                #width='100',
                 height='125px',
                 overflow='hidden',  # Scrollen deaktivieren
                 flex='none'
@@ -1315,15 +1319,16 @@ class Environment:
         layout2 = widgets.Layout(
                 border='1px solid gray',
                 padding='5px',
+                #width='100',
                 height='200px',
                 overflow='hidden',  # Scrollen deaktivieren
                 flex='none'
             )
 
         if translation:
-            x_trans_slider = FloatSlider(min=-10, max = 10, step=0.001, description="Translation X")
-            y_trans_slider = FloatSlider(min=-10, max = 10, step=0.001, description="Translation Y")
-            z_trans_slider = FloatSlider(min=-10, max = 10, step=0.001, description="Translation Z")
+            x_trans_slider = FloatSlider(min=min_trans_x, max = max_trans_x, step=0.001, description="Translation X")
+            y_trans_slider = FloatSlider(min=min_trans_y, max = max_trans_y, step=0.001, description="Translation Y")
+            z_trans_slider = FloatSlider(min=min_trans_z, max = max_trans_z, step=0.001, description="Translation Z")
             x_trans_slider.value = renderable.position[0]
             y_trans_slider.value = renderable.position[1]
             z_trans_slider.value = renderable.position[2]
@@ -1433,15 +1438,20 @@ class Environment:
             
 
             
-            box = HBox(children = content, layout = layout1)
+        box = HBox(children = content, layout = layout1)
+        if rotation :
             main_box = VBox(children = [box, rotation_order_dropdown], layout=layout2)
-            self.add_widget(main_box)
+        else :
+            main_box = VBox(children = [box], layout=layout2)
+        self.add_widget(main_box)
+            
+            
 
 
 
     def add_inspector(self, obj):
             if hasattr(obj, "_create_inspector"):
-                self.add_widget(obj._create_inspector())
+                obj._create_inspector(self)
             
 
 

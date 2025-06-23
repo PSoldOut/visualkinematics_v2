@@ -29,6 +29,8 @@ base_paths = [
     "../assets/custom-package-sets"
 ]
 
+learn_path = "../res/learn"
+
 
 
 
