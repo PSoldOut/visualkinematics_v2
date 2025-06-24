@@ -1163,6 +1163,17 @@ class Environment:
         self.frame_widgets = True
         self.widgets = []
 
+        test_button = widgets.Button(
+            description='',
+            tooltip='',
+            icon='times',
+            layout=widgets.Layout(width='32px')
+        )  
+        test_label = widgets.HTML(value='<span style="font-size:14px; color:red;">Das ist eine Fehlermeldung</span>')
+        test_error = HBox(children=[test_label, test_button])
+
+        self.info_container:widgets.VBox = widgets.VBox(children=[test_error])
+
 
 
     def toggle_grid(self, change):
@@ -1226,11 +1237,11 @@ class Environment:
             w.layout.overvlow="hidden"
 
         #lol_box = HBox(children = [widget_box], layout=layout2)
-        
         if self.widgets_on_bottom:
             display(VBox(children = [mainbox, widget_box]))
         else:
             display(HBox(children = [mainbox, widget_box]))
+        display(self.info_container)
 
         
     def set_frame_widgets(self, bool):
