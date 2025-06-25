@@ -666,6 +666,12 @@ class Joint(Kinematic_Chain_Element):
         return current
 
     def _create_theta_slider(self, num):
+        if self.axis is None : return None
+        sign = 1
+        if sum(self.axis) < 0 : sign *= -1
+        z = self.dh_alignment[:3, -2]     #vorletzte spalte, erste 3 elemente (Spaltenvektor z-achse)
+        if sum(z) < 0 : sign *= -1
+
         content = []
         #content.append(Label(self.name))
         renderable = self
@@ -686,12 +692,21 @@ class Joint(Kinematic_Chain_Element):
                 overflow='hidden',  # Scrollen deaktivieren
                 flex='none'
             )
-        
-        theta_rot_slider = FloatSlider(min=-180, max=180, step=0.1, description=f'Theta {num}')
+        min = -180
+        max = 180
+        if self.lower_limit is not None:
+            min = np.rad2deg(self.lower_limit) * sign
+        if self.upper_limit is not None:
+            max = np.rad2deg(self.upper_limit) * sign
+        if min > max:
+            tmp = max
+            max = min
+            min = tmp
+        theta_rot_slider = FloatSlider(min=min, max=max, step=0.1, description=f'Theta {num}')
         rot = R.from_quat(list(renderable.quaternion))
         euler = rot.as_euler("XYZ", degrees=True) 
-        if self.axis is None : return None
-        elif abs(self.axis[0]) == 1: theta_rot_slider.value = euler[0]
+        
+        if abs(self.axis[0]) == 1: theta_rot_slider.value = euler[0]
         elif abs(self.axis[1]) == 1: theta_rot_slider.value = euler[1]
         elif abs(self.axis[2]) == 1: theta_rot_slider.value = euler[2]
         
@@ -702,11 +717,6 @@ class Joint(Kinematic_Chain_Element):
         euler = rot.as_euler("XYZ", degrees=True)
 
         def _on_rot_slider(change):
-            sign = 1
-            if sum(self.axis) < 0 : sign *= -1
-            z = self.dh_alignment[:3, -2]     #vorletzte spalte, erste 3 elemente (Spaltenvektor z-achse)
-            if sum(z) < 0 : sign *= -1
-
             if abs(self.axis[0]) == 1:
                 util.set_rotation(renderable, [theta_rot_slider.value * sign, euler[1], euler[2]], "XYZ")
             elif abs(self.axis[1]) == 1:
@@ -764,6 +774,7 @@ class Manipulator:
         self.urdf_dictionary:dict = manager.parse_urdf(urdf)
         self.tool:Tool|None = None
         self.learned_poses = self._load_learned_poses()
+        self.tcp_target = None
         if tool_name!="":
             self.tool = Tool(tool_name)
         
@@ -817,7 +828,6 @@ class Manipulator:
             disabled=False
         )
 
-        feedback_label:widgets.Label = widgets.Label(value = "", layout=layout)
         
 
         button_save:widgets.Button = widgets.Button(
@@ -829,6 +839,7 @@ class Manipulator:
         )
 
         def on_click1(button:widgets.Button):
+            info = None
             try:
                 self.learn(pose_name=textfield.value)
                 opts = list(dropdown.options)
@@ -838,12 +849,12 @@ class Manipulator:
                 button.icon='check'
             
             except Exception as e:
-                feedback_label.value = f"Beim Speichern der Pose ist ein Fehler aufgetreten!: {e}"
+                info = env.add_info(f"Beim Speichern der Pose ist ein Fehler aufgetreten!: {e}")
             def reset():
                 time.sleep(1.5)
                 button.description = "Pose Speichern"
                 button.icon='save'
-                feedback_label.value = ""
+                
 
             threading.Thread(target=reset).start() 
 
@@ -867,11 +878,10 @@ class Manipulator:
                 self.animate_by_learned_pose(name = dropdown.value, synchronous=True, duation=4)
                 
             except Exception as e:
-                feedback_label.value = f"Beim Einnehmen der Pose ist ein Fehler aufgetreten!: {e}"
-            
+                info = env.add_info(f"Beim Einnehmen der Pose ist ein Fehler aufgetreten!: {e}")
             button.description = "Pose Einnehmen"
             button.icon='play'
-            feedback_label.value = ""
+            
 
 
         button_take_pos.on_click(on_click2)
@@ -883,8 +893,17 @@ class Manipulator:
         hbox1 = widgets.HBox([textfield, button_save], layout=layout)
         env.add_widget(hbox1)
         env.add_widget(hbox2)
-        env.add_widget(feedback_label)
         
+        def cb():
+            display("callback")
+            r = R.from_quat(list(tcp_target.quaternion)).as_matrix()
+            p = tcp_target.position
+            q0 = np.array(list(self.dh.joint_angles.values()))
+            q_sol = self.dh.inverse_kinematics6D_with_limits(p, r, q0, 10, 0.1)
+            print("IK Lösung:", [int(np.rad2deg(x))%360 for x in q_sol])
+            self.animate_by_theta(q_sol, 0.01, 1, True)
+            self.update_dh_angles()
+
 
         num = 1
         for j in self.joints:
@@ -893,8 +912,12 @@ class Manipulator:
             if slider != None : env.add_widget(slider)
             num += 1
 
-        env.add_gizmo_controls(self.tool.parent.parent, True, False, False, "Tool", 3, 3, 3, -3, -3, -3)
-        env.add_gizmo_controls(self.tool.parent.parent, False, True, False, "Tool")
+        tcp_target = util.create_axes(0.3, 0.1, False, "", 0.2)
+        if self.dh is not None:
+            util.apply_transformation_matrix(tcp_target, self.get_global_tcp_transform())
+        env.add(tcp_target)
+        env.add_gizmo_controls(tcp_target, True, False, False, "Tool", 3, 3, 3, -3, -3, -3, cb)
+        env.add_gizmo_controls(tcp_target, False, True, False, "Tool", callback=cb)
 
         
         
@@ -1110,7 +1133,8 @@ class Manipulator:
         for name, transform in DH_transforms.items():
             joint:Joint = self.get_joint_by_name(name)
             joint.dh_alignment = np.linalg.inv(global_transforms[name]) @ (dh.base_to_dh @ transform)
-
+        if self.tcp_target is not None:
+            util.apply_transformation_matrix(self.tcp_target, self.get_global_tcp_transform())
 
 
 
@@ -1328,11 +1352,6 @@ class Manipulator:
 
 
 #-------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
 
 
 

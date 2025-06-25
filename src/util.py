@@ -13,6 +13,7 @@ import manager
 from collections.abc import Iterable
 import typing
 from numba import njit
+from typing import Callable
 
 
 
@@ -1163,16 +1164,8 @@ class Environment:
         self.frame_widgets = True
         self.widgets = []
 
-        test_button = widgets.Button(
-            description='',
-            tooltip='',
-            icon='times',
-            layout=widgets.Layout(width='32px')
-        )  
-        test_label = widgets.HTML(value='<span style="font-size:14px; color:red;">Das ist eine Fehlermeldung</span>')
-        test_error = HBox(children=[test_label, test_button])
-
-        self.info_container:widgets.VBox = widgets.VBox(children=[test_error])
+        self.info_container:widgets.VBox = widgets.VBox()
+        
 
 
 
@@ -1294,12 +1287,30 @@ class Environment:
         '''
         self.widgets.append(widget)
     
+    def add_info(self, info_text:str):
+        test_button:widgets.Button = widgets.Button(
+            description='',
+            tooltip='',
+            icon='times',
+            layout=widgets.Layout(width='32px')
+        )
+        
+        test_label = widgets.HTML(value=f'<span style="font-size:14px; color:red;">{info_text}</span>')
+        info = HBox(children=[test_label, test_button])
+        self.info_container.children = list(self.info_container.children) + [info]
+        def on_click(button):
+            self.remove_info(info)
+        test_button.on_click(on_click)
+        return info
 
+    def remove_info(self, info):
+        self.info_container.children = tuple(w for w in self.info_container.children if w != info)
     
     def add_gizmo_controls(
             self, obj, translation=True, rotation=True, scale=False, name="",
             max_trans_x:float = 1, max_trans_y:float = 1, max_trans_z:float = 1,
-            min_trans_x:float = -1, min_trans_y:float = -1, min_trans_z:float = -1):
+            min_trans_x:float = -1, min_trans_y:float = -1, min_trans_z:float = -1,
+            callback: Callable[[], None] = None):
         '''
         Fügt ein Gizmo-Steuerelement zur Manipulation eines Objekts in der Umgebung hinzu (Translation, Rotation, Skalierung).
 
@@ -1352,6 +1363,7 @@ class Environment:
 
             def _on_trans_slider(change):#noch fehler drin
                 set_translation(renderable, [x_trans_slider.value, y_trans_slider.value, z_trans_slider.value])
+                if callback is not None : callback()
             x_trans_slider.observe(_on_trans_slider, names='value')
             y_trans_slider.observe(_on_trans_slider, names="value")
             z_trans_slider.observe(_on_trans_slider, names="value")
@@ -1380,6 +1392,7 @@ class Environment:
                 else:
                     angles = order_angles(x_rot_slider.value, y_rot_slider.value, z_rot_slider.value, rotation_order_dropdown.value)
                     set_rotation(renderable, angles, rotation_order_dropdown.value)
+                if callback is not None : callback()
             
 
 
@@ -1398,6 +1411,7 @@ class Environment:
 
             def _on_scale_slider(change):
                 set_scale(renderable, [x_scale_slider.value, y_scale_slider.value, z_scale_slider.value])
+                if callback is not None : callback()
 
             x_scale_slider.observe(_on_scale_slider, names="value")
             y_scale_slider.observe(_on_scale_slider, names="value")
