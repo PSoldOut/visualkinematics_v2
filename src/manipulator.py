@@ -7,6 +7,7 @@ from IPython.display import display
 from pythreejs import *
 import time
 from scipy.spatial.transform import Rotation as R, Slerp
+from scipy.sparse import csr_matrix
 import manager
 import util
 from threading import Timer
@@ -648,6 +649,9 @@ class Joint(Kinematic_Chain_Element):
         self.renderable.add(self.frame)
         self.set_position(position)
         self.set_rotation(rotation)
+        self.dh_frame = util.create_axes(0.3, show_labels=False, arrow_size=0.1, transparent_arrows=False)
+        self.dh_frame.visible = False
+        self.renderable.add(self.dh_frame)
 
         self.dh_alignment:np.ndarray = np.eye(4)  # später ggf. mit echten Werten setzen
 
@@ -716,21 +720,35 @@ class Joint(Kinematic_Chain_Element):
         rot = R.from_quat(list(renderable.quaternion))
         euler = rot.as_euler("XYZ", degrees=True)
 
-        def _on_rot_slider(change):
-            if abs(self.axis[0]) == 1:
-                util.set_rotation(renderable, [theta_rot_slider.value * sign, euler[1], euler[2]], "XYZ")
-            elif abs(self.axis[1]) == 1:
-                util.set_rotation(renderable, [euler[0], theta_rot_slider.value * sign, euler[2]], "XYZ")
-            elif abs(self.axis[2]) == 1:
-                util.set_rotation(renderable, [euler[0], euler[1], theta_rot_slider.value * sign], "XYZ")
         
+        def _on_rot_slider(change):
+            def task():
+                dh_visible = self.dh_frame.visible
+                self.dh_frame.visible = False
+                if abs(self.axis[0]) == 1:
+                    util.set_rotation(renderable, [theta_rot_slider.value * sign, euler[1], euler[2]], "XYZ")
+                elif abs(self.axis[1]) == 1:
+                    util.set_rotation(renderable, [euler[0], theta_rot_slider.value * sign, euler[2]], "XYZ")
+                elif abs(self.axis[2]) == 1:
+                    util.set_rotation(renderable, [euler[0], euler[1], theta_rot_slider.value * sign], "XYZ")
+                if dh_visible:
+                    r = R.from_quat(list(self.renderable.quaternion)).as_matrix()
+                    self.dh_frame.quaternion = tuple(util.rot_matrix_to_quaternion(r.T @ self.dh_alignment[:3, :3]))
+                    util.apply_transformation_matrix
+                    self.dh_frame.visible = True
+            global last_update_time
+            #if time.time() - last_update_time > 0.02:
+            threading.Thread(target=task).start()
+            last_update_time = time.time()
+                
+            
         theta_rot_slider.observe(_on_rot_slider, names="value")
 
         box = HBox(children = content, layout = layout1)
         main_box = VBox(children = [box], layout=layout2)
         return main_box
 
-
+last_update_time = time.time()
 
 class Link(Kinematic_Chain_Element):
     def __init__(self, name:str, mesh:Mesh, position:np.ndarray = np.array([0,0,0]), rotation:np.ndarray = np.array([0,0,0])) -> None:
@@ -1228,13 +1246,13 @@ class Manipulator:
     def show_DH_frames(self, show=True):
         current = self.base_link
         if isinstance(current, Joint):
-            current.frame.visible=show
-            util.apply_transformation_matrix(current.frame, current.dh_alignment)
+            current.dh_frame.visible=show
+            util.apply_transformation_matrix(current.dh_frame, current.dh_alignment)
         while(len(current.children) > 0):
             current = current.children[0]
             if isinstance(current, Joint):
-                current.frame.visible=show
-                util.apply_transformation_matrix(current.frame, current.dh_alignment)
+                current.dh_frame.visible=show
+                util.apply_transformation_matrix(current.dh_frame, current.dh_alignment)
 
 
 
