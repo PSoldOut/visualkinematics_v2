@@ -651,7 +651,7 @@ class Joint(Kinematic_Chain_Element):
         self.set_rotation(rotation)
         self.dh_frame = util.create_axes(0.3, show_labels=False, arrow_size=0.1, transparent_arrows=False)
         self.dh_frame.visible = False
-        self.renderable.add(self.dh_frame)
+        #self.renderable.add(self.dh_frame)
 
         self.dh_alignment:np.ndarray = np.eye(4)  # später ggf. mit echten Werten setzen
 
@@ -722,24 +722,13 @@ class Joint(Kinematic_Chain_Element):
 
         
         def _on_rot_slider(change):
-            def task():
-                dh_visible = self.dh_frame.visible
-                self.dh_frame.visible = False
-                if abs(self.axis[0]) == 1:
-                    util.set_rotation(renderable, [theta_rot_slider.value * sign, euler[1], euler[2]], "XYZ")
-                elif abs(self.axis[1]) == 1:
-                    util.set_rotation(renderable, [euler[0], theta_rot_slider.value * sign, euler[2]], "XYZ")
-                elif abs(self.axis[2]) == 1:
-                    util.set_rotation(renderable, [euler[0], euler[1], theta_rot_slider.value * sign], "XYZ")
-                if dh_visible:
-                    r = R.from_quat(list(self.renderable.quaternion)).as_matrix()
-                    self.dh_frame.quaternion = tuple(util.rot_matrix_to_quaternion(r.T @ self.dh_alignment[:3, :3]))
-                    util.apply_transformation_matrix
-                    self.dh_frame.visible = True
-            global last_update_time
-            #if time.time() - last_update_time > 0.02:
-            threading.Thread(target=task).start()
-            last_update_time = time.time()
+            if abs(self.axis[0]) == 1:
+                util.set_rotation(renderable, [theta_rot_slider.value * sign, euler[1], euler[2]], "XYZ")
+            elif abs(self.axis[1]) == 1:
+                util.set_rotation(renderable, [euler[0], theta_rot_slider.value * sign, euler[2]], "XYZ")
+            elif abs(self.axis[2]) == 1:
+                util.set_rotation(renderable, [euler[0], euler[1], theta_rot_slider.value * sign], "XYZ")
+                
                 
             
         theta_rot_slider.observe(_on_rot_slider, names="value")
@@ -1151,6 +1140,10 @@ class Manipulator:
         for name, transform in DH_transforms.items():
             joint:Joint = self.get_joint_by_name(name)
             joint.dh_alignment = np.linalg.inv(global_transforms[name]) @ (dh.base_to_dh @ transform)
+
+            joint.dh_frame.position = joint.get_position()
+            joint.parent.renderable.add(joint.dh_frame)
+
         if self.tcp_target is not None:
             util.apply_transformation_matrix(self.tcp_target, self.get_global_tcp_transform())
 
@@ -1247,12 +1240,16 @@ class Manipulator:
         current = self.base_link
         if isinstance(current, Joint):
             current.dh_frame.visible=show
+            pos = [current.dh_frame.position[0], current.dh_frame.position[1], current.dh_frame.position[2]]
             util.apply_transformation_matrix(current.dh_frame, current.dh_alignment)
+            util.translate(current.dh_frame, pos)
         while(len(current.children) > 0):
             current = current.children[0]
             if isinstance(current, Joint):
                 current.dh_frame.visible=show
+                pos = [current.dh_frame.position[0], current.dh_frame.position[1], current.dh_frame.position[2]]
                 util.apply_transformation_matrix(current.dh_frame, current.dh_alignment)
+                util.translate(current.dh_frame, pos)
 
 
 
