@@ -669,7 +669,7 @@ class Joint(Kinematic_Chain_Element):
             current = current.parent
         return current
 
-    def _create_theta_slider(self, num):
+    def _create_theta_slider(self, num, callback: Callable[[], None] = None):
         if self.axis is None : return None
         sign = 1
         if sum(self.axis) < 0 : sign *= -1
@@ -728,6 +728,7 @@ class Joint(Kinematic_Chain_Element):
                 util.set_rotation(renderable, [euler[0], theta_rot_slider.value * sign, euler[2]], "XYZ")
             elif abs(self.axis[2]) == 1:
                 util.set_rotation(renderable, [euler[0], euler[1], theta_rot_slider.value * sign], "XYZ")
+            if callback is not None : callback()
                 
                 
             
@@ -772,6 +773,8 @@ class Link(Kinematic_Chain_Element):
 
 class Manipulator:
     def __init__(self, name:str, tool_name:str = "robotiq_arg2f_140_model", position:np.ndarray = np.array([0,0,0])):
+        self.inspector:Manipulator.Inspector|None = None
+        self.environment:util.Environment|None = None
         self.name:str = name
         self.links:list[Link] = []
         self.joints:list[Joint] = []
@@ -812,124 +815,156 @@ class Manipulator:
 
         self.link_to_tool_joint:Joint = self.find_link_to_tool_joint()
 
-    
+    def set_environment(self, env:util.Environment):
+        self.environment = env
 
-    def _create_inspector(self, env:util.Environment):
-        pose_names = sorted(set(obj["name"] for obj in self.learned_poses))
-        dropdown:widgets.Dropdown = widgets.Dropdown(
-            options=pose_names,
-            style={'description_width': 'initial'})
 
+
+    def add_inspector(self, env):
+        self.inspector = self.Inspector(env, self)
+        env.add_widget(self.inspector.widget)
+        return self.inspector
+
+
+
+
+
+
+
+
+
+#--------------------------------------------INSPECTOR--------------------------------------------------------------------------------
+
+
+
+
+
+
+
+    class Inspector:
         layout = widgets.Layout(
-                #border='1px solid gray',
-                padding='2px',
-                height='40px',
-                overflow='hidden',  # Scrollen deaktivieren
-                flex='none'
+            #border='1px solid gray',
+            padding='2px',
+            height='40px',
+            overflow='hidden',  # Scrollen deaktivieren
+            flex='none'
             )
 
-        textfield:widgets.Text = widgets.Text(
-            value='',
-            placeholder='Name für Pose',
-            #description='Eingabe:',
-            disabled=False
-        )
+        def __init__(self, env:util.Environment, manipulator:Manipulator):
+            self.gizmo_controls = None
+            self.sliders = []
+            self.manipulator = manipulator
+            self.content = []
+            self.pose_names = sorted(set(obj["name"] for obj in manipulator.learned_poses))
+            self.pose_dropdown:widgets.Dropdown = widgets.Dropdown(
+                options=self.pose_names,
+                style={'description_width': 'initial'})
+
+            self.save_pose_textfield:widgets.Text = widgets.Text(
+                value='',
+                placeholder='Name für Pose',
+                #description='Eingabe:',
+                disabled=False
+            )
+            self.save_button:widgets.Button = widgets.Button(
+                description='Pose Speichern',
+                disabled=False,
+                button_style='',
+                tooltip='Speichert Die Pose, sodass sie in Zukunft wieder eingenommen werden kann.',
+                icon='save'
+            )
+
+            self.save_button.on_click(self._on_click_save_button)
+
+            self.take_position_button:widgets.Button = widgets.Button(
+                description='Pose Einnehmen',
+                disabled=False,
+                button_style='',
+                tooltip='Überführt den Roboter in die Ausgewählte Pose!',
+                icon='play'
+            )
 
         
+            self.take_position_button.on_click(self._on_click_take_position_button)
 
-        button_save:widgets.Button = widgets.Button(
-            description='Pose Speichern',
-            disabled=False,
-            button_style='',
-            tooltip='Speichert Die Pose, sodass sie in Zukunft wieder eingenommen werden kann.',
-            icon='save'
-        )
+            hbox2 = widgets.HBox([self.pose_dropdown, self.take_position_button], layout=self.__class__.layout)
 
-        def on_click1(button:widgets.Button):
+            # Horizontal anordnen
+            hbox1 = widgets.HBox([self.save_pose_textfield, self.save_button], layout=self.__class__.layout)
+            self.content.append(hbox1)
+            self.content.append(hbox2)
+            
+            num = 1
+            for j in manipulator.joints:
+                if j.is_mimicer: continue
+                slider = j._create_theta_slider(num, callback=self._on_theta_slider)
+                if slider != None : 
+                    self.content.append(slider)
+                    self.sliders.append(slider)
+                num += 1
+
+            manipulator.tcp_target = util.create_axes(0.3, 0.1, False, "", 0.2)
+            if manipulator.dh is not None:
+                util.apply_transformation_matrix(manipulator.tcp_target, manipulator.get_global_tcp_transform())
+            env.add(manipulator.tcp_target)
+            
+            self.gizmo_controls = env.Gizmo_Controls(manipulator.tcp_target, True, True, False, "TCP-Target", 3, 3, 3, -3, -3, -3, widgets_vertical=True, callback=self._on_gizmo_controls)
+            self.content.append(self.gizmo_controls.widget)
+            self.widget = widgets.VBox(children = self.content)
+        
+
+
+
+
+
+        def _on_gizmo_controls(self):
+                pass
+                r = R.from_quat(list(self.manipulator.tcp_target.quaternion)).as_matrix()
+                p = self.manipulator.tcp_target.position
+                q0 = np.array(list(self.manipulator.dh.joint_angles.values()))
+                q_sol = self.manipulator.dh.inverse_kinematics6D_with_limits(p, r, q0, 10, 0.1)
+                print("IK Lösung:", [int(np.rad2deg(x))%360 for x in q_sol])
+                self.manipulator.animate_by_theta(q_sol, 0.01, 1, True)
+                self.manipulator.update_dh_angles()
+
+
+
+
+        def _on_click_take_position_button(self, button:widgets.Button):
+            try:
+                button.description = "Pose Einnehmen"
+                button.icon='pause'
+                self.manipulator.animate_by_learned_pose(name = self.pose_dropdown.value, synchronous=True, duation=4)
+                
+            except Exception as e:
+                info = self.manipulator.environment.add_info(f"Beim Einnehmen der Pose ist ein Fehler aufgetreten!: {e}")
+            button.description = "Pose Einnehmen"
+            button.icon='play'
+
+
+
+        def _on_theta_slider(self):
+                util.apply_transformation_matrix(self.manipulator.tcp_target, self.manipulator.get_global_tcp_transform())
+
+
+
+        def _on_click_save_button(self, button:widgets.Button):
             info = None
             try:
-                self.learn(pose_name=textfield.value)
-                opts = list(dropdown.options)
-                opts.append(textfield.value)
-                dropdown.options = opts
+                self.manipulator.learn(pose_name = self.save_pose_textfield.value)
+                opts = list(self.pose_dropdown.options)
+                opts.append(self.save_pose_textfield.value)
+                self.pose_dropdown.options = opts
                 button.description = "Gespeichert!"
                 button.icon='check'
             
             except Exception as e:
-                info = env.add_info(f"Beim Speichern der Pose ist ein Fehler aufgetreten!: {e}")
+                info = self.manipulator.environments.add_info(f"Beim Speichern der Pose ist ein Fehler aufgetreten!: {e}")
             def reset():
                 time.sleep(1.5)
                 button.description = "Pose Speichern"
                 button.icon='save'
-                
-
             threading.Thread(target=reset).start() 
-
-        button_save.on_click(on_click1)
-
-
-        
-        
-        button_take_pos:widgets.Button = widgets.Button(
-            description='Pose Einnehmen',
-            disabled=False,
-            button_style='',
-            tooltip='Überführt den Roboter in die Ausgewählte Pose!',
-            icon='play'
-        )
-
-        def on_click2(button:widgets.Button):
-            try:
-                button.description = "Pose Einnehmen"
-                button.icon='pause'
-                self.animate_by_learned_pose(name = dropdown.value, synchronous=True, duation=4)
-                
-            except Exception as e:
-                info = env.add_info(f"Beim Einnehmen der Pose ist ein Fehler aufgetreten!: {e}")
-            button.description = "Pose Einnehmen"
-            button.icon='play'
-            
-
-
-        button_take_pos.on_click(on_click2)
-
-
-        hbox2 = widgets.HBox([dropdown, button_take_pos], layout=layout)
-
-        # Horizontal anordnen
-        hbox1 = widgets.HBox([textfield, button_save], layout=layout)
-        env.add_widget(hbox1)
-        env.add_widget(hbox2)
-        
-        def cb():
-            display("callback")
-            r = R.from_quat(list(tcp_target.quaternion)).as_matrix()
-            p = tcp_target.position
-            q0 = np.array(list(self.dh.joint_angles.values()))
-            q_sol = self.dh.inverse_kinematics6D_with_limits(p, r, q0, 10, 0.1)
-            print("IK Lösung:", [int(np.rad2deg(x))%360 for x in q_sol])
-            self.animate_by_theta(q_sol, 0.01, 1, True)
-            self.update_dh_angles()
-
-
-        num = 1
-        for j in self.joints:
-            if j.is_mimicer: continue
-            slider = j._create_theta_slider(num)
-            if slider != None : env.add_widget(slider)
-            num += 1
-
-        tcp_target = util.create_axes(0.3, 0.1, False, "", 0.2)
-        if self.dh is not None:
-            util.apply_transformation_matrix(tcp_target, self.get_global_tcp_transform())
-        env.add(tcp_target)
-        env.add_gizmo_controls(tcp_target, True, False, False, "Tool", 3, 3, 3, -3, -3, -3, cb)
-        env.add_gizmo_controls(tcp_target, False, True, False, "Tool", callback=cb)
-
-        
-        
-    
-
 
 
 
@@ -1083,6 +1118,10 @@ class Manipulator:
                 for m in current.mimicers:
                     add_mimicers(current=m[0], current_angle_rad=m[1] * current_angle_rad, joints=joints)
 
+            util.set_rotation(self.tcp_target, [0,0,0], "XYZ")
+            util.set_translation(self.tcp_target, [0,0,0])
+            self.tool.renderable.add(self.tcp_target)
+
             slerps:list = []
 
             for j, angle in zip(joints, angles_rad):
@@ -1124,9 +1163,17 @@ class Manipulator:
                 t += end - start
             block(1, self.base_link, step)
 
+            if self.environment is not None :
+                util.apply_transformation_matrix(self.tcp_target, self.get_global_tcp_transform())
+                self.environment.add(self.tcp_target) 
+
+
         thread = threading.Thread(target=_animate_experimental_task, args=(joints, angles_rad, duration, quality))
         thread.start()
-        if synchronous : thread.join()        
+        if synchronous : thread.join()  
+     
+
+
 
     
 
@@ -1144,9 +1191,11 @@ class Manipulator:
             joint.dh_frame.position = joint.get_position()
             joint.parent.renderable.add(joint.dh_frame)
 
+        k0 = util.create_axes(0.3, show_labels=False, arrow_size=0.1, transparent_arrows=False)
+        util.apply_transformation_matrix(k0, dh.base_to_dh)
+        self.base_link.renderable.add(k0)
         if self.tcp_target is not None:
             util.apply_transformation_matrix(self.tcp_target, self.get_global_tcp_transform())
-
 
 
 
