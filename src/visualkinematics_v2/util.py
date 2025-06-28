@@ -9,7 +9,7 @@ from pythreejs import SpriteMaterial, Sprite
 import time
 from scipy.spatial.transform import Rotation as R, Slerp
 import os
-import manager
+import visualkinematics_v2.manager as manager
 from collections.abc import Iterable
 import typing
 from numba import njit

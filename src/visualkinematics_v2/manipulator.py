@@ -8,8 +8,8 @@ from pythreejs import *
 import time
 from scipy.spatial.transform import Rotation as R, Slerp
 from scipy.sparse import csr_matrix
-import manager
-import util
+import visualkinematics_v2.manager as manager
+import visualkinematics_v2.util as util
 from threading import Timer
 from numba import njit
 from typing import *

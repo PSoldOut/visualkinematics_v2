@@ -5,6 +5,11 @@ description = ""
 authors = [
     {name = "philmik93",email = "philipp.mikos@gmail.com"}
 ]
+
+packages = [
+    { include = "visualkinematics_v2", from = "src" }
+]
+
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [

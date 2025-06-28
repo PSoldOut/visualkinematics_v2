@@ -1,6 +1,6 @@
 import numpy as np
 import pywavefront
-import util
+import visualkinematics_v2.util as util
 import os
 from multiprocessing import Pool, cpu_count
 
