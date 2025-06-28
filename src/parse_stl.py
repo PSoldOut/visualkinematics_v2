@@ -2,7 +2,7 @@ import numpy as np
 from stl import mesh
 import os
 from multiprocessing import Pool, cpu_count
-import util
+import visualkinematics_v2.util as util
 import sys
 
 
