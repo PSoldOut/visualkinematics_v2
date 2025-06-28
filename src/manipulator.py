@@ -669,33 +669,27 @@ class Joint(Kinematic_Chain_Element):
             current = current.parent
         return current
 
-    def _create_theta_slider(self, num, callback: Callable[[], None] = None):
+
+
+    def _create_theta_slider(self, num, value, callback: Callable[[], None] = None):
         if self.axis is None : return None
         sign = 1
         if sum(self.axis) < 0 : sign *= -1
         z = self.dh_alignment[:3, -2]     #vorletzte spalte, erste 3 elemente (Spaltenvektor z-achse)
         if sum(z) < 0 : sign *= -1
 
-        content = []
-        #content.append(Label(self.name))
+        
         renderable = self
         if hasattr(self, "get_renderable"):
             renderable = self.get_renderable()
 
         layout1 = widgets.Layout(
-                #border='1px solid gray',
+                border='1px solid gray',
                 padding='2px',
                 height='40px',
                 overflow='hidden',  # Scrollen deaktivieren
                 flex='none'
             )  
-        layout2 = widgets.Layout(
-                border='1px solid gray',
-                padding='5px',
-                height='50px',
-                overflow='hidden',  # Scrollen deaktivieren
-                flex='none'
-            )
         min = -180
         max = 180
         if self.lower_limit is not None:
@@ -706,7 +700,7 @@ class Joint(Kinematic_Chain_Element):
             tmp = max
             max = min
             min = tmp
-        theta_rot_slider = FloatSlider(min=min, max=max, step=0.1, description=f'Theta {num}')
+        theta_rot_slider = FloatSlider(min=min, max=max, step=0.1, description=f'Theta {num}', layout=layout1)
         rot = R.from_quat(list(renderable.quaternion))
         euler = rot.as_euler("XYZ", degrees=True) 
         
@@ -714,12 +708,9 @@ class Joint(Kinematic_Chain_Element):
         elif abs(self.axis[1]) == 1: theta_rot_slider.value = euler[1]
         elif abs(self.axis[2]) == 1: theta_rot_slider.value = euler[2]
         
-        rot_box = VBox(children=[theta_rot_slider], layout=layout1)
-        content.append(rot_box)
-
+    
         rot = R.from_quat(list(renderable.quaternion))
         euler = rot.as_euler("XYZ", degrees=True)
-
         
         def _on_rot_slider(change):
             if abs(self.axis[0]) == 1:
@@ -729,16 +720,10 @@ class Joint(Kinematic_Chain_Element):
             elif abs(self.axis[2]) == 1:
                 util.set_rotation(renderable, [euler[0], euler[1], theta_rot_slider.value * sign], "XYZ")
             if callback is not None : callback()
-                
-                
-            
+                  
         theta_rot_slider.observe(_on_rot_slider, names="value")
+        return [self.name, theta_rot_slider]
 
-        box = HBox(children = content, layout = layout1)
-        main_box = VBox(children = [box], layout=layout2)
-        return main_box
-
-last_update_time = time.time()
 
 class Link(Kinematic_Chain_Element):
     def __init__(self, name:str, mesh:Mesh, position:np.ndarray = np.array([0,0,0]), rotation:np.ndarray = np.array([0,0,0])) -> None:
@@ -773,6 +758,7 @@ class Link(Kinematic_Chain_Element):
 
 class Manipulator:
     def __init__(self, name:str, tool_name:str = "robotiq_arg2f_140_model", position:np.ndarray = np.array([0,0,0])):
+        self.k0 = None
         self.inspector:Manipulator.Inspector|None = None
         self.environment:util.Environment|None = None
         self.name:str = name
@@ -851,8 +837,8 @@ class Manipulator:
             )
 
         def __init__(self, env:util.Environment, manipulator:Manipulator):
-            self.gizmo_controls = None
-            self.sliders = []
+            self.gizmo_controls:util.Environment.Gizmo_Controls = None
+            self.sliders = {}
             self.manipulator = manipulator
             self.content = []
             self.pose_names = sorted(set(obj["name"] for obj in manipulator.learned_poses))
@@ -894,38 +880,47 @@ class Manipulator:
             self.content.append(hbox1)
             self.content.append(hbox2)
             
-            num = 1
-            for j in manipulator.joints:
-                if j.is_mimicer: continue
-                slider = j._create_theta_slider(num, callback=self._on_theta_slider)
-                if slider != None : 
-                    self.content.append(slider)
-                    self.sliders.append(slider)
-                num += 1
+            self._create_theta_sliders()
 
             manipulator.tcp_target = util.create_axes(0.3, 0.1, False, "", 0.2)
             if manipulator.dh is not None:
                 util.apply_transformation_matrix(manipulator.tcp_target, manipulator.get_global_tcp_transform())
             env.add(manipulator.tcp_target)
             
-            self.gizmo_controls = env.Gizmo_Controls(manipulator.tcp_target, True, True, False, "TCP-Target", 3, 3, 3, -3, -3, -3, widgets_vertical=True, callback=self._on_gizmo_controls)
+            self.gizmo_controls = env.Gizmo_Controls(manipulator.tcp_target, True, True, False, "TCP-Target", 3, 3, 3, -3, -3, -3, widgets_vertical=True, continuous_update=False, callback=self._on_gizmo_controls)
             self.content.append(self.gizmo_controls.widget)
             self.widget = widgets.VBox(children = self.content)
         
 
 
+        def _create_theta_sliders(self):
+            num = 1
+            for j in self.manipulator.joints:
+                if j.is_mimicer: continue
+                name_and_slider = j._create_theta_slider(num, value=0, callback=self._on_theta_slider)
+                if name_and_slider != None: 
+                    self.content.append(name_and_slider[1])
+                    self.sliders[name_and_slider[0]] = name_and_slider[1]
+                num += 1
 
 
 
         def _on_gizmo_controls(self):
-                pass
-                r = R.from_quat(list(self.manipulator.tcp_target.quaternion)).as_matrix()
-                p = self.manipulator.tcp_target.position
-                q0 = np.array(list(self.manipulator.dh.joint_angles.values()))
-                q_sol = self.manipulator.dh.inverse_kinematics6D_with_limits(p, r, q0, 10, 0.1)
-                print("IK Lösung:", [int(np.rad2deg(x))%360 for x in q_sol])
-                self.manipulator.animate_by_theta(q_sol, 0.01, 1, True)
-                self.manipulator.update_dh_angles()
+            pass
+            r = R.from_quat(list(self.manipulator.tcp_target.quaternion)).as_matrix()
+            p = self.manipulator.tcp_target.position
+            q0 = np.array(list(self.manipulator.dh.joint_angles.values()))
+            q_sol = self.manipulator.dh.inverse_kinematics6D_with_limits(p, r, q0, 10, 0.1)
+            self.manipulator.animate_by_theta(q_sol, 0.5, 1, True, False)
+            self.manipulator.update_dh_angles()
+            #------
+            for name, slider in self.sliders.items():
+                if name in self.manipulator.dh.joint_angles:
+                    angle= self.manipulator.dh.joint_angles[name]
+                    #display(name)
+                    #display((angle / (2*np.pi) * 360))
+                    #slider.value = angle / (2*np.pi) * 360
+                    
 
 
 
@@ -944,7 +939,19 @@ class Manipulator:
 
 
         def _on_theta_slider(self):
-                util.apply_transformation_matrix(self.manipulator.tcp_target, self.manipulator.get_global_tcp_transform())
+                transform = self.manipulator.get_global_tcp_transform()
+                util.apply_transformation_matrix(self.manipulator.tcp_target, transform)
+                pos = transform[:3, 3]
+                self.gizmo_controls.set_translation_silently(pos)
+                if self.gizmo_controls.local_space_check_box.value:
+                    euler = util.quaternion_to_euler(self.manipulator.tcp_target.quaternion[0], self.manipulator.tcp_target.quaternion[1], self.manipulator.tcp_target.quaternion[2], self.manipulator.tcp_target.quaternion[3], self.gizmo_controls.rotation_order_dropdown.value)
+                    euler = util.order_angles(euler, self.gizmo_controls.rotation_order_dropdown.value, "XYZ")
+                    self.gizmo_controls.set_rotation_silently(euler)
+                else :
+                    euler = util.quaternion_to_euler(self.manipulator.tcp_target.quaternion[0], self.manipulator.tcp_target.quaternion[1], self.manipulator.tcp_target.quaternion[2], self.manipulator.tcp_target.quaternion[3], self.gizmo_controls.rotation_order_dropdown.value[::-1])
+                    euler = util.order_angles(euler, self.gizmo_controls.rotation_order_dropdown.value[::-1], "XYZ")
+                    self.gizmo_controls.set_rotation_silently(euler)
+
 
 
 
@@ -965,6 +972,13 @@ class Manipulator:
                 button.description = "Pose Speichern"
                 button.icon='save'
             threading.Thread(target=reset).start() 
+
+
+
+
+#--------------------------------------------------------------------------------------------------------
+
+
 
 
 
@@ -1087,12 +1101,12 @@ class Manipulator:
         Timer(duration, on_animation_finished).start()
 
 
-    def animate_by_learned_pose(self, name:str, duation:float = 1.0, quality:float = 1.0, synchronous:bool = False):
+    def animate_by_learned_pose(self, name:str, duation:float = 1.0, quality:float = 1.0, synchronous:bool = False, with_tcp_target:bool = True):
         pose = self.get_learned_pose(name)
-        self.animate_by_theta(pose, duation, quality, synchronous)
+        self.animate_by_theta(pose, duation, quality, synchronous, with_tcp_target)
         
 
-    def animate_by_theta(self, theta:list, duration:float = 1.0, quality:float = 1.0, synchronous:bool = False):
+    def animate_by_theta(self, theta:list, duration:float = 1.0, quality:float = 1.0, synchronous:bool = False, with_tcp_target:bool = True):
         joints:list = []
         angles_rad:list = []
         i = 0
@@ -1107,10 +1121,10 @@ class Manipulator:
             joints.append(prev_joint)
             angles_rad.append(theta[i]*sign)
             i+=1
-        self.animate_experimental(joints, angles_rad, duration, quality, False, synchronous)
+        self.animate_experimental(joints, angles_rad, duration, quality, False, synchronous, with_tcp_target)
 
 
-    def animate_experimental(self, joints:list, angles_rad:list, duration:float = 1.0, quality:float = 1, add_on_baserotation:bool = True, synchronous:bool = False):
+    def animate_experimental(self, joints:list, angles_rad:list, duration:float = 1.0, quality:float = 1, add_on_baserotation:bool = True, synchronous:bool = False, with_tcp_target:bool = True):
         def _animate_experimental_task(joints:list, angles_rad:list, duration:float = 1.0, quality:float = 1):
             def add_mimicers(current:Joint, current_angle_rad, joints:list):
                 joints.append(current)
@@ -1118,9 +1132,10 @@ class Manipulator:
                 for m in current.mimicers:
                     add_mimicers(current=m[0], current_angle_rad=m[1] * current_angle_rad, joints=joints)
 
-            util.set_rotation(self.tcp_target, [0,0,0], "XYZ")
-            util.set_translation(self.tcp_target, [0,0,0])
-            self.tool.renderable.add(self.tcp_target)
+            if with_tcp_target:
+                util.set_rotation(self.tcp_target, [0,0,0], "XYZ")
+                util.set_translation(self.tcp_target, [0,0,0])
+                self.tool.renderable.add(self.tcp_target)
 
             slerps:list = []
 
@@ -1163,7 +1178,7 @@ class Manipulator:
                 t += end - start
             block(1, self.base_link, step)
 
-            if self.environment is not None :
+            if self.environment is not None and with_tcp_target:
                 util.apply_transformation_matrix(self.tcp_target, self.get_global_tcp_transform())
                 self.environment.add(self.tcp_target) 
 
@@ -1191,9 +1206,10 @@ class Manipulator:
             joint.dh_frame.position = joint.get_position()
             joint.parent.renderable.add(joint.dh_frame)
 
-        k0 = util.create_axes(0.3, show_labels=False, arrow_size=0.1, transparent_arrows=False)
-        util.apply_transformation_matrix(k0, dh.base_to_dh)
-        self.base_link.renderable.add(k0)
+        self.k0 = util.create_axes(0.3, show_labels=False, arrow_size=0.1, transparent_arrows=False)     #nicht schön...das muss in zukunft anders gelöst werden! der manipulator sollte keine variable k0 haben
+        self.k0.visible = False
+        util.apply_transformation_matrix(self.k0, dh.base_to_dh)
+        self.base_link.renderable.add(self.k0)
         if self.tcp_target is not None:
             util.apply_transformation_matrix(self.tcp_target, self.get_global_tcp_transform())
 
@@ -1286,6 +1302,7 @@ class Manipulator:
             l.frame.visible=show
 
     def show_DH_frames(self, show=True):
+        self.k0.visible = show
         current = self.base_link
         if isinstance(current, Joint):
             current.dh_frame.visible=show

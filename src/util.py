@@ -14,6 +14,8 @@ from collections.abc import Iterable
 import typing
 from numba import njit
 from typing import Callable
+from contextlib import contextmanager
+import threading
 
 
 
@@ -175,41 +177,23 @@ def compute_normals(vertices, indices):
 
 
 
-
-def order_angles(x, y, z, order):
+def order_angles(angles: list, from_order:str, to_order: str) -> list:
     '''
-    Ordnet die uebergebenen Eulerwinkel nach order und gibt diese als Array zurueck.
+    Ordnet die übergebenen Eulerwinkel von einer Reihenfolge in eine andere.
 
-    :param x: Eulerwinkel um x.
-    :param y: Eulerwinkel um y.
-    :param z: Eulerwinkel um z.
-
-    :return: Die geordneten Eulerwinkel als Array.
+    :param angles: Liste der Winkel im Format [a1, a2, a3] in from_order.
+    :param from_order: Der aktuelle Rotationsachsen-String (z. B. "ZYX").
+    :param to_order: Die gewünschte neue Reihenfolge der Achsen (z. B. "XYZ").
+    :return: Liste der Winkel in der neuen Reihenfolge to_order.
     '''
-    if order == "ZYZ" or order == "zyz":
-        return [z,y,z]
-    elif order == "XYX" or order == "xyx":
-        return [x,y,x]
-    elif order == "XZX" or order == "xzx":
-        return [x,z,x]
-    elif order == "YXY" or order == "yxy":
-        return [y,x,y]
-    elif order == "YZY" or order == "yzy":
-        return [y,z,y]
-    elif order == "ZXZ" or order == "zxz":
-        return [z,x,z]
-    elif order == "XYZ" or order == "xyz":
-        return [x,y,z]
-    elif order == "XZY" or order == "xzy":
-        return [x,z,y] 
-    elif order == "YZX" or order == "yzx":
-        return [y,z,x]
-    elif order == "YXZ" or order == "yxz":
-        return [y,x,z]
-    elif order == "ZXY" or order == "zxy":
-        return [z,x,y]
-    elif order == "ZYX" or order == "zyx":
-        return [z,y,x]
+    from_order = from_order.upper()
+    to_order = to_order.upper()
+
+    # Erstelle ein Mapping von Achsen zu Winkeln
+    angle_map = {axis: angle for axis, angle in zip(from_order, angles)}
+
+    # Baue die neue Liste der Winkel in der gewünschten Reihenfolge
+    return [angle_map[axis] for axis in to_order]
 
 
 
@@ -437,6 +421,42 @@ def apply_rot_matrix(obj, rot_mat):
     renderable.quaternion = quaternion_multiply((q[0], q[1], q[2], q[3]), renderable.quaternion)
 
 
+
+
+
+
+def create_colored_quad(pos, width, height, depth,
+                        face_colors=[[255, 0, 0], [0, 255, 0], [0, 0, 255], [255, 255, 0], [255, 0, 255], [0, 255, 255]],
+                        transparent=True):
+    '''
+    Erzeugt ein Quader-Mesh mit individuell gefärbten Seiten.
+
+    :param pos: Position des Quaders [x, y, z]
+    :param width: Breite des Quaders
+    :param height: Höhe des Quaders
+    :param depth: Tiefe des Quaders
+    :param face_colors: Liste von 6 RGB-Farben, eine pro Seite. Reihenfolge:
+                        [right, left, top, bottom, front, back]
+    :param transparent: Gibt an, ob das Material transparent ist
+    :return: Ein Mesh-Objekt mit verschiedenfarbigen Seiten
+    '''
+    geometry = three.BoxGeometry(width=width, height=height, depth=depth)
+
+    materials = []
+    for rgb in face_colors:
+        hex_color = f'#{rgb[0]:02X}{rgb[1]:02X}{rgb[2]:02X}'
+        mat = three.MeshStandardMaterial(
+            color=hex_color,
+            metalness=0.5,
+            roughness=0.8,
+            transparent=transparent,
+            opacity=0.5
+        )
+        materials.append(mat)
+
+    mesh = three.Mesh(geometry=geometry, material=materials)
+    mesh.position = tuple(pos)
+    return mesh
 
 
 
@@ -1317,6 +1337,7 @@ class Environment:
             max_trans_x:float = 1, max_trans_y:float = 1, max_trans_z:float = 1,
             min_trans_x:float = -1, min_trans_y:float = -1, min_trans_z:float = -1,
             widgets_vertical:Bool = False,
+            continuous_update=True,
             callback: Callable[[], None] = None):
         '''
         Fügt ein Gizmo-Steuerelement zur Manipulation eines Objekts in der Umgebung hinzu (Translation, Rotation, Skalierung).
@@ -1329,11 +1350,20 @@ class Environment:
         controls = self.Gizmo_Controls(obj, translation, rotation, scale, name,
                                     max_trans_x, max_trans_y, max_trans_z,
                                     min_trans_x, min_trans_y, min_trans_z,
-                                    widgets_vertical, callback)
+                                    widgets_vertical, continuous_update, callback)
         self.gizmo_controls.append(controls)
         self.add_widget(controls.widget)
         return controls
 
+
+    def add_inspector(self, obj):
+        if hasattr(obj, "add_inspector"):
+            self.inspectors.append(obj.add_inspector(self))
+
+
+
+
+#----------------------------------------GIZMO_CONTROLS---------------------------------------------------------
 
 
     class Gizmo_Controls:
@@ -1379,6 +1409,7 @@ class Environment:
                 max_trans_x:float = 1, max_trans_y:float = 1, max_trans_z:float = 1,
                 min_trans_x:float = -1, min_trans_y:float = -1, min_trans_z:float = -1,
                 widgets_vertical:Bool = False,
+                continuous_update=True,
                 callback: Callable[[], None] = None):
             '''
             Erstellt ein Gizmo-Steuerelement zur Manipulation eines Objekts (Translation, Rotation, Skalierung).
@@ -1388,12 +1419,15 @@ class Environment:
             :param rotation: Wenn True, werden Schieberegler für die Rotation angezeigt.
             :param scale: Wenn True, werden Schieberegler für die Skalierung angezeigt.
             '''
+            
+            self.callback = callback
+            self.obj = obj
             self.content = []
             if name != "":
                 self.content.append(Label(name))
-            renderable = obj
+            self.obj_renderable = obj
             if hasattr(obj, "get_renderable"):
-                renderable = obj.get_renderable()
+                self.obj_renderable = obj.get_renderable()
 
             
             if widgets_vertical:
@@ -1404,12 +1438,12 @@ class Environment:
                 layout2 = self.__class__.layout2_horizontal
 
             if translation:
-                self.x_trans_slider = FloatSlider(min=min_trans_x, max = max_trans_x, step=0.001, description="Translation X")
-                self.y_trans_slider = FloatSlider(min=min_trans_y, max = max_trans_y, step=0.001, description="Translation Y")
-                self.z_trans_slider = FloatSlider(min=min_trans_z, max = max_trans_z, step=0.001, description="Translation Z")
-                self.x_trans_slider.value = renderable.position[0]
-                self.y_trans_slider.value = renderable.position[1]
-                self.z_trans_slider.value = renderable.position[2]
+                self.x_trans_slider = FloatSlider(min=min_trans_x, max = max_trans_x, step=0.001, description="Translation X", continuous_update=continuous_update)
+                self.y_trans_slider = FloatSlider(min=min_trans_y, max = max_trans_y, step=0.001, description="Translation Y", continuous_update=continuous_update)
+                self.z_trans_slider = FloatSlider(min=min_trans_z, max = max_trans_z, step=0.001, description="Translation Z", continuous_update=continuous_update)
+                self.x_trans_slider.value = self.obj_renderable.position[0]
+                self.y_trans_slider.value = self.obj_renderable.position[1]
+                self.z_trans_slider.value = self.obj_renderable.position[2]
 
                 
 
@@ -1417,28 +1451,15 @@ class Environment:
                 
                 self.content.append(trans_box)
 
-                def _on_trans_slider(change):#noch fehler drin
-                    delta = change["new"] - change["old"]
-                    v = None
-                    if change['owner'] is self.x_trans_slider: v = np.array([delta, 0, 0])
-                    if change['owner'] is self.y_trans_slider: v = np.array([0, delta, 0])
-                    if change['owner'] is self.z_trans_slider: v = np.array([0, 0, delta])
-                    rot_mat = R.from_quat(list(renderable.quaternion)).as_matrix()
-                    if self.local_space_check_box.value:
-                        final_v = rot_mat @ v
-                    else : final_v = v
-                    renderable.position = tuple(np.array([renderable.position[0], renderable.position[1], renderable.position[2]]) + np.array(final_v))
-                    
-                    if callback is not None : callback()
-                self.x_trans_slider.observe(_on_trans_slider, names='value')
-                self.y_trans_slider.observe(_on_trans_slider, names="value")
-                self.z_trans_slider.observe(_on_trans_slider, names="value")
+                self.x_trans_slider.observe(self._on_trans_slider, names='value')
+                self.y_trans_slider.observe(self._on_trans_slider, names="value")
+                self.z_trans_slider.observe(self._on_trans_slider, names="value")
 
             if rotation:
-                self.x_rot_slider = FloatSlider(min=-180, max=180, step=0.1, description='Rotate X')
-                self.y_rot_slider = FloatSlider(min=-180, max=180, step=0.1, description='Rotate Y')
-                self.z_rot_slider = FloatSlider(min=-180, max=180, step=0.1, description='Rotate Z')
-                rot = R.from_quat(list(renderable.quaternion))
+                self.x_rot_slider = FloatSlider(min=-180, max=180, step=0.1, description='Rotate X', continuous_update=continuous_update)
+                self.y_rot_slider = FloatSlider(min=-180, max=180, step=0.1, description='Rotate Y', continuous_update=continuous_update)
+                self.z_rot_slider = FloatSlider(min=-180, max=180, step=0.1, description='Rotate Z', continuous_update=continuous_update)
+                rot = R.from_quat(list(self.obj_renderable.quaternion))
                 euler = rot.as_euler("XYZ", degrees=True) 
                 self.x_rot_slider.value = euler[0]
                 self.y_rot_slider.value = euler[1]
@@ -1446,40 +1467,22 @@ class Environment:
                 rot_box = VBox(children=[self.x_rot_slider, self.y_rot_slider, self.z_rot_slider], layout=layout1)
                 self.content.append(rot_box)
 
-                def _on_rot_slider(change):
-                    o = self.rotation_order_dropdown.value
-                    if (o == "zyz" or o == "ZYZ" or
-                        o == "xyx" or o == "XYX" or
-                        o == "xzx" or o == "XZX" or
-                        o == "yxy" or o == "YXY" or
-                        o == "yzy" or o == "YZY" or
-                        o == "zxz" or o == "ZXZ"):
-                        set_rotation(renderable, [self.x_rot_slider.value, self.y_rot_slider.value, self.z_rot_slider.value], self.rotation_order_dropdown.value)
-                    else:
-                        angles = order_angles(self.x_rot_slider.value, self.y_rot_slider.value, self.z_rot_slider.value, self.rotation_order_dropdown.value)
-                        if self.local_space_check_box.value:
-                            set_rotation(renderable, angles, self.rotation_order_dropdown.value)
-                        else:
-                            set_rotation_global(renderable, angles, self.rotation_order_dropdown.value)
-                    if callback is not None : callback()
-                
 
-
-                self.x_rot_slider.observe(_on_rot_slider, names="value")
-                self.y_rot_slider.observe(_on_rot_slider, names="value")
-                self.z_rot_slider.observe(_on_rot_slider, names="value")
+                self.x_rot_slider.observe(self._on_rot_slider, names="value")
+                self.y_rot_slider.observe(self._on_rot_slider, names="value")
+                self.z_rot_slider.observe(self._on_rot_slider, names="value")
 
                 
 
             if scale:
-                self.x_scale_slider = FloatSlider(min=0, max=5, step=0.001, description="Scale X", value=1)
-                self.y_scale_slider = FloatSlider(min=0, max=5, step=0.001, description="Scale Y", value=1)
-                self.z_scale_slider = FloatSlider(min=0, max=5, step=0.001, description="Scale Z", value=1)
+                self.x_scale_slider = FloatSlider(min=0, max=5, step=0.001, description="Scale X", value=1, continuous_update=continuous_update)
+                self.y_scale_slider = FloatSlider(min=0, max=5, step=0.001, description="Scale Y", value=1, continuous_update=continuous_update)
+                self.z_scale_slider = FloatSlider(min=0, max=5, step=0.001, description="Scale Z", value=1, continuous_update=continuous_update)
                 scale_box = VBox(children=[self.x_scale_slider, self.y_scale_slider, self.z_scale_slider], layout=layout1)
                 self.content.append(scale_box)
 
                 def _on_scale_slider(change):
-                    set_scale(renderable, [self.x_scale_slider.value, self.y_scale_slider.value, self.z_scale_slider.value])
+                    set_scale(self.obj_renderable, [self.x_scale_slider.value, self.y_scale_slider.value, self.z_scale_slider.value])
                     if callback is not None : callback()
 
                 self.x_scale_slider.observe(_on_scale_slider, names="value")
@@ -1496,48 +1499,12 @@ class Environment:
                     description='Rotation Order:',
                 )
 
-                def _on_rotation_order_change(change):
-                    o = self.rotation_order_dropdown.value
-                    if (o=="ZYZ" or o=="zyz"):
-                        self.x_rot_slider.description="Rotate Z"
-                        self.y_rot_slider.description="Rotate Y"
-                        self.z_rot_slider.description="Rotate Z"
-                    elif (o=="XYX" or o=="xyx"):
-                        self.x_rot_slider.description="Rotate X"
-                        self.y_rot_slider.description="Rotate Y"
-                        self.z_rot_slider.description="Rotate X"
-                    elif (o=="XZX" or o=="xzx"):
-                        self.x_rot_slider.description="Rotate X"
-                        self.y_rot_slider.description="Rotate Z"
-                        self.z_rot_slider.description="Rotate X"
-                    elif (o=="YXY" or o=="yxy"):
-                        self.x_rot_slider.description="Rotate Y"
-                        self.y_rot_slider.description="Rotate X"
-                        self.z_rot_slider.description="Rotate Y"
-                    elif (o=="YZY" or o=="yzy"):
-                        self.x_rot_slider.description="Rotate Y"
-                        self.y_rot_slider.description="Rotate Z"
-                        self.z_rot_slider.description="Rotate Y"
-                    elif (o=="ZXZ" or o=="zxz"):
-                        self.x_rot_slider.description="Rotate Z"
-                        self.y_rot_slider.description="Rotate X"
-                        self.z_rot_slider.description="Rotate Z"
-                    else:
-                        self.x_rot_slider.description="Rotate X"
-                        self.y_rot_slider.description="Rotate Y"
-                        self.z_rot_slider.description="Rotate Z"
-
-                    _on_rot_slider(None)
-                self.rotation_order_dropdown.observe(_on_rotation_order_change, names='value')  
+                self.rotation_order_dropdown.observe(self._on_rotation_order_change, names='value')  
                 
-            def _on_local_scape_check_box(change):
-                _on_rot_slider(change)
-                _on_trans_slider(change)
-                _on_scale_slider(change)
 
 
             self.local_space_check_box = widgets.Checkbox(value=False, description="Lokale Transformation", layout=widgets.Layout(width='350px', height='30px'))
-            self.local_space_check_box.observe(_on_local_scape_check_box, names='value')
+            self.local_space_check_box.observe(self._on_local_space_check_box, names='value')
 
             if widgets_vertical:
                 box = VBox(children = self.content, layout = layout1)
@@ -1549,13 +1516,132 @@ class Environment:
                 main_box = VBox(children = [box, self.local_space_check_box], layout=layout2)
             self.widget = main_box
             
+        
+
+
+
+
+
+        def set_translation_silently(self, translation:list):
+            self.x_trans_slider.unobserve(self._on_trans_slider, names="value")
+            self.y_trans_slider.unobserve(self._on_trans_slider, names="value")
+            self.z_trans_slider.unobserve(self._on_trans_slider, names="value")
+            self.x_trans_slider.value = translation[0]
+            self.y_trans_slider.value = translation[1]
+            self.z_trans_slider.value = translation[2]
+            self.x_trans_slider.observe(self._on_trans_slider, names="value")
+            self.y_trans_slider.observe(self._on_trans_slider, names="value")
+            self.z_trans_slider.observe(self._on_trans_slider, names="value")
             
 
 
 
-    def add_inspector(self, obj):
-        if hasattr(obj, "add_inspector"):
-            self.inspectors.append(obj.add_inspector(self))
+        def set_rotation_silently(self, rot_xyz):
+            self.x_rot_slider.unobserve(self._on_rot_slider, names="value")
+            self.y_rot_slider.unobserve(self._on_rot_slider, names="value")
+            self.z_rot_slider.unobserve(self._on_rot_slider, names="value")
+            self.x_rot_slider.value = rot_xyz[0]
+            self.y_rot_slider.value = rot_xyz[1]
+            self.z_rot_slider.value = rot_xyz[2]
+            self.x_rot_slider.observe(self._on_rot_slider, names="value")
+            self.y_rot_slider.observe(self._on_rot_slider, names="value")
+            self.z_rot_slider.observe(self._on_rot_slider, names="value")
+
+        
+
+        def _on_trans_slider(self, change):#noch fehler drin
+            delta = change["new"] - change["old"]
+            v = None
+            if change['owner'] is self.x_trans_slider: v = np.array([delta, 0, 0])
+            if change['owner'] is self.y_trans_slider: v = np.array([0, delta, 0])
+            if change['owner'] is self.z_trans_slider: v = np.array([0, 0, delta])
+            rot_mat = R.from_quat(list(self.obj_renderable.quaternion)).as_matrix()
+            if self.local_space_check_box.value:
+                final_v = rot_mat @ v
+            else : final_v = v
+            self.obj_renderable.position = tuple(np.array([self.obj_renderable.position[0], self.obj_renderable.position[1], self.obj_renderable.position[2]]) + np.array(final_v))
+            if self.callback is not None : self.callback()
+
+
+        
+
+        def _on_rot_slider(self, change):
+            o = self.rotation_order_dropdown.value
+            if (o == "zyz" or o == "ZYZ" or
+                o == "xyx" or o == "XYX" or
+                o == "xzx" or o == "XZX" or
+                o == "yxy" or o == "YXY" or
+                o == "yzy" or o == "YZY" or
+                o == "zxz" or o == "ZXZ"):
+                set_rotation(self.obj_renderable, [self.x_rot_slider.value, self.y_rot_slider.value, self.z_rot_slider.value], self.rotation_order_dropdown.value)
+            else:
+                angles = order_angles([self.x_rot_slider.value, self.y_rot_slider.value, self.z_rot_slider.value], "XYZ", self.rotation_order_dropdown.value)
+                if self.local_space_check_box.value:
+                    set_rotation(self.obj_renderable, angles, self.rotation_order_dropdown.value)
+                else:
+                    set_rotation_global(self.obj_renderable, angles, self.rotation_order_dropdown.value)
+            if self.callback is not None : self.callback()
+
+
+
+        def _on_local_space_check_box(self, change):
+            self.x_rot_slider.unobserve(self._on_rot_slider, names="value")
+            self.y_rot_slider.unobserve(self._on_rot_slider, names="value")
+            self.z_rot_slider.unobserve(self._on_rot_slider, names="value")
+            if self.local_space_check_box.value:
+                euler = quaternion_to_euler(self.obj.quaternion[0], self.obj.quaternion[1], self.obj.quaternion[2], self.obj.quaternion[3], self.rotation_order_dropdown.value)
+                euler = order_angles(euler, self.rotation_order_dropdown.value, "XYZ")
+                self.x_rot_slider.value = euler[0]
+                self.y_rot_slider.value = euler[1]
+                self.z_rot_slider.value = euler[2]
+            else:
+                euler = quaternion_to_euler(self.obj.quaternion[0], self.obj.quaternion[1], self.obj.quaternion[2], self.obj.quaternion[3], self.rotation_order_dropdown.value[::-1])
+                euler = order_angles(euler, self.rotation_order_dropdown.value[::-1], "XYZ")
+                self.x_rot_slider.value = euler[0]
+                self.y_rot_slider.value = euler[1]
+                self.z_rot_slider.value = euler[2]
+            self.x_rot_slider.observe(self._on_rot_slider, names="value")
+            self.y_rot_slider.observe(self._on_rot_slider, names="value")
+            self.z_rot_slider.observe(self._on_rot_slider, names="value")
+
+
+
+
+
+
+        def _on_rotation_order_change(self, change):
+            o = self.rotation_order_dropdown.value
+            if (o=="ZYZ" or o=="zyz"):
+                self.x_rot_slider.description="Rotate Z"
+                self.y_rot_slider.description="Rotate Y"
+                self.z_rot_slider.description="Rotate Z"
+            elif (o=="XYX" or o=="xyx"):
+                self.x_rot_slider.description="Rotate X"
+                self.y_rot_slider.description="Rotate Y"
+                self.z_rot_slider.description="Rotate X"
+            elif (o=="XZX" or o=="xzx"):
+                self.x_rot_slider.description="Rotate X"
+                self.y_rot_slider.description="Rotate Z"
+                self.z_rot_slider.description="Rotate X"
+            elif (o=="YXY" or o=="yxy"):
+                self.x_rot_slider.description="Rotate Y"
+                self.y_rot_slider.description="Rotate X"
+                self.z_rot_slider.description="Rotate Y"
+            elif (o=="YZY" or o=="yzy"):
+                self.x_rot_slider.description="Rotate Y"
+                self.y_rot_slider.description="Rotate Z"
+                self.z_rot_slider.description="Rotate Y"
+            elif (o=="ZXZ" or o=="zxz"):
+                self.x_rot_slider.description="Rotate Z"
+                self.y_rot_slider.description="Rotate X"
+                self.z_rot_slider.description="Rotate Z"
+            else:
+                self.x_rot_slider.description="Rotate X"
+                self.y_rot_slider.description="Rotate Y"
+                self.z_rot_slider.description="Rotate Z"
+            self._on_rot_slider(None)
+
+
                 
             
 
