@@ -887,8 +887,22 @@ class Manipulator:
                 util.apply_transformation_matrix(manipulator.tcp_target, manipulator.get_global_tcp_transform())
             env.add(manipulator.tcp_target)
             
-            self.gizmo_controls = env.Gizmo_Controls(manipulator.tcp_target, True, True, False, "TCP-Target", 3, 3, 3, -3, -3, -3, widgets_vertical=True, continuous_update=False, callback=self._on_gizmo_controls)
+            self.gizmo_controls = env.Gizmo_Controls(manipulator.tcp_target, True, True, False, "TCP-Target", 3, 3, 3, -3, -3, -3, widgets_vertical=True, continuous_update=True, callback=self._on_gizmo_controls)
             self.content.append(self.gizmo_controls.widget)
+            self.inverse_kinematic_button:widgets.Button = widgets.Button(
+                description = "Pose Suchen",
+                tooltip='Berechnet die inverse Kinematik und überführt den Roboter in die gefundene Pose!',
+                layout = widgets.Layout(
+                        #border='1px solid gray',
+                        padding='2px',
+                        height='40px',
+                        width='40',
+                        overflow='hidden',  # Scrollen deaktivieren
+                        flex='none'
+                        )
+                )
+            self.inverse_kinematic_button.on_click(self._on_inverse_kinematic_button)
+            self.content.append(self.inverse_kinematic_button)
             self.widget = widgets.VBox(children = self.content)
         
 
@@ -904,14 +918,12 @@ class Manipulator:
                 num += 1
 
 
-
-        def _on_gizmo_controls(self):
-            pass
+        def _on_inverse_kinematic_button(self, button):
             r = R.from_quat(list(self.manipulator.tcp_target.quaternion)).as_matrix()
             p = self.manipulator.tcp_target.position
             q0 = np.array(list(self.manipulator.dh.joint_angles.values()))
             q_sol = self.manipulator.dh.inverse_kinematics6D_with_limits(p, r, q0, 10, 0.1)
-            self.manipulator.animate_by_theta(q_sol, 0.5, 1, True, False)
+            self.manipulator.animate_by_theta(q_sol, 0.75, 1, True, False)
             self.manipulator.update_dh_angles()
             #------
             for name, slider in self.sliders.items():
@@ -920,6 +932,11 @@ class Manipulator:
                     #display(name)
                     #display((angle / (2*np.pi) * 360))
                     #slider.value = angle / (2*np.pi) * 360
+
+
+        def _on_gizmo_controls(self):
+            pass
+            
                     
 
 

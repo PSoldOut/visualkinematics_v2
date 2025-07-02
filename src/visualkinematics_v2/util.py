@@ -1398,7 +1398,7 @@ class Environment:
                 border='1px solid gray',
                 padding='5px',
                 #width='100',
-                height='500px',
+                max_height='500px',
                 overflow='hidden',  # Scrollen deaktivieren
                 flex='none'
             )

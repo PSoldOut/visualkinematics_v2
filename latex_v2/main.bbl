@@ -1,0 +1,96 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nyt/global//global/global/global}
+    \entry{Industrieroboter}{book}{}{}
+      \list{language}{1}{%
+        {ger}%
+      }
+      \list{location}{1}{%
+        {Würzburg}%
+      }
+      \list{publisher}{1}{%
+        {Vogel Communications Group}%
+      }
+      \field{sortinit}{I}
+      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labeltitlesource}{title}
+      \field{edition}{1. Aufl}
+      \field{isbn}{9783834362360}
+      \field{title}{Industrieroboter}
+      \field{year}{2018}
+    \endentry
+    \entry{weber-Industrieroboter}{book}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=74e2665774ae87aa06aa0b5961d681f3}{%
+           family={Weber},
+           familyi={W\bibinitperiod},
+           given={Wolfgang},
+           giveni={W\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a756e88d8776c03d3f76db235102ce5e}{%
+           family={Koch},
+           familyi={K\bibinitperiod},
+           given={Heiko},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {München}%
+      }
+      \list{publisher}{1}{%
+        {Carl Hanser Verlag GmbH \&amp; Co. KG}%
+      }
+      \strng{namehash}{6abeb909478e71f6f8c6a5997534997d}
+      \strng{fullhash}{6abeb909478e71f6f8c6a5997534997d}
+      \strng{fullhashraw}{6abeb909478e71f6f8c6a5997534997d}
+      \strng{bibnamehash}{6abeb909478e71f6f8c6a5997534997d}
+      \strng{authorbibnamehash}{6abeb909478e71f6f8c6a5997534997d}
+      \strng{authornamehash}{6abeb909478e71f6f8c6a5997534997d}
+      \strng{authorfullhash}{6abeb909478e71f6f8c6a5997534997d}
+      \strng{authorfullhashraw}{6abeb909478e71f6f8c6a5997534997d}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{5., aktualisierte und erweiterte Auflage}
+      \field{title}{Industrieroboter}
+      \field{year}{2022}
+      \verb{doi}
+      \verb 10.3139/9783446468702
+      \endverb
+      \verb{eprint}
+      \verb https://www.hanser-elibrary.com/doi/pdf/10.3139/9783446468702
+      \endverb
+      \verb{urlraw}
+      \verb https://www.hanser-elibrary.com/doi/abs/10.3139/9783446468702
+      \endverb
+      \verb{url}
+      \verb https://www.hanser-elibrary.com/doi/abs/10.3139/9783446468702
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

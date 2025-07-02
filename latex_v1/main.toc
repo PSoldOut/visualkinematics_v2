@@ -1,0 +1,35 @@
+\babel@toc {german}{}\relax 
+\contentsline {section}{\numberline {1}Einleitung}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Motivation}{1}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Ziel}{2}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Aufbau der Arbeit}{3}{subsection.1.3}%
+\contentsline {section}{\numberline {2}Theoretischer Hintergrund}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Darstellung der Position und Orientierung eines Roboters}{3}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Euler-Winkel und Roll-Pitch-Yaw-Winkel}{5}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Rotationsmatrizen}{6}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Quaternionen und Unit-Quaternionen}{7}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Differentialantrieb}{8}{subsection.2.5}%
+\contentsline {subsection}{\numberline {2.6}JupyterLab}{9}{subsection.2.6}%
+\contentsline {section}{\numberline {3}Anforderungen}{9}{section.3}%
+\contentsline {section}{\numberline {4}Aufbau des Frameworks}{11}{section.4}%
+\contentsline {subsection}{\numberline {4.1}System- und Softwareumgebung}{11}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Framework-Library (Implementierungsdetails)}{15}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Beispiel-Notebooks}{16}{subsection.4.3}%
+\contentsline {subsubsection}{\numberline {4.3.1}robot.ipynb}{16}{subsubsection.4.3.1}%
+\contentsline {subsubsection}{\numberline {4.3.2}rotations.ipynb}{19}{subsubsection.4.3.2}%
+\contentsline {subsubsection}{\numberline {4.3.3}quader.ipynb}{20}{subsubsection.4.3.3}%
+\contentsline {section}{\numberline {5}Entwicklungsprozess}{24}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Wahl der Rendering-API}{24}{subsection.5.1}%
+\contentsline {subsubsection}{\numberline {5.1.1}OpenGL}{24}{subsubsection.5.1.1}%
+\contentsline {subsubsection}{\numberline {5.1.2}WebGL}{25}{subsubsection.5.1.2}%
+\contentsline {subsubsection}{\numberline {5.1.3}Babylon.js}{25}{subsubsection.5.1.3}%
+\contentsline {subsubsection}{\numberline {5.1.4}Three.js}{26}{subsubsection.5.1.4}%
+\contentsline {subsection}{\numberline {5.2}Three.js-Prototyp}{26}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Pythreejs-Prototyp}{29}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Numpy als Mathematik-Library}{31}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}Animationslogik}{32}{subsection.5.5}%
+\contentsline {subsection}{\numberline {5.6}Environment-Klasse}{33}{subsection.5.6}%
+\contentsline {section}{\numberline {6}Evaluation}{34}{section.6}%
+\contentsline {section}{\numberline {7}Ausblick auf die Bachelorarbeit}{35}{section.7}%
+\contentsline {section}{\numberline {8}Anhang}{1}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Code-Dokumentation der Python-Bibliothek util}{1}{subsection.8.1}%

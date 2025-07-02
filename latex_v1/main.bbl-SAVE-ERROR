@@ -1,0 +1,733 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nyt/global//global/global/global}
+    \entry{coppeliaSim_manual}{online}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=d0a08affc2ffbda3cb539391daa8f954}{%
+           family={CoppeliaRobotics},
+           familyi={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{d0a08affc2ffbda3cb539391daa8f954}
+      \strng{fullhash}{d0a08affc2ffbda3cb539391daa8f954}
+      \strng{fullhashraw}{d0a08affc2ffbda3cb539391daa8f954}
+      \strng{bibnamehash}{d0a08affc2ffbda3cb539391daa8f954}
+      \strng{authorbibnamehash}{d0a08affc2ffbda3cb539391daa8f954}
+      \strng{authornamehash}{d0a08affc2ffbda3cb539391daa8f954}
+      \strng{authorfullhash}{d0a08affc2ffbda3cb539391daa8f954}
+      \strng{authorfullhashraw}{d0a08affc2ffbda3cb539391daa8f954}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Manual}
+      \field{urlday}{5}
+      \field{urlmonth}{5}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://manual.coppeliarobotics.com/
+      \endverb
+      \verb{url}
+      \verb https://manual.coppeliarobotics.com/
+      \endverb
+    \endentry
+    \entry{Robotics_Vision_and_Control}{book}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=c0e503339314930d140b67b5e7c55c3e}{%
+           family={Corke},
+           familyi={C\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {eng}%
+      }
+      \list{location}{1}{%
+        {Cham}%
+      }
+      \list{publisher}{1}{%
+        {Springer International Publishing AG}%
+      }
+      \strng{namehash}{c0e503339314930d140b67b5e7c55c3e}
+      \strng{fullhash}{c0e503339314930d140b67b5e7c55c3e}
+      \strng{fullhashraw}{c0e503339314930d140b67b5e7c55c3e}
+      \strng{bibnamehash}{c0e503339314930d140b67b5e7c55c3e}
+      \strng{authorbibnamehash}{c0e503339314930d140b67b5e7c55c3e}
+      \strng{authornamehash}{c0e503339314930d140b67b5e7c55c3e}
+      \strng{authorfullhash}{c0e503339314930d140b67b5e7c55c3e}
+      \strng{authorfullhashraw}{c0e503339314930d140b67b5e7c55c3e}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This textbook provides a comprehensive, but tutorial, introduction to robotics, computer vision, and control. It is written in a light but informative conversational style, weaving text, figures, mathematics, and lines of code into a narrative that covers robotics and computer vision-separately, and together as robotic vision. Over 1600 code examples show how complex problems can be decomposed and solved using just a few simple lines of code.This edition is based on Python and is accompanied by fully open-source Python-based Toolboxes for robotics and machine vision.  The new Toolboxes enable the reader to easily bring the algorithmic concepts into practice and work with real, non-trivial, problems on a broad range of computing platforms. For the beginning student the book makes the algorithms accessible, the Toolbox code can be read to gain understanding, and the examples illustrate how it can be used. The code can also be the starting point for new work, for practitioners, students, or researchers, by writing programs based on Toolbox functions, or modifying the Toolbox code itself.}
+      \field{edition}{Third edition}
+      \field{isbn}{3031064682}
+      \field{issn}{1610-7438}
+      \field{series}{Springer Tracts in Advanced Robotics}
+      \field{title}{Robotics, Vision and Control: Fundamental Algorithms in Python}
+      \field{volume}{146}
+      \field{year}{2023}
+      \keyw{Artificial intelligence ; Cognitive psychology ; Computer algorithms ; Computer vision ; Engineering ; Python (Computer program language) ; Robotics}
+    \endentry
+    \entry{python3_das_umfassende_handbuch}{book}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=6156fc5cb7213bd41c6ff3ac8bcbc7ab}{%
+           family={Ernesti},
+           familyi={E\bibinitperiod},
+           given={Johannes},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4dc05d10b5dc185241ec9b41eadc2e46}{%
+           family={Kaiser},
+           familyi={K\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {ger}%
+      }
+      \list{location}{1}{%
+        {Bonn}%
+      }
+      \list{publisher}{1}{%
+        {Rheinwerk Verlag}%
+      }
+      \strng{namehash}{82054b18b6cde7f1e5313be588fad181}
+      \strng{fullhash}{82054b18b6cde7f1e5313be588fad181}
+      \strng{fullhashraw}{82054b18b6cde7f1e5313be588fad181}
+      \strng{bibnamehash}{82054b18b6cde7f1e5313be588fad181}
+      \strng{authorbibnamehash}{82054b18b6cde7f1e5313be588fad181}
+      \strng{authornamehash}{82054b18b6cde7f1e5313be588fad181}
+      \strng{authorfullhash}{82054b18b6cde7f1e5313be588fad181}
+      \strng{authorfullhashraw}{82054b18b6cde7f1e5313be588fad181}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Python 3 das umfassende Handbuch}
+      \field{edition}{5., aktualisierte Auflage}
+      \field{isbn}{9783836258647}
+      \field{series}{Rheinwerk Computing}
+      \field{title}{Python 3 : das umfassende Handbuch}
+      \field{year}{2017}
+      \keyw{Python 3.6 ; Python 3.0}
+    \endentry
+    \entry{The_Second_Handbook_of_Research_on_the_Psychology_of_Mathematics_Education}{book}{}{}
+      \name{author}{6}{}{%
+        {{un=0,uniquepart=base,hash=e757f28e1ec32466b4cadca58fd45f6c}{%
+           family={Gutiérrez},
+           familyi={G\bibinitperiod},
+           given={Ángel},
+           giveni={Á\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2d78789a2a81407fb71284dac890d986}{%
+           family={Leder},
+           familyi={L\bibinitperiod},
+           given={Gilah\bibnamedelima C},
+           giveni={G\bibinitperiod\bibinitdelim C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=abee34255591c0ce8a7dd90ce1304889}{%
+           family={Boero},
+           familyi={B\bibinitperiod},
+           given={Paolo},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=abee34255591c0ce8a7dd90ce1304889}{%
+           family={Boero},
+           familyi={B\bibinitperiod},
+           given={Paolo},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e757f28e1ec32466b4cadca58fd45f6c}{%
+           family={Gutiérrez},
+           familyi={G\bibinitperiod},
+           given={Ángel},
+           giveni={Á\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2d78789a2a81407fb71284dac890d986}{%
+           family={Leder},
+           familyi={L\bibinitperiod},
+           given={Gilah\bibnamedelima C.},
+           giveni={G\bibinitperiod\bibinitdelim C\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {eng}%
+      }
+      \list{location}{1}{%
+        {Rotterdam}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{8f6b0ed16da2f709f4da432a0d6cbd4b}
+      \strng{fullhash}{8305095fcd79e02dcf6ab5e8a223b5bf}
+      \strng{fullhashraw}{8305095fcd79e02dcf6ab5e8a223b5bf}
+      \strng{bibnamehash}{8305095fcd79e02dcf6ab5e8a223b5bf}
+      \strng{authorbibnamehash}{8305095fcd79e02dcf6ab5e8a223b5bf}
+      \strng{authornamehash}{8f6b0ed16da2f709f4da432a0d6cbd4b}
+      \strng{authorfullhash}{8305095fcd79e02dcf6ab5e8a223b5bf}
+      \strng{authorfullhashraw}{8305095fcd79e02dcf6ab5e8a223b5bf}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The book is divided into four main sections: Cognitive aspects of learning and teaching content areas; Cognitive aspects of learning and teaching transverse areas; Social aspects of learning and teaching mathematics; and Professional aspects of teaching mathematics. The selection for each chapter of a team of at least two authors, mostly located in different parts of the world, ensured effective coverage of each field. High quality was further enhanced by the scrupulous review of early chapter drafts by two leaders in the relevant field.}
+      \field{edition}{1}
+      \field{isbn}{9463005609}
+      \field{title}{The Second Handbook of Research on the Psychology of Mathematics Education: The Journey Continues}
+      \field{year}{2016}
+      \keyw{Education ; General education ; Mathematics ; Psychological aspects ; Study and teaching}
+    \endentry
+    \entry{mobile_roboter}{book}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=5f79246010f00cdea0dbdcaefb39b516}{%
+           family={Hertzberg},
+           familyi={H\bibinitperiod},
+           given={Joachim},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1a464426cc06d2f425acc3d58f05e34c}{%
+           family={Lingemann},
+           familyi={L\bibinitperiod},
+           given={Kai},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=490c7a8d6199fbc87b6ea4dff87f8c54}{%
+           family={Nüchter},
+           familyi={N\bibinitperiod},
+           given={Andreas},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {ger}%
+      }
+      \list{location}{1}{%
+        {Berlin [u.a}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{a8a3e26b63665281f2615c472bcd2fb4}
+      \strng{fullhash}{dd55f65f84b3dae7491f7d9f6056ad45}
+      \strng{fullhashraw}{dd55f65f84b3dae7491f7d9f6056ad45}
+      \strng{bibnamehash}{dd55f65f84b3dae7491f7d9f6056ad45}
+      \strng{authorbibnamehash}{dd55f65f84b3dae7491f7d9f6056ad45}
+      \strng{authornamehash}{a8a3e26b63665281f2615c472bcd2fb4}
+      \strng{authorfullhash}{dd55f65f84b3dae7491f7d9f6056ad45}
+      \strng{authorfullhashraw}{dd55f65f84b3dae7491f7d9f6056ad45}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Mobile Roboter eine Einführung aus Sicht der Informatik}
+      \field{isbn}{9783642017254}
+      \field{series}{eXamen.press}
+      \field{title}{Mobile Roboter : eine Einführung aus Sicht der Informatik}
+      \field{year}{2012}
+      \keyw{Mobiler Roboter / Sensortechnik / Messwertverarbeitung / Bahnplanung / Lokalisierung Robotik / Automatische Kartierung / Navigation / Umweltmodell Informatik}
+    \endentry
+    \entry{webgl_wiki}{online}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=aca6527292aa3ef1dcae92901392e942}{%
+           family={Khronos-Group},
+           familyi={K\bibinithyphendelim G\bibinitperiod}}}%
+      }
+      \strng{namehash}{aca6527292aa3ef1dcae92901392e942}
+      \strng{fullhash}{aca6527292aa3ef1dcae92901392e942}
+      \strng{fullhashraw}{aca6527292aa3ef1dcae92901392e942}
+      \strng{bibnamehash}{aca6527292aa3ef1dcae92901392e942}
+      \strng{authorbibnamehash}{aca6527292aa3ef1dcae92901392e942}
+      \strng{authornamehash}{aca6527292aa3ef1dcae92901392e942}
+      \strng{authorfullhash}{aca6527292aa3ef1dcae92901392e942}
+      \strng{authorfullhashraw}{aca6527292aa3ef1dcae92901392e942}
+      \field{extraname}{1}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{extradate}{1}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Getting Started}
+      \field{urlday}{2}
+      \field{urlmonth}{5}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.khronos.org/webgl/wiki/Getting_Started
+      \endverb
+      \verb{url}
+      \verb https://www.khronos.org/webgl/wiki/Getting_Started
+      \endverb
+    \endentry
+    \entry{opengl_doc}{online}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=aca6527292aa3ef1dcae92901392e942}{%
+           family={Khronos-Group},
+           familyi={K\bibinithyphendelim G\bibinitperiod}}}%
+      }
+      \strng{namehash}{aca6527292aa3ef1dcae92901392e942}
+      \strng{fullhash}{aca6527292aa3ef1dcae92901392e942}
+      \strng{fullhashraw}{aca6527292aa3ef1dcae92901392e942}
+      \strng{bibnamehash}{aca6527292aa3ef1dcae92901392e942}
+      \strng{authorbibnamehash}{aca6527292aa3ef1dcae92901392e942}
+      \strng{authornamehash}{aca6527292aa3ef1dcae92901392e942}
+      \strng{authorfullhash}{aca6527292aa3ef1dcae92901392e942}
+      \strng{authorfullhashraw}{aca6527292aa3ef1dcae92901392e942}
+      \field{extraname}{2}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{extradate}{2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{The Industry's Foundation for High Performance Graphics}
+      \field{urlday}{2}
+      \field{urlmonth}{5}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.khronos.org/opengl/
+      \endverb
+      \verb{url}
+      \verb https://www.khronos.org/opengl/
+      \endverb
+    \endentry
+    \entry{Quaternions_and_Rotation_Sequences_A_Primer_with_Applications_to_Orbits_Aerospace_and_Virtual_Reality}{book}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=335a82a938fdcb41f9aaf97184bfaffb}{%
+           family={Kuipers},
+           familyi={K\bibinitperiod},
+           given={J.\bibnamedelimi B.},
+           giveni={J\bibinitperiod\bibinitdelim B\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {eng}%
+      }
+      \list{location}{1}{%
+        {Princeton, NJ}%
+      }
+      \list{publisher}{1}{%
+        {Princeton University Press}%
+      }
+      \strng{namehash}{335a82a938fdcb41f9aaf97184bfaffb}
+      \strng{fullhash}{335a82a938fdcb41f9aaf97184bfaffb}
+      \strng{fullhashraw}{335a82a938fdcb41f9aaf97184bfaffb}
+      \strng{bibnamehash}{335a82a938fdcb41f9aaf97184bfaffb}
+      \strng{authorbibnamehash}{335a82a938fdcb41f9aaf97184bfaffb}
+      \strng{authornamehash}{335a82a938fdcb41f9aaf97184bfaffb}
+      \strng{authorfullhash}{335a82a938fdcb41f9aaf97184bfaffb}
+      \strng{authorfullhashraw}{335a82a938fdcb41f9aaf97184bfaffb}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Ever since the Irish mathematician William Rowan Hamilton introduced quaternions in the nineteenth century--a feat he celebrated by carving the founding equations into a stone bridge--mathematicians and engineers have been fascinated by these mathematical objects. Today, they are used in applications as various as describing the geometry of spacetime, guiding the Space Shuttle, and developing computer applications in virtual reality. In this book, J. B. Kuipers introduces quaternions for scientists and engineers who have not encountered them before and shows how they can be used in a variety of practical situations. The book is primarily an exposition of the quaternion, a 4-tuple, and its primary application in a rotation operator. But Kuipers also presents the more conventional and familiar 3 x 3 (9-element) matrix rotation operator. These parallel presentations allow the reader to judge which approaches are preferable for specific applications. The volume is divided into three main parts. The opening chapters present introductory material and establish the book's terminology and notation. The next part presents the mathematical properties of quaternions, including quaternion algebra and geometry. It includes more advanced special topics in spherical trigonometry, along with an introduction to quaternion calculus and perturbation theory, required in many situations involving dynamics and kinematics. In the final section, Kuipers discusses state-of-the-art applications. He presents a six degree-of-freedom electromagnetic position and orientation transducer and concludes by discussing the computer graphics necessary for the development of applications in virtual reality}
+      \field{booktitle}{Quaternions and Rotation Sequences A Primer with Applications to Orbits, Aerospace and Virtual Reality}
+      \field{isbn}{9780691211701}
+      \field{title}{Quaternions and Rotation Sequences : A Primer with Applications to Orbits, Aerospace and Virtual Reality}
+      \field{year}{1999}
+      \keyw{Quaternions ; Euler angle ; aircraft ; algorithm ; angles ; complex numbers ; coordinate frame ; coupling ; direction cosine ; electromagnetic ; factor ; geometry ; great-circle ; homogeneous coordinates ; identity ; incremental rotation ; inverse ; matrix ; number ; orientation ; perspective ; phase plane ; projection ; quaternion ; rotation ; seasons ; spherical ; trace of a matrix ; virtual reality ; MATHEMATICS / Applied}
+    \endentry
+    \entry{BabylonJS}{online}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=9139443ae238d22cd631f232b90d727d}{%
+           family={Project-BabylonJS},
+           familyi={P\bibinithyphendelim B\bibinitperiod}}}%
+      }
+      \strng{namehash}{9139443ae238d22cd631f232b90d727d}
+      \strng{fullhash}{9139443ae238d22cd631f232b90d727d}
+      \strng{fullhashraw}{9139443ae238d22cd631f232b90d727d}
+      \strng{bibnamehash}{9139443ae238d22cd631f232b90d727d}
+      \strng{authorbibnamehash}{9139443ae238d22cd631f232b90d727d}
+      \strng{authornamehash}{9139443ae238d22cd631f232b90d727d}
+      \strng{authorfullhash}{9139443ae238d22cd631f232b90d727d}
+      \strng{authorfullhashraw}{9139443ae238d22cd631f232b90d727d}
+      \field{extraname}{1}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradate}{1}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{BabylonJS}
+      \field{urlday}{30}
+      \field{urlmonth}{4}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.babylonjs.com/
+      \endverb
+      \verb{url}
+      \verb https://www.babylonjs.com/
+      \endverb
+    \endentry
+    \entry{BabylonJS_Documentation_Physics}{online}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=9139443ae238d22cd631f232b90d727d}{%
+           family={Project-BabylonJS},
+           familyi={P\bibinithyphendelim B\bibinitperiod}}}%
+      }
+      \strng{namehash}{9139443ae238d22cd631f232b90d727d}
+      \strng{fullhash}{9139443ae238d22cd631f232b90d727d}
+      \strng{fullhashraw}{9139443ae238d22cd631f232b90d727d}
+      \strng{bibnamehash}{9139443ae238d22cd631f232b90d727d}
+      \strng{authorbibnamehash}{9139443ae238d22cd631f232b90d727d}
+      \strng{authornamehash}{9139443ae238d22cd631f232b90d727d}
+      \strng{authorfullhash}{9139443ae238d22cd631f232b90d727d}
+      \strng{authorfullhashraw}{9139443ae238d22cd631f232b90d727d}
+      \field{extraname}{2}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradate}{2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{BabylonJS Dokumentation Physics}
+      \field{urlday}{30}
+      \field{urlmonth}{4}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://doc.babylonjs.com/features/featuresDeepDive/physics/
+      \endverb
+      \verb{url}
+      \verb https://doc.babylonjs.com/features/featuresDeepDive/physics/
+      \endverb
+    \endentry
+    \entry{BabylonJS_specification}{online}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=9139443ae238d22cd631f232b90d727d}{%
+           family={Project-BabylonJS},
+           familyi={P\bibinithyphendelim B\bibinitperiod}}}%
+      }
+      \strng{namehash}{9139443ae238d22cd631f232b90d727d}
+      \strng{fullhash}{9139443ae238d22cd631f232b90d727d}
+      \strng{fullhashraw}{9139443ae238d22cd631f232b90d727d}
+      \strng{bibnamehash}{9139443ae238d22cd631f232b90d727d}
+      \strng{authorbibnamehash}{9139443ae238d22cd631f232b90d727d}
+      \strng{authornamehash}{9139443ae238d22cd631f232b90d727d}
+      \strng{authorfullhash}{9139443ae238d22cd631f232b90d727d}
+      \strng{authorfullhashraw}{9139443ae238d22cd631f232b90d727d}
+      \field{extraname}{3}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradate}{3}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{BabylonJS Specification}
+      \field{urlday}{30}
+      \field{urlmonth}{4}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.babylonjs.com/specifications/
+      \endverb
+      \verb{url}
+      \verb https://www.babylonjs.com/specifications/
+      \endverb
+    \endentry
+    \entry{jupyterlab_docs}{online}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=ecbdefa3923d1d2a98c841def5491303}{%
+           family={Project-Jupyter},
+           familyi={P\bibinithyphendelim J\bibinitperiod}}}%
+      }
+      \strng{namehash}{ecbdefa3923d1d2a98c841def5491303}
+      \strng{fullhash}{ecbdefa3923d1d2a98c841def5491303}
+      \strng{fullhashraw}{ecbdefa3923d1d2a98c841def5491303}
+      \strng{bibnamehash}{ecbdefa3923d1d2a98c841def5491303}
+      \strng{authorbibnamehash}{ecbdefa3923d1d2a98c841def5491303}
+      \strng{authornamehash}{ecbdefa3923d1d2a98c841def5491303}
+      \strng{authorfullhash}{ecbdefa3923d1d2a98c841def5491303}
+      \strng{authorfullhashraw}{ecbdefa3923d1d2a98c841def5491303}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{JupyterLab Documentation}
+      \field{urlday}{14}
+      \field{urlmonth}{4}
+      \field{urlyear}{2025}
+      \field{year}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://jupyterlab.readthedocs.io/en/stable/
+      \endverb
+      \verb{url}
+      \verb https://jupyterlab.readthedocs.io/en/stable/
+      \endverb
+    \endentry
+    \entry{numpy_doc}{online}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=57458abad0d4ab6a1e14834e3d34b92b}{%
+           family={Project-Numpy},
+           familyi={P\bibinithyphendelim N\bibinitperiod}}}%
+      }
+      \strng{namehash}{57458abad0d4ab6a1e14834e3d34b92b}
+      \strng{fullhash}{57458abad0d4ab6a1e14834e3d34b92b}
+      \strng{fullhashraw}{57458abad0d4ab6a1e14834e3d34b92b}
+      \strng{bibnamehash}{57458abad0d4ab6a1e14834e3d34b92b}
+      \strng{authorbibnamehash}{57458abad0d4ab6a1e14834e3d34b92b}
+      \strng{authornamehash}{57458abad0d4ab6a1e14834e3d34b92b}
+      \strng{authorfullhash}{57458abad0d4ab6a1e14834e3d34b92b}
+      \strng{authorfullhashraw}{57458abad0d4ab6a1e14834e3d34b92b}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{what is numpy}
+      \field{urlday}{3}
+      \field{urlmonth}{5}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://numpy.org/devdocs/user/whatisnumpy.html
+      \endverb
+      \verb{url}
+      \verb https://numpy.org/devdocs/user/whatisnumpy.html
+      \endverb
+    \endentry
+    \entry{pythreejs_doc_intro}{online}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=833862724e950b9fc223796089142806}{%
+           family={Project-Pythreejs},
+           familyi={P\bibinithyphendelim P\bibinitperiod}}}%
+      }
+      \strng{namehash}{833862724e950b9fc223796089142806}
+      \strng{fullhash}{833862724e950b9fc223796089142806}
+      \strng{fullhashraw}{833862724e950b9fc223796089142806}
+      \strng{bibnamehash}{833862724e950b9fc223796089142806}
+      \strng{authorbibnamehash}{833862724e950b9fc223796089142806}
+      \strng{authornamehash}{833862724e950b9fc223796089142806}
+      \strng{authorfullhash}{833862724e950b9fc223796089142806}
+      \strng{authorfullhashraw}{833862724e950b9fc223796089142806}
+      \field{extraname}{1}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradate}{1}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Introduction}
+      \field{urlday}{4}
+      \field{urlmonth}{5}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://pythreejs.readthedocs.io/en/stable/introduction.html
+      \endverb
+      \verb{url}
+      \verb https://pythreejs.readthedocs.io/en/stable/introduction.html
+      \endverb
+    \endentry
+    \entry{pythreejs_doc}{online}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=833862724e950b9fc223796089142806}{%
+           family={Project-Pythreejs},
+           familyi={P\bibinithyphendelim P\bibinitperiod}}}%
+      }
+      \strng{namehash}{833862724e950b9fc223796089142806}
+      \strng{fullhash}{833862724e950b9fc223796089142806}
+      \strng{fullhashraw}{833862724e950b9fc223796089142806}
+      \strng{bibnamehash}{833862724e950b9fc223796089142806}
+      \strng{authorbibnamehash}{833862724e950b9fc223796089142806}
+      \strng{authornamehash}{833862724e950b9fc223796089142806}
+      \strng{authorfullhash}{833862724e950b9fc223796089142806}
+      \strng{authorfullhashraw}{833862724e950b9fc223796089142806}
+      \field{extraname}{2}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradate}{2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{pythreejs}
+      \field{urlday}{4}
+      \field{urlmonth}{5}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://pythreejs.readthedocs.io/en/stable/index.html
+      \endverb
+      \verb{url}
+      \verb https://pythreejs.readthedocs.io/en/stable/index.html
+      \endverb
+    \endentry
+    \entry{sympy_doc_advanced_usage}{online}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=0283d90f71a32407bba7efa066e66402}{%
+           family={Project-Sympy},
+           familyi={P\bibinithyphendelim S\bibinitperiod}}}%
+      }
+      \strng{namehash}{0283d90f71a32407bba7efa066e66402}
+      \strng{fullhash}{0283d90f71a32407bba7efa066e66402}
+      \strng{fullhashraw}{0283d90f71a32407bba7efa066e66402}
+      \strng{bibnamehash}{0283d90f71a32407bba7efa066e66402}
+      \strng{authorbibnamehash}{0283d90f71a32407bba7efa066e66402}
+      \strng{authornamehash}{0283d90f71a32407bba7efa066e66402}
+      \strng{authorfullhash}{0283d90f71a32407bba7efa066e66402}
+      \strng{authorfullhashraw}{0283d90f71a32407bba7efa066e66402}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{advanced usage}
+      \field{urlday}{3}
+      \field{urlmonth}{5}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://docs.sympy.org/latest/explanation/best-practices.html#advanced-usage
+      \endverb
+      \verb{url}
+      \verb https://docs.sympy.org/latest/explanation/best-practices.html#advanced-usage
+      \endverb
+    \endentry
+    \entry{threeJS_manual}{online}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=a0c9179c74e3b0bf13aad0eb7410eca0}{%
+           family={Project-ThreeJS},
+           familyi={P\bibinithyphendelim T\bibinitperiod}}}%
+      }
+      \strng{namehash}{a0c9179c74e3b0bf13aad0eb7410eca0}
+      \strng{fullhash}{a0c9179c74e3b0bf13aad0eb7410eca0}
+      \strng{fullhashraw}{a0c9179c74e3b0bf13aad0eb7410eca0}
+      \strng{bibnamehash}{a0c9179c74e3b0bf13aad0eb7410eca0}
+      \strng{authorbibnamehash}{a0c9179c74e3b0bf13aad0eb7410eca0}
+      \strng{authornamehash}{a0c9179c74e3b0bf13aad0eb7410eca0}
+      \strng{authorfullhash}{a0c9179c74e3b0bf13aad0eb7410eca0}
+      \strng{authorfullhashraw}{a0c9179c74e3b0bf13aad0eb7410eca0}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{ThreeJS Manual Fundamentals}
+      \field{urlday}{30}
+      \field{urlmonth}{4}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://threejs.org/manual/#en/fundamentals
+      \endverb
+      \verb{url}
+      \verb https://threejs.org/manual/#en/fundamentals
+      \endverb
+    \endentry
+    \entry{autonomous_mobile_robots}{book}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=6ee8958bbf32527489012d8ca7c95ee3}{%
+           family={Siegwart},
+           familyi={S\bibinitperiod},
+           given={Roland},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1ba5776eed1d9ff0afe0bb5fbfa0c473}{%
+           family={Nourbakhsh},
+           familyi={N\bibinitperiod},
+           given={Illah\bibnamedelima Reza},
+           giveni={I\bibinitperiod\bibinitdelim R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=dac21ab4ede215439fcc6b051be53a11}{%
+           family={Scaramuzza},
+           familyi={S\bibinitperiod},
+           given={Davide},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {eng}%
+      }
+      \list{location}{1}{%
+        {Cambridge, Mass. [u.a}%
+      }
+      \list{publisher}{1}{%
+        {MIT Press}%
+      }
+      \strng{namehash}{5d9ef354cd4bda2a3935c6909059aea8}
+      \strng{fullhash}{d3875fcd18d3abff99854ffcc032ec96}
+      \strng{fullhashraw}{d3875fcd18d3abff99854ffcc032ec96}
+      \strng{bibnamehash}{d3875fcd18d3abff99854ffcc032ec96}
+      \strng{authorbibnamehash}{d3875fcd18d3abff99854ffcc032ec96}
+      \strng{authornamehash}{5d9ef354cd4bda2a3935c6909059aea8}
+      \strng{authorfullhash}{d3875fcd18d3abff99854ffcc032ec96}
+      \strng{authorfullhashraw}{d3875fcd18d3abff99854ffcc032ec96}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{2. ed.}
+      \field{isbn}{9780262015356}
+      \field{series}{Intelligent robotics and autonomous agents}
+      \field{title}{Introduction to autonomous mobile robots}
+      \field{year}{2011}
+      \keyw{Robotik ; Autonomer Roboter ; Mobile robots ; Autonomous robots}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

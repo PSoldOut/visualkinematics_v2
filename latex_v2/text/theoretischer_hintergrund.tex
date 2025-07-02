@@ -1,0 +1,91 @@
+\section{Theoretischer Hintergrund}
+
+\subsection{Industrieroboter}
+Ein Industrieroboter, ist gemäß DIN EN ISO 10 218-1 ein frei Programmierbarer Mehrzweck-Manipulator, der in 3 oder mehr Achsen Programmierbar ist.
+Er ist universell einsetzbar, und wird häufig für Schweiß-, -Lackierarbeiten, Palletieraufgaben und viele weitere Fertigungs- und Handhabeaufgaben verwendet.
+Obwohl ein Industrieroboter, im Gegensatz zu mobilen Robotern sich nicht frei durch den Raum bewegen kann, kann er statt an festen Orten auch beweglich angeordnet werden \doublecite[17-18, 1-2]{Industrieroboter, weber-Industrieroboter}.
+
+
+Im Gegensatz zu mobilen Robotern, die sich im Raum fortbewegen können,
+bleibt ein Manipulator an einem festen Ort und führt Bewegungen über seine Gelenke und Glieder aus.
+Typischerweise besteht ein solcher Roboter aus mehreren starren Segmenten (sogenannten Gliedern),
+die durch Gelenke miteinander verbunden sind.
+Diese Struktur erlaubt es dem Roboter, präzise Bewegungen in mehreren Freiheitsgraden durchzuführen.
+
+
+
+Ihre Bewegungen werden entweder durch direkte Programmierung, durch sogenannte Teach-In-Verfahren oder durch komplexe Steuerungsalgorithmen bestimmt, die z.B.
+Pfadplanung und inverse Kinematik umfassen.
+
+Ein klassisches Beispiel für einen Manipulator ist der Industrieroboterarm.
+Er imitiert in gewissem Maße den menschlichen Arm: Er hat typischerweise eine Basis (entsprechend der Schulter),
+einen Arm (Oberarm und Unterarm), ein Handgelenk sowie gegebenenfalls ein Greifwerkzeug (Endeffektor) an der Spitze.
+Die Steuerung solcher Systeme erfordert ein Verständnis für Robotikgrundlagen wie Kinematik, Dynamik, Sensorik und Steuerungstechnik.
+
+\subsection{Vorwärtskinematik}
+Die Vorwärtskinematik (auch direkte Kinematik genannt) beschreibt in der Robotik den Zusammenhang zwischen den Gelenkwinkeln eines Roboters und der daraus resultierenden Position und Orientierung des Endeffektors im Raum.
+Sie ist ein zentrales Konzept für die Steuerung und Simulation von Manipulatoren, da sie es ermöglicht, den Zustand des Roboterarms basierend auf den aktuellen Gelenkstellungen zu berechnen.
+
+Mathematisch wird die Vorwärtskinematik durch Transformationen beschrieben, die die Position und Ausrichtung eines Glieds relativ zu einem vorhergehenden Glied bestimmen.
+Dazu werden in der Regel Homogene Transformationsmatrizen verwendet, die sowohl Rotation als auch Translation in einer einzigen Matrix kombinieren.
+Durch die sukzessive Multiplikation dieser Matrizen entlang der kinematischen Kette – von der Basis bis zum Endeffektor – ergibt sich die absolute Pose des Endeffektors im kartesischen Raum.
+
+Ein verbreitetes Modell zur systematischen Beschreibung der Vorwärtskinematik ist die Denavit-Hartenberg-Notation.
+Dieses Verfahren erlaubt es, die Transformationen zwischen benachbarten Gliedern mit nur vier Parametern pro Gelenk kompakt darzustellen.
+
+Die Berechnung der Vorwärtskinematik ist deterministisch und liefert für jeden Satz an Gelenkwerten genau eine Lösung.
+Dies unterscheidet sie von der inversen Kinematik, bei der für eine bestimmte Zielposition mehrere, eine oder gar keine Lösung existieren kann.
+In vielen Robotiksystemen ist die Vorwärtskinematik Bestandteil der grundlegenden Steuerlogik und wird auch für Visualisierung und Kollisionserkennung eingesetzt.
+
+
+
+
+\subsection{Denavit-Hartenberg-Notation}
+Die Denavit-Hartenberg-Notation (kurz: DH-Notation) ist ein standardisiertes Verfahren zur Modellierung der Kinematik serieller Roboterarme.
+Sie wurde 1955 von Jacques Denavit und Richard Hartenberg eingeführt und ist bis heute eines der am weitesten verbreiteten Werkzeuge zur Beschreibung von Roboterkinematiken.
+Ziel der Notation ist es, die Position und Orientierung jedes Gliedes relativ zum vorhergehenden Glied mit einem minimalen Satz von Parametern darzustellen.
+
+Bei der DH-Notation wird jedem Gelenk ein eigenes Koordinatensystem zugewiesen.
+Die Transformation von einem Glied zum nächsten wird durch eine sogenannte homogene Transformationsmatrix beschrieben, die vier aufeinanderfolgende Basisoperationen zusammenfasst:
+zwei Rotationen und zwei Translationen. Diese vier DH-Parameter sind:
+
+  $\theta_i$: der Gelenkwinkel, Rotation um die z-Achse
+
+  $d_i$: die Verschiebung entland der z-Achse
+
+  $a_i$: die Länge des Arms, also die verschiebung entlang der x-Achse
+
+  $\alpha_i$: der Verwindungswinkel, Rotation um die x-Achse
+
+  Mit diesen Parametern lässt sich für jedes Glied eine 4×4-Transformationsmatrix aufstellen, die die Position und Orientierung relativ zum vorherigen Koordinatensystem beschreibt.
+  Die Gesamttransformation vom Basis-Koordinatensystem zum Endeffektor ergibt sich durch sukzessive Multiplikation aller einzelnen Transformationsmatrizen entlang der kinematischen Kette.
+
+Ein Vorteil der DH-Notation liegt in ihrer systematischen und einheitlichen Struktur,
+was insbesondere bei der Programmierung von Robotern und bei der Analyse komplexer Kinematiken hilfreich ist.
+Allerdings kann die Anwendung bei bestimmten Robotertypen – z.B. bei parallelen Strukturen oder redundanten Systemen – unübersichtlich oder eingeschränkt sein.
+In solchen Fällen kommen häufig alternative Modellierungsverfahren wie die modifizierte DH-Notation oder Produkt-von-Exponentialen-Darstellungen zum Einsatz.
+
+
+
+\subsection{Rückwärtstransformation}
+Die Rückwärtstransformation – häufig auch als inverse Transformation bezeichnet – beschreibt den rechnerischen Vorgang,
+bei dem aus einer bekannten Pose des Endeffektors (Position und Orientierung im Raum) auf die zugehörigen Gelenkparameter eines Roboters geschlossen wird.
+Sie ist das Gegenstück zur Vorwärtskinematik und stellt eine zentrale Herausforderung in der Robotik dar.
+
+Im Gegensatz zur Vorwärtskinematik, bei der es für eine bestimmte Konfiguration der Gelenke genau eine Lösung für die Endeffektorposition gibt,
+ist die Rückwärtstransformation in der Regel nicht eindeutig lösbar. Für viele Aufgabenstellungen existieren mehrere mögliche Gelenkstellungen,
+die dieselbe Endeffektorposition erreichen können – oder in manchen Fällen auch keine.
+Diese Mehrdeutigkeit entsteht insbesondere bei Robotern mit sechs oder mehr Freiheitsgraden.
+
+Die mathematische Lösung der Rückwärtstransformation kann analytisch oder numerisch erfolgen.
+
+Analytische Methoden liefern geschlossene Formeln für die Gelenkwinkel, sind aber nur für bestimmte Roboterstrukturen möglich (z.B. bei standardisierten 6-DOF-Industrierobotern mit spezifischer Gelenkanordnung).
+
+Numerische Methoden wie das Newton-Raphson-Verfahren oder Gradientenverfahren arbeiten iterativ und können auch für komplexere oder redundante Roboter eingesetzt werden.
+Allerdings erfordern sie eine geeignete Startlösung und können je nach Problemstellung langsam oder instabil sein.
+
+Ein häufig genutzter Ansatz zur Implementierung der Rückwärtstransformation ist die Kombination aus Vorwärtskinematik und Optimierung:
+Ein Ziel im kartesischen Raum wird durch sukzessive Anpassung der Gelenkwinkel angesteuert, bis die berechnete Pose mit der Zielpose innerhalb einer akzeptablen Toleranz übereinstimmt.
+
+Die Rückwärtstransformation spielt eine wesentliche Rolle bei der Trajektorienplanung, da in vielen Anwendungen die gewünschte Bewegung im kartesischen Raum beschrieben wird (z.B. entlang einer Linie oder Kurve),
+während die Steuerung des Roboters auf Gelenkebene erfolgen muss.

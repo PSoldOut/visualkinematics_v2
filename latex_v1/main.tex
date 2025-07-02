@@ -1,0 +1,171 @@
+\documentclass[12pt]{article}
+\usepackage{glossaries}
+\usepackage[hidelinks]{hyperref}
+\usepackage{tabularx}
+\usepackage{ltablex}
+%\usepackage[pass]{geometry}
+\usepackage[a4paper, top=2.5cm, bottom=2.5cm, left=3.5cm, right=2.0cm]{geometry}
+%\usepackage[backend=biber, style=alphabetic]{biblatex}
+\usepackage[backend=biber, style=authoryear, language=english, maxbibnames=99, maxcitenames=2]{biblatex}
+\usepackage[german]{babel}
+\usepackage{csquotes}
+\usepackage{amsfonts}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} %für bilder
+\usepackage{algorithm} %für pseudocode
+\usepackage{algpseudocode} %für pseudocode
+\usepackage{ragged2e}
+
+\usepackage{color} %für deckblatt
+\usepackage{lmodern} %für deckblatt
+\usepackage{setspace} %für deckblatt
+\usepackage{textpos,xcolor,rawfonts,latexsym,graphicx,epsf,verbatim} %für deckblatt
+
+\usepackage{listings} %für code
+\usepackage{titlesec} %für verschieden große überschriften
+\usepackage{pdfpages}
+
+% setzt die schriftgröße für \section und \subsection
+\titleformat{\section}
+  {\normalfont\Large\bfseries} % Schriftstil für section
+  {\thesection}{1em}{}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries} % etwas kleiner als section
+  {\thesubsection}{1em}{}
+
+
+\lstdefinestyle{mypython}{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{teal},
+    showstringspaces=false,
+    breaklines=true,
+    frame=single,
+    captionpos=b
+}
+
+
+\definecolor{fh_orange}{rgb}{0.953,0.201,0}
+\definecolor{fh_grau}{rgb}{0.76,0.75,0.76}
+
+\definecolor{lightgray}{rgb}{0.9, 0.9, 0.9}
+\definecolor{green}{rgb}{0.0, 0.5, 0.0}
+\definecolor{blue}{rgb}{0.0, 0.0, 1.0}
+
+
+
+
+
+
+
+% Funktionseintrag (öffnet Umgebung)
+\newenvironment{functiondoc}[2]{%
+  \subsubsection*{\texttt{\textbf{\color{green} def} \color{blue} #1}\texttt{(...):}}%
+  #2
+
+  \vspace{0.5ex}
+  \noindent \textbf{Parameter:} \vspace{-2ex} \\
+  \begin{itemize}
+    \setlength{\itemindent}{1em}
+}{%
+  \end{itemize}
+}
+
+% Einzelner Parametereintrag
+\newcommand{\param}[2]{\item \texttt{#1}: #2}
+
+% Rückgabewert (optional)
+\newcommand{\returnsection}[1]{%
+  \noindent \textbf{Rückgabewert:} \vspace{-2ex} \\
+  \begin{itemize}
+    \setlength{\itemindent}{1em}
+    \item #1
+  \end{itemize}
+  \noindent\rule{\linewidth}{0.4pt}
+}
+
+
+
+
+
+
+
+\addbibresource{quellen.bib}
+\title{Visualisierung kinematischer Kennwerte}
+\author{Philipp Mikos}
+\date{April 2025}
+
+\renewcommand{\baselinestretch}{1.5}
+\newcommand{\doublecite}[2][]{(\textcite[#1]{#2})}
+
+%\setlength{\parindent}{0pt}
+%\setlength{\parskip}{0.8em}
+\setlength{\skip\footins}{10mm}
+
+\begin{document}
+
+
+\begin{titlepage}
+	\begin{textblock}{6.5}(-1.5,-3)
+		\begin{color}{fh_grau}
+			\rule{6.35cm}{33cm}    
+		\end{color}
+	\end{textblock}
+	\begin{textblock}{6.5}(-1.2,-0.7)
+	\end{textblock}
+	\begin{textblock}{6.5}(-1.3,1)
+		{\large \textsf{Projektarbeit}}            
+	\end{textblock}
+	
+	\begin{textblock}{7}(4.1,2)
+		{\noindent \huge 
+			\textsf{\textbf{Visualisierung kinematischer Kennwerte\\[0.3cm] 
+					} }}
+	\end{textblock}
+	
+	
+	\begin{textblock}{6}(4.1,6.5)\noindent
+		\textsf{An der Fachhochschule Dortmund\\
+			im Fachbereich Informatik\\
+			Studiengang BA Informatik \\
+			6. Fachsemester}
+	\end{textblock}
+	
+	\begin{textblock}{6.5}(-0.9,10.8)
+		\noindent
+		\textsf{von \\
+			Philipp Jan Mikos \\
+			geb.\ am 18.02.1993  \\
+			Matr.-Nr. 7215204	\\
+			Betreuer: Prof.\ Dr.\ Christof Röhrig \\[0.5cm]
+			Dortmund, \today}    
+	\end{textblock}
+	
+\end{titlepage}
+
+\justifying
+\pagenumbering{roman}
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\clearpage
+\pagenumbering{arabic}
+\input{text/einleitung.tex}
+\input{text/theoretischer_hintergrund.tex}
+\input{text/anforderungen.tex}
+\input{text/aufbau.tex}
+\input{text/entwicklungsprozess.tex}
+\input{text/evaluation.tex}
+\input{text/ausblick_auf_bachelor.tex}
+\newpage
+\printbibliography
+\newpage
+\pagenumbering{arabic}
+\input{text/anhang.tex}
+
+
+\end{document}
