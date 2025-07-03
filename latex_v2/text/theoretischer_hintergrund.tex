@@ -1,25 +1,86 @@
 \section{Theoretischer Hintergrund}
 
 \subsection{Industrieroboter}
-Ein Industrieroboter, ist gemäß DIN EN ISO 10 218-1 ein frei Programmierbarer Mehrzweck-Manipulator, der in 3 oder mehr Achsen Programmierbar ist.
-Er ist universell einsetzbar, und wird häufig für Schweiß-, -Lackierarbeiten, Palletieraufgaben und viele weitere Fertigungs- und Handhabeaufgaben verwendet.
-Obwohl ein Industrieroboter, im Gegensatz zu mobilen Robotern sich nicht frei durch den Raum bewegen kann, kann er statt an festen Orten auch beweglich angeordnet werden \doublecite[17-18, 1-2]{Industrieroboter, weber-Industrieroboter}.
+Ein Industrieroboter (engl. industrial-robot, manipulator), ist gemäß DIN EN ISO 10 218-1 ein frei Programmierbarer Mehrzweck-Manipulator,
+der in 3 oder mehr Achsen Programmierbar ist
+\doublecite[17]{Industrieroboter}.
+Er ist universell einsetzbar, und wird häufig für Schweiß-, -Lackierarbeiten, Montageaufgaben und viele weitere Fertigungs- und Handhabeaufgaben verwendet
+\doublecite[2-3]{weber-Industrieroboter}.
+Obwohl ein Industrieroboter sich, im Gegensatz zu mobilen Robotern, nicht frei durch den Raum bewegen kann,
+kann er statt an festen Orten auch beweglich angeordnet werden
+\doublecite[17]{Industrieroboter}.
+Typischerweise besteht ein solcher Roboter aus mehreren starren Segmenten, sogenannten Gliedern (engl. links), welche durch Gelenke bzw. Achsen (engl. joints)
+miteinander verbunden sind. Der Industrieroboter führt seine Bewegung über seine Gelenke und Glieder aus, wobei ihre Anordnung die kinematische Struktur des Roboters bestimmt.
+Es gibt zwei Hauptklassen kinematischer Strukturen:
+Die serielle Kinematik und die Parallelkinematik. Die Parallelkinematik wird nur in spezielleren Fällen verwendet wo eine besonders schnelle Handhabung notwendig ist
+und wird in dieser Arbeit nicht näher beleuchtet.
+Die serielle Kinematik ist in der Industrie häufiger verteten.
+Die folgende Abbildung zeigt einen Industrieroboter von KUKA, welcher 6 Drehgelenke hat und zu den Seriellen Robotern gehört.
+
+ \vspace{1em}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\textwidth]{images/kuka-ir.PNG}
+        \caption{Industrieroboter von Kuka. Quelle: \doublecite[6]{weber-Industrieroboter}}
+        \label{fig:KUKA-IR}
+    \end{figure}
+
+\vspace{1em}
 
 
-Im Gegensatz zu mobilen Robotern, die sich im Raum fortbewegen können,
-bleibt ein Manipulator an einem festen Ort und führt Bewegungen über seine Gelenke und Glieder aus.
-Typischerweise besteht ein solcher Roboter aus mehreren starren Segmenten (sogenannten Gliedern),
-die durch Gelenke miteinander verbunden sind.
-Diese Struktur erlaubt es dem Roboter, präzise Bewegungen in mehreren Freiheitsgraden durchzuführen.
+Die durch Pfeile markierten Elemente des Roboters sind die Drehgelenke.
+Durch Drehung dieser Gelenke werden die damit verbundenen Glieder im Raum bewegt.
+Die Glieder stehen aneinandergereiht zueinander und bilden eine kinematische Kette, was das Merkmal für Roboter mit serieller Kinematik ist
+\doublecite[3-6]{weber-Industrieroboter}.
+Am oberen Ende des Roboters befindet sich ein Flansch, an den ein beliebiges Werkzeug, wie beispielsweise ein Greifer angebracht werden kann
+\doublecite[17]{Industrieroboter}.
+Ein solches Werkzeug wird dann als Endeffektor bezeichnet und kann als letztes Glied aufgefasst werden.
+Die Werkzeugspitze des Endeffektors wird als Tool Center Point (TCP) bezeichnet und wird verwendet um die sogenannte Pose (Position und Orientierung) des Endeffektors, im Raum zu beschreiben.
+Die Aufgabe eines jeden Industrieroboters ist es den Endeffektor geeignet im Raum zu bewegen um eine bestimmte Tätigkeit auszuführen.
+Dies wird durch eine passende Konfiguration der Achsen erreicht.
+Die Bewegungsmöglichkeit des Roboters hängt direkt von der Anzahl der Achsen ab.
+Man spricht bei der Anzahl unabhängig angetriebener Achsen vom mechanischen- oder Getriebe-Freiheitsgrad.
+Bei mindestens 6 unabhängig angetriebener Achsen in geeigneter anordnung hat der Endeffektor den Freiheitsgrad 6 und kann eine beliebige Pose einnehmen
+\doublecite[3-6]{weber-Industrieroboter}.
+Der Bereich im Raum, der vom Endeffektor erreicht werden kann, wird Arbeitsraum des Roboters genannt und ist abhängig von der Bewegunsform,
+der Anordnung und Anzahl der Achsen sowie der Länge der einzelnen Glieder.
+Der Arbeitsraum eines Industrieroboters kann z.B quaderförmig, zylindrisch oder Kugelförmig sein.
+der Arbeitsraum eines klassichen Sechs-Achs-Knickarmroboters ist kugelförmig wie in Abbildung \ref{fig:KUKA-IR} durch den grauen Bereich dargestellt ist.
+\doublecite[18]{Industrieroboter}.
+Es gibt auch Roboter mit mehr Achsen und einem höheren Freiheitsgrad, sowie weniger Achsen und einem geringeren Freiheitsgrad.
+Die Kinematik bei Robotern mit einem Freiheitsgrad > 6 ist redundant und gilt als überbestimmt
+\doublecite[4-5]{weber-Industrieroboter}..
+Abbildung \ref{fig:lbr} zeigt den Leichtbauroboter iiwa von KUKA mit 7 Drehachsen.
+
+\vspace{1em}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1.0\textwidth]{images/lbr2.png}
+        \caption{Leichtbauroboter iiwa von KUKA. Quelle: \doublecite[]{lbr_image}}
+        \label{fig:lbr}
+    \end{figure}
+
+\vspace{1em}
 
 
 
-Ihre Bewegungen werden entweder durch direkte Programmierung, durch sogenannte Teach-In-Verfahren oder durch komplexe Steuerungsalgorithmen bestimmt, die z.B.
-Pfadplanung und inverse Kinematik umfassen.
+Der Vorteil der überbestimmten Kinematik liegt darin, dass die Feinbewegung des Endeffektors verbessert wird und dieser besser mit bewegenden Objekten synchronisiert werden kann.
+Darüber hinaus sind Roboter mit 7 Drehachsen in zusammenarbeit mir Menschen zu bevorzugen,
+da sie Hindernisse besser umfahren und sich somit der Bewegung von Menschen besser anpassen können
+\doublecite[]{WEINGARTSHOFER2019507}.
 
-Ein klassisches Beispiel für einen Manipulator ist der Industrieroboterarm.
-Er imitiert in gewissem Maße den menschlichen Arm: Er hat typischerweise eine Basis (entsprechend der Schulter),
-einen Arm (Oberarm und Unterarm), ein Handgelenk sowie gegebenenfalls ein Greifwerkzeug (Endeffektor) an der Spitze.
+Damit ein Industrieroboter durch Bewegung eine spezifische Tätigkeit ausführen kann, muss er zunächst programmiert werden.
+Dabei "[...] wird in der Robotik zwischen zwei wesentlichen Verfahrensgruppen unterschieden: Online- und Offline-Programmierung" \doublecite[149]{Industrieroboter}.
+Die Online-Programmierung wird meistens durch sogenannte Teach-In verfahren durchgeführt. Dabei steuert eine Person den Roboter mithilfe eines Programmierhandgeräts
+an bestimmte Punkte im Raum. Anschließend wird diese Position gespeichert, sodass sie in Zukunft ohne erneute Steuerung angefahren werden kann.
+Die Offline-Programmierung umfasst die Verfahren zur Programmierung des Roboters ohne diesen einzubinden und eignet sich besonders wenn der Roboter komplexe Bahnen verfahren muss
+\doublecite[149-150]{Industrieroboter}.
+Dabei stellt die textuelle Programmierung, bei der die "[...] Befehle in eine Textdatei geschrieben werden und [...] sequentiell von der Robotersteuerung abgeabeitet [...]" werden, das am häufigsten verwendete Verfahren dar
+\doublecite[149]{Industrieroboter}. 
+
+
 Die Steuerung solcher Systeme erfordert ein Verständnis für Robotikgrundlagen wie Kinematik, Dynamik, Sensorik und Steuerungstechnik.
 
 \subsection{Vorwärtskinematik}

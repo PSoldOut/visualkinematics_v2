@@ -19,7 +19,60 @@
 
 \refsection{0}
   \datalist[entry]{nyt/global//global/global/global}
+    \entry{lbr_image}{online}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=07150e2189504f5d9e22645f955cfdc4}{%
+           family={KUKA},
+           familyi={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{07150e2189504f5d9e22645f955cfdc4}
+      \strng{fullhash}{07150e2189504f5d9e22645f955cfdc4}
+      \strng{fullhashraw}{07150e2189504f5d9e22645f955cfdc4}
+      \strng{bibnamehash}{07150e2189504f5d9e22645f955cfdc4}
+      \strng{authorbibnamehash}{07150e2189504f5d9e22645f955cfdc4}
+      \strng{authornamehash}{07150e2189504f5d9e22645f955cfdc4}
+      \strng{authorfullhash}{07150e2189504f5d9e22645f955cfdc4}
+      \strng{authorfullhashraw}{07150e2189504f5d9e22645f955cfdc4}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Feedback Erfolgsmeldung}
+      \field{urlday}{2}
+      \field{urlmonth}{7}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.kuka.com/de-de/feedback/erfolgsmeldung
+      \endverb
+      \verb{url}
+      \verb https://www.kuka.com/de-de/feedback/erfolgsmeldung
+      \endverb
+    \endentry
     \entry{Industrieroboter}{book}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=01ca483c93532132393dc53954eadc90}{%
+           family={Reinhart},
+           familyi={R\bibinitperiod},
+           given={Gunther},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=f03495a5c1286e9fc04a976fd311defb}{%
+           family={Flores},
+           familyi={F\bibinitperiod},
+           given={Alejandro\bibnamedelima Magaña},
+           giveni={A\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=f3ec9bc3ead38d8e8eed422785040c1e}{%
+           family={Zwicker},
+           familyi={Z\bibinitperiod},
+           given={Carola},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+      }
       \list{language}{1}{%
         {ger}%
       }
@@ -29,10 +82,19 @@
       \list{publisher}{1}{%
         {Vogel Communications Group}%
       }
-      \field{sortinit}{I}
-      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \strng{namehash}{2d49e1928f7457116399c2fc666d199c}
+      \strng{fullhash}{c1c5d44f332eb20e7661ec0abfe37bb0}
+      \strng{fullhashraw}{c1c5d44f332eb20e7661ec0abfe37bb0}
+      \strng{bibnamehash}{c1c5d44f332eb20e7661ec0abfe37bb0}
+      \strng{authorbibnamehash}{c1c5d44f332eb20e7661ec0abfe37bb0}
+      \strng{authornamehash}{2d49e1928f7457116399c2fc666d199c}
+      \strng{authorfullhash}{c1c5d44f332eb20e7661ec0abfe37bb0}
+      \strng{authorfullhashraw}{c1c5d44f332eb20e7661ec0abfe37bb0}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
+      \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{edition}{1. Aufl}
       \field{isbn}{9783834362360}
@@ -89,6 +151,73 @@
       \verb{url}
       \verb https://www.hanser-elibrary.com/doi/abs/10.3139/9783446468702
       \endverb
+    \endentry
+    \entry{WEINGARTSHOFER2019507}{article}{}{}
+      \name{author}{5}{}{%
+        {{un=0,uniquepart=base,hash=959c7c9a97dfe42a61d78b2a72f97f04}{%
+           family={Weingartshofer},
+           familyi={W\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=45d9d62f67c1014f8b2c0a19be99da91}{%
+           family={Schwegel},
+           familyi={S\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=5c600431c5c8f6d3157d1a6654aee6f0}{%
+           family={Hartl-Nesic},
+           familyi={H\bibinithyphendelim N\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=dd417d1d25dab28178210f840fb7e58f}{%
+           family={Glück},
+           familyi={G\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1db479757629c24a58ffebcef5ca461b}{%
+           family={Kugi},
+           familyi={K\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{fed48c497cf516d8429618546553cb18}
+      \strng{fullhash}{0bbad4aca934a2718b2d40736a4b2ae3}
+      \strng{fullhashraw}{0bbad4aca934a2718b2d40736a4b2ae3}
+      \strng{bibnamehash}{0bbad4aca934a2718b2d40736a4b2ae3}
+      \strng{authorbibnamehash}{0bbad4aca934a2718b2d40736a4b2ae3}
+      \strng{authornamehash}{fed48c497cf516d8429618546553cb18}
+      \strng{authorfullhash}{0bbad4aca934a2718b2d40736a4b2ae3}
+      \strng{authorfullhashraw}{0bbad4aca934a2718b2d40736a4b2ae3}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{2405-8963}
+      \field{journaltitle}{IFAC-PapersOnLine}
+      \field{note}{8th IFAC Symposium on Mechatronic Systems MECHATRONICS 2019}
+      \field{number}{15}
+      \field{title}{Collaborative Synchronization of a 7-Axis Robot}
+      \field{volume}{52}
+      \field{year}{2019}
+      \field{pages}{507\bibrangedash 512}
+      \range{pages}{6}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.ifacol.2019.11.726
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S2405896319317185
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S2405896319317185
+      \endverb
+      \keyw{Synchronization,Human-Robot Collaboration,Robot dynamics,Robot control,Lyapunov stability,Path planning}
     \endentry
   \enddatalist
 \endrefsection

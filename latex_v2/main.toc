@@ -1,6 +1,6 @@
 \babel@toc {german}{}\relax 
 \contentsline {section}{\numberline {1}Theoretischer Hintergrund}{1}{section.1}%
 \contentsline {subsection}{\numberline {1.1}Industrieroboter}{1}{subsection.1.1}%
-\contentsline {subsection}{\numberline {1.2}Vorwärtskinematik}{1}{subsection.1.2}%
-\contentsline {subsection}{\numberline {1.3}Denavit-Hartenberg-Notation}{2}{subsection.1.3}%
-\contentsline {subsection}{\numberline {1.4}Rückwärtstransformation}{3}{subsection.1.4}%
+\contentsline {subsection}{\numberline {1.2}Vorwärtskinematik}{4}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Denavit-Hartenberg-Notation}{4}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Rückwärtstransformation}{5}{subsection.1.4}%

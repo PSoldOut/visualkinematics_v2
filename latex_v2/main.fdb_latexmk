@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 1751455026.8392 "main.bcf" "main.bbl" "main" 1751455736.70065 0
-  "main.bcf" 1751455736 108692 104d109c8698d68fc59d369d40de0b67 "pdflatex"
-  "quellen.bib" 1751454924 650 b3a80ba8346fc536a8b47e73f18098e6 ""
+["biber main"] 1751544404.34217 "main.bcf" "main.bbl" "main" 1751544717.10497 0
+  "main.bcf" 1751544716 109714 d6fcc615b7089e5d382c92e2ec4787f4 "pdflatex"
+  "quellen.bib" 1751486818 1587 4078ce55a7038f2b84665fdf7cbf0c38 ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1751455734.95108 "c:/Users/Philipp/Desktop/gitProjects/visualkinematics_v2/latex_v2/main.tex" "main.pdf" "main" 1751455736.70137 0
+["pdflatex"] 1751544715.1931 "c:/Users/Philipp/Desktop/gitProjects/visualkinematics_v2/latex_v2/main.tex" "main.pdf" "main" 1751544717.10578 0
   "C:/Users/Philipp/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1748166828 82686 2381c3433487640bf26aa76a10db7eb2 ""
   "C:/Users/Philipp/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1744032231 12037097 f1aaf3e725f1267bdc89a46b152a8116 ""
   "C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc" 1256929440 2405 5dcf2c1b967ee25cc46c58cd52244aed ""
@@ -219,15 +219,17 @@
   "C:/Users/Philipp/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
   "C:/Users/Philipp/AppData/Local/Programs/MiKTeX/tex/latex/xfor/xfor.sty" 1233849756 2689 44855b72da58344b1c1d9b3087bce6ca ""
   "C:/Users/Philipp/AppData/Local/Programs/MiKTeX/tex/latex/xkeyval/xkeyval.sty" 1656236919 4937 4ce600ce9bd4ec84d0250eb6892fcf4f ""
-  "c:/Users/Philipp/Desktop/gitProjects/visualkinematics_v2/latex_v2/main.tex" 1751387588 3943 59b9fb80100e36adc615e2f4cfd7310e ""
-  "main.aux" 1751455736 1528 5f07f22cba0ccfb321cd7d358c70974e "pdflatex"
-  "main.bbl" 1751455028 3147 e140b9e7f710918772357165e59d409a "biber main"
-  "main.lof" 1751455736 29 b30e294a26ba8a1b918ee7f216435239 "pdflatex"
-  "main.out" 1751455736 823 4347eaf79979af22942e7527a018002d "pdflatex"
-  "main.run.xml" 1751455736 2307 3de67e6f1ed5bca0492f00cf768167cb "pdflatex"
-  "main.tex" 1751387588 3943 59b9fb80100e36adc615e2f4cfd7310e ""
-  "main.toc" 1751455736 460 21058b4a036dd5c26d437b245ac26521 "pdflatex"
-  "text/theoretischer_hintergrund.tex" 1751455734 7545 9136077de3cd03e5bb83c4c86cddbfec ""
+  "c:/Users/Philipp/Desktop/gitProjects/visualkinematics_v2/latex_v2/main.tex" 1751483104 4017 d5d3f852c7129faa80ec4d2fb69b8f0b ""
+  "images/kuka-ir.PNG" 1751464488 205678 f2d5566cf8c0240674690a659acd85af ""
+  "images/lbr2.png" 1751485542 740205 fdd263d13f3ec6369a0f8cde49acf4b7 ""
+  "main.aux" 1751544716 3631 c72da36cffb00a8d64faa3ff768253a8 "pdflatex"
+  "main.bbl" 1751544406 8660 1d259d05e13b9bcb4e2a01679f745884 "biber main"
+  "main.lof" 1751544716 308 7fd70cb2f387be122f9a8b6673d8099e "pdflatex"
+  "main.out" 1751544716 823 4347eaf79979af22942e7527a018002d "pdflatex"
+  "main.run.xml" 1751544716 2307 3de67e6f1ed5bca0492f00cf768167cb "pdflatex"
+  "main.tex" 1751483104 4017 d5d3f852c7129faa80ec4d2fb69b8f0b ""
+  "main.toc" 1751544716 460 c64cb8e754a2284fe4b07e575eddf0d1 "pdflatex"
+  "text/theoretischer_hintergrund.tex" 1751544715 11831 c25aea7e7efd772a7f514d7f61d8e24a ""
   (generated)
   "main.aux"
   "main.bcf"
