@@ -1,3 +1,8 @@
 \babel@toc {german}{}\relax 
-\contentsline {figure}{\numberline {1}{\ignorespaces Industrieroboter von Kuka. Quelle: \doublecite [6]{weber-Industrieroboter}}}{1}{figure.1}%
-\contentsline {figure}{\numberline {2}{\ignorespaces Leichtbauroboter iiwa von KUKA. Quelle: \doublecite []{lbr_image}}}{3}{figure.2}%
+\contentsline {figure}{\numberline {1}{\ignorespaces a) Quader mit Freiheitsgrad 3. b) Quader mit Freiheitsgrad 6. Quelle: \doublecite [35]{weber-Industrieroboter}}}{1}{figure.1}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Industrieroboter von Kuka. Quelle: \doublecite [6]{weber-Industrieroboter}}}{3}{figure.2}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Leichtbauroboter iiwa von KUKA. Quelle: \doublecite []{lbr_image}}}{4}{figure.3}%
+\contentsline {figure}{\numberline {4}{\ignorespaces schematischer Aufbau der Vorwärtstransformation. Quelle: \doublecite [49]{weber-Industrieroboter}}}{6}{figure.4}%
+\contentsline {figure}{\numberline {5}{\ignorespaces schematische Zeichnung eines Knickarmroboters mit 6 Gelenken und DH-Koordinatensystemen. Quelle: \doublecite [39]{weber-Industrieroboter}}}{7}{figure.5}%
+\contentsline {figure}{\numberline {6}{\ignorespaces schematische Zeichnung eines Planarroboters mit 2 Achsen. Quelle: \doublecite [51]{weber-Industrieroboter}}}{8}{figure.6}%
+\contentsline {figure}{\numberline {7}{\ignorespaces schematische Zeichnung einer Gelenkstellung die zu Unendlich vielen Lösungen führt. Quelle: \doublecite [51]{weber-Industrieroboter}}}{9}{figure.7}%
