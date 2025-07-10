@@ -17,16 +17,19 @@ import pywavefront
 from visualkinematics_v2 import util
 
 
-base_paths = [
-    "../assets/ros-package-sets",
-    "../assets/custom-package-sets"
-]
 
-project_path = ".."
+
+project_path = Path(__file__).resolve().parent.parent.parent 
+#os.chdir(project_path)
 learn_path = f"{project_path}/res/learn"
 scripts_path = f"{project_path}/src/scripts"
 npz_path = f"{project_path}/assets/npz"
 obj_path = f"{project_path}/assets/obj"
+
+base_paths = [
+    f"{project_path}/assets/ros-package-sets",
+    f"{project_path}/assets/custom-package-sets"
+]
 
 fast_load : bool = True
 
