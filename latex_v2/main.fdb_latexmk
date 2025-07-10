@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 1751707669.02709 "main.bcf" "main.bbl" "main" 1751707675.90391 0
-  "main.bcf" 1751707675 111590 e7e7636a392720855204c31e9c6cc062 "pdflatex"
+["biber main"] 1751707669.02709 "main.bcf" "main.bbl" "main" 1752062019.68972 0
+  "main.bcf" 1752062019 111590 e7e7636a392720855204c31e9c6cc062 "pdflatex"
   "quellen.bib" 1751648712 3863 dc4a2c762ccfbc734a8f12621aa677a4 ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1751707673.55573 "c:/Users/Philipp/Desktop/gitProjects/visualkinematics_v2/latex_v2/main.tex" "main.pdf" "main" 1751707675.90456 0
+["pdflatex"] 1752062017.22381 "c:/Users/Philipp/Desktop/gitProjects/visualkinematics_v2/latex_v2/main.tex" "main.pdf" "main" 1752062019.69037 0
   "C:/Users/Philipp/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1751631102 82686 2381c3433487640bf26aa76a10db7eb2 ""
   "C:/Users/Philipp/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1744032231 12037097 f1aaf3e725f1267bdc89a46b152a8116 ""
   "C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc" 1256929440 2405 5dcf2c1b967ee25cc46c58cd52244aed ""
@@ -226,7 +226,7 @@
   "C:/Users/Philipp/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
   "C:/Users/Philipp/AppData/Local/Programs/MiKTeX/tex/latex/xfor/xfor.sty" 1233849756 2689 44855b72da58344b1c1d9b3087bce6ca ""
   "C:/Users/Philipp/AppData/Local/Programs/MiKTeX/tex/latex/xkeyval/xkeyval.sty" 1656236919 4937 4ce600ce9bd4ec84d0250eb6892fcf4f ""
-  "c:/Users/Philipp/Desktop/gitProjects/visualkinematics_v2/latex_v2/main.tex" 1751707305 4095 905d9eee802afeb450bbff6ca3b851d7 ""
+  "c:/Users/Philipp/Desktop/gitProjects/visualkinematics_v2/latex_v2/main.tex" 1752062013 4095 905d9eee802afeb450bbff6ca3b851d7 ""
   "images/DH_explain2.PNG" 1751644916 40335 384db3432eb0290d0c25ee40b7e0a101 ""
   "images/DOF_exp.PNG" 1751573881 58837 0369d78f5759ca592dc4820463d12228 ""
   "images/forward_kin.PNG" 1751629568 22087 7610e22c2395771f56c40f9d380ddb75 ""
@@ -234,13 +234,13 @@
   "images/ik_singularity_explain.PNG" 1751653715 7067 fa6f1fd9037ffb8da8f128e68a6f4171 ""
   "images/kuka-ir.PNG" 1751464488 205678 f2d5566cf8c0240674690a659acd85af ""
   "images/lbr2.png" 1751485542 740205 fdd263d13f3ec6369a0f8cde49acf4b7 ""
-  "main.aux" 1751707675 8480 5288a8110359f1447c2dae65e8ae4ec9 "pdflatex"
+  "main.aux" 1752062019 8480 5288a8110359f1447c2dae65e8ae4ec9 "pdflatex"
   "main.bbl" 1751707671 11518 e871d3d2d72bbedac6e27a79b5d042b9 "biber main"
-  "main.lof" 1751707675 1243 86d9ed78289c950965cffe4f09b7e958 "pdflatex"
-  "main.out" 1751707675 1358 19ef09aeb222e0aa68efe0fd4b47259d "pdflatex"
-  "main.run.xml" 1751707675 2307 3de67e6f1ed5bca0492f00cf768167cb "pdflatex"
-  "main.tex" 1751707305 4095 905d9eee802afeb450bbff6ca3b851d7 ""
-  "main.toc" 1751707675 721 4792ae673567919f18d96f516f925cf3 "pdflatex"
+  "main.lof" 1752062019 1243 86d9ed78289c950965cffe4f09b7e958 "pdflatex"
+  "main.out" 1752062019 1358 19ef09aeb222e0aa68efe0fd4b47259d "pdflatex"
+  "main.run.xml" 1752062019 2307 3de67e6f1ed5bca0492f00cf768167cb "pdflatex"
+  "main.tex" 1752062013 4095 905d9eee802afeb450bbff6ca3b851d7 ""
+  "main.toc" 1752062019 721 4792ae673567919f18d96f516f925cf3 "pdflatex"
   "text/anforderungen.tex" 1751707666 2671 bd29ff60f38b15650d90e630bd179eca ""
   "text/theoretischer_hintergrund.tex" 1751706178 18718 6561ab137c45a182a799447dc40e30e3 ""
   (generated)

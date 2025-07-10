@@ -138,40 +138,38 @@ def euler_to_quaternion(angles, order='ZYZ'):
 
 
 
-def compute_normals(vertices, indices):
-    '''
-    Generiert die Normalen fuer alle Dreiecke die sich aus vertices und indices ergeben.
+def compute_normals(vertices: np.ndarray, indices: np.ndarray) -> np.ndarray:
+    """
+    Berechnet Vertex-Normalen für ein Dreiecksnetz.
 
-    :param vertices: Die Punkte im Raum aus denen die Dreiecke bestehen, für die die Normalen berechnet werden als Array.
-    :param indices: Die Indexe zum Verbinden der Punke zu Dreiecken, für welche dann die Normalen berechnet werden als Array.
+    :param vertices: (N, 3) array of float32 – die Eckpunkte
+    :param indices: (M,) array of uint32 – flach (also dreifach pro Dreieck)
+    :return: (N, 3) array of float32 – die berechneten Vertex-Normalen
+    """
+    num_vertices = vertices.shape[0]
+    normals = np.zeros((num_vertices, 3), dtype=np.float32)
 
-    :return: Ein Array, welches die Normalen enthaelt.
-    '''
-    # Initialisiere Array für Normalen
-    normals = np.zeros_like(vertices)
+    triangles = indices.reshape(-1, 3)
+    v0 = vertices[triangles[:, 0]]
+    v1 = vertices[triangles[:, 1]]
+    v2 = vertices[triangles[:, 2]]
 
-    # Für jedes Dreieck die Flächennormale berechnen
-    for i in range(0, len(indices), 3):
-        idx1, idx2, idx3 = indices[i], indices[i+1], indices[i+2]
-        v1, v2, v3 = vertices[idx1], vertices[idx2], vertices[idx3]
+    # Kantenvektoren
+    edge1 = v1 - v0
+    edge2 = v2 - v0
 
-        # Berechne zwei Kanten des Dreiecks
-        edge1 = v2 - v1
-        edge2 = v3 - v1
+    # Flächennormalen (cross product)
+    face_normals = np.cross(edge1, edge2)
 
-        # Kreuzprodukt für die Flächennormale
-        face_normal = np.cross(edge1, edge2)
+    # Normale zu jedem Vertex aufsummieren
+    for i in range(3):
+        np.add.at(normals, triangles[:, i], face_normals)
 
-        # Normalisiere die Flächennormale
-        face_normal = face_normal / np.linalg.norm(face_normal)
+    # Normalisieren
+    lengths = np.linalg.norm(normals, axis=1)
+    lengths[lengths == 0] = 1.0  # Division durch 0 vermeiden
+    normals /= lengths[:, np.newaxis]
 
-        # Addiere die Flächennormale zu den Vertex-Normalen
-        normals[idx1] += face_normal
-        normals[idx2] += face_normal
-        normals[idx3] += face_normal
-
-    # Normalisiere die Vertex-Normalen
-    normals = np.array([n / np.linalg.norm(n) if np.linalg.norm(n) > 0 else n for n in normals])
     return normals
 
 

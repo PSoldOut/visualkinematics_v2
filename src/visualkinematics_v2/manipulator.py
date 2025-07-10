@@ -23,7 +23,6 @@ max_pending_actions = 100
 
 
 
-
 def block(data, current:Kinematic_Chain_Element, func:Callable, depth:int = 0) -> None:
     with Widget.hold_sync(current.get_renderable()):
         if len(current.children) > 0:
@@ -562,11 +561,11 @@ class Tool(Kinematic_Chain_Element):
                                 position=[2, 0, 4]
 )
                         else:
-                            meshi = manager.load_mesh_auto_compatibility(mesh_path, hex_color, rgba[3])
+                            meshi = manager.load_mesh_auto_compatibility(mesh_path, hex_color, rgba[3], robot_name=self.name)
                     else:
-                        meshi = manager.load_mesh_auto_compatibility(mesh_path, link_element["visual"][0]["material"]["name"])
+                        meshi = manager.load_mesh_auto_compatibility(mesh_path, link_element["visual"][0]["material"]["name"], robot_name=self.name)
                 else:
-                    meshi = manager.load_mesh_auto_compatibility(mesh_path)
+                    meshi = manager.load_mesh_auto_compatibility(mesh_path, robot_name=self.name)
             else:
                 meshi = three.Group()
             if scale is not None:
@@ -819,6 +818,227 @@ class Manipulator:
 
 
 
+
+    def learn(self, pose_name: str, thetas:list|None = None):
+        display(f"POSEN: {self.learned_poses}")
+        exists = any(obj["name"] == pose_name for obj in self.learned_poses)
+        if exists : raise RuntimeError("Pose mit diesem Namen existiert bereits")
+        filepath = f"{manager.learn_path}/{self.name}.json"
+        q = []
+        if thetas is None:
+            self.update_dh_angles()
+            for key, value in self.dh.joint_angles.items():
+                q.append(value)
+        else : q = thetas
+        # Neue Pose
+        new_pose = {
+            "name": pose_name,
+            "theta": list(q)  # z. B. [0.1, -1.2, ...]
+        }
+
+        # Ordner erstellen, falls nicht vorhanden
+        os.makedirs(os.path.dirname(filepath), exist_ok=True)
+
+        # Bestehende Datei einlesen, falls vorhanden
+        if os.path.exists(filepath):
+            with open(filepath, 'r') as f:
+                data = json.load(f)
+        else:
+            data = []
+
+        # Neue Pose anhängen
+        data.append(new_pose)
+
+        # Zurückschreiben
+        with open(filepath, 'w') as f:
+            json.dump(data, f, indent=2)
+        self.learned_poses = self._load_learned_poses()
+        
+
+
+
+    def _load_learned_poses(self):
+        filepath = f"{manager.learn_path}/{self.name}.json"
+        if os.path.exists(filepath):
+            try:
+                with open(filepath, 'r') as f:
+                    return json.load(f)
+            except json.JSONDecodeError:
+                print(f"[WARN] Lern-Datei '{filepath}' ist beschädigt oder leer.")
+                return []
+        else:
+            return []
+
+
+    def get_learned_pose(self, name: str):
+        for pose in self.learned_poses:
+            if pose["name"] == name:
+                return pose["theta"]
+        raise ValueError(f"Pose '{name}' nicht gefunden.")
+
+    def update_dh_angles(self):
+        for name, _ in self.dh.joint_angles.items():
+            current_joint = self.get_joint_by_name(name)
+            prev_joint = current_joint.get_previous_joint_in_chain()
+            
+            new_angle = 0.0
+            sign = 1
+            z = prev_joint.dh_alignment[:3, -2]     #vorletzte spalte, erste 3 elemente (Spaltenvektor z-achse)
+            if prev_joint is None or prev_joint.axis is None:
+                    new_angle = 0.0
+            else:
+                rotvec = prev_joint.get_rotvec()
+                new_angle = np.linalg.norm(rotvec)
+                if sum(rotvec) < 0: sign *=-1
+                if sum(z) < 0: sign *= -1
+            self.dh.update_joint_angle(name, new_angle * sign)
+            #print(f"joint:{name:<15}\t\tprev_joint:{prev_joint.name:<15}\t\trad:{new_angle}\t\tdeg:{new_angle*(180/np.pi)}\t\trotvec:{rotvec}\t\trotation:{prev_joint.get_rotation(False)}\t\tprev_axis:{prev_joint.axis}\t\taxis:{current_joint.axis}")
+            #print(f"DH_align:\n{prev_joint.dh_alignment}")
+
+
+    def get_global_tcp_transform(self) -> np.ndarray:
+        self.update_dh_angles()
+        return self.dh.forward_kinematics()
+
+
+    def animate_stable(self, joints:list, angles_rad:list, duration:float = 2) -> None:
+        action_q2_joint:list = []
+        for joint, angle_rad in zip(joints, angles_rad):
+            action_q2_joint.append(apply_joint_rotation_animated(joint=joint, axis=joint.axis, angle_rad=angle_rad, duration=duration))
+
+        print(len(action_q2_joint))
+        def on_animation_finished():
+            #display("DRINNE")
+            base = joints[0]
+            while(base.parent is not None):
+                base = base.parent
+
+
+            def do(action_q2_joint_array):
+                base.get_renderable().visible = False
+                time.sleep(0.02)
+                for i in range(len(action_q2_joint)):
+                    action_q2_joint[i][2].get_renderable().quaternion = tuple(action_q2_joint[i][1])
+                    #action_q2_joint[i][0].stop()
+                    action_q2_joint[i][2].get_renderable().quaternion = tuple(action_q2_joint[i][1])
+                base.get_renderable().visible = True
+                    #display("jauuuuuu")
+
+
+            if action_q2_joint[0][0].time <= 0.000001:
+                block([action_q2_joint], base, do)
+                #display("animation finished!")
+            else:
+                i = 0
+                while(action_q2_joint[0][0].time > 0.000001 and i < 99):
+                    time.sleep(0.001)
+                    i+=1
+                block(action_q2_joint, base, do)
+                #display("animation finished!")
+        Timer(duration, on_animation_finished).start()
+
+
+    def animate_by_learned_pose(self, name:str, duation:float = 1.0, quality:float = 1.0, synchronous:bool = False, with_tcp_target:bool = True):
+        pose = self.get_learned_pose(name)
+        self.animate_by_theta(pose, duation, quality, synchronous, with_tcp_target)
+        
+
+
+
+    def animate_by_theta(self, theta:list, duration:float = 1.0, quality:float = 1.0, synchronous:bool = False, with_tcp_target:bool = True):
+        joints:list = []
+        angles_rad:list = []
+        i = 0
+        for name, _ in self.dh.joint_angles.items():
+            current_joint = self.get_joint_by_name(name)
+            prev_joint = current_joint.get_previous_joint_in_chain()
+            sign = 1
+            z = prev_joint.dh_alignment[:3, -2]     #vorletzte spalte, erste 3 elemente (Spaltenvektor z-achse)
+            
+            if sum(z) < 0: sign *= -1
+            if sum(prev_joint.axis) < 0: sign *= -1
+            joints.append(prev_joint)
+            angles_rad.append(theta[i]*sign)
+            i+=1
+        self.animate_experimental(joints, angles_rad, duration, quality, False, synchronous, with_tcp_target)
+
+
+
+
+
+    def animate_experimental(self, joints:list, angles_rad:list, duration:float = 1.0, quality:float = 1, add_on_baserotation:bool = True, synchronous:bool = False, with_tcp_target:bool = True):
+        def _animate_experimental_task(joints:list, angles_rad:list, duration:float = 1.0, quality:float = 1):
+            def add_mimicers(current:Joint, current_angle_rad, joints:list):
+                joints.append(current)
+                angles_rad.append(current_angle_rad)
+                for m in current.mimicers:
+                    add_mimicers(current=m[0], current_angle_rad=m[1] * current_angle_rad, joints=joints)
+
+            if with_tcp_target:
+                util.set_rotation(self.tcp_target, [0,0,0], "XYZ")
+                util.set_translation(self.tcp_target, [0,0,0])
+                self.tool.renderable.add(self.tcp_target)
+
+            slerps:list = []
+
+            for j, angle in zip(joints, angles_rad):
+                for m in j.mimicers:
+                    add_mimicers(current=m[0], current_angle_rad=m[1]*angle, joints=joints)
+        
+            for joint, angle_rad in zip(joints, angles_rad):
+                axis = joint.axis
+                axis = np.array(axis, dtype=np.float64)
+                if np.linalg.norm(axis) == 0:
+                    raise ValueError("Rotationsachse darf nicht der Nullvektor sein.")
+                axis = axis / np.linalg.norm(axis)
+                base_rot = R.from_quat(joint.get_quaternion())
+                #base_rot = R.from_euler("ZYX", joint.get_rotation(), degrees=True)
+                axis_rot = R.from_rotvec(axis * angle_rad)
+                final_rot = None
+                if add_on_baserotation : final_rot = axis_rot * base_rot
+                else : final_rot = axis_rot
+                #q1s.append(list(joint.get_renderable().quaternion))
+                #q2s.append(final_rot.as_quat())
+                q1 = list(joint.get_renderable().quaternion)
+                q2 = final_rot.as_quat()
+                key_times = np.array([0, 1])  
+                key_rots = R.from_quat([q1, q2]) 
+                slerp = Slerp(key_times, key_rots)
+                slerps.append(slerp)
+            
+            t = 0
+
+            def step(data):
+                for joint, slerp, angle_rad in zip(joints, slerps, angles_rad):
+                    joint.get_renderable().quaternion = tuple(slerp(data).as_quat())
+                    
+            while(t < duration):
+                start = time.perf_counter()
+                block(t/duration, self.base_link, step)
+                time.sleep(0.01/quality)
+                end = time.perf_counter()
+                t += end - start
+            block(1, self.base_link, step)
+
+            if self.environment is not None and with_tcp_target:
+                util.apply_transformation_matrix(self.tcp_target, self.get_global_tcp_transform())
+                self.environment.add(self.tcp_target) 
+
+
+        thread = threading.Thread(target=_animate_experimental_task, args=(joints, angles_rad, duration, quality))
+        thread.start()
+        if synchronous : thread.join()  
+
+
+
+
+
+
+
+
+
+
+
 #--------------------------------------------INSPECTOR--------------------------------------------------------------------------------
 
 
@@ -997,216 +1217,6 @@ class Manipulator:
 
 
 
-
-
-    def learn(self, pose_name: str, thetas:list|None = None):
-        display(f"POSEN: {self.learned_poses}")
-        exists = any(obj["name"] == pose_name for obj in self.learned_poses)
-        if exists : raise RuntimeError("Pose mit diesem Namen existiert bereits")
-        filepath = f"{manager.learn_path}/{self.name}.json"
-        q = []
-        if thetas is None:
-            self.update_dh_angles()
-            for key, value in self.dh.joint_angles.items():
-                q.append(value)
-        else : q = thetas
-        # Neue Pose
-        new_pose = {
-            "name": pose_name,
-            "theta": list(q)  # z. B. [0.1, -1.2, ...]
-        }
-
-        # Ordner erstellen, falls nicht vorhanden
-        os.makedirs(os.path.dirname(filepath), exist_ok=True)
-
-        # Bestehende Datei einlesen, falls vorhanden
-        if os.path.exists(filepath):
-            with open(filepath, 'r') as f:
-                data = json.load(f)
-        else:
-            data = []
-
-        # Neue Pose anhängen
-        data.append(new_pose)
-
-        # Zurückschreiben
-        with open(filepath, 'w') as f:
-            json.dump(data, f, indent=2)
-        self.learned_poses = self._load_learned_poses()
-        
-
-
-
-    def _load_learned_poses(self):
-        filepath = f"{manager.learn_path}/{self.name}.json"
-        if os.path.exists(filepath):
-            try:
-                with open(filepath, 'r') as f:
-                    return json.load(f)
-            except json.JSONDecodeError:
-                print(f"[WARN] Lern-Datei '{filepath}' ist beschädigt oder leer.")
-                return []
-        else:
-            return []
-
-
-    def get_learned_pose(self, name: str):
-        for pose in self.learned_poses:
-            if pose["name"] == name:
-                return pose["theta"]
-        raise ValueError(f"Pose '{name}' nicht gefunden.")
-
-    def update_dh_angles(self):
-        for name, _ in self.dh.joint_angles.items():
-            current_joint = self.get_joint_by_name(name)
-            prev_joint = current_joint.get_previous_joint_in_chain()
-            
-            new_angle = 0.0
-            sign = 1
-            z = prev_joint.dh_alignment[:3, -2]     #vorletzte spalte, erste 3 elemente (Spaltenvektor z-achse)
-            if prev_joint is None or prev_joint.axis is None:
-                    new_angle = 0.0
-            else:
-                rotvec = prev_joint.get_rotvec()
-                new_angle = np.linalg.norm(rotvec)
-                if sum(rotvec) < 0: sign *=-1
-                if sum(z) < 0: sign *= -1
-            self.dh.update_joint_angle(name, new_angle * sign)
-            #print(f"joint:{name:<15}\t\tprev_joint:{prev_joint.name:<15}\t\trad:{new_angle}\t\tdeg:{new_angle*(180/np.pi)}\t\trotvec:{rotvec}\t\trotation:{prev_joint.get_rotation(False)}\t\tprev_axis:{prev_joint.axis}\t\taxis:{current_joint.axis}")
-            #print(f"DH_align:\n{prev_joint.dh_alignment}")
-
-
-    def get_global_tcp_transform(self) -> np.ndarray:
-        self.update_dh_angles()
-        return self.dh.forward_kinematics()
-
-
-    def animate_stable(self, joints:list, angles_rad:list, duration:float = 2) -> None:
-        action_q2_joint:list = []
-        for joint, angle_rad in zip(joints, angles_rad):
-            action_q2_joint.append(apply_joint_rotation_animated(joint=joint, axis=joint.axis, angle_rad=angle_rad, duration=duration))
-
-        print(len(action_q2_joint))
-        def on_animation_finished():
-            #display("DRINNE")
-            base = joints[0]
-            while(base.parent is not None):
-                base = base.parent
-
-
-            def do(action_q2_joint_array):
-                base.get_renderable().visible = False
-                time.sleep(0.02)
-                for i in range(len(action_q2_joint)):
-                    action_q2_joint[i][2].get_renderable().quaternion = tuple(action_q2_joint[i][1])
-                    #action_q2_joint[i][0].stop()
-                    action_q2_joint[i][2].get_renderable().quaternion = tuple(action_q2_joint[i][1])
-                base.get_renderable().visible = True
-                    #display("jauuuuuu")
-
-
-            if action_q2_joint[0][0].time <= 0.000001:
-                block([action_q2_joint], base, do)
-                #display("animation finished!")
-            else:
-                i = 0
-                while(action_q2_joint[0][0].time > 0.000001 and i < 99):
-                    time.sleep(0.001)
-                    i+=1
-                block(action_q2_joint, base, do)
-                #display("animation finished!")
-        Timer(duration, on_animation_finished).start()
-
-
-    def animate_by_learned_pose(self, name:str, duation:float = 1.0, quality:float = 1.0, synchronous:bool = False, with_tcp_target:bool = True):
-        pose = self.get_learned_pose(name)
-        self.animate_by_theta(pose, duation, quality, synchronous, with_tcp_target)
-        
-
-    def animate_by_theta(self, theta:list, duration:float = 1.0, quality:float = 1.0, synchronous:bool = False, with_tcp_target:bool = True):
-        joints:list = []
-        angles_rad:list = []
-        i = 0
-        for name, _ in self.dh.joint_angles.items():
-            current_joint = self.get_joint_by_name(name)
-            prev_joint = current_joint.get_previous_joint_in_chain()
-            sign = 1
-            z = prev_joint.dh_alignment[:3, -2]     #vorletzte spalte, erste 3 elemente (Spaltenvektor z-achse)
-            
-            if sum(z) < 0: sign *= -1
-            if sum(prev_joint.axis) < 0: sign *= -1
-            joints.append(prev_joint)
-            angles_rad.append(theta[i]*sign)
-            i+=1
-        self.animate_experimental(joints, angles_rad, duration, quality, False, synchronous, with_tcp_target)
-
-
-    def animate_experimental(self, joints:list, angles_rad:list, duration:float = 1.0, quality:float = 1, add_on_baserotation:bool = True, synchronous:bool = False, with_tcp_target:bool = True):
-        def _animate_experimental_task(joints:list, angles_rad:list, duration:float = 1.0, quality:float = 1):
-            def add_mimicers(current:Joint, current_angle_rad, joints:list):
-                joints.append(current)
-                angles_rad.append(current_angle_rad)
-                for m in current.mimicers:
-                    add_mimicers(current=m[0], current_angle_rad=m[1] * current_angle_rad, joints=joints)
-
-            if with_tcp_target:
-                util.set_rotation(self.tcp_target, [0,0,0], "XYZ")
-                util.set_translation(self.tcp_target, [0,0,0])
-                self.tool.renderable.add(self.tcp_target)
-
-            slerps:list = []
-
-            for j, angle in zip(joints, angles_rad):
-                for m in j.mimicers:
-                    add_mimicers(current=m[0], current_angle_rad=m[1]*angle, joints=joints)
-        
-            for joint, angle_rad in zip(joints, angles_rad):
-                axis = joint.axis
-                axis = np.array(axis, dtype=np.float64)
-                if np.linalg.norm(axis) == 0:
-                    raise ValueError("Rotationsachse darf nicht der Nullvektor sein.")
-                axis = axis / np.linalg.norm(axis)
-                base_rot = R.from_quat(joint.get_quaternion())
-                #base_rot = R.from_euler("ZYX", joint.get_rotation(), degrees=True)
-                axis_rot = R.from_rotvec(axis * angle_rad)
-                final_rot = None
-                if add_on_baserotation : final_rot = axis_rot * base_rot
-                else : final_rot = axis_rot
-                #q1s.append(list(joint.get_renderable().quaternion))
-                #q2s.append(final_rot.as_quat())
-                q1 = list(joint.get_renderable().quaternion)
-                q2 = final_rot.as_quat()
-                key_times = np.array([0, 1])  
-                key_rots = R.from_quat([q1, q2]) 
-                slerp = Slerp(key_times, key_rots)
-                slerps.append(slerp)
-            
-            t = 0
-
-            def step(data):
-                for joint, slerp, angle_rad in zip(joints, slerps, angles_rad):
-                    joint.get_renderable().quaternion = tuple(slerp(data).as_quat())
-                    
-            while(t < duration):
-                start = time.perf_counter()
-                block(t/duration, self.base_link, step)
-                time.sleep(0.01/quality)
-                end = time.perf_counter()
-                t += end - start
-            block(1, self.base_link, step)
-
-            if self.environment is not None and with_tcp_target:
-                util.apply_transformation_matrix(self.tcp_target, self.get_global_tcp_transform())
-                self.environment.add(self.tcp_target) 
-
-
-        thread = threading.Thread(target=_animate_experimental_task, args=(joints, angles_rad, duration, quality))
-        thread.start()
-        if synchronous : thread.join()  
-     
-
-
-
     
 
 
@@ -1260,11 +1270,11 @@ class Manipulator:
                         rgba : str = link_element["visual"][0]["material"]["rgba"].split()
                         rgba = [float(x) for x in rgba]
                         hex_color = '#%02x%02x%02x' % (int(rgba[0]*255), int(rgba[1]*255), int(rgba[2]*255))
-                        meshi = manager.load_mesh_auto_compatibility(mesh_path, hex_color, rgba[3])
+                        meshi = manager.load_mesh_auto_compatibility(mesh_path, hex_color, rgba[3], robot_name=self.name)
                     else:
-                        meshi = manager.load_mesh_auto_compatibility(mesh_path, link_element["visual"][0]["material"]["name"])
+                        meshi = manager.load_mesh_auto_compatibility(mesh_path, link_element["visual"][0]["material"]["name"], robot_name=self.name)
                 else:
-                    meshi = manager.load_mesh_auto_compatibility(mesh_path)
+                    meshi = manager.load_mesh_auto_compatibility(mesh_path, robot_name=self.name)
             else:
                 meshi = three.Group()
             l = Link(link_element["name"], meshi, xyz, rpy)
@@ -1452,6 +1462,69 @@ class Manipulator:
 #-------------------------------------------------------------------------------------------------------------------------------------
 
 
+
+class lbr_iiwa_14_r820(Manipulator):
+    def __init__(self, tool_name:str = "robotiq_arg2f_140_model", position:np.ndarray = np.array([0,0,0])):
+        super().__init__(name="lbr_iiwa_14_r820", tool_name=tool_name, position=position)
+        dh_parameters : dict= {}
+        dh_parameters[self.joints[1].name] = {"theta":0,        "d":0.36,      "a":-0.00043624,   "alpha":np.pi/2}
+        dh_parameters[self.joints[2].name] = {"theta":0,        "d":0,         "a":0,             "alpha":-np.pi/2}
+        dh_parameters[self.joints[3].name] = {"theta":0,        "d":0.42,      "a":0.00043624,    "alpha":np.pi/2}
+        dh_parameters[self.joints[4].name] = {"theta":0,        "d":0,         "a":0,             "alpha":-np.pi/2}
+        dh_parameters[self.joints[5].name] = {"theta":0,        "d":0.4,       "a":0,             "alpha":np.pi/2}
+        dh_parameters[self.joints[6].name] = {"theta":0,        "d":0.0,       "a":0,             "alpha":-np.pi/2}
+        dh_parameters[self.joints[7].name] = {"theta":0,        "d":0.126,       "a":0,           "alpha":0}
+        base_transform = pose_to_matrix(self.base_to_baselink_joint.get_position(), self.base_to_baselink_joint.get_rotation(False), False)
+        base_transform_inv = np.linalg.inv(base_transform)
+        k0 = compute_dh_matrix(0.0, 0.0, 0.0, 0.0)
+        base_to_dh = base_transform_inv @ k0
+        DH = DHKinematicModel(dh_parameters=dh_parameters, base_to_dh=base_to_dh)
+        DH.dh_to_tool = DH.compute_dh_to_tool(self.compute_global_transform()[self.link_to_tool_joint.name])
+        self.apply_DH_model(DH)
+
+
+
+class kr6r900_2(Manipulator):
+    def __init__(self, tool_name:str = "robotiq_arg2f_140_model", position:np.ndarray = np.array([0,0,0])):
+        super().__init__(name="kr6r900_2", tool_name=tool_name, position=position)
+        dh_parameters : dict= {}
+        dh_parameters[self.joints[1].name] = {"theta":0,        "d":0,      "a":0.025,   "alpha":np.pi/2}
+        dh_parameters[self.joints[2].name] = {"theta":0,        "d":0,      "a":0.455,   "alpha":0}
+        dh_parameters[self.joints[3].name] = {"theta":np.pi/2,  "d":0,      "a":0.025,   "alpha":np.pi/2}
+        dh_parameters[self.joints[4].name] = {"theta":0,        "d":0.42,   "a":0,       "alpha":-np.pi/2}
+        dh_parameters[self.joints[5].name] = {"theta":0,        "d":0,      "a":0,       "alpha":np.pi/2}
+        dh_parameters[self.joints[7].name] = {"theta":0,        "d":0.09,   "a":0,       "alpha":0}    #7 weil es so im urdf geordnet ist...6 wäre der joint "base_link-base"
+        base_transform = pose_to_matrix(self.base_to_baselink_joint.get_position(), self.base_to_baselink_joint.get_rotation(False), False)
+        base_transform_inv = np.linalg.inv(base_transform)
+        k0 = compute_dh_matrix(0.0, 0.4, 0.0, 0.0)
+        base_to_dh = base_transform_inv @ k0
+        DH = DHKinematicModel(dh_parameters=dh_parameters, base_to_dh=base_to_dh)
+        DH.dh_to_tool = DH.compute_dh_to_tool(self.compute_global_transform()[self.link_to_tool_joint.name])
+        self.apply_DH_model(DH)
+
+
+
+
+
+
+
+class irb6640_185_280(Manipulator):
+    def __init__(self, tool_name:str = "robotiq_arg2f_140_model", position:np.ndarray = np.array([0,0,0])):
+        super().__init__(name="irb6640_185_280", tool_name=tool_name, position=position)
+        dh_parameters : dict= {}
+        dh_parameters[self.joints[1].name] = {"theta":0,        "d":0,      "a":0.32,   "alpha":np.pi/2}
+        dh_parameters[self.joints[2].name] = {"theta":np.pi/2,  "d":0,      "a":1.075,  "alpha":0}
+        dh_parameters[self.joints[3].name] = {"theta":0,        "d":0,      "a":0.2,    "alpha":np.pi/2}
+        dh_parameters[self.joints[4].name] = {"theta":0,        "d":1.392,  "a":0,      "alpha":-np.pi/2}
+        dh_parameters[self.joints[5].name] = {"theta":0,        "d":0,      "a":0,      "alpha":np.pi/2}
+        dh_parameters[self.joints[6].name] = {"theta":0,        "d":0.2,    "a":0,      "alpha":0}
+        base_transform = pose_to_matrix(self.base_to_baselink_joint.get_position(), self.base_to_baselink_joint.get_rotation(False), False)
+        base_transform_inv = np.linalg.inv(base_transform)
+        k0 = compute_dh_matrix(0.0, 0.78, 0.0, 0.0)
+        base_to_dh = base_transform_inv @ k0
+        DH = DHKinematicModel(dh_parameters=dh_parameters, base_to_dh=base_to_dh)
+        DH.dh_to_tool = DH.compute_dh_to_tool(self.compute_global_transform()[self.link_to_tool_joint.name])
+        self.apply_DH_model(DH)
 
 
 
