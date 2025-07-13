@@ -7,3 +7,7 @@
 \contentsline {subsection}{\numberline {1.5}Rückwärtstransformation}{8}{subsection.1.5}%
 \contentsline {subsection}{\numberline {1.6}Unified Robot Description Format (URDF)}{9}{subsection.1.6}%
 \contentsline {section}{\numberline {2}Anforderungen}{10}{section.2}%
+\contentsline {section}{\numberline {3}Entwicklungsprozess}{11}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Beschaffung von 3D-Modellen}{11}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Laden von 3D-Modellen}{14}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Graphische Darstellung von Industrierobotern}{15}{subsection.3.3}%

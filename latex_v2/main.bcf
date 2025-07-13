@@ -2413,6 +2413,19 @@
     <bcf:citekey order="38" intorder="1">weber-Industrieroboter</bcf:citekey>
     <bcf:citekey order="39" intorder="1">weber-Industrieroboter</bcf:citekey>
     <bcf:citekey order="40" intorder="1">Robotics_Vision_and_Control</bcf:citekey>
+    <bcf:citekey order="41" intorder="1">philipp</bcf:citekey>
+    <bcf:citekey order="42" intorder="1">pythreejs_Geometry_types</bcf:citekey>
+    <bcf:citekey order="43" intorder="1">pythreejs_doc</bcf:citekey>
+    <bcf:citekey order="44" intorder="1">ROS_Industrial</bcf:citekey>
+    <bcf:citekey order="45" intorder="1">ROS_Industrial_repo_search</bcf:citekey>
+    <bcf:citekey order="46" intorder="1">ROS_Packages_Design</bcf:citekey>
+    <bcf:citekey order="47" intorder="1">GrabCAD_Company</bcf:citekey>
+    <bcf:citekey order="48" intorder="1">Thingiverse</bcf:citekey>
+    <bcf:citekey order="49" intorder="1">onShape</bcf:citekey>
+    <bcf:citekey order="50" intorder="1">Robotics_Vision_and_Control</bcf:citekey>
+    <bcf:citekey order="51" intorder="1">trimesh</bcf:citekey>
+    <bcf:citekey order="52" intorder="1">numpy_npy_npz_format</bcf:citekey>
+    <bcf:citekey order="53" intorder="1">philipp</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nyt">

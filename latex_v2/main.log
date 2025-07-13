@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.3) (preloaded format=pdflatex 2025.4.7)  9 JUL 2025 13:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.3) (preloaded format=pdflatex 2025.4.7)  13 JUL 2025 00:09
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -958,7 +958,13 @@ Package biblatex Info: Automatic encoding selection.
 
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'main.bbl' found.
- (main.bbl)
+ (main.bbl
+
+Package biblatex Warning: Biber reported the following issues
+(biblatex)                with 'trimesh':
+(biblatex)                - software entry 'trimesh' (quellen.bib): Invalid format '2019-12-8' of date field 'date' - ignoring.
+
+)
 Package biblatex Info: Reference section=0 on input line 110.
 Package biblatex Info: Reference segment=0 on input line 110.
  (C:\Users\Philipp\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
@@ -1046,7 +1052,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 
 [2] (text/theoretischer_hintergrund.tex
-<images/DOF_exp.PNG, id=91, 1193.96063pt x 508.90125pt>
+<images/DOF_exp.PNG, id=114, 1193.96063pt x 508.90125pt>
 File: images/DOF_exp.PNG Graphic file (type png)
 <use images/DOF_exp.PNG>
 Package pdftex.def Info: images/DOF_exp.PNG  used on input line 17.
@@ -1068,7 +1074,7 @@ l.33
       <./images/DOF_exp.PNG>]
 
 [2{C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}]
-<images/kuka-ir.PNG, id=116, 658.71094pt x 593.96906pt>
+<images/kuka-ir.PNG, id=139, 658.71094pt x 593.96906pt>
 File: images/kuka-ir.PNG Graphic file (type png)
 <use images/kuka-ir.PNG>
 Package pdftex.def Info: images/kuka-ir.PNG  used on input line 69.
@@ -1081,7 +1087,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has
                                                   \__shipout_drop_firstpage_...
 l.100 
        <./images/kuka-ir.PNG>]
-<images/lbr2.png, id=130, 1907.125pt x 1073.00874pt>
+<images/lbr2.png, id=153, 1907.125pt x 1073.00874pt>
 File: images/lbr2.png Graphic file (type png)
 <use images/lbr2.png>
 Package pdftex.def Info: images/lbr2.png  used on input line 105.
@@ -1094,7 +1100,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has
                                                   \__shipout_drop_firstpage_...
 l.128 
        <./images/lbr2.png (PNG copy)>]
-<images/forward_kin.PNG, id=143, 674.52pt x 280.04625pt>
+<images/forward_kin.PNG, id=166, 674.52pt x 280.04625pt>
 File: images/forward_kin.PNG Graphic file (type png)
 <use images/forward_kin.PNG>
 Package pdftex.def Info: images/forward_kin.PNG  used on input line 149.
@@ -1113,7 +1119,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 183--187
 
  []
 
-<images/DH_explain2.PNG, id=158, 444.15938pt x 402.75468pt>
+<images/DH_explain2.PNG, id=181, 444.15938pt x 402.75468pt>
 File: images/DH_explain2.PNG Graphic file (type png)
 <use images/DH_explain2.PNG>
 Package pdftex.def Info: images/DH_explain2.PNG  used on input line 192.
@@ -1126,7 +1132,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) has
                                                   \__shipout_drop_firstpage_...
 l.211 
        <./images/DH_explain2.PNG>]
-<images/ik_planar_exp.PNG, id=167, 621.07031pt x 530.73282pt>
+<images/ik_planar_exp.PNG, id=190, 621.07031pt x 530.73282pt>
 File: images/ik_planar_exp.PNG Graphic file (type png)
 <use images/ik_planar_exp.PNG>
 Package pdftex.def Info: images/ik_planar_exp.PNG  used on input line 231.
@@ -1139,7 +1145,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.6}) has
                                                   \__shipout_drop_firstpage_...
 l.243 
        <./images/ik_planar_exp.PNG>]
-<images/ik_singularity_explain.PNG, id=175, 336.50719pt x 101.62968pt>
+<images/ik_singularity_explain.PNG, id=198, 336.50719pt x 101.62968pt>
 File: images/ik_singularity_explain.PNG Graphic file (type png)
 <use images/ik_singularity_explain.PNG>
 Package pdftex.def Info: images/ik_singularity_explain.PNG  used on input line 248.
@@ -1162,37 +1168,102 @@ Overfull \hbox (7.4907pt too wide) in paragraph at lines 8--10
 
 
 
-[10{C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}])
+[10{C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}]) (text/entwicklungsprozess.tex
 
 [11]
-LaTeX Font Info:    Trying to load font information for OT1+lmtt on input line 164.
+Underfull \hbox (badness 4739) in paragraph at lines 35--35
+[]|\OT1/lmr/m/n/12 Plattform f[]ur 3D-druckbare
+ []
+
+
+Underfull \hbox (badness 4441) in paragraph at lines 37--37
+[]|\OT1/lmr/m/n/12 Onshape Pu-blic Li-
+ []
+
+
+Underfull \hbox (badness 1132) in paragraph at lines 37--37
+[]|\OT1/lmr/m/n/12 Online-CAD-Modelle mit di-
+ []
+
+
+
+[12
+pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.59 E
+      ine weitere Quelle für 3D-Modelle von Industrierobotern ist GrabCAD, ...]
+Overfull \hbox (13.06699pt too wide) in paragraph at lines 59--67
+\OT1/lmr/m/n/12 hoch-la-den, tei-len und her-un-ter-la-den k[]onnen ([]Grab-CAD ([]2025[])). Auf der Online-Plattfrom
+ []
+
+
+Overfull \hbox (0.60854pt too wide) in paragraph at lines 69--74
+[]\OT1/lmr/m/n/12 Weiterhin ist Thin-gi-ver-se ei-ne Quel-le f[]ur 3D-Modelle von In-du-striero-bo-tern. []Ahnlich
+ []
+
+
+
+[13]
+
+[14]
+LaTeX Font Info:    Trying to load font information for OT1+lmtt on input line 124.
  (C:\Users\Philipp\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmtt.fd
 File: ot1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 138.
 
-[12{C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rmsc.enc}{C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rmtt.enc}] (main.aux)
+
+[15{C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rmtt.enc}]
+<images/load_links.PNG, id=264, 517.18219pt x 364.36125pt>
+File: images/load_links.PNG Graphic file (type png)
+<use images/load_links.PNG>
+Package pdftex.def Info: images/load_links.PNG  used on input line 181.
+(pdftex.def)             Requested size: 352.81552pt x 248.57408pt.
+)
+
+[16
+pdfTeX warning (ext4): destination with the same identifier (name{figure.8}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.164 \newpage
+               <./images/load_links.PNG>]
+Overfull \hbox (2.67049pt too wide) in paragraph at lines 166--166
+[][]\OT1/lmr/m/n/12 GrabCAD (2025). \OT1/lmr/m/it/12 About Grab-CAD\OT1/lmr/m/n/12 . \OT1/lmr/m/sc/12 url\OT1/lmr/m/n/12 : []$\OT1/lmtt/m/n/12 https : / / resources . grabcad . com / company/$[]
+ []
+
+
+Overfull \hbox (11.4352pt too wide) in paragraph at lines 166--166
+\OT1/lmtt/m/n/12 pythreejs . readthedocs . io / en / stable / api / index . html$[] \OT1/lmr/m/n/12 (be-sucht am 10. 07. 2025). 
+ []
+
+
+
+[17{C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rmsc.enc}]
+
+[18] (main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 19EF09AEB222E0AA68EFE0FD4B47259D;1358.
+(rerunfilecheck)             Checksum: 9012D8D84059D873F8C5AA4B32B740BA;2151.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 30545 strings out of 473522
- 566155 string characters out of 5713642
- 1456439 words of memory out of 5000000
- 53278 multiletter control sequences out of 15000+600000
- 622722 words of font info for 124 fonts, out of 8000000 for 9000
+ 30683 strings out of 473522
+ 569728 string characters out of 5713642
+ 1461448 words of memory out of 5000000
+ 53387 multiletter control sequences out of 15000+600000
+ 626037 words of font info for 126 fonts, out of 8000000 for 9000
  1143 hyphenation exceptions out of 8191
- 78i,7n,81p,2448b,2772s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (15 pages, 1359015 bytes).
+ 78i,11n,81p,2448b,2772s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (21 pages, 1462615 bytes).
 PDF statistics:
- 283 PDF objects out of 1000 (max. 8388607)
- 35 named destinations out of 1000 (max. 500000)
- 100 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 388 PDF objects out of 1000 (max. 8388607)
+ 59 named destinations out of 1000 (max. 500000)
+ 137 words of extra memory for PDF output out of 10000 (max. 10000000)
 
