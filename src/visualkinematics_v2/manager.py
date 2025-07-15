@@ -88,7 +88,6 @@ def find_ros_packages(base_paths: list[str]) -> dict:
 
 
 
-#vulnerabel weil abhängig vom packer xacrodoc. support nicht gesichert. vielleicht in zukunft besser eine ros installation mit ins framework zu bringen
 def xacro_to_urdf_string(xacro_file_path: str, package_paths = base_paths, mappings: dict = {}) -> str:
     xd.packages.look_in(package_paths)
     return xd.XacroDoc.from_file(xacro_file_path, walk_up=False, subargs=mappings).to_urdf_string()

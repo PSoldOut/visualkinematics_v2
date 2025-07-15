@@ -773,6 +773,7 @@ class Manipulator:
         if tool_name!="":
             self.tool = Tool(tool_name)
         
+        print(urdf)
         #self.urdf_dictionary = json.dumps(self.urdf_dictionary, indent=4)
         #print(self.urdf_dictionary)
         #self.urdf_dictionary = json.loads(self.urdf_dictionary)

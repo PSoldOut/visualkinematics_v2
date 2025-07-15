@@ -1,4 +1,7 @@
 \section{Entwicklungsprozess}
+hier sollte noch was darüber stehen dass die basis des Frameworks die in der projektarbeit entwickelt wurde fähig ist den pythreejs Renderer
+über die display funktion in ein jupyter notebook einzubinden und der viewport dann wie ein widget bei ausführung der zelle in das Notebook eingebunden wird.
+
 
 \subsection{Beschaffung von 3D-Modellen}
 Die bereits in der Projektarbeit entwickelte Basis des Frameworks erlaubt
@@ -170,10 +173,63 @@ Dieses Prinzip lässt sich gezielt für die visuelle Darstellung und Animation v
 Jedes Glied der kinematischen Kette verwaltet dabei das nachfolgende Gelenk als child, welches wiederum das nächste Glied als child verwaltet. 
 Auf diese Weise bewegen sich alle nachfolgenden Glieder korrekt mit, wenn ein vorheriges Glied transformiert wird.
 
-In den meisten stl-, obj- und dae-Dateien werden wenn überhaupt nur die Vertex-Normalen gespeichert.
-Damit die Oberflächen des gerenderten Roboters glatt erscheinen, muss das
+Im STL-Format, welches trianguläre Mesh-Modelle beschreibt und in den genutzten Quellen häufig verwendet wird, werden nur die Normalenvektoren pro Fläche eines Dreiecks gespeichert \doublecite[297]{HALLMANN2019293}.
+Das MeshStandardMaterial, welches in diesem Framework für alle Geometrien verwendet wird verwendet physically based rendering (PBR),
+wobei das Beleuchtungsmodell pro Fragment (pro Pixel) und nicht pro Fläche anwendet wird \doublecite[]{threejs_docs_MeshStandardMaterial}.
+Aus diesem Grund müssen die Vertex-Normalen manuell berechnet werden,
+die dann im Hintergrund von pythreejs baryzentrisch Interpoliert werden um einen Normalenvektor pro Pixel zu bestimmen \doublecite[9]{mileff2024per}.
+Für die Berechnung der Normalen ist ein gängiger Algorithmus implementiert worden.
+Dabei wird für jeden Vertex $v_i \in \{v_0, v_1,...,v_n\} \subset \mathbb{R}^3$ eine gemittelte Normale $n_i \in \mathbb{R}^3$ bestimmt,
+indem zunächst für jedes Dreieck $t_k = (\alpha_k,\beta_k,\gamma_k)$ die Flächennormale $n^{(k)}_{face}$ berechnet wird:
+\begin{align*}
+    e^{(k)}_1 = v_{\beta_k} - v_{\alpha_k}\\
+    e^{(k)}_2 = v_{\gamma_k} - v_{\alpha_k}\\
+    n^{(k)}_{face} = e^{(k)}_1 \times e^{(k)}_2
+\end{align*}
 
-Die folgende Abbildung zeigt die mit dem Framework gerenderten Einzelglieder des KR6 R900-2 von KUKA.
+Die Flächennormalen werden aufsummiert und es ergibt sich für jeden $v_i$:
+\begin{align*}
+    n_i := \sum_{k : v_i \in t_k} n^{(k)}_{\text{face}} 
+\end{align*}
+
+Zuletzt wird $n_i$ mit $n_i \leftarrow \frac{n_i}{||n_i||}$ normiert, sofern $||n_i|| \neq 0$.
+
+
+\vspace{1em}
+\begin{algorithm}[H]
+    \caption{Berechnung von Vertex-Normalen}
+    \begin{algorithmic}[1]
+        \State \textbf{Input:} \textit{vertices} ($N \times 3$), \textit{indices} ($Z$)
+        \State $normals \gets$ Nullmatrix der Form $N \times 3$
+        \State $triangles \gets$ Umgeformt aus \textit{indices} zu $M \times 3$
+        \For{$k = 0$ \textbf{to} $M-1$}
+            \State $v_0 \gets vertices[triangles[k, 0]]$
+            \State $v_1 \gets vertices[triangles[k, 1]]$
+            \State $v_2 \gets vertices[triangles[k, 2]]$
+            \State $e_1 \gets v_1 - v_0$
+            \State $e_2 \gets v_2 - v_0$
+            \State $n_{\text{face}}^{(k)} \gets e_1 \times e_2$
+            \For{$i \in \{0,1,2\}$}
+                \State $normals[triangles[k, i]] \mathrel{+}= n_{\text{face}}^{(k)}$
+            \EndFor
+        \EndFor
+        \For{$i = 0$ \textbf{to} $N-1$}
+            \If{$\|normals[i]\| = 0$}
+                \State $normals[i] \gets [0, 0, 1]$ \Comment{Standardnormale}
+            \Else
+                \State $normals[i] \gets \dfrac{normals[i]}{\|normals[i]\|}$
+            \EndIf
+        \EndFor
+        \State \textbf{Return} $normals$
+    \end{algorithmic}
+\end{algorithm}
+\vspace{1em}
+
+
+
+Die so berechneten Normalen müssen dem BufferGeometry-Objekt übergeben werden und können dann für das Shading pro Pixel verwendet werden.
+Durch diese Form des Shadings wirken die Oberflächen von Komplexen Geometrien realistisch und glatt \doublecite[]{threejs_docs_MeshStandardMaterial}.
+Abbildung \ref{fig:render_links} zeigt die mit dem Framework gerenderten Einzelglieder des KR6 R900-2 von KUKA.
 
 \vspace{1em}
 \begin{figure}[H]
@@ -186,5 +242,121 @@ Die folgende Abbildung zeigt die mit dem Framework gerenderten Einzelglieder des
 
 In dieser Darstellung besteht noch keine Hierarchie zwischen den einzelnen Gliedern. 
 Alle Glieder sind im Ursprung des Basiskoordinatensystems positioniert und bilden daher noch keine zusammenhängende Roboterstruktur. 
+Die Farbe der Glieder ist frei gewählt worden.
+
+
+
+\subsection{URDF-Parsing}
 Um eine korrekte Darstellung zu erreichen, müssen die Glieder entsprechend einer URDF-Beschreibung räumlich korrekt positioniert und orientiert werden.
+Auch Farbinformationen der Glieder lassen sich aus den URDF-Dateien der verwendeten Quellen extrahieren.
+Dazu ist es zunächst erforderlich, die vorhandenen .xacro-Dateien einzulesen und in gültiges URDF-Format zu überführen.
+Für diesen Zweck wird die Bibliothek xacrodoc verwendet, die über pip installiert werden kann.
+Mit Hilfe von xacrodoc lassen sich die Xacro-Dateien zur Laufzeit als URDF-String in den Arbeitsspeicher laden \doublecite[]{xacrodoc}.
+Im weiteren Verlauf wurde eine Funktion implementiert,
+die diesen URDF-String analysiert und in ein strukturierteres Dictionary überführt,
+das innerhalb des Frameworks weiterverarbeitet werden kann.
+
+
+
+\subsection{Objektorientierte Modellierung der Kinematik}
+Um den Code generisch zu halten und den allgemeinen Aufbau eines Industrieroboters abzubilden, wurden an dieser Stelle die Klassen Joint, Link, Tool und Manipulator erstellt.
+Die Klassen Link, Joint und Tool verwalten die relative Pose innerhalb der kinematischen Kette, sowie die Mesh und das Material.
+Die Klasse Joint verwaltet zusätzlich die relative Pose und die Minimal- und Maximalgrenzen sowie die Drehachse eines Gelenks.
+die 3 Klasse verwalten darüber hinaus ein Array von Children um die Hierarchie innerhalb der kinematischen Kette abzubilden.
+Die Klasse Manipulator repräsentiert den Industrieroboter und verwaltet Links, Joints und maximal eine Tool-Instanz.
+Der Konstruktor der Manipulator-Klasse ist so gestaltet worden, dass der Name des Robotermodells übergeben werden muss.
+Anschließend werden auf Basis des zuvor geparsten URDF-Strings automatisch die notwendigen Objekte wie Links und Joints erzeugt und miteinander verknüpft.
+Das Roboter-Objekt kann einer Environment-Instanz übergeben und somit gerendert werden.
+Abbildung \ref{fig:render_robot} zeigt den im Framework gerenderten KR6 R900-2 von KUKA in Nullstellung mit Greifer.
+
+
+\vspace{1em}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/load_robot.PNG}
+    \caption{Ansicht der 3D-Szene des Frameworks mit dem KR6 R900-2 von KUKA in Nullstellung mit Greifer}
+    \label{fig:render_robot}
+\end{figure}
+\vspace{1em}
+
+
+Die einzelnen Glieder und Gelenke wurden dabei gemäß ihrer Beschreibung in der URDF-Datei korrekt transformiert und eingefärbt.
+So ergibt sich in ihrer Gesamtheit die vollständige Roboterstruktur.
+
+\subsection{Animation}
+Mithilfe des Frameworks soll es hinsichtlich der Anforderungen möglich sein die Ro\-bo\-ter-Modelle zu animieren.
+Dazu wurde bereits in der vorangegangenen Projektarbeit ein Algorithmus verwendet bei dem eine
+Zeitvariable $0 \leq t$ solange um ein $\Delta t$ erhöht wird, wie $t \leq 1$ ist.
+Dabei wird bei jedem Iterationsschritt die Transformation des zu animierenden Objekts mit $t$ zwischen
+der alten und der neuen Transformation interpoliert \doublecite[32]{philipp}.
+Mithilfe dieses Algorithmus können einzelne Objekte unabhängig von einander animiert werden.
+Darauf aufbauend wurde ein neuer Algorithmus entworfen, der in jeder Iteration die Rotation
+mehrerer Gelenke $j = \{j_0,j_1,...j_n\}$ um die entsprechene Drehachse interpoliert:
+
+\vspace{1em}
+\begin{algorithm}
+    \caption{Gleichzeitige Interpolation mehrerer Gelenke}
+    \begin{algorithmic}[1]
+    \State $t \gets 0$
+    \While{$t \leq 1$}
+        \State $t_\text{start} \gets \mathit{now()}$
+        \ForAll{$j \in \{j_0, j_1, \dots, j_n\}$}
+            \State $j.transform \gets \mathit{interpolate}(j.old\_transform, j.new\_transform, t)$
+        \EndFor
+        \ForAll{$j \in \{j_0, j_1, \dots, j_n\}$}
+            \State $\mathit{render}(j)$
+        \EndFor
+        \State $\mathit{wait}(0{,}01 / quality)$
+        \State $t_\text{end} \gets \mathit{now()}$
+        \State $\Delta t \gets t_\text{end} - t_\text{start}$
+        \State $t \gets t + \Delta t$
+    \EndWhile
+    \ForAll{$j \in \{j_0, j_1, \dots, j_n\}$}
+        \State $j.transform \gets \mathit{interpolate}(j.old\_transform, j.new\_transform, 1)$
+    \EndFor
+    \end{algorithmic}
+\end{algorithm}
+\vspace{1em}
+
+Dieser Algorithmus wird in einem separaten Thread ausgeführt.
+Die dabei verwendete Variable quality beeinflusst die Frequenz der Aktualisierungen und damit die Flüssigkeit der Animation.
+Ein höherer Wert führt zu einer feineren zeitlichen Auflösung und somit zu einer flüssigeren Bewegung.
+Auf leistungsschwächeren Geräten kann ein niedrigerer Wert gewählt werden, um die Systemressourcen zu schonen.
+Dies trägt zur Stabilität des Frameworks bei und gewährleistet,
+dass Interaktionen wie die Navigation der Kameraperspektive per Maus im Viewport weiterhin problemlos möglich bleiben.
+
+Um die Animation zeitlich konsistenter und realistischer zu gestalten,
+wird die Interpolationsvariable $t$ nicht um einen festen Wert erhöht,
+sondern dynamisch anhand der tatsächlich vergangenen Zeit pro Iterationsschritt angepasst.
+Dazu wird zu Beginn jeder Iteration ein Zeitstempel gesetzt und nach Ausführung der Transformationen sowie einer kurzen Wartezeit die vergangene Zeit gemessen.
+Der Wert von $t$ wird anschließend um genau diese verstrichene Zeit erhöht.
+Dieses Verfahren erlaubt eine flüssige und konsistente Animation, auch wenn es zu leichten Schwankungen in der Ausführungsdauer einzelner Iterationen kommt.
+Da die Interpolation der einzelnen Gelenke auf der gemeinsamen Zeitvariable $t$ beruhen,
+landen alle Gelenke gleichzeitig in ihrer Zielpose, was der synchronen Point-to-Point Bewegungsplanung entspricht \doublecite[71]{weber-Industrieroboter}.
+
+
+\subsection{Benutzerschnittstelle}
+Das Framework verfügt bereits über die Funktionalität, interaktive Bedienelemente wie Schieberegler oder Checkboxen direkt in ein Jupyter-Notebook einzubetten.
+Dabei wird auf die Bibliothek ipywidgets zurückgegriffen,
+die speziell für die Verwendung innerhalb von Jupyter-Umgebungen entwickelt wurde.
+Für die manuele Konfiguration der Gelenkwinkel sowie der Bewegung des Endeffektors im lokalen und globalen Koordinatensystem, wie in der Anforderungen beschrieben,
+wurde ein spezielles Layout entworfen.
+Dabei wurde sich an der grafschen Benutzeroberfläche von PolyScope5, einer Steuerungssoftware von Universal Robots orientiert.
+Abbildung \ref{fig:ps5} zeigt die grafische Benutzeroberfläche von PolyScope5.
+
+\vspace{1em}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/polyscope5.PNG}
+    \caption{Benutzeroberfläche von PolyScope5. Quelle: \doublecite[]{universal_robots_ps5}}
+    \label{fig:ps5}
+\end{figure}
+\vspace{1em}
+
+Dabei wurde ein eigenes Layout entwickelt, das es ermöglicht, sowohl die Gelenkwinkel manuell über Schieberegler einzustellen als auch die Pose des Endeffektors im lokalen oder globalen Koordinatensystem zu verändern.
+Neben einzelnen Schiebereglern für jedes Gelenk wurde auch eine eigene Sektion zur Anzeige und direkten Manipulation der Endeffektor-Pose implementiert.
+
+
+
+
 

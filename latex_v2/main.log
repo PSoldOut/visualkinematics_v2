@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.3) (preloaded format=pdflatex 2025.4.7)  13 JUL 2025 00:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.3) (preloaded format=pdflatex 2025.4.7)  15 JUL 2025 15:05
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -873,13 +873,13 @@ Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
 Package biblatex Warning: Load 'inputenc' before biblatex.
 
 
-Package csquotes Warning: Load 'inputenc' before 'csquotes' on input line 110.
+Package csquotes Warning: Load 'inputenc' before 'csquotes' on input line 113.
 
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'german'.
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 110.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 113.
 (C:\Users\Philipp\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) (main.aux
@@ -888,25 +888,25 @@ Package babel Info: 'german' activates 'german' shorthands.
 )
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-Package hyperref Info: Link coloring OFF on input line 110.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 113.
+LaTeX Font Info:    ... okay on input line 113.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 113.
+LaTeX Font Info:    ... okay on input line 113.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 113.
+LaTeX Font Info:    ... okay on input line 113.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 113.
+LaTeX Font Info:    ... okay on input line 113.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 113.
+LaTeX Font Info:    ... okay on input line 113.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 113.
+LaTeX Font Info:    ... okay on input line 113.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 113.
+LaTeX Font Info:    ... okay on input line 113.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 113.
+LaTeX Font Info:    ... okay on input line 113.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 113.
+LaTeX Font Info:    ... okay on input line 113.
+Package hyperref Info: Link coloring OFF on input line 113.
  (main.out) (main.out)
 \@outlinefile=\write4
 \openout4 = `main.out'.
@@ -965,8 +965,8 @@ Package biblatex Warning: Biber reported the following issues
 (biblatex)                - software entry 'trimesh' (quellen.bib): Invalid format '2019-12-8' of date field 'date' - ignoring.
 
 )
-Package biblatex Info: Reference section=0 on input line 110.
-Package biblatex Info: Reference segment=0 on input line 110.
+Package biblatex Info: Reference section=0 on input line 113.
+Package biblatex Info: Reference segment=0 on input line 113.
  (C:\Users\Philipp\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count490
@@ -996,16 +996,16 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 ))
-LaTeX Font Info:    Trying to load font information for OT1+lmss on input line 122.
+LaTeX Font Info:    Trying to load font information for OT1+lmss on input line 125.
  (C:\Users\Philipp\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmss.fd
 File: ot1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-Overfull \hbox (6.33075pt too wide) in paragraph at lines 126--129
+Overfull \hbox (6.33075pt too wide) in paragraph at lines 129--132
 \OT1/lmss/bx/n/24.88 Visualisierung ki-ne-ma-ti-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 126--129
+Underfull \hbox (badness 10000) in paragraph at lines 129--132
 
  []
 
@@ -1049,10 +1049,14 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \tf@lof=\write6
 \openout6 = `main.lof'.
 
+ (main.loa)
+\tf@loa=\write7
+\openout7 = `main.loa'.
+
 
 
 [2] (text/theoretischer_hintergrund.tex
-<images/DOF_exp.PNG, id=114, 1193.96063pt x 508.90125pt>
+<images/DOF_exp.PNG, id=147, 1193.96063pt x 508.90125pt>
 File: images/DOF_exp.PNG Graphic file (type png)
 <use images/DOF_exp.PNG>
 Package pdftex.def Info: images/DOF_exp.PNG  used on input line 17.
@@ -1074,7 +1078,7 @@ l.33
       <./images/DOF_exp.PNG>]
 
 [2{C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}]
-<images/kuka-ir.PNG, id=139, 658.71094pt x 593.96906pt>
+<images/kuka-ir.PNG, id=172, 658.71094pt x 593.96906pt>
 File: images/kuka-ir.PNG Graphic file (type png)
 <use images/kuka-ir.PNG>
 Package pdftex.def Info: images/kuka-ir.PNG  used on input line 69.
@@ -1087,7 +1091,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has
                                                   \__shipout_drop_firstpage_...
 l.100 
        <./images/kuka-ir.PNG>]
-<images/lbr2.png, id=153, 1907.125pt x 1073.00874pt>
+<images/lbr2.png, id=186, 1907.125pt x 1073.00874pt>
 File: images/lbr2.png Graphic file (type png)
 <use images/lbr2.png>
 Package pdftex.def Info: images/lbr2.png  used on input line 105.
@@ -1100,7 +1104,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has
                                                   \__shipout_drop_firstpage_...
 l.128 
        <./images/lbr2.png (PNG copy)>]
-<images/forward_kin.PNG, id=166, 674.52pt x 280.04625pt>
+<images/forward_kin.PNG, id=199, 674.52pt x 280.04625pt>
 File: images/forward_kin.PNG Graphic file (type png)
 <use images/forward_kin.PNG>
 Package pdftex.def Info: images/forward_kin.PNG  used on input line 149.
@@ -1119,7 +1123,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 183--187
 
  []
 
-<images/DH_explain2.PNG, id=181, 444.15938pt x 402.75468pt>
+<images/DH_explain2.PNG, id=214, 444.15938pt x 402.75468pt>
 File: images/DH_explain2.PNG Graphic file (type png)
 <use images/DH_explain2.PNG>
 Package pdftex.def Info: images/DH_explain2.PNG  used on input line 192.
@@ -1132,7 +1136,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) has
                                                   \__shipout_drop_firstpage_...
 l.211 
        <./images/DH_explain2.PNG>]
-<images/ik_planar_exp.PNG, id=190, 621.07031pt x 530.73282pt>
+<images/ik_planar_exp.PNG, id=223, 621.07031pt x 530.73282pt>
 File: images/ik_planar_exp.PNG Graphic file (type png)
 <use images/ik_planar_exp.PNG>
 Package pdftex.def Info: images/ik_planar_exp.PNG  used on input line 231.
@@ -1145,7 +1149,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.6}) has
                                                   \__shipout_drop_firstpage_...
 l.243 
        <./images/ik_planar_exp.PNG>]
-<images/ik_singularity_explain.PNG, id=198, 336.50719pt x 101.62968pt>
+<images/ik_singularity_explain.PNG, id=231, 336.50719pt x 101.62968pt>
 File: images/ik_singularity_explain.PNG Graphic file (type png)
 <use images/ik_singularity_explain.PNG>
 Package pdftex.def Info: images/ik_singularity_explain.PNG  used on input line 248.
@@ -1171,17 +1175,17 @@ Overfull \hbox (7.4907pt too wide) in paragraph at lines 8--10
 [10{C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}]) (text/entwicklungsprozess.tex
 
 [11]
-Underfull \hbox (badness 4739) in paragraph at lines 35--35
+Underfull \hbox (badness 4739) in paragraph at lines 38--38
 []|\OT1/lmr/m/n/12 Plattform f[]ur 3D-druckbare
  []
 
 
-Underfull \hbox (badness 4441) in paragraph at lines 37--37
+Underfull \hbox (badness 4441) in paragraph at lines 40--40
 []|\OT1/lmr/m/n/12 Onshape Pu-blic Li-
  []
 
 
-Underfull \hbox (badness 1132) in paragraph at lines 37--37
+Underfull \hbox (badness 1132) in paragraph at lines 40--40
 []|\OT1/lmr/m/n/12 Online-CAD-Modelle mit di-
  []
 
@@ -1191,14 +1195,14 @@ Underfull \hbox (badness 1132) in paragraph at lines 37--37
 pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.59 E
-      ine weitere Quelle für 3D-Modelle von Industrierobotern ist GrabCAD, ...]
-Overfull \hbox (13.06699pt too wide) in paragraph at lines 59--67
+l.61 
+     ]
+Overfull \hbox (13.06699pt too wide) in paragraph at lines 62--70
 \OT1/lmr/m/n/12 hoch-la-den, tei-len und her-un-ter-la-den k[]onnen ([]Grab-CAD ([]2025[])). Auf der Online-Plattfrom
  []
 
 
-Overfull \hbox (0.60854pt too wide) in paragraph at lines 69--74
+Overfull \hbox (0.60854pt too wide) in paragraph at lines 72--77
 []\OT1/lmr/m/n/12 Weiterhin ist Thin-gi-ver-se ei-ne Quel-le f[]ur 3D-Modelle von In-du-striero-bo-tern. []Ahnlich
  []
 
@@ -1207,63 +1211,107 @@ Overfull \hbox (0.60854pt too wide) in paragraph at lines 69--74
 [13]
 
 [14]
-LaTeX Font Info:    Trying to load font information for OT1+lmtt on input line 124.
+LaTeX Font Info:    Trying to load font information for OT1+lmtt on input line 127.
  (C:\Users\Philipp\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmtt.fd
 File: ot1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 138.
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 141.
 
 
 [15{C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rmtt.enc}]
-<images/load_links.PNG, id=264, 517.18219pt x 364.36125pt>
+
+[16{C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}]
+<images/load_links.PNG, id=311, 517.18219pt x 368.1253pt>
 File: images/load_links.PNG Graphic file (type png)
 <use images/load_links.PNG>
-Package pdftex.def Info: images/load_links.PNG  used on input line 181.
-(pdftex.def)             Requested size: 352.81552pt x 248.57408pt.
-)
+Package pdftex.def Info: images/load_links.PNG  used on input line 237.
+(pdftex.def)             Requested size: 352.81552pt x 251.142pt.
 
-[16
+
+[17]
+
+[18
 pdfTeX warning (ext4): destination with the same identifier (name{figure.8}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.164 \newpage
-               <./images/load_links.PNG>]
-Overfull \hbox (2.67049pt too wide) in paragraph at lines 166--166
+l.271 
+       <./images/load_links.PNG>]
+<images/load_robot.PNG, id=324, 519.44063pt x 370.38374pt>
+File: images/load_robot.PNG Graphic file (type png)
+<use images/load_robot.PNG>
+Package pdftex.def Info: images/load_robot.PNG  used on input line 276.
+(pdftex.def)             Requested size: 352.81552pt x 251.56937pt.
+
+
+[19
+pdfTeX warning (ext4): destination with the same identifier (name{figure.9}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.285 
+       <./images/load_robot.PNG>]
+
+[20]
+<images/polyscope5.PNG, id=337, 791.20593pt x 598.48593pt>
+File: images/polyscope5.PNG Graphic file (type png)
+<use images/polyscope5.PNG>
+Package pdftex.def Info: images/polyscope5.PNG  used on input line 350.
+(pdftex.def)             Requested size: 352.81552pt x 266.8779pt.
+
+
+[21])
+
+[22
+pdfTeX warning (ext4): destination with the same identifier (name{figure.10}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.168 \newpage
+               <./images/polyscope5.PNG>]
+Overfull \hbox (10.98741pt too wide) in paragraph at lines 170--170
+[][]\OT1/lmr/m/n/12 Cabello, Ri-car-do u.a. (2025). \OT1/lmr/m/it/12 Mes-h-Stan-dard-Ma-te-ri-al - three.js docs\OT1/lmr/m/n/12 . Zu-griff am 13.07.2025.
+ []
+
+
+Overfull \hbox (2.67049pt too wide) in paragraph at lines 170--170
 [][]\OT1/lmr/m/n/12 GrabCAD (2025). \OT1/lmr/m/it/12 About Grab-CAD\OT1/lmr/m/n/12 . \OT1/lmr/m/sc/12 url\OT1/lmr/m/n/12 : []$\OT1/lmtt/m/n/12 https : / / resources . grabcad . com / company/$[]
  []
 
 
-Overfull \hbox (11.4352pt too wide) in paragraph at lines 166--166
+Overfull \hbox (0.26894pt too wide) in paragraph at lines 170--170
+[][]\OT1/lmr/m/n/12 Hallmann, Mar-tin, Ste-fan Goetz und Ben-ja-min Schleich (2019). []  Map-ping of GD(and)T
+ []
+
+
+Overfull \hbox (11.4352pt too wide) in paragraph at lines 170--170
 \OT1/lmtt/m/n/12 pythreejs . readthedocs . io / en / stable / api / index . html$[] \OT1/lmr/m/n/12 (be-sucht am 10. 07. 2025). 
  []
 
 
 
-[17{C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rmsc.enc}]
+[23{C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rmsc.enc}]
 
-[18] (main.aux)
+[24] (main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 9012D8D84059D873F8C5AA4B32B740BA;2151.
+(rerunfilecheck)             Checksum: 4625C694B299A5328DF11B06E589D4A0;2822.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 30683 strings out of 473522
- 569728 string characters out of 5713642
- 1461448 words of memory out of 5000000
- 53387 multiletter control sequences out of 15000+600000
- 626037 words of font info for 126 fonts, out of 8000000 for 9000
+ 30791 strings out of 473522
+ 572070 string characters out of 5713642
+ 1465093 words of memory out of 5000000
+ 53470 multiletter control sequences out of 15000+600000
+ 634479 words of font info for 128 fonts, out of 8000000 for 9000
  1143 hyphenation exceptions out of 8191
  78i,11n,81p,2448b,2772s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (21 pages, 1462615 bytes).
+<C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi6.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (27 pages, 1995703 bytes).
 PDF statistics:
- 388 PDF objects out of 1000 (max. 8388607)
- 59 named destinations out of 1000 (max. 500000)
- 137 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 487 PDF objects out of 1000 (max. 8388607)
+ 78 named destinations out of 1000 (max. 500000)
+ 179 words of extra memory for PDF output out of 10000 (max. 10000000)
 

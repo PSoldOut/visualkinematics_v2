@@ -19,6 +19,39 @@
 
 \refsection{0}
   \datalist[entry]{nyt/global//global/global/global}
+    \entry{threejs_docs_MeshStandardMaterial}{online}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=fd37269523dc9e55a06825e3037a511a}{%
+           family={Cabello},
+           familyi={C\bibinitperiod},
+           given={Ricardo\bibnamedelima u.a.},
+           giveni={R\bibinitperiod\bibinitdelim u\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{fd37269523dc9e55a06825e3037a511a}
+      \strng{fullhash}{fd37269523dc9e55a06825e3037a511a}
+      \strng{fullhashraw}{fd37269523dc9e55a06825e3037a511a}
+      \strng{bibnamehash}{fd37269523dc9e55a06825e3037a511a}
+      \strng{authorbibnamehash}{fd37269523dc9e55a06825e3037a511a}
+      \strng{authornamehash}{fd37269523dc9e55a06825e3037a511a}
+      \strng{authorfullhash}{fd37269523dc9e55a06825e3037a511a}
+      \strng{authorfullhashraw}{fd37269523dc9e55a06825e3037a511a}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Zugriff am 13.07.2025}
+      \field{title}{MeshStandardMaterial - three.js docs}
+      \field{year}{2025}
+      \verb{urlraw}
+      \verb https://threejs.org/docs/#api/en/materials/MeshStandardMaterial
+      \endverb
+      \verb{url}
+      \verb https://threejs.org/docs/#api/en/materials/MeshStandardMaterial
+      \endverb
+    \endentry
     \entry{Robotics_Vision_and_Control}{book}{}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=c0e503339314930d140b67b5e7c55c3e}{%
@@ -123,6 +156,92 @@
       \verb https://resources.grabcad.com/company/
       \endverb
     \endentry
+    \entry{HALLMANN2019293}{article}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=d268d05e2650fd4a9f4c1651e6e2bf51}{%
+           family={Hallmann},
+           familyi={H\bibinitperiod},
+           given={Martin},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=fcbff119935e2ff3b0ae38c525a8ec58}{%
+           family={Goetz},
+           familyi={G\bibinitperiod},
+           given={Stefan},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=c10d9a5259a9a6ece7530be43547507c}{%
+           family={Schleich},
+           familyi={S\bibinitperiod},
+           given={Benjamin},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{e67bc3dd92db0e4f0b65d621bc2fb0ac}
+      \strng{fullhash}{023864a5b58163563bc97eea0d326b71}
+      \strng{fullhashraw}{023864a5b58163563bc97eea0d326b71}
+      \strng{bibnamehash}{023864a5b58163563bc97eea0d326b71}
+      \strng{authorbibnamehash}{023864a5b58163563bc97eea0d326b71}
+      \strng{authornamehash}{e67bc3dd92db0e4f0b65d621bc2fb0ac}
+      \strng{authorfullhash}{023864a5b58163563bc97eea0d326b71}
+      \strng{authorfullhashraw}{023864a5b58163563bc97eea0d326b71}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0010-4485}
+      \field{journaltitle}{Computer-Aided Design}
+      \field{title}{Mapping of GD(and)T information and PMI between 3D product models in the STEP and STL format}
+      \field{volume}{115}
+      \field{year}{2019}
+      \field{pages}{293\bibrangedash 306}
+      \range{pages}{14}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.cad.2019.06.006
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0010448518305359
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0010448518305359
+      \endverb
+      \keyw{STEP,PMI,STL,GD&T,Feature recognition}
+    \endentry
+    \entry{xacrodoc}{online}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=9e27ae5fc4b1314d90518c406f1330d1}{%
+           family={Heins},
+           familyi={H\bibinitperiod},
+           given={Adam},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{9e27ae5fc4b1314d90518c406f1330d1}
+      \strng{fullhash}{9e27ae5fc4b1314d90518c406f1330d1}
+      \strng{fullhashraw}{9e27ae5fc4b1314d90518c406f1330d1}
+      \strng{bibnamehash}{9e27ae5fc4b1314d90518c406f1330d1}
+      \strng{authorbibnamehash}{9e27ae5fc4b1314d90518c406f1330d1}
+      \strng{authornamehash}{9e27ae5fc4b1314d90518c406f1330d1}
+      \strng{authorfullhash}{9e27ae5fc4b1314d90518c406f1330d1}
+      \strng{authorfullhashraw}{9e27ae5fc4b1314d90518c406f1330d1}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Zugriff am 14.07.2025}
+      \field{title}{reference xacrodoc 0.7.0 documentation}
+      \field{year}{2025}
+      \verb{urlraw}
+      \verb https://xacrodoc.readthedocs.io/en/latest/reference.html#
+      \endverb
+      \verb{url}
+      \verb https://xacrodoc.readthedocs.io/en/latest/reference.html#
+      \endverb
+    \endentry
     \entry{lbr_image}{online}{}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=07150e2189504f5d9e22645f955cfdc4}{%
@@ -183,6 +302,37 @@
       \field{title}{Visualisierung kinematischer Kennwerte}
       \field{volume}{1}
       \field{year}{2025}
+    \endentry
+    \entry{mileff2024per}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=a74b59658e99b0a71c0f7dae2f86be41}{%
+           family={Mileff},
+           familyi={M\bibinitperiod},
+           given={Péter},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{a74b59658e99b0a71c0f7dae2f86be41}
+      \strng{fullhash}{a74b59658e99b0a71c0f7dae2f86be41}
+      \strng{fullhashraw}{a74b59658e99b0a71c0f7dae2f86be41}
+      \strng{bibnamehash}{a74b59658e99b0a71c0f7dae2f86be41}
+      \strng{authorbibnamehash}{a74b59658e99b0a71c0f7dae2f86be41}
+      \strng{authornamehash}{a74b59658e99b0a71c0f7dae2f86be41}
+      \strng{authorfullhash}{a74b59658e99b0a71c0f7dae2f86be41}
+      \strng{authorfullhashraw}{a74b59658e99b0a71c0f7dae2f86be41}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Production Systems and Information Engineering}
+      \field{number}{3}
+      \field{title}{PER-PIXEL LIGHTING FOR MULTI-OBJECT MODELS}
+      \field{volume}{12}
+      \field{year}{2024}
+      \field{pages}{42\bibrangedash 59}
+      \range{pages}{18}
     \endentry
     \entry{numpy_npy_npz_format}{online}{}{}
       \name{author}{1}{}{%
@@ -398,6 +548,39 @@
       \field{isbn}{9783834362360}
       \field{title}{Industrieroboter}
       \field{year}{2018}
+    \endentry
+    \entry{universal_robots_ps5}{online}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=1a04c8d94dde0c0103fd0791548ef73d}{%
+           family={Robots},
+           familyi={R\bibinitperiod},
+           given={Universal},
+           giveni={U\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{1a04c8d94dde0c0103fd0791548ef73d}
+      \strng{fullhash}{1a04c8d94dde0c0103fd0791548ef73d}
+      \strng{fullhashraw}{1a04c8d94dde0c0103fd0791548ef73d}
+      \strng{bibnamehash}{1a04c8d94dde0c0103fd0791548ef73d}
+      \strng{authorbibnamehash}{1a04c8d94dde0c0103fd0791548ef73d}
+      \strng{authornamehash}{1a04c8d94dde0c0103fd0791548ef73d}
+      \strng{authorfullhash}{1a04c8d94dde0c0103fd0791548ef73d}
+      \strng{authorfullhashraw}{1a04c8d94dde0c0103fd0791548ef73d}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Zugriff am 15.07.2025}
+      \field{title}{PolyScope 5}
+      \field{year}{2025}
+      \verb{urlraw}
+      \verb https://www.universal-robots.com/products/polyscope-5/
+      \endverb
+      \verb{url}
+      \verb https://www.universal-robots.com/products/polyscope-5/
+      \endverb
     \endentry
     \entry{ROS_Industrial_repo_search}{online}{}{}
       \name{author}{1}{}{%
