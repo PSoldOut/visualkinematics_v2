@@ -15,6 +15,9 @@ from numba import njit
 from typing import *
 import re
 import threading
+import numba
+from sympy.utilities.autowrap import autowrap
+import ipyevents
 
 
 pending_actions = []
@@ -50,8 +53,8 @@ def pose_to_matrix(xyz:np.ndarray, rpy:np.ndarray, degrees:bool = True) -> np.nd
     return T
 
 
-
-def compute_dh_matrix(theta:float, d:float, a:float, alpha:float) -> np.ndarray:
+@njit
+def compute_dh_matrix(theta:float, d:float, a:float, alpha:float):
     ct = np.cos(theta)
     st = np.sin(theta)
     ca = np.cos(alpha)
@@ -60,9 +63,9 @@ def compute_dh_matrix(theta:float, d:float, a:float, alpha:float) -> np.ndarray:
     return np.array([
         [ct, -st * ca,  st * sa, a * ct],
         [st,  ct * ca, -ct * sa, a * st],
-        [0,       sa,      ca,     d],
-        [0,        0,       0,     1]
-    ])
+        [0.0,       sa,      ca,     d],
+        [0.0,        0.0,       0.0,     1.0]
+    ], dtype=np.float64)
 
 
 
@@ -90,12 +93,23 @@ class DHKinematicModel:
         self.joint_angles:dict = {}
         self.base_to_dh:np.ndarray = base_to_dh
         self.dh_to_tool:np.ndarray = dh_to_tool
+        self.fk = None
+        self.fk_pos_func = None
+        self.fk_rot_func = None
+        self.jacobian_func = None
         for name, _ in dh_parameters.items():
             self.joint_angles[name] = 0.0
             theta_sym = sp.Symbol(name)
             self.symbolic_thetas[name] = theta_sym
             #print(f"hier: {name}")
-        
+    
+
+    @staticmethod
+    def compute_base_to_dh(base_transform, k0):
+        base_transform_inv = np.linalg.inv(base_transform)
+        return base_transform_inv @ k0
+
+
 
     def compute_transforms(self) -> dict: 
         T_dict:dict = {}
@@ -190,7 +204,7 @@ class DHKinematicModel:
     
     
 
-    def inverse_kinematics6D(self, target_position, target_rotation, q0, max_iters=100, tol=1e-4):
+    def inverse_kinematics6D(self, target_position, target_rotation, q0:np.ndarray, max_iters=100, tol=1e-4):
         # Symbolischer Aufbau
         dh_transforms = self.compute_transforms_symbolic()
         last_key = next(reversed(dh_transforms))
@@ -255,33 +269,11 @@ class DHKinematicModel:
 
 
 
-    def inverse_kinematics6D_with_limits(self, target_position, target_rotation, q0, max_iters=100, tol=1e-4, joint_mins=None, joint_maxs=None):
-        print(f"joint mins: {joint_mins}")
-        print(f"joint maxs: {joint_maxs}")
-        # Symbolischer Aufbau
-        dh_transforms = self.compute_transforms_symbolic()
-        last_key = next(reversed(dh_transforms))
-        last_dh = dh_transforms[last_key]
-
-        base_to_dh_sym = sp.Matrix(self.base_to_dh)
-        dh_to_tool_sym = sp.Matrix(self.dh_to_tool)
-        full_transform = base_to_dh_sym * last_dh * dh_to_tool_sym
-
-        pos_expr = full_transform[:3, 3]
-        rot_expr = full_transform[:3, :3]
-
-        q_syms = list(self.symbolic_thetas.values())
-
-        # Symbolische Jacobi-Teilmatrix (nur Position)
-        J_pos = sp.Matrix.hstack(*[pos_expr.diff(qi) for qi in q_syms])
-        fk_pos_func = sp.lambdify(q_syms, pos_expr, 'numpy')
-        fk_rot_func = sp.lambdify(q_syms, rot_expr, 'numpy')
-        jacobian_func = sp.lambdify(q_syms, J_pos, 'numpy')
-
-        q = np.array(q0, dtype=float)
-        for i in range(max_iters):
-            pos = np.array(fk_pos_func(*q), dtype=float).flatten()
-            rot_mat = np.array(fk_rot_func(*q), dtype=float)
+    def inverse_kinematics6D_with_limits(self, target_position, target_rotation, q0:np.ndarray, max_iters=100, tol=1e-4, joint_mins=None, joint_maxs=None):
+        
+        for _ in range(max_iters):
+            pos = np.array(self.fk_pos_func(*q0), dtype=float).flatten()
+            rot_mat = np.array(self.fk_rot_func(*q0), dtype=float)
 
             pos_error = target_position - pos
 
@@ -295,20 +287,20 @@ class DHKinematicModel:
             error = np.concatenate([pos_error, rot_error])
 
             if np.linalg.norm(error) < tol:
-                return q  # Lösung gefunden
+                return q0  # Lösung gefunden
 
             # Numerischer Jacobian erweitern: Positionsteil + Orientierungsteil
-            J_pos_num = np.array(jacobian_func(*q), dtype=float)
+            J_pos_num = np.array(self.jacobian_func(*q0), dtype=float)
 
             # Approximierter Rotations-Jacobian: numerisch per finite differences
             delta = 1e-6
-            J_rot_num = np.zeros((3, len(q)))
-            for j in range(len(q)):
-                dq = np.zeros_like(q)
+            J_rot_num = np.zeros((3, len(q0)))
+            for j in range(len(q0)):
+                dq = np.zeros_like(q0)
                 dq[j] = delta
 
-                q_plus = q + dq
-                R_plus = R.from_matrix(np.array(fk_rot_func(*q_plus), dtype=float))
+                q_plus = q0 + dq
+                R_plus = R.from_matrix(np.array(self.fk_rot_func(*q_plus), dtype=float))
                 R_diff = R_plus * R_current.inv()
                 rot_vec = R_diff.as_rotvec()
                 J_rot_num[:, j] = rot_vec / delta
@@ -316,11 +308,11 @@ class DHKinematicModel:
             J_full = np.vstack((J_pos_num, J_rot_num))
 
             dq = np.linalg.pinv(J_full, rcond=1e-3) @ error
-            q += dq
+            q0 += dq
 
             # Gelenkgrenzen beachten (falls angegeben)
             if joint_mins is not None and joint_maxs is not None:
-                q = np.clip(q, joint_mins, joint_maxs)
+                q0 = np.clip(q0, joint_mins, joint_maxs)
 
         raise ValueError("Inverse Kinematik (6D) konvergiert nicht")
 
@@ -328,11 +320,44 @@ class DHKinematicModel:
 
 
 
+
+
+    
     def forward_kinematics(self) -> np.ndarray:
-        dh_transforms = self.compute_transforms()
+        #dh_transforms = self.compute_transforms()
+        #last_key = next(reversed(dh_transforms))
+        #last_dh = dh_transforms[last_key]
+        #return self.base_to_dh @ last_dh @ self.dh_to_tool
+        arr = self.fk(*list(self.joint_angles.values()))
+        return np.array(arr)
+    
+
+    def init_functions(self):
+        # Symbolischer Aufbau
+        dh_transforms = self.compute_transforms_symbolic()
         last_key = next(reversed(dh_transforms))
         last_dh = dh_transforms[last_key]
-        return self.base_to_dh @ last_dh @ self.dh_to_tool
+
+        base_to_dh_sym = sp.Matrix(self.base_to_dh)
+        dh_to_tool_sym = sp.Matrix(self.dh_to_tool)
+        full_transform = base_to_dh_sym * last_dh * dh_to_tool_sym
+
+        pos_expr = full_transform[:3, 3]
+        rot_expr = full_transform[:3, :3]
+
+        q_syms = list(self.symbolic_thetas.values())
+
+        self.fk = sp.lambdify(q_syms, full_transform, modules = "numpy")
+
+        q_syms = list(self.symbolic_thetas.values())
+
+        # Symbolische Jacobi-Teilmatrix (nur Position)
+        J_pos = sp.Matrix.hstack(*[pos_expr.diff(qi) for qi in q_syms])
+        self.fk_pos_func = sp.lambdify(q_syms, pos_expr, 'numpy')
+        self.fk_rot_func = sp.lambdify(q_syms, rot_expr, 'numpy')
+        self.jacobian_func = sp.lambdify(q_syms, J_pos, 'numpy')
+
+    
 
 
 #----------------------------------------------------------------------------------------------------------------
@@ -773,7 +798,7 @@ class Manipulator:
         if tool_name!="":
             self.tool = Tool(tool_name)
         
-        print(urdf)
+        #print(urdf)
         #self.urdf_dictionary = json.dumps(self.urdf_dictionary, indent=4)
         #print(self.urdf_dictionary)
         #self.urdf_dictionary = json.loads(self.urdf_dictionary)
@@ -1049,16 +1074,61 @@ class Manipulator:
 
 
     class Inspector:
+        mouse_down:bool = False
+
+
+
         layout = widgets.Layout(
             #border='1px solid gray',
-            padding='2px',
+            padding='2px 2px, 2px 0px',
             height='40px',
             overflow='hidden',  # Scrollen deaktivieren
             flex='none'
             )
+        
+        button_layout = widgets.Layout(width='30px', height='30px', margin='5px 5px 5px 5px')
+
+
+        layout_box = widgets.Layout(
+                #border='1px solid gray',
+                padding='5px 5px 5px 5px',
+                margin = '5px 5px 5px 5px',
+                #width='100',
+                max_height='800px',
+                overflow='hidden',  # Scrollen deaktivieren
+                flex='none'
+            )
+        
+
+
+        layout_text = widgets.Layout(
+                #border='1px solid gray',
+                padding='5px 5px 5px 5px',
+                margin = '5px 5px 5px 5px',
+                max_width='70px',
+                width = "70px",
+                max_height='50px',
+                overflow='hidden',  # Scrollen deaktivieren
+                flex='none'
+            )
+
+
+        layout_gizmo_box = widgets.Layout(
+                border='1px solid gray',
+                margin = '5px 5px 5px 2px',
+                padding='0px',
+                max_width='300px',
+                max_height='500px',
+                overflow='hidden',  # Scrollen deaktivieren
+                flex='none'
+            )
+
 
         def __init__(self, env:util.Environment, manipulator:Manipulator):
-            self.gizmo_controls:util.Environment.Gizmo_Controls = None
+            #self.gizmo_controls:util.Environment.Gizmo_Controls = None
+            self.trans_step = 0.05
+            self.rot_step = 4.0
+            self.button_wait_time = 0.02
             self.sliders = {}
             self.manipulator = manipulator
             self.content = []
@@ -1108,24 +1178,106 @@ class Manipulator:
                 util.apply_transformation_matrix(manipulator.tcp_target, manipulator.get_global_tcp_transform())
             env.add(manipulator.tcp_target)
             
-            self.gizmo_controls = env.Gizmo_Controls(manipulator.tcp_target, True, True, False, "TCP-Target", 3, 3, 3, -3, -3, -3, widgets_vertical=True, continuous_update=True, callback=self._on_gizmo_controls)
-            self.content.append(self.gizmo_controls.widget)
-            self.inverse_kinematic_button:widgets.Button = widgets.Button(
-                description = "Pose Suchen",
-                tooltip='Berechnet die inverse Kinematik und überführt den Roboter in die gefundene Pose!',
-                layout = widgets.Layout(
-                        #border='1px solid gray',
-                        padding='2px',
-                        height='40px',
-                        width='40',
-                        overflow='hidden',  # Scrollen deaktivieren
-                        flex='none'
-                        )
-                )
-            self.inverse_kinematic_button.on_click(self._on_inverse_kinematic_button)
-            self.content.append(self.inverse_kinematic_button)
+            #-----------------------------------
+            trans_x_minus = widgets.Button(description='-', layout=self.__class__.button_layout, disabled=False)
+            #trans_x_minus.on_click(self._on_trans_x_minus_button)
+            trans_x_label = widgets.Label("X")
+            trans_x_plus = widgets.Button(description='+', layout=self.__class__.button_layout, disabled=False)
+            #trans_x_plus.on_click(self._on_trans_x_plus_button)
+            x_trans_box = widgets.HBox([trans_x_minus, trans_x_label, trans_x_plus])
+
+
+            trans_y_minus = widgets.Button(description='-', layout=self.__class__.button_layout, disabled=False)
+            trans_y_label = widgets.Label("Y")
+            trans_y_plus = widgets.Button(description='+', layout=self.__class__.button_layout, disabled=False)
+            y_trans_box = widgets.HBox([trans_y_minus, trans_y_label, trans_y_plus])
+
+
+            trans_z_minus = widgets.Button(description='-', layout=self.__class__.button_layout, disabled=False)
+            trans_z_label = widgets.Label("Z")
+            trans_z_plus = widgets.Button(description='+', layout=self.__class__.button_layout, disabled=False)
+            z_trans_box = widgets.HBox([trans_z_minus, trans_z_label, trans_z_plus])
+
+            trans_box = widgets.VBox([x_trans_box, y_trans_box, z_trans_box], layout=self.__class__.layout_box)
+
+
+
+            rot_x_minus = widgets.Button(description='-', layout=self.__class__.button_layout, disabled=False)
+            rot_x_label = widgets.Label("R")
+            rot_x_plus = widgets.Button(description='+', layout=self.__class__.button_layout, disabled=False)
+            x_rot_box = widgets.HBox([rot_x_minus, rot_x_label, rot_x_plus])
+
+
+            rot_y_minus = widgets.Button(description='-', layout=self.__class__.button_layout, disabled=False)
+            rot_y_label = widgets.Label("N")
+            rot_y_plus = widgets.Button(description='+', layout=self.__class__.button_layout, disabled=False)
+            y_rot_box = widgets.HBox([rot_y_minus, rot_y_label, rot_y_plus])
+
+
+            rot_z_minus = widgets.Button(description='-', layout=self.__class__.button_layout, disabled=False)
+            rot_z_label = widgets.Label("G")
+            rot_z_plus = widgets.Button(description='+', layout=self.__class__.button_layout, disabled=False)
+            z_rot_box = widgets.HBox([rot_z_minus, rot_z_label, rot_z_plus])
+
+            rot_box = widgets.VBox([x_rot_box, y_rot_box, z_rot_box], layout=self.__class__.layout_box)
+
+
+
+            gizmo_box = widgets.HBox([trans_box, rot_box], layout=self.__class__.layout_gizmo_box)
+
+            self.local_space_check_box = widgets.Checkbox(description="local space", value=False, disabled=False)
+            self.content.append(gizmo_box)
+            self.content.append(self.local_space_check_box)
+            
+
+            x_current_pos = widgets.Label("X:")
+            self.x_current_pos_text = widgets.Text(value="-", layout=self.__class__.layout_text)
+
+            y_current_pos = widgets.Label("Y:")
+            self.y_current_pos_text = widgets.Text(value="-", layout=self.__class__.layout_text)
+
+            z_current_pos = widgets.Label("Z:")
+            self.z_current_pos_text = widgets.Text(value="-", layout=self.__class__.layout_text)
+
+            x_current_rot = widgets.Label("R:")
+            self.x_current_rot_text = widgets.Text(value="-", layout=self.__class__.layout_text)
+
+            y_current_rot = widgets.Label("N:")
+            self.y_current_rot_text = widgets.Text(value="-", layout=self.__class__.layout_text)
+
+            z_current_rot = widgets.Label("G:")
+            self.z_current_rot_text = widgets.Text(value="-", layout=self.__class__.layout_text)
+
+            current_pos_box = widgets.HBox([x_current_pos, self.x_current_pos_text, y_current_pos, self.y_current_pos_text, z_current_pos, self.z_current_pos_text])
+            current_rot_box = widgets.HBox([x_current_rot, self.x_current_rot_text, y_current_rot, self.y_current_rot_text, z_current_rot, self.z_current_rot_text])
+            box = VBox([current_pos_box, current_rot_box], layout=self.__class__.layout_gizmo_box)
+            self.content.append(box)
+            
+            ipyevents.Event(source=trans_x_minus, watched_events=['mousedown', 'mouseup']).on_dom_event(self._on_trans_x_minus_button)
+            ipyevents.Event(source=trans_x_plus, watched_events=['mousedown', 'mouseup']).on_dom_event(self._on_trans_x_plus_button)
+            ipyevents.Event(source=trans_y_minus, watched_events=['mousedown', 'mouseup']).on_dom_event(self._on_trans_y_minus_button)
+            ipyevents.Event(source=trans_y_plus, watched_events=['mousedown', 'mouseup']).on_dom_event(self._on_trans_y_plus_button)
+            ipyevents.Event(source=trans_z_minus, watched_events=['mousedown', 'mouseup']).on_dom_event(self._on_trans_z_minus_button)
+            ipyevents.Event(source=trans_z_plus, watched_events=['mousedown', 'mouseup']).on_dom_event(self._on_trans_z_plus_button)
+
+            ipyevents.Event(source=rot_x_minus, watched_events=['mousedown', 'mouseup']).on_dom_event(self._on_rot_x_minus_button)
+            ipyevents.Event(source=rot_x_plus, watched_events=['mousedown', 'mouseup']).on_dom_event(self._on_rot_x_plus_button)
+            ipyevents.Event(source=rot_y_minus, watched_events=['mousedown', 'mouseup']).on_dom_event(self._on_rot_y_minus_button)
+            ipyevents.Event(source=rot_y_plus, watched_events=['mousedown', 'mouseup']).on_dom_event(self._on_rot_y_plus_button)
+            ipyevents.Event(source=rot_z_minus, watched_events=['mousedown', 'mouseup']).on_dom_event(self._on_rot_z_minus_button)
+            ipyevents.Event(source=rot_z_plus, watched_events=['mousedown', 'mouseup']).on_dom_event(self._on_rot_z_plus_button)
+            
+            #---------------------------------
+
+            #self.gizmo_controls = env.Gizmo_Controls(manipulator.tcp_target, True, True, False, "TCP-Target", 3, 3, 3, -3, -3, -3, widgets_vertical=True, continuous_update=True, callback=self._on_gizmo_controls)
+            #self.content.append(self.gizmo_controls.widget)
+            
             self.widget = widgets.VBox(children = self.content)
-        
+
+            r = R.from_quat(list(self.manipulator.tcp_target.quaternion))
+            euler = r.as_euler('zyx', degrees=True)
+            self.set_rotation_text(euler)
+            self.set_position_text(self.manipulator.tcp_target.position)
 
 
         def _create_theta_sliders(self):
@@ -1139,24 +1291,276 @@ class Manipulator:
                 num += 1
 
 
-        def _on_inverse_kinematic_button(self, button):
+        
+
+        def rot_x(self, change):
+            if self.local_space_check_box.value:
+                util.rotate(self.manipulator.tcp_target, [change, 0, 0], "XYZ")
+            else:
+                util.rotate_global(self.manipulator.tcp_target, [change, 0, 0], "XYZ")
+            r = R.from_quat(list(self.manipulator.tcp_target.quaternion))
+            euler = r.as_euler('zyx', degrees=True)
+            self.set_rotation_text(euler)
+
+
+        def rot_y(self, change):
+            if self.local_space_check_box.value:
+                util.rotate(self.manipulator.tcp_target, [change, 0, 0], "YXZ")
+            else:
+                util.rotate_global(self.manipulator.tcp_target, [0, change, 0], "XYZ")
+            r = R.from_quat(list(self.manipulator.tcp_target.quaternion))
+            euler = r.as_euler('zyx', degrees=True)
+            self.set_rotation_text(euler)
+
+
+        def rot_z(self, change):
+            if self.local_space_check_box.value:
+                util.rotate(self.manipulator.tcp_target, [change, 0, 0], "ZYX")
+            else:
+                util.rotate_global(self.manipulator.tcp_target, [0, 0, change], "XYZ")
+            r = R.from_quat(list(self.manipulator.tcp_target.quaternion))
+            euler = r.as_euler('zyx', degrees=True)
+            self.set_rotation_text(euler)
+        
+
+
+
+        def trans(self, v):#noch fehler drin
+            rot_mat = R.from_quat(list(self.manipulator.tcp_target.quaternion)).as_matrix()
+            if self.local_space_check_box.value:
+                final_v = rot_mat @ v
+            else : final_v = v
+            self.manipulator.tcp_target.position = tuple(np.array([self.manipulator.tcp_target.position[0], self.manipulator.tcp_target.position[1], self.manipulator.tcp_target.position[2]]) + np.array(final_v))
+            self.set_position_text(self.manipulator.tcp_target.position)
+
+
+        def set_position_text(self, pos_vec):
+            self.x_current_pos_text.value = f"{pos_vec[0]}"
+            self.y_current_pos_text.value = f"{pos_vec[1]}"
+            self.z_current_pos_text.value = f"{pos_vec[2]}"
+            
+
+        def set_rotation_text(self, rot_vec):
+            self.x_current_rot_text.value = f"{rot_vec[2]}"
+            self.y_current_rot_text.value = f"{rot_vec[1]}"
+            self.z_current_rot_text.value = f"{rot_vec[0]}"
+
+        def _on_trans_x_minus_button(self, event):
+            def down():
+                while(self.__class__.mouse_down):
+                    self.trans([-self.trans_step,0,0])
+                    self.update_robot()
+                    time.sleep(self.button_wait_time)
+
+            if event['type'] == 'mousedown':
+                self.__class__.mouse_down = True
+                thread = threading.Thread(target=down)
+                thread.start()
+            elif event['type'] == 'mouseup':
+                self.__class__.mouse_down = False
+
+            
+
+        def _on_trans_x_plus_button(self, event):
+            def down():
+                while(self.__class__.mouse_down):
+                    self.trans([self.trans_step,0,0])
+                    self.update_robot()
+                    time.sleep(self.button_wait_time)
+
+            if event['type'] == 'mousedown':
+                self.__class__.mouse_down = True
+                thread = threading.Thread(target=down)
+                thread.start()
+            elif event['type'] == 'mouseup':
+                self.__class__.mouse_down = False
+            
+
+
+
+        def _on_trans_y_minus_button(self, event):
+            def down():
+                while(self.__class__.mouse_down):
+                    self.trans([0,-self.trans_step,0])
+                    self.update_robot()
+                    time.sleep(self.button_wait_time)
+
+            if event['type'] == 'mousedown':
+                self.__class__.mouse_down = True
+                thread = threading.Thread(target=down)
+                thread.start()
+            elif event['type'] == 'mouseup':
+                self.__class__.mouse_down = False
+
+
+
+
+        def _on_trans_y_plus_button(self, event):
+            def down():
+                while(self.__class__.mouse_down):
+                    self.trans([0,self.trans_step,0])
+                    self.update_robot()
+                    time.sleep(self.button_wait_time)
+
+            if event['type'] == 'mousedown':
+                self.__class__.mouse_down = True
+                thread = threading.Thread(target=down)
+                thread.start()
+            elif event['type'] == 'mouseup':
+                self.__class__.mouse_down = False
+
+
+
+
+        def _on_trans_z_minus_button(self, event):
+            def down():
+                while(self.__class__.mouse_down):
+                    self.trans([0,0,-self.trans_step])
+                    self.update_robot()
+                    time.sleep(self.button_wait_time)
+
+            if event['type'] == 'mousedown':
+                self.__class__.mouse_down = True
+                thread = threading.Thread(target=down)
+                thread.start()
+            elif event['type'] == 'mouseup':
+                self.__class__.mouse_down = False
+
+
+
+
+        def _on_trans_z_plus_button(self, event):
+            def down():
+                while(self.__class__.mouse_down):
+                    self.trans([0,0,self.trans_step])
+                    self.update_robot()
+                    time.sleep(self.button_wait_time)
+
+            if event['type'] == 'mousedown':
+                self.__class__.mouse_down = True
+                thread = threading.Thread(target=down)
+                thread.start()
+            elif event['type'] == 'mouseup':
+                self.__class__.mouse_down = False
+
+
+
+        def _on_rot_x_minus_button(self, event):
+            def down():
+                while(self.__class__.mouse_down):
+                    self.rot_x(self.rot_step)
+                    self.update_robot()
+                    time.sleep(self.button_wait_time)
+
+            if event['type'] == 'mousedown':
+                self.__class__.mouse_down = True
+                thread = threading.Thread(target=down)
+                thread.start()
+            elif event['type'] == 'mouseup':
+                self.__class__.mouse_down = False
+
+
+        def _on_rot_x_plus_button(self, event):
+            def down():
+                while(self.__class__.mouse_down):
+                    self.rot_x(-self.rot_step)
+                    self.update_robot()
+                    time.sleep(self.button_wait_time)
+
+            if event['type'] == 'mousedown':
+                self.__class__.mouse_down = True
+                thread = threading.Thread(target=down)
+                thread.start()
+            elif event['type'] == 'mouseup':
+                self.__class__.mouse_down = False
+            
+
+
+
+        def _on_rot_y_minus_button(self, event):
+            def down():
+                while(self.__class__.mouse_down):
+                    self.rot_y(-self.rot_step)
+                    self.update_robot()
+                    time.sleep(self.button_wait_time)
+
+            if event['type'] == 'mousedown':
+                self.__class__.mouse_down = True
+                thread = threading.Thread(target=down)
+                thread.start()
+            elif event['type'] == 'mouseup':
+                self.__class__.mouse_down = False
+
+
+
+
+        def _on_rot_y_plus_button(self, event):
+            def down():
+                while(self.__class__.mouse_down):
+                    self.rot_y(self.rot_step)
+                    self.update_robot()
+                    time.sleep(self.button_wait_time)
+
+            if event['type'] == 'mousedown':
+                self.__class__.mouse_down = True
+                thread = threading.Thread(target=down)
+                thread.start()
+            elif event['type'] == 'mouseup':
+                self.__class__.mouse_down = False
+
+
+
+
+        def _on_rot_z_minus_button(self, event):
+            def down():
+                while(self.__class__.mouse_down):
+                    self.rot_z(-self.rot_step)
+                    self.update_robot()
+                    time.sleep(self.button_wait_time)
+
+            if event['type'] == 'mousedown':
+                self.__class__.mouse_down = True
+                thread = threading.Thread(target=down)
+                thread.start()
+            elif event['type'] == 'mouseup':
+                self.__class__.mouse_down = False
+
+
+
+
+        def _on_rot_z_plus_button(self, event):
+            def down():
+                while(self.__class__.mouse_down):
+                    self.rot_z(self.rot_step)
+                    self.update_robot()
+                    time.sleep(self.button_wait_time)
+
+            if event['type'] == 'mousedown':
+                self.__class__.mouse_down = True
+                thread = threading.Thread(target=down)
+                thread.start()
+            elif event['type'] == 'mouseup':
+                self.__class__.mouse_down = False
+
+
+
+
+
+
+        def update_robot(self):
             r = R.from_quat(list(self.manipulator.tcp_target.quaternion)).as_matrix()
             p = self.manipulator.tcp_target.position
-            q0 = np.array(list(self.manipulator.dh.joint_angles.values()))
+            q0 = np.array(list(self.manipulator.dh.joint_angles.values()), float)
             q_sol = self.manipulator.dh.inverse_kinematics6D_with_limits(p, r, q0, 10, 0.1)
-            self.manipulator.animate_by_theta(q_sol, 0.75, 1, True, False)
+            self.manipulator.animate_by_theta(q_sol, 0.04, 1, True, False)
             self.manipulator.update_dh_angles()
             #------
-            for name, slider in self.sliders.items():
-                if name in self.manipulator.dh.joint_angles:
-                    angle= self.manipulator.dh.joint_angles[name]
-                    #display(name)
-                    #display((angle / (2*np.pi) * 360))
-                    #slider.value = angle / (2*np.pi) * 360
-
-
-        def _on_gizmo_controls(self):
-            pass
+            #i = 0
+            #for name, slider in self.sliders.items():
+                #display(name)
+                #display(((q_sol[i] / (2*np.pi)) * 360.0)
+                #slider.value = (q_sol[i] / (2*np.pi)) * 360.0
+                #i+=1
             
                     
 
@@ -1179,22 +1583,22 @@ class Manipulator:
         def _on_theta_slider(self):
                 transform = self.manipulator.get_global_tcp_transform()
                 util.apply_transformation_matrix(self.manipulator.tcp_target, transform)
-                pos = transform[:3, 3]
-                self.gizmo_controls.set_translation_silently(pos)
-                if self.gizmo_controls.local_space_check_box.value:
-                    euler = util.quaternion_to_euler(self.manipulator.tcp_target.quaternion[0], self.manipulator.tcp_target.quaternion[1], self.manipulator.tcp_target.quaternion[2], self.manipulator.tcp_target.quaternion[3], self.gizmo_controls.rotation_order_dropdown.value)
-                    euler = util.order_angles(euler, self.gizmo_controls.rotation_order_dropdown.value, "XYZ")
-                    self.gizmo_controls.set_rotation_silently(euler)
-                else :
-                    euler = util.quaternion_to_euler(self.manipulator.tcp_target.quaternion[0], self.manipulator.tcp_target.quaternion[1], self.manipulator.tcp_target.quaternion[2], self.manipulator.tcp_target.quaternion[3], self.gizmo_controls.rotation_order_dropdown.value[::-1])
-                    euler = util.order_angles(euler, self.gizmo_controls.rotation_order_dropdown.value[::-1], "XYZ")
-                    self.gizmo_controls.set_rotation_silently(euler)
+                
+                def worker():
+                    position_vector = transform[:3, 3]
+                    rotation_matrix = transform[:3, :3]
+                    r = R.from_matrix(rotation_matrix)
+                    euler = r.as_euler('zyx', degrees=True)
+                    self.set_rotation_text(euler)
+                    self.set_position_text(position_vector)
+                
+                thread = threading.Thread(target=worker)
+                thread.start()
 
 
 
 
         def _on_click_save_button(self, button:widgets.Button):
-            info = None
             try:
                 self.manipulator.learn(pose_name = self.save_pose_textfield.value)
                 opts = list(self.pose_dropdown.options)
@@ -1204,7 +1608,7 @@ class Manipulator:
                 button.icon='check'
             
             except Exception as e:
-                info = self.manipulator.environments.add_info(f"Beim Speichern der Pose ist ein Fehler aufgetreten!: {e}")
+                self.manipulator.environment.add_info(f"Beim Speichern der Pose ist ein Fehler aufgetreten!: {e}")
             def reset():
                 time.sleep(1.5)
                 button.description = "Pose Speichern"
@@ -1225,6 +1629,7 @@ class Manipulator:
 
     def apply_DH_model(self, dh:DHKinematicModel) -> None:
         self.dh = dh
+        self.dh.init_functions()
         DH_transforms:dict = dh.compute_transforms()
         global_transforms:dict = self.compute_global_transform()
         for name, transform in DH_transforms.items():
@@ -1475,11 +1880,10 @@ class lbr_iiwa_14_r820(Manipulator):
         dh_parameters[self.joints[5].name] = {"theta":0,        "d":0.4,       "a":0,             "alpha":np.pi/2}
         dh_parameters[self.joints[6].name] = {"theta":0,        "d":0.0,       "a":0,             "alpha":-np.pi/2}
         dh_parameters[self.joints[7].name] = {"theta":0,        "d":0.126,       "a":0,           "alpha":0}
-        base_transform = pose_to_matrix(self.base_to_baselink_joint.get_position(), self.base_to_baselink_joint.get_rotation(False), False)
-        base_transform_inv = np.linalg.inv(base_transform)
-        k0 = compute_dh_matrix(0.0, 0.0, 0.0, 0.0)
-        base_to_dh = base_transform_inv @ k0
-        DH = DHKinematicModel(dh_parameters=dh_parameters, base_to_dh=base_to_dh)
+        #base_transform = pose_to_matrix(self.base_to_baselink_joint.get_position(), self.base_to_baselink_joint.get_rotation(False), False)
+        #k0 = compute_dh_matrix(0.0, 0.0, 0.0, 0.0)
+        DH = DHKinematicModel(dh_parameters=dh_parameters)
+        #DH.base_to_dh = DHKinematicModel.compute_base_to_dh(base_transform, k0)
         DH.dh_to_tool = DH.compute_dh_to_tool(self.compute_global_transform()[self.link_to_tool_joint.name])
         self.apply_DH_model(DH)
 
@@ -1489,21 +1893,18 @@ class kr6r900_2(Manipulator):
     def __init__(self, tool_name:str = "robotiq_arg2f_140_model", position:np.ndarray = np.array([0,0,0])):
         super().__init__(name="kr6r900_2", tool_name=tool_name, position=position)
         dh_parameters : dict= {}
-        dh_parameters[self.joints[1].name] = {"theta":0,        "d":0,      "a":0.025,   "alpha":np.pi/2}
+        dh_parameters[self.joints[1].name] = {"theta":0,        "d":0.4,    "a":0.025,   "alpha":np.pi/2}
         dh_parameters[self.joints[2].name] = {"theta":0,        "d":0,      "a":0.455,   "alpha":0}
         dh_parameters[self.joints[3].name] = {"theta":np.pi/2,  "d":0,      "a":0.025,   "alpha":np.pi/2}
         dh_parameters[self.joints[4].name] = {"theta":0,        "d":0.42,   "a":0,       "alpha":-np.pi/2}
         dh_parameters[self.joints[5].name] = {"theta":0,        "d":0,      "a":0,       "alpha":np.pi/2}
         dh_parameters[self.joints[7].name] = {"theta":0,        "d":0.09,   "a":0,       "alpha":0}    #7 weil es so im urdf geordnet ist...6 wäre der joint "base_link-base"
-        base_transform = pose_to_matrix(self.base_to_baselink_joint.get_position(), self.base_to_baselink_joint.get_rotation(False), False)
-        base_transform_inv = np.linalg.inv(base_transform)
-        k0 = compute_dh_matrix(0.0, 0.4, 0.0, 0.0)
-        base_to_dh = base_transform_inv @ k0
-        DH = DHKinematicModel(dh_parameters=dh_parameters, base_to_dh=base_to_dh)
+        #base_transform = pose_to_matrix(self.base_to_baselink_joint.get_position(), self.base_to_baselink_joint.get_rotation(False), False)
+        #k0 = compute_dh_matrix(0.0, 0.0, 0.0, 0.0)
+        DH = DHKinematicModel(dh_parameters=dh_parameters)
+        #DH.base_to_dh = DHKinematicModel.compute_base_to_dh(base_transform, k0)
         DH.dh_to_tool = DH.compute_dh_to_tool(self.compute_global_transform()[self.link_to_tool_joint.name])
         self.apply_DH_model(DH)
-
-
 
 
 
@@ -1513,17 +1914,16 @@ class irb6640_185_280(Manipulator):
     def __init__(self, tool_name:str = "robotiq_arg2f_140_model", position:np.ndarray = np.array([0,0,0])):
         super().__init__(name="irb6640_185_280", tool_name=tool_name, position=position)
         dh_parameters : dict= {}
-        dh_parameters[self.joints[1].name] = {"theta":0,        "d":0,      "a":0.32,   "alpha":np.pi/2}
+        dh_parameters[self.joints[1].name] = {"theta":0,        "d":0.78,      "a":0.32,   "alpha":np.pi/2}
         dh_parameters[self.joints[2].name] = {"theta":np.pi/2,  "d":0,      "a":1.075,  "alpha":0}
         dh_parameters[self.joints[3].name] = {"theta":0,        "d":0,      "a":0.2,    "alpha":np.pi/2}
         dh_parameters[self.joints[4].name] = {"theta":0,        "d":1.392,  "a":0,      "alpha":-np.pi/2}
         dh_parameters[self.joints[5].name] = {"theta":0,        "d":0,      "a":0,      "alpha":np.pi/2}
         dh_parameters[self.joints[6].name] = {"theta":0,        "d":0.2,    "a":0,      "alpha":0}
-        base_transform = pose_to_matrix(self.base_to_baselink_joint.get_position(), self.base_to_baselink_joint.get_rotation(False), False)
-        base_transform_inv = np.linalg.inv(base_transform)
-        k0 = compute_dh_matrix(0.0, 0.78, 0.0, 0.0)
-        base_to_dh = base_transform_inv @ k0
-        DH = DHKinematicModel(dh_parameters=dh_parameters, base_to_dh=base_to_dh)
+        #base_transform = pose_to_matrix(self.base_to_baselink_joint.get_position(), self.base_to_baselink_joint.get_rotation(False), False)
+        #k0 = compute_dh_matrix(0.0, 0.0, 0.0, 0.0)
+        DH = DHKinematicModel(dh_parameters=dh_parameters)
+        #DH.base_to_dh = DHKinematicModel.compute_base_to_dh(base_transform, k0)
         DH.dh_to_tool = DH.compute_dh_to_tool(self.compute_global_transform()[self.link_to_tool_joint.name])
         self.apply_DH_model(DH)
 

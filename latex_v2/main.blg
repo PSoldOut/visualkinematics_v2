@@ -1,17 +1,15 @@
 [0] Config.pm:308> INFO - This is Biber 2.20
 [0] Config.pm:311> INFO - Logfile is 'main.blg'
-[103] biber-MSWIN64:340> INFO - === 
-[142] Biber.pm:420> INFO - Reading 'main.bcf'
-[273] Biber.pm:994> INFO - Found 21 citekeys in bib section 0
-[287] Biber.pm:4463> INFO - Processing section 0
-[298] Biber.pm:4654> INFO - Looking for bibtex file 'quellen.bib' for section 0
-[351] bibtex.pm:1713> INFO - LaTeX decoding ...
-[374] bibtex.pm:1519> INFO - Found BibTeX data source 'quellen.bib'
-[508] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'variable = shifted' with 'variable = non-ignorable'
-[509] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[509] Biber.pm:4283> INFO - Sorting list 'nyt/global//global/global/global' of type 'entry' with template 'nyt' and locale 'de-DE'
-[509] Biber.pm:4289> INFO - No sort tailoring available for locale 'de-DE'
-[530] bbl.pm:676> INFO - Writing 'main.bbl' with encoding 'UTF-8'
-[541] bbl.pm:779> INFO - Output to main.bbl
-[541] Biber.pm:131> WARN - software entry 'trimesh' (quellen.bib): Invalid format '2019-12-8' of date field 'date' - ignoring
-[541] Biber.pm:133> INFO - WARNINGS: 1
+[202] biber-MSWIN64:340> INFO - === 
+[278] Biber.pm:420> INFO - Reading 'main.bcf'
+[391] Biber.pm:994> INFO - Found 21 citekeys in bib section 0
+[405] Biber.pm:4463> INFO - Processing section 0
+[430] Biber.pm:4654> INFO - Looking for bibtex file 'quellen.bib' for section 0
+[489] bibtex.pm:1713> INFO - LaTeX decoding ...
+[523] bibtex.pm:1519> INFO - Found BibTeX data source 'quellen.bib'
+[722] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[722] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'variable = shifted' with 'variable = non-ignorable'
+[722] Biber.pm:4283> INFO - Sorting list 'nyt/global//global/global/global' of type 'entry' with template 'nyt' and locale 'de-DE'
+[723] Biber.pm:4289> INFO - No sort tailoring available for locale 'de-DE'
+[773] bbl.pm:676> INFO - Writing 'main.bbl' with encoding 'UTF-8'
+[783] bbl.pm:779> INFO - Output to main.bbl

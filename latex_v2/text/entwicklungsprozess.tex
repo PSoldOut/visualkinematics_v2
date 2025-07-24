@@ -57,15 +57,15 @@ Diese Repositories sind in der Regel als eigenständige ROS-Packages organisiert
 weitere Unterpackages für die einzelnen Robotermodelle.
 Dies entspricht der typischen Struktur innerhalb des ROS-Ökosystems,
 in dem Software, Konfigurationen und Modelle modular in Form von ROS-Packages aufgebaut sind \doublecite[]{ROS_Packages_Design}.
-Die Unterpackages enthalten zudem Dateien im Xacro Format, wobei es sich um die URDF-Beschreibung des jeweiligen Modells handelt.
+Die Unterpackages enthalten zudem Dateien im Xacro-Format, wobei es sich um die URDF-Beschreibung des jeweiligen Modells handelt.
 
 Eine weitere Quelle für 3D-Modelle von Industrierobotern ist GrabCAD, ein Unternehmen,
 das Softwarelösungen im Bereich 3D-Druck anbietet.
 Darüber hinaus betreibt GrabCAD eine Online-Plattform,
 auf der Mitglieder der Community CAD-Dateien hochladen, teilen und herunterladen können \doublecite[]{GrabCAD_Company}.
-Auf der Online-Plattfrom sind CAD-Dateien von Industrierobotern wie zum Beispiel der kr\_140\_3200\_2 von KUKA, der
+Auf der Online-Plattfrom sind CAD-Dateien von Industrierobotern wie zum Beispiel der kr\_140\_3200\_2 von KUKA,
 der PUMA 560 und viele andere.
-Die CAD-Dateien liegen in den meisten Fällen im STEP, STL oder im SLDASM Format vor und lassen sich mit CAD-Software
+Die CAD-Dateien liegen in den meisten Fällen im STEP-, STL- oder im SLDASM-Format vor und lassen sich mit CAD-Software
 wie beispielsweise FreeCAD öffnen und bearbeiten.
 
 
@@ -120,7 +120,7 @@ welches maschinell effizienter eingelesen werden kann \doublecite[]{numpy_npy_np
 Die 3D-Modelle wurden in das NPZ-Format konvertiert, um die Ladezeiten zu optimieren.
 Um die Auswirkung auf die Ladezeit nachzuvollziehen wurde eine Messung durchgeführt.
 Dabei wurde die Ladezeit beim Einlesen einer .npz-Datei mit derjenigen beim Laden der entsprechenden .stl-Datei für dieselbe Mesh verglichen.
-Der Test, welcher dieser Arbeit unter dem Namen benchmark\_npz\_vs\_stl.ipynb beiliegt zeigt, dass der Ladevorgang aus der .stl Datei
+Der Test, welcher dieser Arbeit unter dem Namen benchmark\_npz\_vs\_stl.ipynb beiliegt ergab, dass der Ladevorgang aus der .stl Datei
 c.a 0.7757 Sekunden benötigte. Der Ladevorgang aus der .npz-Datei benötigte hingegen c.a 0.0002 Sekunden und ist damit c.a 2800 mal schneller:
 
 \begin{center}
@@ -167,15 +167,15 @@ um als Bestandteil einer Szene gerendert werden zu können.
 Bereits in der vorangegangenen Projektarbeit wurde hierfür eine Klasse namens Environment entwickelt, 
 die die Erstellung einer Szene einschließlich Beleuchtung, Kamera, Basiskoordinatensystem und Gitter kapselt. 
 Darüber hinaus verwaltet sie alle Objekte, die über die display-Funktion im Jupyter Notebook gerendert werden sollen \doublecite[15]{philipp}.
-Diese Objekte erben von der Klasse Object3D aus pythreejs und können ihrerseits weitere Object3D-Instanzen über ein Array namens children enthalten. 
-Transformationen werden dabei an die children weitergegeben, wodurch Transformationshierarchien entstehen. 
+Diese Objekte erben von der Klasse Object3D aus pythreejs und können ihrerseits weitere Object3D-Instanzen über ein Array namens Children enthalten. 
+Transformationen werden dabei an die Children weitergegeben, wodurch Transformationshierarchien entstehen. 
 Dieses Prinzip lässt sich gezielt für die visuelle Darstellung und Animation von Robotern mit serieller Kinematik nutzen: 
-Jedes Glied der kinematischen Kette verwaltet dabei das nachfolgende Gelenk als child, welches wiederum das nächste Glied als child verwaltet. 
+Jedes Glied der kinematischen Kette verwaltet dabei das nachfolgende Gelenk als Child, welches wiederum das nächste Glied als Child verwaltet. 
 Auf diese Weise bewegen sich alle nachfolgenden Glieder korrekt mit, wenn ein vorheriges Glied transformiert wird.
 
 Im STL-Format, welches trianguläre Mesh-Modelle beschreibt und in den genutzten Quellen häufig verwendet wird, werden nur die Normalenvektoren pro Fläche eines Dreiecks gespeichert \doublecite[297]{HALLMANN2019293}.
 Das MeshStandardMaterial, welches in diesem Framework für alle Geometrien verwendet wird verwendet physically based rendering (PBR),
-wobei das Beleuchtungsmodell pro Fragment (pro Pixel) und nicht pro Fläche anwendet wird \doublecite[]{threejs_docs_MeshStandardMaterial}.
+wobei das Beleuchtungsmodell pro Fragment (pro Pixel) und nicht pro Fläche angewendet wird \doublecite[]{threejs_docs_MeshStandardMaterial}.
 Aus diesem Grund müssen die Vertex-Normalen manuell berechnet werden,
 die dann im Hintergrund von pythreejs baryzentrisch Interpoliert werden um einen Normalenvektor pro Pixel zu bestimmen \doublecite[9]{mileff2024per}.
 Für die Berechnung der Normalen ist ein gängiger Algorithmus implementiert worden.
@@ -229,7 +229,7 @@ Zuletzt wird $n_i$ mit $n_i \leftarrow \frac{n_i}{||n_i||}$ normiert, sofern $||
 
 Die so berechneten Normalen müssen dem BufferGeometry-Objekt übergeben werden und können dann für das Shading pro Pixel verwendet werden.
 Durch diese Form des Shadings wirken die Oberflächen von Komplexen Geometrien realistisch und glatt \doublecite[]{threejs_docs_MeshStandardMaterial}.
-Abbildung \ref{fig:render_links} zeigt die mit dem Framework gerenderten Einzelglieder des KR6 R900-2 von KUKA.
+Abbildung \ref{fig:render_links} zeigt die mithilfe des Frameworks gerenderten Einzelglieder des KR6 R900-2 von KUKA.
 
 \vspace{1em}
 \begin{figure}[H]
@@ -262,12 +262,15 @@ das innerhalb des Frameworks weiterverarbeitet werden kann.
 Um den Code generisch zu halten und den allgemeinen Aufbau eines Industrieroboters abzubilden, wurden an dieser Stelle die Klassen Joint, Link, Tool und Manipulator erstellt.
 Die Klassen Link, Joint und Tool verwalten die relative Pose innerhalb der kinematischen Kette, sowie die Mesh und das Material.
 Die Klasse Joint verwaltet zusätzlich die relative Pose und die Minimal- und Maximalgrenzen sowie die Drehachse eines Gelenks.
-die 3 Klasse verwalten darüber hinaus ein Array von Children um die Hierarchie innerhalb der kinematischen Kette abzubilden.
+Da ein Joint keine Mesh hat, wurde hier als graphische Repräsentation lediglich die sogenannte Group Klasse von pythreejs genutzt,
+die keine Mesh beinhaltet, jedoch eine Pose im Raum besitzt,
+sodass trotz nicht vorhandener Geometrie dennoch eine Transformationshierarchie aufgestellt werden kann und die Transformationen and die Children weiter gegeben werden.
+Die 3 Klassen Link, Joint und Tool verwalten darüber hinaus ein Array von Children um die Hierarchie innerhalb der kinematischen Kette abzubilden.
 Die Klasse Manipulator repräsentiert den Industrieroboter und verwaltet Links, Joints und maximal eine Tool-Instanz.
 Der Konstruktor der Manipulator-Klasse ist so gestaltet worden, dass der Name des Robotermodells übergeben werden muss.
 Anschließend werden auf Basis des zuvor geparsten URDF-Strings automatisch die notwendigen Objekte wie Links und Joints erzeugt und miteinander verknüpft.
 Das Roboter-Objekt kann einer Environment-Instanz übergeben und somit gerendert werden.
-Abbildung \ref{fig:render_robot} zeigt den im Framework gerenderten KR6 R900-2 von KUKA in Nullstellung mit Greifer.
+Abbildung \ref{fig:render_robot} zeigt den mithilfe des Frameworks gerenderten KR6 R900-2 von KUKA in Nullstellung mit Greifer.
 
 
 \vspace{1em}
@@ -335,7 +338,7 @@ Da die Interpolation der einzelnen Gelenke auf der gemeinsamen Zeitvariable $t$ 
 landen alle Gelenke gleichzeitig in ihrer Zielpose, was der synchronen Point-to-Point Bewegungsplanung entspricht \doublecite[71]{weber-Industrieroboter}.
 
 
-\subsection{Benutzerschnittstelle}
+\subsection{grafische Benutzeroberfläche}
 Das Framework verfügt bereits über die Funktionalität, interaktive Bedienelemente wie Schieberegler oder Checkboxen direkt in ein Jupyter-Notebook einzubetten.
 Dabei wird auf die Bibliothek ipywidgets zurückgegriffen,
 die speziell für die Verwendung innerhalb von Jupyter-Umgebungen entwickelt wurde.
@@ -353,8 +356,342 @@ Abbildung \ref{fig:ps5} zeigt die grafische Benutzeroberfläche von PolyScope5.
 \end{figure}
 \vspace{1em}
 
-Dabei wurde ein eigenes Layout entwickelt, das es ermöglicht, sowohl die Gelenkwinkel manuell über Schieberegler einzustellen als auch die Pose des Endeffektors im lokalen oder globalen Koordinatensystem zu verändern.
-Neben einzelnen Schiebereglern für jedes Gelenk wurde auch eine eigene Sektion zur Anzeige und direkten Manipulation der Endeffektor-Pose implementiert.
+Dabei wurde ein eigenes Layout entwickelt, das es ermöglicht,
+sowohl die Gelenkwinkel manuell über Schieberegler einzustellen als auch die Pose des Endeffektors im lokalen oder globalen Koordinatensystem zu verändern.
+Neben einzelnen Schiebereglern für jedes Gelenk wurde eine eigene Sektion zur Anzeige und direkten Manipulation der Endeffektor-Pose implementiert.
+Da während der Entwicklung festgestellt wurde, dass ipywidgets keine Möglichkeit bietet,
+einen Knopf gedrückt zu halten und damit einen Wert kontinuierlich zu aktualisieren,
+konnte eine Endeffektorsteuerung wie in Abbildung \ref{fig:ps5} dargestellt, nicht vollständig umgesetzt werden.
+Stattdessen wurde auf Schieberegler zurückgegriffen. Auch hier ergeben sich jedoch Einschränkungen durch die Library: So lässt sich der numerische Wert, der rechts neben dem Schieberegler angezeigt wird, nicht ausblenden.
+Gerade beim Umschalten auf das lokale Koordinatensystem führt dies zu Problemen hinsichtlich der Benutzerführung.
+In dieser Darstellungsweise besitzt der Endeffektor stets die Position $(0, 0, 0)$ und Rotation $(0, 0, 0)$ relativ zu sich selbst.
+Die tatsächliche Transformation wirkt sich zwar korrekt auf die globale Pose aus, die dargestellten Werte im UI geben jedoch keinen sinnvollen Bezug mehr zur realen Veränderung.
+In diesem Fall dienen die Schieberegler ausschließlich zur Interaktion, nicht zur Anzeige der tatsächlichen Pose.
+Eine Möglichkeit zur Ausblendung der Werte wäre daher wünschenswert gewesen.
+Abbildung \ref{fig:gui} zeigt das Framework mit viewport und Benutzeroberfläche während der Ausführung innerhalb eines Jupyter-Notebooks
+
+
+\vspace{1em}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{images/UI.PNG}
+    \caption{Viewport mit grafischer Benutzeroberfläche}
+    \label{fig:gui}
+\end{figure}
+\vspace{1em}
+
+
+Die beiden Felder oben rechts in der Benutzeroberfläche, wie in Abbildung \ref{fig:gui} dargestellt, dienen der sogenannten Teach-Funktion.
+Beim Betätigen des Buttons \textquote{Pose speichern} werden die aktuellen Gelenkwinkel unter dem im danebenstehenden Textfeld angegebenen Namen in einer JSON-Datei gespeichert.
+Die so gespeicherte Pose ist anschließend über das Dropdown-Menü unter dem vergebenen Namen auswählbar und kann über den Button \textquote{Pose Einnehmen} mithilfe des Animationsalgorithmus wieder angefahren werden.
+
+Darunter befindet sich eine Reihe von Schiebereglern, die dynamisch basierend auf der Anzahl der Gelenke des Roboters erzeugt werden.
+Jedes Gelenk lässt sich innerhalb der in der URDF-Beschreibung definierten Minimal- und Maximalgrenzen konfigurieren. Diese Werte werden zur Laufzeit eingelesen.
+Durch Interaktion mit den Reglern wird die jeweilige Joint-Instanz direkt manipuliert, wodurch sich auch alle nachfolgenden Glieder in der kinematischen Kette entsprechend bewegen.
+
+Im Gegensatz zum Animationsalgorithmus erfolgt diese Bewegung nicht zeitlich interpoliert, sondern es wird lediglich die Mesh der jeweiligen Joint-Instanz unmittelbar rotiert. Dadurch entsteht eine intuitive und reaktive Steuerung in weicher Echtzeit.
+
+In dem Unteren Bereich Namens
+
+
+
+\subsection{Denavit-Hartenberg-Konvention}
+Um den didaktischen Mehrwert des Frameworks zu erhöhen, wurde die Denavit-Hartenberg-Konvention aufgegriffen und grafisch nachvollziehbar umgesetzt.
+Hierzu wurde eine eigene Klasse mit dem Namen DHKinematicModel entwickelt. Ziel war es, die grafische Darstellung vom mathematischen Berechnungsmodell klar zu trennen,
+um die Wartbarkeit und Lesbarkeit des Codes zu verbessern.
+Die Klasse ermöglicht die Erstellung von Homogenen Transformationsmatrizen anhand der jeweiligen DH-Parameter:
+\begin{itemize}
+    \item \( \theta_i \): Rotationswinkel um die \( z \)-Achse
+    \item \( d_i \): Verschiebung entlang der \( z \)-Achse
+    \item \( a_i \): Verschiebung entlang der \( x \)-Achse
+    \item \( \alpha_i \): Rotationswinkel um die \( x \)-Achse
+\end{itemize}
+
+Die Berechnung erfolgt mithilfe der standardisierten DH-Transformationsmatrix, wie sie beispielsweise in \doublecite[275]{Robotics_Vision_and_Control} dargestellt ist:
+
+\begin{equation}
+    A_i =
+    \begin{bmatrix}
+    \cos\theta_i & -\sin\theta_i\cos\alpha_i & \sin\theta_i\sin\alpha_i & a_i\cos\theta_i \\
+    \sin\theta_i & \cos\theta_i\cos\alpha_i  & -\cos\theta_i\sin\alpha_i & a_i\sin\theta_i \\
+    0            & \sin\alpha_i              & \cos\alpha_i              & d_i \\
+    0            & 0                         & 0                         & 1
+    \end{bmatrix}
+\end{equation}
+
+
+Darüber hinaus kapselt die Klasse sowohl die Berechnung der Transformationsmatrix vom globalen Basiskoordinatensystem zur Roboterbasis
+als auch die Berechnung der Transformation vom letzten Denavit-Hartenberg-Koordinatensystem zum Koordinatensystem des Endeffektors.
+
+
+
+Die Transformation von der globalen Szene zur Roboterbasis ist notwendig, um den Roboter beliebig im Raum platzieren zu können.
+Diese Transformation wird durch folgende homogene Matrix beschrieben:
+
+
+\begin{equation}
+    T_{\text{global} \rightarrow \text{base}} =
+    \begin{bmatrix}
+    R & \mathbf{p} \\
+    \mathbf{0}^\top & 1
+    \end{bmatrix}
+\end{equation}
+
+wobei \( R \in \mathbb{R}^{3 \times 3} \) eine Rotationsmatrix und \( \mathbf{p} \in \mathbb{R}^3 \) ein Translationsvektor ist.
+Die Matrix platziert die Roboterbasis bezüglich des globalen Koordinatensystems und kann der Klasse DHKinematicModel im Konstruktor übergeben werden.
+
+
+Die Berechnung der Transformation vom letzten Denavit-Hartenberg-Koordinatensystem zum Koordinatensystem des Endeffektors 
+erfolgt über das Invertieren der Transformation vom globalen Basiskoordinatensystem zum letzten DH-Koordinatensystem und der nachfolgenden
+Multiplikation mit der bekannten Pose des Werkzeugs:
+
+\begin{equation}
+    T_{\text{dh}_n \rightarrow \text{ee}} = T_{\text{global} \rightarrow \text{dh}_n}^{-1} \cdot T_{\text{global} \rightarrow \text{ee}}
+\end{equation}
+
+Dabei bezeichnet \( T_{\text{global} \rightarrow \text{dh}_n} \) die gesamte Vorwärtstransformation vom globalen Koordinatensystem bis zum letzten DH-Koordinatensystem,
+die sich zusammensetzt aus der Matrix \( T_{\text{global} \rightarrow \text{base}} \cdot A_1 \cdot A_2 \cdots A_n \).
+Die resultierende Transformation \( T_{\text{dh}_n \rightarrow \text{ee}} \) beschreibt somit die relative Lage des Werkzeugs bezogen auf das letzte DH-Koordinatensystem.
+
+Damit ist die gesamte Vorwärtstransformation nach der Denavit-Hartenberg-Konvention in dieser Klasse gekapselt und modular verfügbar.
+
+Die partiellen Vorwärtstransformationen
+
+
+\[
+\mathcal{F}^{(i)} = 
+\left\{
+T_{\text{global} \rightarrow \text{base}} \cdot A_1,\ 
+T_{\text{global} \rightarrow \text{base}} \cdot A_1 A_2,\ 
+\dots,\ 
+T_{\text{global} \rightarrow \text{base}} \cdot \prod_{j=1}^{i} A_j
+\right\}
+\]
+
+werden außerhalb der Klasse genutzt, um DH-Koordinatensysteme korrekt im globalen Raum zu platzieren und gemeinsam mit dem Robotermodell visuell darzustellen,
+wie in Abbildung \ref{fig:robot_with_dh}
+dargestellt wird.
+
+\vspace{1em}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/robot_with_dh.PNG}
+    \caption{Ansicht der 3D-Szene des Frameworks mit dem KR6 R900-2 von KUKA mit Denavit-Hartenberg-Koordinatensystemen}
+    \label{fig:robot_with_dh}
+\end{figure}
+\vspace{1em}
+
+Dazu ist eine Funktion des Frameworks genutzt worden, die bereits im Rahmen der Projektarbeit entwickelt wurde und eine graphische Repräsentation eines Koordinatensystems erstellt.
+Diese Koordinatensysteme sind aber nicht direkt anhand der Transformationsmatrizen $\mathcal{F}^{(i)}$ transformiert worden.
+Das hätte den nachteil, dass die Berechnung nach jeder Bewegung des Roboters wiederholt werden müsste.
+stadessen wurde der Joint-Klasse eine Variable zur verwaltung des Koordinatensystems $K_i$ hinzugefügt und diese dem Group-Objekt (graphische Repräsentation) des vorherhigen Gelenks $j_{i-1}$ in der kinematischen Kette als Child zugewiesen,
+sodass die Transformation von $j_{i-1}$ an das Koordinatensystem $K_i$ weitergegeben wird.
+Da die Transformation von $K_i$ nun relativ zur Transformation des Gelenks $j_{i-1}$ angewendet wird,
+ist es notwendig die relative Transformation $T_{rel}$ zu berechnen die auf das Koordinatensystem $K_i$
+anzuwenden ist um die korrekte Lage zu erhalten.
+Dazu wird die globale Transformation des Gelenks bzw. des Group-Objekts $T_{j_{i-1}}$ invertiert und mit der globalen Transformation des DH-Koordinatensystems $T_{glob_i}$ multipliziert:
+\[
+    T_{rel_i} = T_{j_{i-1}}^{-1} \cdot T_{glob_i}
+\] 
+Die relative Transformation $T_{rel_i}$ kann dann einmalig auf $K_i$ angewendet werden,
+sodass dieses anschließend die korrekte Lage im Raum einnimmt und bei der Bewegung des Roboters automatisch durch die Transformationshierarchie mittransformiert wird.
+Zur besseren Sichtbarkeit der Koordinatensysteme wurde in der Manipulator-Klasse mit pythreejs eine Funktion ergänzt, die das Robotermodell transparent erscheinen lässt (Abbildung \ref{fig:robot_with_dh}), indem dem Material ein opacity-Wert zugewiesen wird.
+Durch die visuelle Darstellung der DH-Koordinatensysteme kann jede Zwischenkonfiguration entlang der Kinematischen kette nachvollziehbar in der Szene gerendert und analysiert werden, was den abstrakten Berechnungsprozess greifbar und anschaulich macht.
+
+
+
+\subsection{Rückwärtstransformation (Inverse Kinematik)}
+
+Das Framework soll laut den Anforderungen die Möglichkeit bieten, die Pose des Endeffektors (TCP) sowohl über globale als auch lokale Koordinaten zu steuern.
+Damit sich die Glieder des Roboters entsprechend mitbewegen, müssen aus der Zielpose des TCP die Gelenkkoordinaten $q_0, q_1, \dots, q_n$ im Konfigurationsraum bestimmt werden.
+Da auch Roboter mit mehr als 6 Gelenken, wie der \textit{LBR iiwa} von KUKA, unterstützt werden sollen, wurde ein numerisches Verfahren auf Basis der Newton-Raphson-Methode implementiert.
+
+\vspace{1em}
+\noindent
+\textbf{Symbolische Vorbereitung}
+
+Um die symbolischen Ausdrücke für die Vorwärtstransformation effizient aufzubauen, wird die Mathematik-Library \textit{SymPy} in Kombination mit \textit{NumPy} verwendet.
+\textit{SymPy} erlaubt die symbolische Definition der Denavit-Hartenberg-Matrizen
+\[
+A_1^{\text{sym}}, A_2^{\text{sym}}, \dots, A_n^{\text{sym}},
+\]
+welche sukzessive zur Gesamttransformation multipliziert werden:
+
+\[
+A_{\text{ges}}^{\text{sym}} = A_1^{\text{sym}} \cdot A_2^{\text{sym}} \cdots A_n^{\text{sym}}
+\]
+
+Die symbolische Transformationsmatrix des TCP ergibt sich somit zu:
+\[
+T_{\text{TCP}}^{\text{sym}} = T_{\text{global} \rightarrow \text{base}} \cdot A_{\text{ges}}^{\text{sym}} \cdot T_{\text{DH}_n \rightarrow \text{EE}}
+\]
+
+\vspace{1em}
+\noindent
+\textbf{Analytischer Positionsteil}
+
+Die Position des Endeffektors $\mathbf{p}_{\text{sym}}$ ist in der vierten Spalte von $T_{\text{TCP}}^{\text{sym}}$ enthalten:
+
+\[
+T_{\text{TCP}}^{\text{sym}} =
+\begin{bmatrix}
+R_{\text{sym}} & \mathbf{p}_{\text{sym}} \\
+\mathbf{0}^\top & 1
+\end{bmatrix}
+\]
+
+Durch symbolische Ableitung von $\mathbf{p}_{\text{sym}}$ nach den Gelenkwinkeln entsteht die symbolische Jacobi-Matrix für die Position:
+\[
+J_{\text{pos}}^{\text{sym}} =
+\begin{bmatrix}
+\frac{\partial p_x}{\partial q_0} & \cdots & \frac{\partial p_x}{\partial q_n} \\
+\frac{\partial p_y}{\partial q_0} & \cdots & \frac{\partial p_y}{\partial q_n} \\
+\frac{\partial p_z}{\partial q_0} & \cdots & \frac{\partial p_z}{\partial q_n}
+\end{bmatrix}
+\]
+
+Diese Matrix wird mit \texttt{sympy.lambdify} in eine effiziente \textit{NumPy}-Funktion überführt, um zur Laufzeit schnell numerische Werte für gegebene Gelenkwinkel berechnen zu können.
+
+\vspace{1em}
+\noindent
+\textbf{Numerischer Rotationsteil}
+
+Da die analytische Ableitung der Orientierung (Rotationsmatrix) aufwendig und potenziell instabil ist, wird der entsprechende Jacobi-Anteil numerisch approximiert:
+Für jede Komponente $q_i$ wird die Orientierung durch kleine Änderungen von $q_i$ variiert und die Änderung als Rotationsvektor $\Delta \boldsymbol{\theta}$ interpretiert:
+
+\[
+J_{\text{rot}}[:,i] \approx \frac{\boldsymbol{\theta}(R(q_i + \delta) R(q)^{-1})}{\delta}
+\]
+
+Die daraus resultierende numerische Rotations-Jacobi-Matrix $J_{\text{rot}}$ hat ebenfalls Dimension $3 \times n$ und wird mit dem analytischen Positionsteil zu einer vollständigen Jacobi-Matrix zusammengeführt:
+
+\[
+J_{\text{gesamt}} =
+\begin{bmatrix}
+J_{\text{pos}} \\
+J_{\text{rot}}
+\end{bmatrix}
+\]
+
+\vspace{1em}
+\noindent
+\textbf{Iteratives Lösungsverfahren}
+
+Die Lösung der inversen Kinematik erfolgt iterativ. In jedem Schritt wird die Differenz zwischen aktueller und Ziel-Pose (Position und Orientierung) als Fehlervektor $\mathbf{e}$ berechnet:
+
+\[
+\mathbf{e} =
+\begin{bmatrix}
+\mathbf{p}_{\text{ziel}} - \mathbf{p}_{\text{aktuell}} \\
+\boldsymbol{\theta}(R_{\text{ziel}} R_{\text{aktuell}}^{-1})
+\end{bmatrix}
+\]
+
+Mithilfe der Pseudoinversen der vollständigen Jacobi-Matrix $J_{\text{gesamt}}$ wird dann ein Gelenkwinkel-Inkrement $\Delta \mathbf{q}$ bestimmt:
+
+\[
+\Delta \mathbf{q} = J_{\text{gesamt}}^{+} \cdot \mathbf{e}
+\]
+
+Der Gelenkwinkelvektor wird entsprechend aktualisiert:
+
+\[
+\mathbf{q}_{\text{neu}} = \mathbf{q}_{\text{alt}} + \Delta \mathbf{q}
+\]
+
+Dieser Vorgang wird iteriert, bis der Fehlervektor eine vordefinierte Toleranz unterschreitet oder eine maximale Anzahl an Iterationen erreicht ist.
+Gelenkwinkelgrenzen können dabei durch Clipping nach jeder Iteration berücksichtigt werden.
+Es ergibt sich folgender Algorithmus für die implementierung:
+
+\vspace{1em}
+\begin{algorithm}[H]
+    \caption{Iterative Inverse Kinematik mit symbolischem Vorwärtspfad und Gelenkwinkelgrenzen}
+    \label{alg:inverse_kinematik}
+    \begin{algorithmic}[1]
+        \State \textbf{Symbolische Vorbereitung:}
+        \State $A_i^{\text{sym}} \gets$ DH-Matrix für jedes Gelenk $i$
+        \State $A_{\text{ges}}^{\text{sym}} \gets A_1^{\text{sym}} \cdot A_2^{\text{sym}} \cdots A_n^{\text{sym}}$
+        \State $T_{\text{TCP}}^{\text{sym}} \gets T_{\text{global} \rightarrow \text{base}} \cdot A_{\text{ges}}^{\text{sym}} \cdot T_{\text{DH}_n \rightarrow \text{EE}}$
+        \State $\mathbf{p}_{\text{sym}} \gets T_{\text{TCP}}^{\text{sym}}[0{:}3,\, 3]$
+        \State $R_{\text{sym}} \gets T_{\text{TCP}}^{\text{sym}}[0{:}3,\, 0{:}3]$
+        \State $J_{\text{pos}}^{\text{sym}} \gets \frac{\partial \mathbf{p}_{\text{sym}}}{\partial \mathbf{q}}$
+        \State $\mathit{fk\_pos},\, \mathit{fk\_rot},\, \mathit{jacobian\_pos} \gets \texttt{lambdify}(...)$
+
+        \Statex
+        \State \textbf{Iterative Lösung:}
+        \State $q \gets q_0$ \Comment{Initialer Gelenkwinkelvektor}
+        \For{$i \in \{0, \dots, \mathit{max\_iters}\}$}
+            \State $p_{\text{aktuell}} \gets \mathit{fk\_pos}(q)$
+            \State $R_{\text{aktuell}} \gets \mathit{fk\_rot}(q)$
+            \State $e_p \gets p_{\text{ziel}} - p_{\text{aktuell}}$
+            \State $R_{\text{fehler}} \gets R_{\text{ziel}} \cdot R_{\text{aktuell}}^{-1}$
+            \State $e_r \gets \mathit{asRotVec}(R_{\text{fehler}})$
+            \State $e \gets \begin{bmatrix} e_p \\ e_r \end{bmatrix}$ \Comment{Gesamter Fehlervektor}
+            \If{$\|e\| < \mathit{tol}$}
+                \State \Return $q$
+            \EndIf
+            \State $J_{\text{pos}} \gets \mathit{jacobian\_pos}(q)$
+            \State $J_{\text{rot}} \gets \text{zeros}(3,\, \text{len}(q))$
+            \For{$j \in \{0, \dots, \text{len}(q)-1\}$}
+                \State $\delta q \gets \text{zeros\_like}(q)$
+                \State $\delta q[j] \gets \delta$
+                \State $R^+ \gets \mathit{fk\_rot}(q + \delta q)$
+                \State $R_{\Delta} \gets R^+ \cdot R_{\text{aktuell}}^{-1}$
+                \State $J_{\text{rot}}[:, j] \gets \mathit{asRotVec}(R_{\Delta}) / \delta$
+            \EndFor
+            \State $J_{\text{gesamt}} \gets \begin{bmatrix} J_{\text{pos}} \\ J_{\text{rot}} \end{bmatrix}$
+            \State $\Delta q \gets J_{\text{gesamt}}^{+} \cdot e$
+            \State $q \gets q + \Delta q$
+            \If{$\mathit{joint\_mins} \neq \mathit{None}$ \textbf{and} $\mathit{joint\_maxs} \neq \mathit{None}$}
+                \State $q \gets \mathit{clip}(q,\, \mathit{joint\_mins},\, \mathit{joint\_maxs})$
+            \EndIf
+        \EndFor
+        \State \Return \texttt{Fehler: keine Konvergenz innerhalb max\_iters}
+    \end{algorithmic}
+\end{algorithm}
+\vspace{1em}
+
+
+
+
+
+Der in Algorithmus~\ref{alg:inverse_kinematik} dargestellte Ablauf kombiniert die zuvor erläuterten symbolischen und numerischen Schritte zu einem konsistenten IK-Verfahren. 
+Ziel ist es, für eine gegebene Zielpose eine Konfiguration der Gelenkwinkel zu finden, welche diese Pose möglichst genau erreicht.
+
+Nach Initialisierung des Gelenkwinkelvektors $\mathbf{q}$ wird in jeder Iteration zunächst die aktuelle Pose des TCP berechnet, indem die transformierte symbolische Vorwärtstransformation mit den aktuellen Gelenkwerten ausgewertet wird. 
+Aus der resultierenden Position und Orientierung wird anschließend der Fehlervektor $\mathbf{e}$ gebildet, der die Differenz zur Zielpose beschreibt.
+
+Zur Bestimmung eines Korrekturvorschlags für die Gelenkwinkel wird die zusammengesetzte Jacobi-Matrix $J_{\text{gesamt}}$ berechnet.
+Diese besteht aus einem analytischen Positionsteil sowie einem numerisch approximierten Rotationsanteil.
+Die dabei verwendeten Funktionen wurden in einem separaten symbolischen Vorbereitungsschritt mit \textit{SymPy} erzeugt und zur Laufzeit mit \textit{NumPy} effizient ausgewertet.
+
+Die Pseudoinverse der Jacobi-Matrix dient zur Berechnung eines Inkrements $\Delta\mathbf{q}$, welches die Gelenkwinkel in Richtung der Zielpose verschiebt.
+Dabei werden numerische Stabilität und Redundanzbehandlung durch die Pseudoinverse sichergestellt, sodass auch Roboter mit mehr Freiheitsgraden als erforderlich unterstützt werden.
+
+Nach jeder Iteration erfolgt optional eine Begrenzung der Winkel durch Clipping innerhalb der spezifizierten Gelenkgrenzen.
+Das Verfahren wird wiederholt, bis entweder eine maximale Anzahl an Iterationen erreicht oder die Pose innerhalb einer vorgegebenen Toleranz getroffen wurde.
+
+Die Algorithmusstruktur folgt damit eng dem theoretischen Aufbau:
+\vspace{-0.5em}
+\begin{itemize}
+  \item symbolische Modellierung der Kinematik über die DH-Parameter,
+  \item Kombination analytischer und numerischer Methoden zur Jacobi-Berechnung,
+  \item schrittweise Konvergenz durch Anwendung der Newton-Raphson-Methode im Gelenkraum.
+\end{itemize}
+
+
+Nachdem die Rückwärtstransformation implementiert worden ist,
+wird diese beim verschieben des TCP-Koordinatensystems in der 3D-Szene aufgerufen um die Gelenke und Glieder des Roboters entsprechend mitzubewegen.
+Da die implementierte Rückwärtstransformation anhand des Newton-Raphson-Verfahrens sehr rechenintensiv ist, wurde die 
+
+
+
+
+
+
+
+
+
 
 
 

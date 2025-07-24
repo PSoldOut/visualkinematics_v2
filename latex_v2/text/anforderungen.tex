@@ -2,22 +2,53 @@
 Im Rahmen dieser Bachelorarbeit wird das in der vorangegangenen Projektarbeit entwickelte Framework erweitert.
 Während in der Projektarbeit der Fokus auf grundlegenden Transformationen und der Visualisierung kinematischer Konzepte lag,
 steht nun die Integration eines stationären Robotermodells, konkret eines Knickarmroboters, im Zentrum der Weiterentwicklung.
-Die folgenden funktionalen Anforderungen ergeben sich aus den Zielsetzungen dieser Arbeit:
+Die folgenden funktionalen und nicht-funktionalen Anforderungen ergeben sich aus den Zielsetzungen dieser Arbeit:
 
 \begin{itemize}
-    \item \textbf{Integration eines Knickarmroboters:} \\
-    Das Framework soll um ein Modell eines typischen Industrieroboters mit Knickarmstruktur erweitert werden. Dieses Modell bildet die Grundlage für die Umsetzung kinematischer Verfahren.
+    \item \textbf{Funktionale Anforderungen:}
+        \begin{itemize}
+        \item \textbf{Integration eines Knickarmroboters:} \\
+        Das Framework soll um ein Modell eines typischen Industrieroboters mit Knickarmstruktur erweitert werden. Dieses Modell bildet die Grundlage für die Umsetzung kinematischer Verfahren.
 
-    \item \textbf{Vorwärts- und Rückwärtstransformation:} \\
-    Die kinematischen Modelle des Roboters sollen sowohl die Berechnung der Endeffektorposition aus gegebenen Gelenkwinkeln (Vorwärtstransformation) als auch die Bestimmung notwendiger Gelenkkonfigurationen für eine gegebene Endeffektorposition (Rückwärtstransformation) ermöglichen. Beide Transformationen sollen visuell nachvollziehbar simuliert und dargestellt werden.
+        \item \textbf{Vorwärts- und Rückwärtstransformation:} \\
+        Das Denavit-Hartenberg Modell des Roboters soll sowohl die Berechnung der Endeffektorposition aus gegebenen Gelenkwinkeln (Vorwärtstransformation) als auch die Bestimmung notwendiger Gelenkkonfigurationen für eine gegebene Endeffektorposition (Rückwärtstransformation) ermöglichen.
+        Beide Transformationen sollen visuell nachvollziehbar simuliert und dargestellt werden.
 
-    \item \textbf{Endeffektorsteuerung durch interaktive Bewegung des Koordinatensystems:} \\
-    Es soll möglich sein, das Koordinatensystem des Endeffektors im dreidimensionalen Raum interaktiv zu verschieben und zu rotieren. Der Roboter soll dieser Bewegung durch inverse Kinematik folgen, wie es in gängigen Robotersteuerungen (z.B. bei Universal Robots) üblich ist.
+        \item \textbf{Endeffektorsteuerung durch interaktive Bewegung des Koordinatensystems:} \\
+        Es soll möglich sein, das Koordinatensystem des Tool-Center-Point (TCP) im dreidimensionalen Raum interaktiv zu verschieben und zu rotieren.
+        Der Roboter soll dieser Bewegung durch inverse Kinematik folgen, wie es in gängigen Robotersteuerungen (z.B. bei Universal Robots) üblich ist.
 
-    \item \textbf{Bewegung im lokalen und globalen Koordinatensystem:} \\
-    Die Steuerung des Endeffektors soll sowohl im lokalen Werkzeugkoordinatensystem als auch im globalen Weltkoordinatensystem erfolgen können. Eine Umschaltung zwischen diesen Modi soll benutzerfreundlich möglich sein.
+        \item \textbf{Bewegung im lokalen und globalen Koordinatensystem:} \\
+        Die Steuerung des TCP soll sowohl im lokalen Werkzeugkoordinatensystem als auch im globalen Weltkoordinatensystem erfolgen können. Eine Umschaltung zwischen diesen Modi soll benutzerfreundlich möglich sein.
 
-    \item \textbf{Manuelle Konfiguration der Gelenkwinkel:} \\
-    Über interaktive Schieberegler (Slider) soll der Nutzer die Gelenkwinkel des Roboters direkt beeinflussen können. Änderungen der Konfiguration sollen unmittelbar in der Visualisierung sichtbar werden, wobei die aktuelle Position des Endeffektors kontinuierlich anhand der Vorwärtstransformation berechnet wird.
+        \item \textbf{Manuelle Konfiguration der Gelenkwinkel:} \\
+        Über interaktive Schieberegler (Slider) soll der Nutzer die Gelenkwinkel des Roboters direkt beeinflussen können.
+        Änderungen der Konfiguration sollen unmittelbar in der Visualisierung sichtbar werden,
+        wobei die aktuelle Position des Endeffektors kontinuierlich anhand der Vorwärtstransformation berechnet wird.
+    \end{itemize}
+
+    \item \textbf{Nicht-Funktionale Anforderungen:}
+        \begin{itemize}
+        \item \textbf{Effiziente Ausführung:} \\
+        Die Anwendung soll unter typischen Systemvoraussetzungen eine flüssige Benutzerinteraktion ohne spürbare Ruckler ermöglichen.
+
+        \item \textbf{Benutzerfreundliche Bedienbarkeit:} \\
+        Die Benutzeroberfläche soll intuitiv und ohne vorherige Schulung bedienbar sein.
+        Alle Hauptfunktionen sollen mit maximal drei Klicks erreichbar sein.
+        Fehlbedienungen sollen durch visuelles Feedback und validierte Eingabefelder minimiert werden.
+
+        \item \textbf{Intuitive Vermittlung kinematischer Konzepte:} \\
+        Die Anwendung soll eine intuitive Zuordnung zwischen grafischer Darstellung und mathematischem Modell (DH-Konvention) ermöglichen.
+        Die Benutzeroberfläche soll so gestaltet sein, dass die Bedienung des Roboters gleichzeitig als Lernprozess dient.
+        \end{itemize}
 \end{itemize}
-Diese Anforderungen bauen auf den bereits in der Projektarbeit definierten Zielen auf, insbesondere auf der dort formulierten langfristigen Perspektive, stationäre Roboterkinematik in das Framework zu integrieren. Im Fokus steht weiterhin die intuitive Vermittlung komplexer kinematischer Zusammenhänge durch interaktive und visuelle Darstellungen in der browserbasierten JupyterLab-Umgebung.
+
+
+
+
+
+Diese Anforderungen bauen auf den bereits in der Projektarbeit definierten Zielen auf,
+insbesondere auf der dort formulierten langfristigen Perspektive,
+stationäre Roboterkinematik in das Framework zu integrieren.
+Im Fokus steht weiterhin die intuitive Vermittlung komplexer kinematischer Zusammenhänge durch interaktive und visuelle Darstellungen in der browserbasierten JupyterLab-Umgebung.
+

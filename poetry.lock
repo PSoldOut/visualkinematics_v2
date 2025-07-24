@@ -907,6 +907,25 @@ docs = ["recommonmark", "sphinx", "sphinx-rtd-theme"]
 test = ["nbval (>=0.9.2)", "pytest (>=4)", "pytest-cov"]
 
 [[package]]
+name = "ipyevents"
+version = "2.0.2"
+description = "A custom widget for returning mouse and keyboard events to Python"
+optional = false
+python-versions = ">=3.6"
+groups = ["main"]
+files = [
+    {file = "ipyevents-2.0.2-py3-none-any.whl", hash = "sha256:60c2a9e992bdc41e8577aa27e57b124efafa48a59a3bff886029fe5700d546b3"},
+    {file = "ipyevents-2.0.2.tar.gz", hash = "sha256:26e878b0c5854bc8b6bd6a2bd2c89b314ebe86fda642f4d2434051545bab258f"},
+]
+
+[package.dependencies]
+ipywidgets = ">=7.6.0"
+
+[package.extras]
+docs = ["jupyterlab (>=3)", "nbsphinx", "sphinx"]
+test = ["nbval", "pytest", "pytest-cov"]
+
+[[package]]
 name = "ipykernel"
 version = "6.29.5"
 description = "IPython Kernel for Jupyter"
@@ -3678,4 +3697,4 @@ mujoco = ["mujoco (>=3.2.3)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10"
-content-hash = "720a17e81d5d46c00dbc4898783eefb01007318e7a7adaf2e6796cff1f2418d1"
+content-hash = "eaf2a40db7ff15556872b426e591d3d6508b447e83c95dbcf4cd5cf9e3b877a3"

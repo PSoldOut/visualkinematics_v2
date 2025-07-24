@@ -6,6 +6,8 @@
 \contentsline {figure}{\numberline {5}{\ignorespaces schematische Zeichnung eines Knickarmroboters mit 6 Gelenken und DH-Koordinatensystemen. Quelle: \doublecite [39]{weber-Industrieroboter}}}{7}{figure.5}%
 \contentsline {figure}{\numberline {6}{\ignorespaces schematische Zeichnung eines Planarroboters mit 2 Achsen. Quelle: \doublecite [51]{weber-Industrieroboter}}}{8}{figure.6}%
 \contentsline {figure}{\numberline {7}{\ignorespaces schematische Zeichnung einer Gelenkstellung die zu Unendlich vielen Lösungen führt. Quelle: \doublecite [51]{weber-Industrieroboter}}}{9}{figure.7}%
-\contentsline {figure}{\numberline {8}{\ignorespaces Ansicht der 3D-Szene des Frameworks mit einzelnen Gliedern des KR6 R900-2 von KUKA}}{18}{figure.8}%
-\contentsline {figure}{\numberline {9}{\ignorespaces Ansicht der 3D-Szene des Frameworks mit dem KR6 R900-2 von KUKA in Nullstellung mit Greifer}}{19}{figure.9}%
-\contentsline {figure}{\numberline {10}{\ignorespaces Benutzeroberfläche von PolyScope5. Quelle: \doublecite []{universal_robots_ps5}}}{22}{figure.10}%
+\contentsline {figure}{\numberline {8}{\ignorespaces Ansicht der 3D-Szene des Frameworks mit einzelnen Gliedern des KR6 R900-2 von KUKA}}{19}{figure.8}%
+\contentsline {figure}{\numberline {9}{\ignorespaces Ansicht der 3D-Szene des Frameworks mit dem KR6 R900-2 von KUKA in Nullstellung mit Greifer}}{21}{figure.9}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Benutzeroberfläche von PolyScope5. Quelle: \doublecite []{universal_robots_ps5}}}{23}{figure.10}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Viewport mit grafischer Benutzeroberfläche}}{24}{figure.11}%
+\contentsline {figure}{\numberline {12}{\ignorespaces Ansicht der 3D-Szene des Frameworks mit dem KR6 R900-2 von KUKA mit Denavit-Hartenberg-Koordinatensystemen}}{27}{figure.12}%

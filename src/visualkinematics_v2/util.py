@@ -16,6 +16,7 @@ from numba import njit
 from typing import Callable
 from contextlib import contextmanager
 import threading
+import ipyevents
 
 
 
@@ -1188,6 +1189,9 @@ class Environment:
         
 
 
+        
+        
+
 
     def toggle_grid(self, change):
         '''
@@ -1235,7 +1239,7 @@ class Environment:
         layout1 = widgets.Layout(
             #border='1px solid gray',
             padding='5px',
-            height='600px',
+            height=f'{self.renderer.height}px',
             #width ='1600px',
             overflow_y='auto',
             overflow_x = "auto",
@@ -1255,6 +1259,7 @@ class Environment:
         else:
             display(HBox(children = [mainbox, widget_box]))
         display(self.info_container)
+
 
         
     def set_frame_widgets(self, bool):
@@ -1571,7 +1576,10 @@ class Environment:
                 o == "yxy" or o == "YXY" or
                 o == "yzy" or o == "YZY" or
                 o == "zxz" or o == "ZXZ"):
-                set_rotation(self.obj_renderable, [self.x_rot_slider.value, self.y_rot_slider.value, self.z_rot_slider.value], self.rotation_order_dropdown.value)
+                if self.local_space_check_box.value:
+                    set_rotation(self.obj_renderable, [self.x_rot_slider.value, self.y_rot_slider.value, self.z_rot_slider.value], self.rotation_order_dropdown.value)
+                else:
+                    set_rotation_global(self.obj_renderable, [self.x_rot_slider.value, self.y_rot_slider.value, self.z_rot_slider.value], self.rotation_order_dropdown.value)
             else:
                 angles = order_angles([self.x_rot_slider.value, self.y_rot_slider.value, self.z_rot_slider.value], "XYZ", self.rotation_order_dropdown.value)
                 if self.local_space_check_box.value:

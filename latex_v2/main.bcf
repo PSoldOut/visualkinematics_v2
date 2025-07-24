@@ -2397,12 +2397,12 @@
     <bcf:citekey order="22" intorder="1">Industrieroboter</bcf:citekey>
     <bcf:citekey order="23" intorder="1">weber-Industrieroboter</bcf:citekey>
     <bcf:citekey order="24" intorder="1">lbr_image</bcf:citekey>
-    <bcf:citekey order="25" intorder="1">WEINGARTSHOFER2019507</bcf:citekey>
-    <bcf:citekey order="26" intorder="1">Industrieroboter</bcf:citekey>
+    <bcf:citekey order="25" intorder="1">lbr_image</bcf:citekey>
+    <bcf:citekey order="26" intorder="1">WEINGARTSHOFER2019507</bcf:citekey>
     <bcf:citekey order="27" intorder="1">Industrieroboter</bcf:citekey>
     <bcf:citekey order="28" intorder="1">Industrieroboter</bcf:citekey>
     <bcf:citekey order="29" intorder="1">Industrieroboter</bcf:citekey>
-    <bcf:citekey order="30" intorder="1">weber-Industrieroboter</bcf:citekey>
+    <bcf:citekey order="30" intorder="1">Industrieroboter</bcf:citekey>
     <bcf:citekey order="31" intorder="1">weber-Industrieroboter</bcf:citekey>
     <bcf:citekey order="32" intorder="1">weber-Industrieroboter</bcf:citekey>
     <bcf:citekey order="33" intorder="1">weber-Industrieroboter</bcf:citekey>
@@ -2413,28 +2413,30 @@
     <bcf:citekey order="38" intorder="1">weber-Industrieroboter</bcf:citekey>
     <bcf:citekey order="39" intorder="1">weber-Industrieroboter</bcf:citekey>
     <bcf:citekey order="40" intorder="1">weber-Industrieroboter</bcf:citekey>
-    <bcf:citekey order="41" intorder="1">Robotics_Vision_and_Control</bcf:citekey>
-    <bcf:citekey order="42" intorder="1">philipp</bcf:citekey>
-    <bcf:citekey order="43" intorder="1">pythreejs_Geometry_types</bcf:citekey>
-    <bcf:citekey order="44" intorder="1">pythreejs_doc</bcf:citekey>
-    <bcf:citekey order="45" intorder="1">ROS_Industrial</bcf:citekey>
-    <bcf:citekey order="46" intorder="1">ROS_Industrial_repo_search</bcf:citekey>
-    <bcf:citekey order="47" intorder="1">ROS_Packages_Design</bcf:citekey>
-    <bcf:citekey order="48" intorder="1">GrabCAD_Company</bcf:citekey>
-    <bcf:citekey order="49" intorder="1">Thingiverse</bcf:citekey>
-    <bcf:citekey order="50" intorder="1">onShape</bcf:citekey>
-    <bcf:citekey order="51" intorder="1">Robotics_Vision_and_Control</bcf:citekey>
-    <bcf:citekey order="52" intorder="1">trimesh</bcf:citekey>
-    <bcf:citekey order="53" intorder="1">numpy_npy_npz_format</bcf:citekey>
-    <bcf:citekey order="54" intorder="1">philipp</bcf:citekey>
-    <bcf:citekey order="55" intorder="1">HALLMANN2019293</bcf:citekey>
-    <bcf:citekey order="56" intorder="1">threejs_docs_MeshStandardMaterial</bcf:citekey>
-    <bcf:citekey order="57" intorder="1">mileff2024per</bcf:citekey>
-    <bcf:citekey order="58" intorder="1">threejs_docs_MeshStandardMaterial</bcf:citekey>
-    <bcf:citekey order="59" intorder="1">xacrodoc</bcf:citekey>
-    <bcf:citekey order="60" intorder="1">philipp</bcf:citekey>
-    <bcf:citekey order="61" intorder="1">weber-Industrieroboter</bcf:citekey>
-    <bcf:citekey order="62" intorder="1">universal_robots_ps5</bcf:citekey>
+    <bcf:citekey order="41" intorder="1">weber-Industrieroboter</bcf:citekey>
+    <bcf:citekey order="42" intorder="1">Robotics_Vision_and_Control</bcf:citekey>
+    <bcf:citekey order="43" intorder="1">philipp</bcf:citekey>
+    <bcf:citekey order="44" intorder="1">pythreejs_Geometry_types</bcf:citekey>
+    <bcf:citekey order="45" intorder="1">pythreejs_doc</bcf:citekey>
+    <bcf:citekey order="46" intorder="1">ROS_Industrial</bcf:citekey>
+    <bcf:citekey order="47" intorder="1">ROS_Industrial_repo_search</bcf:citekey>
+    <bcf:citekey order="48" intorder="1">ROS_Packages_Design</bcf:citekey>
+    <bcf:citekey order="49" intorder="1">GrabCAD_Company</bcf:citekey>
+    <bcf:citekey order="50" intorder="1">Thingiverse</bcf:citekey>
+    <bcf:citekey order="51" intorder="1">onShape</bcf:citekey>
+    <bcf:citekey order="52" intorder="1">Robotics_Vision_and_Control</bcf:citekey>
+    <bcf:citekey order="53" intorder="1">trimesh</bcf:citekey>
+    <bcf:citekey order="54" intorder="1">numpy_npy_npz_format</bcf:citekey>
+    <bcf:citekey order="55" intorder="1">philipp</bcf:citekey>
+    <bcf:citekey order="56" intorder="1">HALLMANN2019293</bcf:citekey>
+    <bcf:citekey order="57" intorder="1">threejs_docs_MeshStandardMaterial</bcf:citekey>
+    <bcf:citekey order="58" intorder="1">mileff2024per</bcf:citekey>
+    <bcf:citekey order="59" intorder="1">threejs_docs_MeshStandardMaterial</bcf:citekey>
+    <bcf:citekey order="60" intorder="1">xacrodoc</bcf:citekey>
+    <bcf:citekey order="61" intorder="1">philipp</bcf:citekey>
+    <bcf:citekey order="62" intorder="1">weber-Industrieroboter</bcf:citekey>
+    <bcf:citekey order="63" intorder="1">universal_robots_ps5</bcf:citekey>
+    <bcf:citekey order="64" intorder="1">Robotics_Vision_and_Control</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nyt">
