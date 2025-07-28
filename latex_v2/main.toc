@@ -11,9 +11,15 @@
 \contentsline {subsection}{\numberline {3.1}Beschaffung von 3D-Modellen}{12}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Laden von 3D-Modellen}{15}{subsection.3.2}%
 \contentsline {subsection}{\numberline {3.3}Graphische Darstellung von Industrierobotern}{16}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}URDF-Parsing}{19}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.4}URDF-Parsing und Verarbeitung}{19}{subsection.3.4}%
 \contentsline {subsection}{\numberline {3.5}Objektorientierte Modellierung der Kinematik}{20}{subsection.3.5}%
 \contentsline {subsection}{\numberline {3.6}Animation}{21}{subsection.3.6}%
 \contentsline {subsection}{\numberline {3.7}grafische Benutzeroberfläche}{23}{subsection.3.7}%
 \contentsline {subsection}{\numberline {3.8}Denavit-Hartenberg-Konvention}{26}{subsection.3.8}%
 \contentsline {subsection}{\numberline {3.9}Rückwärtstransformation (Inverse Kinematik)}{29}{subsection.3.9}%
+\contentsline {subsection}{\numberline {3.10}Stresstest zur Ressourcen- und Performance-Analyse}{34}{subsection.3.10}%
+\contentsline {subsubsection}{\numberline {3.10.1}Testaufbau}{34}{subsubsection.3.10.1}%
+\contentsline {subsubsection}{\numberline {3.10.2}Durchführung}{35}{subsubsection.3.10.2}%
+\contentsline {subsubsection}{\numberline {3.10.3}Ergebnisse}{36}{subsubsection.3.10.3}%
+\contentsline {subsubsection}{\numberline {3.10.4}Interpretation}{36}{subsubsection.3.10.4}%
+\contentsline {section}{\numberline {4}Aufbau}{37}{section.4}%

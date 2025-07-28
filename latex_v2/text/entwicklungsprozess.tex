@@ -104,6 +104,7 @@ Aus diesen Gründen sind im weiteren Verlauf des Entwicklungsprozesses hauptsäc
 
 
 \subsection{Laden von 3D-Modellen}
+\label{subsec:Laden von 3D-Modellen}
 Um die 3D-Modelle der Industrieroboter innerhalb des Frameworks rendern zu können,
 müssen diese zunächst aus den heruntergeladenen Dateien in den Arbeitsspeicher geladen werden.
 Hierfür wird die Python-Bibliothek trimesh verwendet, die das Einlesen und die Verarbeitung von triangulären Meshes unterstützt.
@@ -113,36 +114,7 @@ sondern setzen sich aus mehreren einzelnen Teil-Meshes zusammen, von denen jede 
 Diese Teilmodelle entsprechen den physischen Gliedern des Roboters.
 Beim Laden der Meshes ist aufgefallen dass der Vorgang pro Mesh einige Sekunden in Anspruch nimmt und Insbesondere bei komplexeren Modellen
 zu einer Gesamtladezeit von knapp einer Minute pro Roboter-Modell geführt hat.
-Verwendet wurde das in Tabelle \ref{tab:system_a} dargestellte System A.
-
-\vspace{1em}
-\begin{table}[H]
-\centering
-\begin{tabular}{|p{4.5cm}|p{9.5cm}|}
-\hline
-\textbf{Komponente} & \textbf{Spezifikation} \\
-\hline
-Gerätetyp & Desktop \\
-\hline
-Hersteller & Eigenbau (ASUS-Mainboard, OEM-Konfiguration) \\
-\hline
-Prozessor (CPU) & Intel\textsuperscript{\textregistered} Core\texttrademark\ i7-9700K CPU mit 3,60\,GHz, 8 Kerne, 8 logische Prozessoren \\
-\hline
-Arbeitsspeicher (RAM) & 16\,GB (2x 8\,GB, 3000\,MHz, DIMM) \\
-\hline
-Grafikeinheit (GPU) & NVIDIA GeForce RTX 2070 \\
-\hline
-Massenspeicher & Samsung SSD 970 EVO Plus 500\,GB \\
-\hline
-Betriebssystem & Windows 10 Home (64-bit), Version 10.0.19045 Build 19045 \\
-\hline
-\end{tabular}
-\caption{Technische Spezifikationen des Testsystems „System A“}
-\label{tab:system_a}
-\end{table}
-\vspace{1em}
-
-
+Verwendet wurde das in Tabelle \ref{tab:system_a_dt} dargestellte System A DT, wobei es sich um einen Desktop PC handelt.
 Um die Ladezeiten der Meshes zu reduzieren und dadurch die Benutzerfreundlichkeit zu verbessern, wurde das NPZ-Format von NumPy verwendet.
 Im Gegensatz zu den üblichen Text-basierten Formaten handelt es sich beim NPZ-Format um ein binäres Format,
 welches maschinell effizienter eingelesen werden kann \doublecite[]{numpy_npy_npz_format}.
@@ -159,7 +131,7 @@ c.a 0.7757 Sekunden benötigte. Der Ladevorgang aus der .npz-Datei benötigte hi
     \end{verbatim}
 \end{center}
 
-Für diesen Test ist das bereits erwähnte System A aus Tabelle \ref{tab:system_a} zum Einsatz gekommen.
+Für diesen Test ist das bereits erwähnte System A DT aus Tabelle \ref{tab:system_a_dt} zum Einsatz gekommen.
 Um das NPZ-Format nutzen zu können, müssen die 3D-Modelle zunächst in dieses Format konvertiert und dauerhaft gespeichert werden.
 So können sie beim nächsten Start des Frameworks direkt aus der .npz-Datei geladen werden.
 Dafür wurde ein Lazy-Loading-Mechanismus implementiert, der zunächst prüft, ob bereits eine .npz-Datei für die gewünschte Mesh vorhanden ist.
@@ -177,7 +149,6 @@ Abhängig vom Ergebnis wird die Datei entweder geladen oder zunächst erstellt:
         \end{algorithmic}
     \end{algorithm}
 \vspace{1em}
-
 
 
 
@@ -275,15 +246,20 @@ Die Farbe der Glieder ist frei gewählt worden.
 
 
 
-\subsection{URDF-Parsing}
+\subsection{URDF-Parsing und Verarbeitung}
 Um eine korrekte Darstellung zu erreichen, müssen die Glieder entsprechend einer URDF-Beschreibung räumlich korrekt positioniert und orientiert werden.
-Auch Farbinformationen der Glieder lassen sich aus den URDF-Dateien der verwendeten Quellen extrahieren.
+Auch Farbinformationen der Glieder sowie der Pfad zum 3D-Modell lassen sich aus den URDF-Dateien der verwendeten Quellen extrahieren.
 Dazu ist es zunächst erforderlich, die vorhandenen .xacro-Dateien einzulesen und in gültiges URDF-Format zu überführen.
 Für diesen Zweck wird die Bibliothek xacrodoc verwendet, die über pip installiert werden kann.
 Mit Hilfe von xacrodoc lassen sich die Xacro-Dateien zur Laufzeit als URDF-String in den Arbeitsspeicher laden \doublecite[]{xacrodoc}.
 Im weiteren Verlauf wurde eine Funktion implementiert,
 die diesen URDF-String analysiert und in ein strukturierteres Dictionary überführt,
-das innerhalb des Frameworks weiterverarbeitet werden kann.
+das innerhalb des Frameworks weiterverarbeitet werden kann um die Glieder und Gelenke des Roboters zu initialisieren.
+Um die Performance zu steigern, werden die Glieder pro Robotermodell parallel verarbeitet,
+indem ihre Initialisierung jeweils in einem eigenen Thread erfolgt.
+Diese parallele Verarbeitung ist an dieser Stelle sinnvoll,
+da beim Initialisieren der Glieder auch das Laden der jeweiligen Meshes erfolgt.
+Dieses benötigt pro Mesh, wie in Kapitel \ref{subsec:Laden von 3D-Modellen} gezeigt, eine gewisse Zeit.
 
 
 
@@ -720,18 +696,111 @@ Nachdem die Rückwärtstransformation implementiert worden ist,
 wird diese beim verschieben des TCP-Koordinatensystems in der 3D-Szene aufgerufen um die Gelenke und Glieder des Roboters entsprechend mitzubewegen.
 Da die implementierte Rückwärtstransformation anhand des Newton-Raphson-Verfahrens sehr rechenintensiv ist, wird die symbolische Vorbereitung für jeden
 Roboter nur einmalig bei der Initialisierung dessen berechnet um Ressourcen zu sparen.
+Damit konnte die Aktualisierungsrate des Roboters effektiv gesteigert werden.
+Im gegensatz zum Rendering findet die Berechnung der Rückwärtstransformation im Backend statt.
+Daher steigt die Belastung des Servers bei mehreren Clients die gleichzeitig versuchen die Rückwärtstransformation
+zu berechnen.
 
 
 
 
+\subsection{Stresstest zur Ressourcen- und Performance-Analyse}
+Um den Ressourcenverbrauch und die Performance des Frameworks unter Mehrfachverbindungen zu analysieren,
+wurde ein Stresstest durchgeführt.
+Im Fokus standen dabei insbesondere die Ausführung von Animationen sowie die Berechnung der Vorwärts- und Rückwärtstransformationen während des Betriebs,
+da das Funktionen sind die im realen Betrieb durchgehend aufgerufen werden.
+Das Laden der Meshes wurde in diesem Test nicht berücksichtigt,
+da es lediglich einmalig beim Start des Frameworks erfolgt.
+
+
+\subsubsection{Testaufbau}
+Der Stresstest wurde im Computerraum C.1.30 des Fachbereichs Informatik der Fachhochschule Dortmund durchgeführt.
+Dabei kam ein Laptop der Marke HP (System B LT, siehe Tabelle \ref{tab:system_b_lt}) als Server zum Einsatz.
+Als Clients wurden acht Workstations der Marke Dell (System C WS, siehe Tabelle \ref{tab:system_c_ws}) verwendet.
+Für die Netzwerkkommunikation wurde ein Access Point der Marke TP-Link (System D AP, siehe Tabelle \ref{tab:system_d_ap}) eingesetzt.
+Server und Clients waren über WLAN mit dem Access Point verbunden.
+
+
+\vspace{1em}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/aufbau.JPG}
+    \caption{Testaufbau der Ressourcen- und Performance-Analyse}
+    \label{fig:aufbau}
+\end{figure}
+\vspace{1em}
+
+
+\subsubsection{Durchführung}
+Auf dem System B LT wurden 8 unabhängige JupyterLab-Instanzen jeweils mit einem eigenen Kernel-Prozess gestartet.
+Auf jedem der 8 Clients wurde ein Browser-Tab in Google Chrome geöffnet, um eine Verbindung zu jeweils einem dieser Kernel herzustellen.
+Dadurch war jedem Kernel genau ein Client zugeordnet und umgekehrt. 
+Auf jedem der Clients wurde eine Dauerschleife ausgeführt in der fortlaufend die Rückwärtstransformation berechnet und eine Animation durchgeführt wurde.
+Die Rückwärtstransformation beinhaltet dabei die Berechnung der Vorwärtstransformation.
+Zur Messung der Systemauslastung auf dem Server (System B LT) wurde über eine Dauer von 3 Minuten alle 5 Sekunden die Ausgabe des Kommandozeilenwerkzeugs top in eine Datei geschrieben.
+Auf einem der Clients wurden während der Ausführung die Auslastungswerte des Taskmanagers mithilfe des Snipping Tools dokumentiert.
+Anschließend wurde der gleiche Test erneut durchgeführt,
+jedoch mit nur 4 Clients und 4 JupyterLab-Instanzen bzw. Kernel-Prozessen.
+
+\subsubsection{Ergebnisse}
+Die top-Ausgabe zeigt für 8 Instanzen eine durchschnittliche CPU-Auslastung von 98.8\% davon 92.33\% im User Space wo die JupyterLab-Instanzen ausgeführt worden sind.
+Der Load Average lag bei 12.15.
+Die gesamte RES-Speichernutzung der 8 JupyterLab-Instanzen lag im Durchschnitt bei 3483.22\,MiB
+Für 4 Instancen lag eine durchschnittliche CPU-Auslastung von 98.9\% davon 69.57\% im User Space.
+Der Load Average lad hier bei 8.07.
+Die gesamte RES-Speichernutzung bei 1621.85\,MiB
+
+
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Inst.} & \textbf{CPU Auslastung (\%)} & \textbf{User Space (\%)} & \textbf{Load Average} & \textbf{RES (MiB)} \\
+\hline
+8 & 98{,}8 & 92{,}3 & 12{,}15 & 3483{,}22 \\
+4 & 98{,}9 & 69{,}6 & 8{,}07 & 1621{,}85 \\
+\hline
+\end{tabular}
+\caption{Systemauslastung bei 4 und 8 JupyterLab-Instanzen}
+\label{tab:jupyterlab}
+\end{table}
+
+
+Zusätzlich zur Systemauslastung wurde das Verhalten der Clients während des Tests beobachtet.
+Trotz der hohen CPU-Last auf dem Server (System B LT) lief die Animation auf allen Clients durchgehend flüssig ab.
+Auch die Berechnung der Rückwärtstransformationen zeigte keine spürbaren Verzögerungen im Ablauf.
+Zwar wurden hierfür keine exakten Zeitmessungen durchgeführt,
+jedoch ergaben sich augenscheinlich keine nennenswerten Beeinträchtigungen der Benutzererfahrung.
+
+Der Taskmanager des Clients zeigte eine CPU Auslastung von 12\%, eine GPU Auslastung von 18\% und 7.2\,GB belegter RAM.
+
+
+\subsubsection{Interpretation}
+Die Messergebnisse verdeutlichen,
+dass bereits bei 4 gleichzeitig verbundenen Clients eine nahezu vollständige Auslastung der CPU des Testsystems (System B LT) erreicht wurde.
+Bei 8 Instanzen stieg die CPU-Auslastung im User Space von 69.6\% auf 92.3\%, was auf eine erhebliche Steigerung der Rechenlast durch die zusätzlichen JupyterLab-Instanzen hinweist.
+
+Der Load Average überschritt in beiden Fällen deutlich die Anzahl verfügbarer logischer CPU-Kerne (vermutlich 4 Threads),
+was bedeutet, dass viele Prozesse gleichzeitig auf CPU-Zeit warteten.
+Besonders bei 8 Instanzen mit einem Load Average von 12.15 ist eine deutliche Systemüberlastung erkennbar.
+
+Der Arbeitsspeicherverbrauch stieg bei 8 Instanzen auf mehr als das Doppelte im Vergleich zu 4 Instanzen.
+Dies ist erwartbar, da jede Instanz Speicher benötigt, allerdings zeigt sich auch ein zusätzlicher Overhead pro Instanz.
+
+Diese Ergebnisse zeigen, dass das verwendete Testsystem (System B LT) an seine Kapazitätsgrenzen gelangt.
+Da es sich hierbei nicht um das geplante produktive System handelt,
+können die Werte nicht unmittelbar auf die spätere Einsatzumgebung übertragen werden.
+Sie zeigen jedoch, dass bei Mehrfachnutzung eine ausreichend leistungsfähige Serverhardware erforderlich ist.
+
+Die Tatsache, dass die Animation auf den Clients dennoch Flüssig lief bestätigt, dass die Berechnungen für das
+Rendering im Frontend durchgeführt werden und das Framework somit trotz überlastung eine stabile Nutzererfahrung ermöglicht.
+Dies erklärt auch die leicht erhöhte GPU Auslastung auf dem Client.
 
 
 
 
-
-
-
-
+\section{Aufbau}
 
 
 
@@ -759,8 +828,8 @@ Massenspeicher & Samsung SSD 256\,GB \\
 Betriebssystem & Linux Mint 21.3 „Virginia“ (64-bit) \\
 \hline
 \end{tabular}
-\caption{Technische Spezifikationen des Testsystems „System B“}
-\label{tab:system_b}
+\caption{Technische Spezifikationen des Testsystems „System B LT“}
+\label{tab:system_b_lt}
 \end{table}
 \vspace{1em}
 
@@ -795,8 +864,8 @@ Massenspeicher & 256\,GB NVMe SSD (PCIe 3.0 x4, M.2) \\
 Betriebssystem & Windows 11 Pro (64-bit), Version 22H2 (Build 22621) \\
 \hline
 \end{tabular}
-\caption{Technische Spezifikationen des Testsystems „System C“}
-\label{tab:system_c}
+\caption{Technische Spezifikationen des Testsystems „System C WS“}
+\label{tab:system_c_ws}
 \end{table}
 \vspace{1em}
 
@@ -804,3 +873,65 @@ Betriebssystem & Windows 11 Pro (64-bit), Version 22H2 (Build 22621) \\
 
 
 
+
+
+\vspace{1em}
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{4.5cm}|p{9.5cm}|}
+\hline
+\textbf{Komponente} & \textbf{Spezifikation} \\
+\hline
+Gerätetyp & Access Point (Indoor) \\
+\hline
+Hersteller & TP-Link \\
+\hline
+Modell & TL-WA801N \\
+\hline
+WLAN-Standard & IEEE 802.11b/g/n (2.4\,GHz) \\
+\hline
+Maximale Übertragungsrate & 300\,Mbit/s \\
+\hline
+Ethernet-Anschluss & 1× Fast Ethernet (10/100\,Mbit/s) \\
+\hline
+Antennen & 2× externe, abnehmbare Antennen \\
+\hline
+Betriebssystem & Eigenständige Firmware (Webinterface konfigurierbar) \\
+\hline
+\end{tabular}
+\caption{Technische Spezifikationen des Testsystems „System D AP“}
+\label{tab:system_d_ap}
+\end{table}
+\vspace{1em}
+
+
+
+
+
+
+\vspace{1em}
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{4.5cm}|p{9.5cm}|}
+\hline
+\textbf{Komponente} & \textbf{Spezifikation} \\
+\hline
+Gerätetyp & Desktop \\
+\hline
+Hersteller & Eigenbau (ASUS-Mainboard, OEM-Konfiguration) \\
+\hline
+Prozessor (CPU) & Intel\textsuperscript{\textregistered} Core\texttrademark\ i7-9700K CPU mit 3,60\,GHz, 8 Kerne, 8 logische Prozessoren \\
+\hline
+Arbeitsspeicher (RAM) & 16\,GB (2x 8\,GB, 3000\,MHz, DIMM) \\
+\hline
+Grafikeinheit (GPU) & NVIDIA GeForce RTX 2070 \\
+\hline
+Massenspeicher & Samsung SSD 970 EVO Plus 500\,GB \\
+\hline
+Betriebssystem & Windows 10 Home (64-bit), Version 10.0.19045 Build 19045 \\
+\hline
+\end{tabular}
+\caption{Technische Spezifikationen des Testsystems „System A DT“}
+\label{tab:system_a_dt}
+\end{table}
+\vspace{1em}

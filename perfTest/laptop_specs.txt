@@ -1,0 +1,197 @@
+HP Pavilion Laptop 14-bf0xx
+
+
+------------------------CPU-----------------------------------
+Architektur:                       x86_64
+  CPU Operationsmodus:             32-bit, 64-bit
+  Adressgrößen:                    39 bits physical, 48 bits virtual
+  Byte-Reihenfolge:                Little Endian
+CPU(s):                            4
+  Liste der Online-CPU(s):         0-3
+Anbieterkennung:                   GenuineIntel
+  Modellname:                      Intel(R) Core(TM) i5-7200U CPU @ 2.50GHz
+    Prozessorfamilie:              6
+    Modell:                        142
+    Thread(s) pro Kern:            2
+    Kern(e) pro Socket:            2
+    Sockel:                        1
+    Stepping:                      9
+    Maximale Taktfrequenz der CPU: 3100,0000
+    Minimale Taktfrequenz der CPU: 400,0000
+    BogoMIPS:                      5399.81
+    Markierungen:                  fpu vme de pse tsc msr pae mce cx8 apic sep m
+                                   trr pge mca cmov pat pse36 clflush dts acpi m
+                                   mx fxsr sse sse2 ss ht tm pbe syscall nx pdpe
+                                   1gb rdtscp lm constant_tsc art arch_perfmon p
+                                   ebs bts rep_good nopl xtopology nonstop_tsc c
+                                   puid aperfmperf pni pclmulqdq dtes64 monitor 
+                                   ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr p
+                                   dcm pcid sse4_1 sse4_2 x2apic movbe popcnt ts
+                                   c_deadline_timer aes xsave avx f16c rdrand la
+                                   hf_lm abm 3dnowprefetch cpuid_fault epb invpc
+                                   id_single pti ssbd ibrs ibpb stibp tpr_shadow
+                                    vnmi flexpriority ept vpid ept_ad fsgsbase t
+                                   sc_adjust bmi1 avx2 smep bmi2 erms invpcid mp
+                                   x rdseed adx smap clflushopt intel_pt xsaveop
+                                   t xsavec xgetbv1 xsaves dtherm ida arat pln p
+                                   ts hwp hwp_notify hwp_act_window hwp_epp md_c
+                                   lear flush_l1d arch_capabilities
+Virtualization features:           
+  Virtualisierung:                 VT-x
+Caches (sum of all):               
+  L1d:                             64 KiB (2 instances)
+  L1i:                             64 KiB (2 instances)
+  L2:                              512 KiB (2 instances)
+  L3:                              3 MiB (1 instance)
+NUMA:                              
+  NUMA-Knoten:                     1
+  NUMA-Knoten0 CPU(s):             0-3
+Schwachstellen:                    
+  Gather data sampling:            Mitigation; Microcode
+  Itlb multihit:                   KVM: Mitigation: VMX disabled
+  L1tf:                            Mitigation; PTE Inversion; VMX conditional ca
+                                   che flushes, SMT vulnerable
+  Mds:                             Mitigation; Clear CPU buffers; SMT vulnerable
+  Meltdown:                        Mitigation; PTI
+  Mmio stale data:                 Mitigation; Clear CPU buffers; SMT vulnerable
+  Reg file data sampling:          Not affected
+  Retbleed:                        Mitigation; IBRS
+  Spec rstack overflow:            Not affected
+  Spec store bypass:               Mitigation; Speculative Store Bypass disabled
+                                    via prctl and seccomp
+  Spectre v1:                      Mitigation; usercopy/swapgs barriers and __us
+                                   er pointer sanitization
+  Spectre v2:                      Mitigation; IBRS; IBPB conditional; STIBP con
+                                   ditional; RSB filling; PBRSB-eIBRS Not affect
+                                   ed; BHI Not affected
+  Srbds:                           Mitigation; Microcode
+  Tsx async abort:                 Not affected
+
+
+
+
+--------------------RAM--------------------
+# dmidecode 3.3
+Getting SMBIOS data from sysfs.
+SMBIOS 3.0.0 present.
+
+Handle 0x0026, DMI type 16, 23 bytes
+Physical Memory Array
+	Location: System Board Or Motherboard
+	Use: System Memory
+	Error Correction Type: None
+	Maximum Capacity: 32 GB
+	Error Information Handle: No Error
+	Number Of Devices: 2
+
+Handle 0x0027, DMI type 17, 40 bytes
+Memory Device
+	Array Handle: 0x0026
+	Error Information Handle: No Error
+	Total Width: 64 bits
+	Data Width: 64 bits
+	Size: 8 GB
+	Form Factor: SODIMM
+	Set: None
+	Locator: Bottom-slot 1(left)
+	Bank Locator: BANK 0
+	Type: DDR4
+	Type Detail: Synchronous Unbuffered (Unregistered)
+	Speed: 2133 MT/s
+	Manufacturer: SK Hynix
+	Serial Number: 294972AF
+	Asset Tag: 9876543210
+	Part Number: HMA81GS6AFR8N-UH    
+	Rank: 1
+	Configured Memory Speed: 2133 MT/s
+	Minimum Voltage: Unknown
+	Maximum Voltage: Unknown
+	Configured Voltage: 1.2 V
+
+Handle 0x0028, DMI type 17, 40 bytes
+Memory Device
+	Array Handle: 0x0026
+	Error Information Handle: No Error
+	Total Width: Unknown
+	Data Width: Unknown
+	Size: No Module Installed
+	Form Factor: SODIMM
+	Set: None
+	Locator: Bottom-slot 2(right)
+	Bank Locator: BANK 2
+	Type: DDR
+	Type Detail: Synchronous
+	Speed: Unknown
+	Manufacturer: Not Specified
+	Serial Number: Not Specified
+	Asset Tag: Not Specified
+	Part Number: Not Specified
+	Rank: Unknown
+	Configured Memory Speed: Unknown
+	Minimum Voltage: Unknown
+	Maximum Voltage: Unknown
+	Configured Voltage: Unknown
+
+
+---------------------------GPU----------------------------------
+  *-display                 
+       Beschreibung: VGA compatible controller
+       Produkt: HD Graphics 620
+       Hersteller: Intel Corporation
+       Physische ID: 2
+       Bus-Informationen: pci@0000:00:02.0
+       Logischer Name: /dev/fb0
+       Version: 02
+       Breite: 64 bits
+       Takt: 33MHz
+       Fähigkeiten: pciexpress msi pm vga_controller bus_master cap_list rom fb
+       Konfiguration: depth=32 driver=i915 latency=0 resolution=1920,1080
+       Ressourcen: irq:128 memory:a2000000-a2ffffff memory:b0000000-bfffffff ioport:5000(Größe=64) memory:c0000-dffff
+  *-display
+       Beschreibung: 3D controller
+       Produkt: GM108M [GeForce 940MX]
+       Hersteller: NVIDIA Corporation
+       Physische ID: 0
+       Bus-Informationen: pci@0000:01:00.0
+       Version: a2
+       Breite: 64 bits
+       Takt: 33MHz
+       Fähigkeiten: pm msi pciexpress bus_master cap_list rom
+       Konfiguration: driver=nvidia latency=0
+       Ressourcen: irq:129 memory:a3000000-a3ffffff memory:90000000-9fffffff memory:a0000000-a1ffffff ioport:4000(Größe=128)
+
+
+
+------------------Massenspeicher---------------------------------
+ *-disk:0                  
+       Beschreibung: ATA Disk
+       Produkt: ST1000LM035-1RK1
+       Physische ID: 0
+       Bus-Informationen: scsi@0:0.0.0
+       Logischer Name: /dev/sda
+       Version: RSM4
+       Seriennummer: WDEC4A4P
+       Größe: 931GiB (1TB)
+       Fähigkeiten: gpt-1.00 partitioned partitioned:gpt
+       Konfiguration: ansiversion=5 guid=7d6aeffc-f199-4e02-845e-cae5ce11e29b logicalsectorsize=512 sectorsize=4096
+  *-disk:1
+       Beschreibung: ATA Disk
+       Produkt: SAMSUNG MZNLN256
+       Physische ID: 1
+       Bus-Informationen: scsi@2:0.0.0
+       Logischer Name: /dev/sdb
+       Version: 1H3Q
+       Seriennummer: S2Y2NX0J166050
+       Größe: 238GiB (256GB)
+       Fähigkeiten: gpt-1.00 partitioned partitioned:gpt
+       Konfiguration: ansiversion=5 guid=fe2953e5-4901-4c47-b3d1-866c38bf9d04 logicalsectorsize=512 sectorsize=4096
+
+
+-----------------------------------betriebssystem---------------------------
+No LSB modules are available.
+Distributor ID:	Linuxmint
+Description:	Linux Mint 21.3
+Release:	21.3
+Codename:	virginia
+
+

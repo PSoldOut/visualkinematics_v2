@@ -17,7 +17,7 @@ import pywavefront
 from visualkinematics_v2 import util
 
 
-
+#Datenhaltung (Model)
 
 project_path = Path(__file__).resolve().parent.parent.parent 
 #os.chdir(project_path)
