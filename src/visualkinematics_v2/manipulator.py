@@ -724,6 +724,7 @@ class Joint(Kinematic_Chain_Element):
             tmp = max
             max = min
             min = tmp
+
         theta_rot_slider = FloatSlider(min=min, max=max, step=0.1, description=f'Theta {num}', layout=layout1)
         rot = R.from_quat(list(renderable.quaternion))
         euler = rot.as_euler("XYZ", degrees=True) 
@@ -736,6 +737,8 @@ class Joint(Kinematic_Chain_Element):
         rot = R.from_quat(list(renderable.quaternion))
         euler = rot.as_euler("XYZ", degrees=True)
         
+        
+
         def _on_rot_slider(change):
             if abs(self.axis[0]) == 1:
                 util.set_rotation(renderable, [theta_rot_slider.value * sign, euler[1], euler[2]], "XYZ")
@@ -744,9 +747,23 @@ class Joint(Kinematic_Chain_Element):
             elif abs(self.axis[2]) == 1:
                 util.set_rotation(renderable, [euler[0], euler[1], theta_rot_slider.value * sign], "XYZ")
             if callback is not None : callback()
+
+        def handle_event(event):
+            if event['type'] == 'mouseenter':
+                theta_rot_slider.observe(_on_rot_slider, names="value")
+            elif event['type'] == 'mouseleave':
+                theta_rot_slider.unobserve(_on_rot_slider, names="value")
                   
-        theta_rot_slider.observe(_on_rot_slider, names="value")
-        return [self.name, theta_rot_slider]
+        #theta_rot_slider.observe(_on_rot_slider, names="value")
+
+        mouse_events = ipyevents.Event(
+        source = theta_rot_slider,
+        watched_events=['mouseenter', 'mouseleave'],
+        prevent_default_action=True
+        )
+        mouse_events.on_dom_event(handle_event)
+
+        return [self.name, theta_rot_slider, sign]
 
 
 class Link(Kinematic_Chain_Element):
@@ -825,6 +842,7 @@ class Manipulator:
         
 
         self.link_to_tool_joint:Joint = self.find_link_to_tool_joint()
+        self.base_link.set_position(position)
 
     def set_environment(self, env:util.Environment):
         self.environment = env
@@ -1078,10 +1096,13 @@ class Manipulator:
 
 
 
-        layout = widgets.Layout(
+        teach_section_layout = widgets.Layout(
             #border='1px solid gray',
+            margin='0px,0px,0px,0px',
             padding='2px 2px, 2px 0px',
-            height='40px',
+            height='70px',
+            max_width='302px',
+            width='302',
             overflow='hidden',  # Scrollen deaktivieren
             flex='none'
             )
@@ -1103,11 +1124,18 @@ class Manipulator:
 
         layout_text = widgets.Layout(
                 #border='1px solid gray',
-                padding='5px 5px 5px 5px',
-                margin = '5px 5px 5px 5px',
-                max_width='70px',
-                width = "70px",
+                padding='5px 2px 5px 2px',
+                margin = '5px 2px 5px 2px',
+                max_width='65px',
+                width = "65px",
                 max_height='50px',
+                overflow='hidden',  # Scrollen deaktivieren
+                flex='none'
+            )
+        
+
+        widget_layout = widgets.Layout(
+                max_width='450px',
                 overflow='hidden',  # Scrollen deaktivieren
                 flex='none'
             )
@@ -1122,13 +1150,17 @@ class Manipulator:
                 overflow='hidden',  # Scrollen deaktivieren
                 flex='none'
             )
+        
+        
 
 
         def __init__(self, env:util.Environment, manipulator:Manipulator):
             #self.gizmo_controls:util.Environment.Gizmo_Controls = None
+            self.environment = env
+            self.sliders_signs = {}
             self.trans_step = 0.05
             self.rot_step = 4.0
-            self.button_wait_time = 0.02
+            self.button_wait_time = 0.01
             self.sliders = {}
             self.manipulator = manipulator
             self.content = []
@@ -1164,10 +1196,10 @@ class Manipulator:
         
             self.take_position_button.on_click(self._on_click_take_position_button)
 
-            hbox2 = widgets.HBox([self.pose_dropdown, self.take_position_button], layout=self.__class__.layout)
+            hbox2 = widgets.VBox([self.pose_dropdown, self.take_position_button], layout=self.__class__.teach_section_layout)
 
             # Horizontal anordnen
-            hbox1 = widgets.HBox([self.save_pose_textfield, self.save_button], layout=self.__class__.layout)
+            hbox1 = widgets.VBox([self.save_pose_textfield, self.save_button], layout=self.__class__.teach_section_layout)
             self.content.append(hbox1)
             self.content.append(hbox2)
             
@@ -1222,10 +1254,12 @@ class Manipulator:
             rot_box = widgets.VBox([x_rot_box, y_rot_box, z_rot_box], layout=self.__class__.layout_box)
 
 
-
+            
+            tcp_label = widgets.Label("TCP Pose")
             gizmo_box = widgets.HBox([trans_box, rot_box], layout=self.__class__.layout_gizmo_box)
-
+            
             self.local_space_check_box = widgets.Checkbox(description="local space", value=False, disabled=False)
+            self.content.append(tcp_label)
             self.content.append(gizmo_box)
             self.content.append(self.local_space_check_box)
             
@@ -1248,8 +1282,10 @@ class Manipulator:
             z_current_rot = widgets.Label("G:")
             self.z_current_rot_text = widgets.Text(value="-", layout=self.__class__.layout_text)
 
-            current_pos_box = widgets.HBox([x_current_pos, self.x_current_pos_text, y_current_pos, self.y_current_pos_text, z_current_pos, self.z_current_pos_text])
-            current_rot_box = widgets.HBox([x_current_rot, self.x_current_rot_text, y_current_rot, self.y_current_rot_text, z_current_rot, self.z_current_rot_text])
+            meter_label = widgets.Label("(m)")
+            radiant_label = widgets.Label("(rad)")
+            current_pos_box = widgets.HBox([x_current_pos, self.x_current_pos_text, y_current_pos, self.y_current_pos_text, z_current_pos, self.z_current_pos_text, meter_label])
+            current_rot_box = widgets.HBox([x_current_rot, self.x_current_rot_text, y_current_rot, self.y_current_rot_text, z_current_rot, self.z_current_rot_text, radiant_label])
             box = VBox([current_pos_box, current_rot_box], layout=self.__class__.layout_gizmo_box)
             self.content.append(box)
             
@@ -1272,10 +1308,10 @@ class Manipulator:
             #self.gizmo_controls = env.Gizmo_Controls(manipulator.tcp_target, True, True, False, "TCP-Target", 3, 3, 3, -3, -3, -3, widgets_vertical=True, continuous_update=True, callback=self._on_gizmo_controls)
             #self.content.append(self.gizmo_controls.widget)
             
-            self.widget = widgets.VBox(children = self.content)
+            self.widget = widgets.VBox(children = self.content, layout=self.__class__.widget_layout)
 
             r = R.from_quat(list(self.manipulator.tcp_target.quaternion))
-            euler = r.as_euler('zyx', degrees=True)
+            euler = r.as_euler('zyx', degrees=False)
             self.set_rotation_text(euler)
             self.set_position_text(self.manipulator.tcp_target.position)
 
@@ -1284,10 +1320,11 @@ class Manipulator:
             num = 1
             for j in self.manipulator.joints:
                 if j.is_mimicer: continue
-                name_and_slider = j._create_theta_slider(num, value=0, callback=self._on_theta_slider)
-                if name_and_slider != None: 
-                    self.content.append(name_and_slider[1])
-                    self.sliders[name_and_slider[0]] = name_and_slider[1]
+                name_and_slider_and_sign = j._create_theta_slider(num, value=0, callback=self._on_theta_slider)
+                if name_and_slider_and_sign != None: 
+                    self.content.append(name_and_slider_and_sign[1])
+                    self.sliders[name_and_slider_and_sign[0]] = name_and_slider_and_sign[1]
+                    self.sliders_signs[name_and_slider_and_sign[0]] = name_and_slider_and_sign[2]
                 num += 1
 
 
@@ -1299,7 +1336,7 @@ class Manipulator:
             else:
                 util.rotate_global(self.manipulator.tcp_target, [change, 0, 0], "XYZ")
             r = R.from_quat(list(self.manipulator.tcp_target.quaternion))
-            euler = r.as_euler('zyx', degrees=True)
+            euler = r.as_euler('zyx', degrees=False)
             self.set_rotation_text(euler)
 
 
@@ -1309,7 +1346,7 @@ class Manipulator:
             else:
                 util.rotate_global(self.manipulator.tcp_target, [0, change, 0], "XYZ")
             r = R.from_quat(list(self.manipulator.tcp_target.quaternion))
-            euler = r.as_euler('zyx', degrees=True)
+            euler = r.as_euler('zyx', degrees=False)
             self.set_rotation_text(euler)
 
 
@@ -1319,7 +1356,7 @@ class Manipulator:
             else:
                 util.rotate_global(self.manipulator.tcp_target, [0, 0, change], "XYZ")
             r = R.from_quat(list(self.manipulator.tcp_target.quaternion))
-            euler = r.as_euler('zyx', degrees=True)
+            euler = r.as_euler('zyx', degrees=False)
             self.set_rotation_text(euler)
         
 
@@ -1551,16 +1588,20 @@ class Manipulator:
             r = R.from_quat(list(self.manipulator.tcp_target.quaternion)).as_matrix()
             p = self.manipulator.tcp_target.position
             q0 = np.array(list(self.manipulator.dh.joint_angles.values()), float)
-            q_sol = self.manipulator.dh.inverse_kinematics6D_with_limits(p, r, q0, 10, 0.1)
-            self.manipulator.animate_by_theta(q_sol, 0.04, 1, True, False)
-            self.manipulator.update_dh_angles()
+            try:
+                q_sol = self.manipulator.dh.inverse_kinematics6D_with_limits(p, r, q0, 20, 0.0001)
+                self.manipulator.animate_by_theta(q_sol, 0.04, 1, True, False)
+                self.manipulator.update_dh_angles()
+            except ValueError as e:
+                self.environment.add_info(f"{e}")
             #------
-            #i = 0
-            #for name, slider in self.sliders.items():
-                #display(name)
-                #display(((q_sol[i] / (2*np.pi)) * 360.0)
-                #slider.value = (q_sol[i] / (2*np.pi)) * 360.0
-                #i+=1
+            #for (name, slider), q in zip(self.sliders.items(), q_sol):
+                #slider.value = (q / (2*np.pi)) * 360.0
+
+            for slider, angle in zip(list(self.sliders.values()), list(self.manipulator.dh.joint_angles.values())):
+                slider.value = angle / (2*np.pi) * 360.0
+
+                
             
                     
 
@@ -1588,7 +1629,7 @@ class Manipulator:
                     position_vector = transform[:3, 3]
                     rotation_matrix = transform[:3, :3]
                     r = R.from_matrix(rotation_matrix)
-                    euler = r.as_euler('zyx', degrees=True)
+                    euler = r.as_euler('zyx', degrees=False)
                     self.set_rotation_text(euler)
                     self.set_position_text(position_vector)
                 
@@ -1905,6 +1946,7 @@ class kr6r900_2(Manipulator):
         #DH.base_to_dh = DHKinematicModel.compute_base_to_dh(base_transform, k0)
         DH.dh_to_tool = DH.compute_dh_to_tool(self.compute_global_transform()[self.link_to_tool_joint.name])
         self.apply_DH_model(DH)
+        
 
 
 

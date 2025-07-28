@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.3) (preloaded format=pdflatex 2025.4.7)  24 JUL 2025 17:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.3) (preloaded format=pdflatex 2025.4.7)  27 JUL 2025 18:02
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1043,14 +1043,20 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \tf@lof=\write6
 \openout6 = `main.lof'.
 
- (main.loa)
-\tf@loa=\write7
-\openout7 = `main.loa'.
+ (main.lot)
+\tf@lot=\write7
+\openout7 = `main.lot'.
+
+ (main.loa
+
+[2])
+\tf@loa=\write8
+\openout8 = `main.loa'.
 
 
 
-[2] (text/theoretischer_hintergrund.tex
-<images/DOF_exp.PNG, id=165, 1193.96063pt x 508.90125pt>
+[3] (text/theoretischer_hintergrund.tex
+<images/DOF_exp.PNG, id=177, 1193.96063pt x 508.90125pt>
 File: images/DOF_exp.PNG Graphic file (type png)
 <use images/DOF_exp.PNG>
 Package pdftex.def Info: images/DOF_exp.PNG  used on input line 17.
@@ -1072,7 +1078,7 @@ l.33
       <./images/DOF_exp.PNG>]
 
 [2{C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}]
-<images/kuka-ir.PNG, id=190, 658.71094pt x 593.96906pt>
+<images/kuka-ir.PNG, id=202, 658.71094pt x 593.96906pt>
 File: images/kuka-ir.PNG Graphic file (type png)
 <use images/kuka-ir.PNG>
 Package pdftex.def Info: images/kuka-ir.PNG  used on input line 69.
@@ -1085,7 +1091,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has
                                                   \__shipout_drop_firstpage_...
 l.100 
        <./images/kuka-ir.PNG>]
-<images/lbr2.png, id=204, 1907.125pt x 1073.00874pt>
+<images/lbr2.png, id=217, 1907.125pt x 1073.00874pt>
 File: images/lbr2.png Graphic file (type png)
 <use images/lbr2.png>
 Package pdftex.def Info: images/lbr2.png  used on input line 105.
@@ -1098,7 +1104,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has
                                                   \__shipout_drop_firstpage_...
 l.128 
        <./images/lbr2.png (PNG copy)>]
-<images/forward_kin.PNG, id=218, 674.52pt x 280.04625pt>
+<images/forward_kin.PNG, id=230, 674.52pt x 280.04625pt>
 File: images/forward_kin.PNG Graphic file (type png)
 <use images/forward_kin.PNG>
 Package pdftex.def Info: images/forward_kin.PNG  used on input line 149.
@@ -1117,7 +1123,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 183--187
 
  []
 
-<images/DH_explain2.PNG, id=233, 444.15938pt x 402.75468pt>
+<images/DH_explain2.PNG, id=245, 444.15938pt x 402.75468pt>
 File: images/DH_explain2.PNG Graphic file (type png)
 <use images/DH_explain2.PNG>
 Package pdftex.def Info: images/DH_explain2.PNG  used on input line 192.
@@ -1130,7 +1136,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) has
                                                   \__shipout_drop_firstpage_...
 l.211 
        <./images/DH_explain2.PNG>]
-<images/ik_planar_exp.PNG, id=242, 621.07031pt x 530.73282pt>
+<images/ik_planar_exp.PNG, id=254, 621.07031pt x 530.73282pt>
 File: images/ik_planar_exp.PNG Graphic file (type png)
 <use images/ik_planar_exp.PNG>
 Package pdftex.def Info: images/ik_planar_exp.PNG  used on input line 231.
@@ -1143,7 +1149,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.6}) has
                                                   \__shipout_drop_firstpage_...
 l.243 
        <./images/ik_planar_exp.PNG>]
-<images/ik_singularity_explain.PNG, id=250, 336.50719pt x 101.62968pt>
+<images/ik_singularity_explain.PNG, id=262, 336.50719pt x 101.62968pt>
 File: images/ik_singularity_explain.PNG Graphic file (type png)
 <use images/ik_singularity_explain.PNG>
 Package pdftex.def Info: images/ik_singularity_explain.PNG  used on input line 248.
@@ -1166,9 +1172,9 @@ Overfull \hbox (1.14853pt too wide) in paragraph at lines 13--16
 
 
 
-[10{C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}]) (text/entwicklungsprozess.tex
+[10{C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}]
 
-[11]
+[11]) (text/entwicklungsprozess.tex
 Underfull \hbox (badness 4739) in paragraph at lines 38--38
 []|\OT1/lmr/m/n/12 Plattform f[]ur 3D-druckbare
  []
@@ -1191,8 +1197,8 @@ Underfull \hbox (badness 1132) in paragraph at lines 40--40
 pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.72 W
-      eiterhin ist Thingiverse eine Quelle für 3D-Modelle von Industrierobo...]
+l.70 
+     ]
 Overfull \hbox (0.60854pt too wide) in paragraph at lines 72--77
 []\OT1/lmr/m/n/12 Weiterhin ist Thin-gi-ver-se ei-ne Quel-le f[]ur 3D-Modelle von In-du-striero-bo-tern. []Ahnlich
  []
@@ -1200,22 +1206,27 @@ Overfull \hbox (0.60854pt too wide) in paragraph at lines 72--77
 
 
 [14]
-LaTeX Font Info:    Trying to load font information for OT1+lmtt on input line 127.
+
+[15
+pdfTeX warning (ext4): destination with the same identifier (name{table.2}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.154 
+      ]
+LaTeX Font Info:    Trying to load font information for OT1+lmtt on input line 156.
  (C:\Users\Philipp\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmtt.fd
 File: ot1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-
-[15{C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rmtt.enc}]
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 141.
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 170.
 
 
-[16]
+[16{C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rmtt.enc}]
 
 [17{C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}]
-<images/load_links.PNG, id=334, 517.18219pt x 368.1253pt>
+<images/load_links.PNG, id=347, 517.18219pt x 368.1253pt>
 File: images/load_links.PNG Graphic file (type png)
 <use images/load_links.PNG>
-Package pdftex.def Info: images/load_links.PNG  used on input line 237.
+Package pdftex.def Info: images/load_links.PNG  used on input line 266.
 (pdftex.def)             Requested size: 352.81552pt x 251.142pt.
 
 
@@ -1225,12 +1236,12 @@ Package pdftex.def Info: images/load_links.PNG  used on input line 237.
 pdfTeX warning (ext4): destination with the same identifier (name{figure.8}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.274 
+l.303 
        <./images/load_links.PNG>]
-<images/load_robot.PNG, id=347, 519.44063pt x 370.38374pt>
+<images/load_robot.PNG, id=360, 519.44063pt x 370.38374pt>
 File: images/load_robot.PNG Graphic file (type png)
 <use images/load_robot.PNG>
-Package pdftex.def Info: images/load_robot.PNG  used on input line 279.
+Package pdftex.def Info: images/load_robot.PNG  used on input line 308.
 (pdftex.def)             Requested size: 352.81552pt x 251.56937pt.
 
 
@@ -1240,14 +1251,14 @@ Package pdftex.def Info: images/load_robot.PNG  used on input line 279.
 pdfTeX warning (ext4): destination with the same identifier (name{figure.9}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.330 
+l.359 
        <./images/load_robot.PNG>]
 
 [22]
-<images/polyscope5.PNG, id=365, 791.20593pt x 598.48593pt>
+<images/polyscope5.PNG, id=378, 791.20593pt x 598.48593pt>
 File: images/polyscope5.PNG Graphic file (type png)
 <use images/polyscope5.PNG>
-Package pdftex.def Info: images/polyscope5.PNG  used on input line 353.
+Package pdftex.def Info: images/polyscope5.PNG  used on input line 382.
 (pdftex.def)             Requested size: 352.81552pt x 266.8779pt.
 
 
@@ -1255,101 +1266,120 @@ Package pdftex.def Info: images/polyscope5.PNG  used on input line 353.
 pdfTeX warning (ext4): destination with the same identifier (name{figure.10}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.372 
+l.406 
        <./images/polyscope5.PNG>]
-<images/UI.PNG, id=374, 1048.66782pt x 595.47469pt>
+<images/UI.PNG, id=388, 1041.8925pt x 559.33969pt>
 File: images/UI.PNG Graphic file (type png)
 <use images/UI.PNG>
-Package pdftex.def Info: images/UI.PNG  used on input line 377.
-(pdftex.def)             Requested size: 441.01773pt x 250.42476pt.
+Package pdftex.def Info: images/UI.PNG  used on input line 411.
+(pdftex.def)             Requested size: 441.01773pt x 236.75604pt.
 
 
-[24
+[24]
+
+[25
 pdfTeX warning (ext4): destination with the same identifier (name{figure.11}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.387 
+l.431 
        <./images/UI.PNG>]
-Overfull \hbox (21.3287pt too wide) in paragraph at lines 399--403
+Overfull \hbox (21.3287pt too wide) in paragraph at lines 435--439
 \OT1/lmr/m/n/12 Um den di-dak-ti-schen Mehr-wert des Fra-me-works zu erh[]ohen, wur-de die Denavit-Hartenberg-
  []
 
 
 
-[25]
-Overfull \hbox (26.0629pt too wide) in paragraph at lines 444--447
+[26]
+Overfull \hbox (26.0629pt too wide) in paragraph at lines 480--483
 []\OT1/lmr/m/n/12 Die Be-rech-nung der Trans-for-ma-ti-on vom letz-ten Denavit-Hartenberg-Koordinatensystem
  []
 
 
-Overfull \hbox (30.0731pt too wide) in paragraph at lines 452--455
+Overfull \hbox (30.0731pt too wide) in paragraph at lines 488--491
 \OT1/lmr/m/n/12 schreibt so-mit die re-la-ti-ve La-ge des Werk-zeugs be-zo-gen auf das letz-te DH-Koordinatensystem. 
  []
 
 
-Overfull \hbox (22.69865pt too wide) in paragraph at lines 456--457
+Overfull \hbox (22.69865pt too wide) in paragraph at lines 492--493
 []\OT1/lmr/m/n/12 Damit ist die ge-sam-te Vorw[]artstransformation nach der Denavit-Hartenberg-Konvention
  []
 
-
-
-[26]
-<images/robot_with_dh.PNG, id=394, 521.69907pt x 372.64218pt>
+<images/robot_with_dh.PNG, id=408, 521.69907pt x 372.64218pt>
 File: images/robot_with_dh.PNG Graphic file (type png)
 <use images/robot_with_dh.PNG>
-Package pdftex.def Info: images/robot_with_dh.PNG  used on input line 478.
+Package pdftex.def Info: images/robot_with_dh.PNG  used on input line 514.
 (pdftex.def)             Requested size: 352.81552pt x 252.01161pt.
 
 
-[27
+[27]
+
+[28
 pdfTeX warning (ext4): destination with the same identifier (name{figure.12}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.493 \[
-         <./images/robot_with_dh.PNG>]
-
-[28]
-Overfull \hbox (5.63908pt too wide) in paragraph at lines 553--554
-[]\OT1/lmr/m/n/12 Diese Ma-trix wird mit \OT1/lmtt/m/n/12 sympy.lambdify \OT1/lmr/m/n/12 in ei-ne ef-fi-zi-en-te \OT1/lmr/m/it/12 Num-Py\OT1/lmr/m/n/12 -Funktion []uberf[]uhrt,
- []
-
-LaTeX Font Info:    Font shape `U/lasy/b/n' in size <8> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 560.
-LaTeX Font Info:    Font shape `U/lasy/b/n' in size <6> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 560.
-
+l.536 
+       <./images/robot_with_dh.PNG>]
 
 [29]
+LaTeX Font Info:    Font shape `U/lasy/b/n' in size <8> not available
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 596.
+LaTeX Font Info:    Font shape `U/lasy/b/n' in size <6> not available
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 596.
+
 
 [30]
 
 [31]
-Overfull \hbox (42.8115pt too wide) in paragraph at lines 661--663
+
+[32]
+Overfull \hbox (42.8115pt too wide) in paragraph at lines 697--699
 \OT1/lmr/m/n/12 ak-tu-el-le Po-se des TCP be-rech-net, in-dem die trans-for-mier-te sym-bo-li-sche Vorw[]artstransformation
  []
 
-)
 
-[32]
-Overfull \hbox (0.26894pt too wide) in paragraph at lines 170--170
+
+[33])
+
+[34
+pdfTeX warning (ext4): destination with the same identifier (name{table.3}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.169 \newpage
+              
+pdfTeX warning (ext4): destination with the same identifier (name{table.4}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.169 \newpage
+              ]
+Overfull \hbox (0.26894pt too wide) in paragraph at lines 171--171
 [][]\OT1/lmr/m/n/12 Hallmann, Mar-tin, Ste-fan Goetz und Ben-ja-min Schleich (2019). []  Map-ping of GD(and)T
  []
 
 
-Overfull \hbox (0.16219pt too wide) in paragraph at lines 170--170
+Overfull \hbox (0.16219pt too wide) in paragraph at lines 171--171
 [][]\OT1/lmr/m/n/12 Heins, Adam (2025). \OT1/lmr/m/it/12 re-fe-rence xa-cro-doc 0.7.0 do-cu-men-ta-ti-on\OT1/lmr/m/n/12 . \OT1/lmr/m/sc/12 url\OT1/lmr/m/n/12 : []$\OT1/lmtt/m/n/12 https : / / xacrodoc .
  []
 
 
-Overfull \hbox (5.2602pt too wide) in paragraph at lines 170--170
+Overfull \hbox (5.2602pt too wide) in paragraph at lines 171--171
 \OT1/lmtt/m/n/12 org / devdocs / reference / generated / numpy . savez . html$[] \OT1/lmr/m/n/12 (be-sucht am 11. 07. 2025). 
  []
 
 
+Overfull \hbox (2.42432pt too wide) in paragraph at lines 171--171
+[][]\OT1/lmr/m/n/12 Project Ju-py-ter con-tri-bu-tors (2025). \OT1/lmr/m/it/12 ipye-vents pypi\OT1/lmr/m/n/12 . \OT1/lmr/m/sc/12 url\OT1/lmr/m/n/12 : []$\OT1/lmtt/m/n/12 https : / / pypi . org / project /
+ []
 
-[33{C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rmsc.enc}]
 
-[34] (main.aux)
+Overfull \hbox (17.05336pt too wide) in paragraph at lines 171--171
+[][]\OT1/lmr/m/n/12 pythreejs Con-tri-bu-tors (2025b). \OT1/lmr/m/it/12 Geo-me-try ty-pes\OT1/lmr/m/n/12 . \OT1/lmr/m/sc/12 url\OT1/lmr/m/n/12 : []$\OT1/lmtt/m/n/12 https : / / pythreejs . readthedocs .
+ []
+
+
+
+[35{C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rmsc.enc}]
+
+[36] (main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -1361,17 +1391,17 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 30853 strings out of 473522
- 573009 string characters out of 5713642
- 1468368 words of memory out of 5000000
- 53506 multiletter control sequences out of 15000+600000
+ 30876 strings out of 473522
+ 573417 string characters out of 5713642
+ 1468669 words of memory out of 5000000
+ 53519 multiletter control sequences out of 15000+600000
  643067 words of font info for 139 fonts, out of 8000000 for 9000
  1143 hyphenation exceptions out of 8191
- 78i,13n,81p,2448b,2746s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 78i,14n,81p,2448b,2746s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx8.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi6.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmib10.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy6.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (37 pages, 2269094 bytes).
+Output written on main.pdf (40 pages, 2316218 bytes).
 PDF statistics:
- 591 PDF objects out of 1000 (max. 8388607)
- 96 named destinations out of 1000 (max. 500000)
+ 618 PDF objects out of 1000 (max. 8388607)
+ 103 named destinations out of 1000 (max. 500000)
  205 words of extra memory for PDF output out of 10000 (max. 10000000)
 

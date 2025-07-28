@@ -15,5 +15,5 @@
 \contentsline {subsection}{\numberline {3.5}Objektorientierte Modellierung der Kinematik}{20}{subsection.3.5}%
 \contentsline {subsection}{\numberline {3.6}Animation}{21}{subsection.3.6}%
 \contentsline {subsection}{\numberline {3.7}grafische Benutzeroberfläche}{23}{subsection.3.7}%
-\contentsline {subsection}{\numberline {3.8}Denavit-Hartenberg-Konvention}{25}{subsection.3.8}%
-\contentsline {subsection}{\numberline {3.9}Rückwärtstransformation (Inverse Kinematik)}{28}{subsection.3.9}%
+\contentsline {subsection}{\numberline {3.8}Denavit-Hartenberg-Konvention}{26}{subsection.3.8}%
+\contentsline {subsection}{\numberline {3.9}Rückwärtstransformation (Inverse Kinematik)}{29}{subsection.3.9}%

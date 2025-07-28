@@ -341,6 +341,39 @@
       \verb https://wiki.ros.org/Packages
       \endverb
     \endentry
+    \entry{ipyevents}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=61c15e4cb14571e7097e570e39aa5942}{%
+           family={{Project Jupyter contributors}},
+           familyi={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{61c15e4cb14571e7097e570e39aa5942}
+      \strng{fullhash}{61c15e4cb14571e7097e570e39aa5942}
+      \strng{fullhashraw}{61c15e4cb14571e7097e570e39aa5942}
+      \strng{bibnamehash}{61c15e4cb14571e7097e570e39aa5942}
+      \strng{authorbibnamehash}{61c15e4cb14571e7097e570e39aa5942}
+      \strng{authornamehash}{61c15e4cb14571e7097e570e39aa5942}
+      \strng{authorfullhash}{61c15e4cb14571e7097e570e39aa5942}
+      \strng{authorfullhashraw}{61c15e4cb14571e7097e570e39aa5942}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{ipyevents pypi}
+      \field{urlday}{26}
+      \field{urlmonth}{7}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://pypi.org/project/ipyevents/
+      \endverb
+      \verb{url}
+      \verb https://pypi.org/project/ipyevents/
+      \endverb
+    \endentry
     \entry{onShape}{misc}{}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=e095b8133a2dbdc23b300f5d39211ec0}{%

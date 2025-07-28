@@ -1152,6 +1152,23 @@ class Environment:
     - Die Umgebung kann mit einer interaktiven Steuerung für Kamera und Objekte angezeigt werden.
     - Widgets für die Manipulation von Objekten (Translation, Rotation, Skalierung) können zur Szene hinzugefügt werden.
     '''
+
+    info_container_layout = widgets.Layout(
+                #border='1px solid gray',
+                #padding='5px 2px 5px 2px',
+                #margin = '5px 2px 5px 2px',
+                max_height = '150px',
+                #overflow='auto',  
+                flex='none'
+            )
+    
+    info_layout = widgets.Layout(
+                max_height = '30px',
+                height = '30px',
+                flex='none',
+                overflow='hidden',
+            )
+
     def __init__(self, width=700, height=500, frame=None, grid=None, up=[0,0,1], widgets_on_bottom=False):
         '''
         Initialisiert eine neue 3D-Umgebung.
@@ -1185,7 +1202,7 @@ class Environment:
         self.gizmo_controls = []
         self.inspectors = []
 
-        self.info_container:widgets.VBox = widgets.VBox()
+        self.info_container:widgets.VBox = widgets.VBox(layout=self.__class__.info_container_layout)
         
 
 
@@ -1219,46 +1236,80 @@ class Environment:
         '''
         Zeigt die Umgebung mit Renderer und interaktiven Widgets an, wenn sie in einem Jupyter-Notebook verwendet wird.
         '''
-        layout2 = widgets.Layout(
+        mainbox_layout = widgets.Layout(
             #border='1px solid gray',
             padding='5px',
-            flex='none' 
+            flex='1 1 auto',     # <- erlaubt Schrumpfen & Wachsen
+            min_width='0px',     # <- wichtig für Schrumpfen!
+            overflow='auto',
+            justify_content='center',
+            align_items='center'
         )
 
-        mainbox = VBox([self.renderer], layout = layout2)
+        renderer_box_layout = widgets.Layout(
+            #border='1px solid gray',
+            #max_width='70vw',
+            #max_height='70vh',
+            overflow='auto',
+            flex='1 1 auto',
+            
+        )
+
+        b_layout = widgets.Layout(
+            #border='1px solid gray',
+            overflow='hidden',
+            width='100%'
+        )
+
+
+        outer_layout = widgets.Layout(
+            #flex="1 1 auto",
+            min_width='300px'
+        )
+
+        frame_widget_box_layout = widgets.Layout(
+            width=f'{self.renderer.width}px'
+        )
+
+
+        renderer_box = HBox([self.renderer], layout=renderer_box_layout)
+
+        mainbox = VBox([renderer_box], layout = mainbox_layout)
         if self.frame_widgets:
             checkbox_grid = Checkbox(value=True, description='Show Grid')
             checkbox_axes = Checkbox(value=True, description='Show Axes')
             #interactive_control_scale = widgets.interactive(update_cube_scale, x=self.x_scale_slider, y=self.y_scale_slider, z=self.z_scale_slider)
             checkbox_grid.observe(self.toggle_grid, names='value')
             checkbox_axes.observe(self.toggle_axes, names='value')
-            frame_widget_box = HBox([checkbox_grid, checkbox_axes])
+            frame_widget_box = HBox([checkbox_grid, checkbox_axes], layout=frame_widget_box_layout)
             mainbox.children = mainbox.children + (frame_widget_box,)
 
 
-        layout1 = widgets.Layout(
+        widget_box_layout = widgets.Layout(
             #border='1px solid gray',
             padding='5px',
             height=f'{self.renderer.height}px',
-            #width ='1600px',
+            min_width='335px',
+            width='335px',
             overflow_y='auto',
-            overflow_x = "auto",
-            flex="none"
+            #overflow_x = "auto",
+            flex="0 0 auto"
         )
 
         
 
-        widget_box = VBox(children=[], layout = layout1)
+        widget_box = VBox(children=[], layout = widget_box_layout)
         for w in self.widgets:
             widget_box.children = widget_box.children + (w,)
             w.layout.overvlow="hidden"
 
         #lol_box = HBox(children = [widget_box], layout=layout2)
         if self.widgets_on_bottom:
-            display(VBox(children = [mainbox, widget_box]))
+            b = VBox(children = [mainbox, widget_box], layout=b_layout)
         else:
-            display(HBox(children = [mainbox, widget_box]))
-        display(self.info_container)
+            b = HBox(children = [mainbox, widget_box], layout=b_layout)
+        outer_box = VBox([b, self.info_container], layout=outer_layout)
+        display(outer_box)
 
 
         
@@ -1323,7 +1374,7 @@ class Environment:
         )
         
         test_label = widgets.HTML(value=f'<span style="font-size:14px; color:red;">{info_text}</span>')
-        info = HBox(children=[test_label, test_button])
+        info = HBox(children=[test_label, test_button], layout=self.__class__.info_layout)
         self.info_container.children = list(self.info_container.children) + [info]
         def on_click(button):
             self.remove_info(info)

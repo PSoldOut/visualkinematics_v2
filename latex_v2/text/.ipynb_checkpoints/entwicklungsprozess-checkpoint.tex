@@ -113,36 +113,7 @@ sondern setzen sich aus mehreren einzelnen Teil-Meshes zusammen, von denen jede 
 Diese Teilmodelle entsprechen den physischen Gliedern des Roboters.
 Beim Laden der Meshes ist aufgefallen dass der Vorgang pro Mesh einige Sekunden in Anspruch nimmt und Insbesondere bei komplexeren Modellen
 zu einer Gesamtladezeit von knapp einer Minute pro Roboter-Modell geführt hat.
-Verwendet wurde das in Tabelle \ref{tab:system_a} dargestellte System A.
-
-\vspace{1em}
-\begin{table}[H]
-\centering
-\begin{tabular}{|p{4.5cm}|p{9.5cm}|}
-\hline
-\textbf{Komponente} & \textbf{Spezifikation} \\
-\hline
-Gerätetyp & Desktop \\
-\hline
-Hersteller & Eigenbau (ASUS-Mainboard, OEM-Konfiguration) \\
-\hline
-Prozessor (CPU) & Intel\textsuperscript{\textregistered} Core\texttrademark\ i7-9700K CPU mit 3,60\,GHz, 8 Kerne, 8 logische Prozessoren \\
-\hline
-Arbeitsspeicher (RAM) & 16\,GB (2x 8\,GB, 3000\,MHz, DIMM) \\
-\hline
-Grafikeinheit (GPU) & NVIDIA GeForce RTX 2070 \\
-\hline
-Massenspeicher & Samsung SSD 970 EVO Plus 500\,GB \\
-\hline
-Betriebssystem & Windows 10 Home (64-bit), Version 10.0.19045 Build 19045 \\
-\hline
-\end{tabular}
-\caption{Technische Spezifikationen des Testsystems „System A“}
-\label{tab:system_a}
-\end{table}
-\vspace{1em}
-
-
+Verwendet wurde eine Intel\textsuperscript{\textregistered} Core\texttrademark\ i7-9700K CPU mit 3,60\,GHz, 8 Kernen und 8 logischen Prozessoren.
 Um die Ladezeiten der Meshes zu reduzieren und dadurch die Benutzerfreundlichkeit zu verbessern, wurde das NPZ-Format von NumPy verwendet.
 Im Gegensatz zu den üblichen Text-basierten Formaten handelt es sich beim NPZ-Format um ein binäres Format,
 welches maschinell effizienter eingelesen werden kann \doublecite[]{numpy_npy_npz_format}.
@@ -159,7 +130,7 @@ c.a 0.7757 Sekunden benötigte. Der Ladevorgang aus der .npz-Datei benötigte hi
     \end{verbatim}
 \end{center}
 
-Für diesen Test ist das bereits erwähnte System A aus Tabelle \ref{tab:system_a} zum Einsatz gekommen.
+Für diesen Test ist die bereits erwähnte Intel\textsuperscript{\textregistered} Core\texttrademark\ i7-9700K CPU mit 3,60\,GHz, 8 Kernen und 8 logischen Prozessoren zum Einsatz gekommen.
 Um das NPZ-Format nutzen zu können, müssen die 3D-Modelle zunächst in dieses Format konvertiert und dauerhaft gespeichert werden.
 So können sie beim nächsten Start des Frameworks direkt aus der .npz-Datei geladen werden.
 Dafür wurde ein Lazy-Loading-Mechanismus implementiert, der zunächst prüft, ob bereits eine .npz-Datei für die gewünschte Mesh vorhanden ist.
@@ -385,8 +356,8 @@ Abbildung \ref{fig:ps5} zeigt die grafische Benutzeroberfläche von PolyScope5.
 \end{figure}
 \vspace{1em}
 
-Das neu entwickelte Layout ermöglicht es sowohl die Gelenkwinkel manuell über Schieberegler einzustellen,
-als auch die Pose des Endeffektors im lokalen oder globalen Koordinatensystem zu verändern.
+Dabei wurde ein eigenes Layout entwickelt, das es ermöglicht,
+sowohl die Gelenkwinkel manuell über Schieberegler einzustellen als auch die Pose des Endeffektors im lokalen oder globalen Koordinatensystem zu verändern.
 Neben einzelnen Schiebereglern für jedes Gelenk wurde eine eigene Sektion zur Anzeige und direkten Manipulation der Endeffektor-Pose implementiert.
 Da während der Entwicklung festgestellt wurde, dass ipywidgets keine Möglichkeit bietet,
 einen Knopf gedrückt zu halten und damit einen Wert kontinuierlich zu aktualisieren,
@@ -394,14 +365,11 @@ konnte eine Endeffektorsteuerung wie in Abbildung \ref{fig:ps5} dargestellt, zun
 Stattdessen wurde auf Schieberegler zurückgegriffen. Auch hier ergaben sich jedoch Einschränkungen durch die Library: So lässt sich der numerische Wert, der rechts neben dem Schieberegler angezeigt wird, nicht ausblenden.
 Gerade beim Umschalten auf das lokale Koordinatensystem führt dies zu Problemen hinsichtlich der Benutzerführung.
 In dieser Darstellungsweise besitzt der Endeffektor stets die Position $(0, 0, 0)$ und Rotation $(0, 0, 0)$ relativ zu sich selbst.
-Die tatsächliche Transformation wirkt sich zwar korrekt auf die globale Pose aus, die dargestellten Werte im UI gaben jedoch keinen sinnvollen Bezug mehr zur realen Veränderung.
+Die tatsächliche Transformation wirkt sich zwar korrekt auf die globale Pose aus, die dargestellten Werte im UI geben jedoch keinen sinnvollen Bezug mehr zur realen Veränderung.
 In diesem Fall dienten die Schieberegler ausschließlich zur Interaktion, nicht zur Anzeige der tatsächlichen Pose.
 Eine Möglichkeit zur Ausblendung der Werte wäre daher wünschenswert gewesen.
-Aufgrund dieser Einschränkungen wurde die Variante mit den Schiebereglern verworfen und ein Workaround erarbeitet, der es ermöglicht Knöpfe gedrückt zu halten.
-Dazu wurde die Library ipyevents genutzt, welche für das Verarbeiten von Maus- und Tastatureingaben innerhalb von Jupyter-Widgets verwendet wird \doublecite[]{ipyevents}.
-Die kontinuierliche Interaktion mit einem Knopf wird im Framework durch Auswertung von Mauszuständen realisiert, aus denen ein boolescher Steuerwert abgeleitet wird.
-Sobald dieser auf True gesetzt ist, wird ein Thread gestartet, der eine while-Schleife ausführt und so lange aktiv bleibt, bis der Wert wieder auf False wechselt.
-So können im Framework Knöpfe genutzt werden um die Position sowie Orientierung des TCP im Raum zu steuern.
+Damit die Endeffektorsteuerung einen hohen didaktischen
+Daher wurde mithilfe der Library ipyevents ein Workaround erarbeitet, sodass anhand eines Mausevents ein Knopf 
 Abbildung \ref{fig:gui} zeigt das Framework mit viewport und Benutzeroberfläche während der Ausführung innerhalb eines Jupyter-Notebooks
 
 
@@ -423,11 +391,9 @@ Darunter befindet sich eine Reihe von Schiebereglern, die dynamisch basierend au
 Jedes Gelenk lässt sich innerhalb der in der URDF-Beschreibung definierten Minimal- und Maximalgrenzen konfigurieren. Diese Werte werden zur Laufzeit eingelesen.
 Durch Interaktion mit den Reglern wird die jeweilige Joint-Instanz direkt manipuliert, wodurch sich auch alle nachfolgenden Glieder in der kinematischen Kette entsprechend bewegen.
 
-Im Gegensatz zum Animationsalgorithmus erfolgt diese Bewegung nicht zeitlich interpoliert, sondern es wird lediglich die Mesh der jeweiligen Joint-Instanz unmittelbar rotiert.
-Dadurch entsteht eine intuitive und reaktive Steuerung.
+Im Gegensatz zum Animationsalgorithmus erfolgt diese Bewegung nicht zeitlich interpoliert, sondern es wird lediglich die Mesh der jeweiligen Joint-Instanz unmittelbar rotiert. Dadurch entsteht eine intuitive und reaktive Steuerung in weicher Echtzeit.
 
-In dem Unteren Bereich namens TCP Pose befinden sich die Knöpfe zur Endeffektorsteuerung in sowie eine die Checkbox um die Steuerung in lokale Koordinaten umzuschalten.
-Darunter befinden sich Textfelder um die aktuelle Pose des TCP anzuzeigen, die mithilfe der Vorwärtstransformation berechnet wird.
+In dem Unteren Bereich Namens
 
 
 
@@ -586,7 +552,7 @@ J_{\text{pos}}^{\text{sym}} =
 \end{bmatrix}
 \]
 
-Diese Matrix wird mit sympy.lambdify in eine effiziente NumPy-Funktion überführt, um zur Laufzeit schnell numerische Werte für gegebene Gelenkwinkel berechnen zu können.
+Diese Matrix wird mit \texttt{sympy.lambdify} in eine effiziente \textit{NumPy}-Funktion überführt, um zur Laufzeit schnell numerische Werte für gegebene Gelenkwinkel berechnen zu können.
 
 \vspace{1em}
 \noindent
@@ -719,7 +685,7 @@ Die Algorithmusstruktur folgt damit eng dem theoretischen Aufbau:
 Nachdem die Rückwärtstransformation implementiert worden ist,
 wird diese beim verschieben des TCP-Koordinatensystems in der 3D-Szene aufgerufen um die Gelenke und Glieder des Roboters entsprechend mitzubewegen.
 Da die implementierte Rückwärtstransformation anhand des Newton-Raphson-Verfahrens sehr rechenintensiv ist, wird die symbolische Vorbereitung für jeden
-Roboter nur einmalig bei der Initialisierung dessen berechnet um Ressourcen zu sparen.
+Roboter nur einmalig bei der Initialisierung dessen berechnet.
 
 
 
@@ -729,76 +695,6 @@ Roboter nur einmalig bei der Initialisierung dessen berechnet um Ressourcen zu s
 
 
 
-
-
-
-
-
-
-\vspace{1em}
-\begin{table}[H]
-\centering
-\begin{tabular}{|p{4.5cm}|p{9.5cm}|}
-\hline
-\textbf{Komponente} & \textbf{Spezifikation} \\
-\hline
-Gerätetyp & Laptop \\
-\hline
-Hersteller & HP \\
-\hline
-Modell & Pavilion Laptop 14-bf0xx \\
-\hline
-Prozessor (CPU) & Intel\textsuperscript{\textregistered} Core\texttrademark\ i5-7200U CPU mit 2,50\,GHz, 2 Kerne, 4 Threads \\
-\hline
-Arbeitsspeicher (RAM) & 8\,GB (1x 8\,GB, DDR4, 2133\,MHz, SODIMM, SK Hynix) \\
-\hline
-Grafikeinheit (GPU) & Intel HD Graphics 620 (integriert) \newline NVIDIA GeForce 940MX (dediziert) \\
-\hline
-Massenspeicher & Samsung SSD 256\,GB \\
-\hline
-Betriebssystem & Linux Mint 21.3 „Virginia“ (64-bit) \\
-\hline
-\end{tabular}
-\caption{Technische Spezifikationen des Testsystems „System B“}
-\label{tab:system_b}
-\end{table}
-\vspace{1em}
-
-
-
-
-
-
-
-
-\vspace{1em}
-\begin{table}[H]
-\centering
-\begin{tabular}{|p{4.5cm}|p{9.5cm}|}
-\hline
-\textbf{Komponente} & \textbf{Spezifikation} \\
-\hline
-Gerätetyp & Workstation (Micro Form Factor) \\
-\hline
-Hersteller & Dell \\
-\hline
-Modell & OptiPlex 7000 Micro \\
-\hline
-Prozessor (CPU) & Intel\textsuperscript{\textregistered} Core\texttrademark\ i5-12500T CPU mit 2,00–4,60\,GHz, 6 Kerne, 12 logische Prozessoren \\
-\hline
-Arbeitsspeicher (RAM) & 16\,GB DDR4 (1× 16\,GB, 3200\,MHz, SODIMM) \\
-\hline
-Grafikeinheit (GPU) & Integrierte Intel UHD Graphics 770 \\
-\hline
-Massenspeicher & 256\,GB NVMe SSD (PCIe 3.0 x4, M.2) \\
-\hline
-Betriebssystem & Windows 11 Pro (64-bit), Version 22H2 (Build 22621) \\
-\hline
-\end{tabular}
-\caption{Technische Spezifikationen des Testsystems „System C“}
-\label{tab:system_c}
-\end{table}
-\vspace{1em}
 
 
 
