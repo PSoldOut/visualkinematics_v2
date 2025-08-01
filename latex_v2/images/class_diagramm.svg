@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="2740.625px" preserveAspectRatio="none" style="width:1359px;height:2740px;background:#FFFFFF;" version="1.1" viewBox="0 0 1359 2740" width="1359.375px" zoomAndPan="magnify"><defs/><g><!--MD5=[b383186554fbe7d11b3e59812a82c4d0]
+cluster visualkinematics_v2.manipulator--><g id="cluster_visualkinematics_v2.manipulator"><path d="M13.2813,1492.1875 L410.1563,1492.1875 A5.8594,5.8594 0 0 1 414.0625,1496.0938 L425,1527.0264 L1344.5313,1527.0264 A3.9063,3.9063 0 0 1 1348.4375,1530.9326 L1348.4375,2697.6563 A3.9063,3.9063 0 0 1 1344.5313,2701.5625 L13.2813,2701.5625 A3.9063,3.9063 0 0 1 9.375,2697.6563 L9.375,1496.0938 A3.9063,3.9063 0 0 1 13.2813,1492.1875 " fill="none" style="stroke:#000000;stroke-width:2.34375;"/><line style="stroke:#000000;stroke-width:2.34375;" x1="9.375" x2="425" y1="1527.0264" y2="1527.0264"/><text fill="#000000" font-family="sans-serif" font-size="21.875" font-weight="bold" lengthAdjust="spacing" textLength="395.3125" x="15.625" y="1515.6174">visualkinematics_v2.manipulator</text></g><!--MD5=[31b5baa3f2cce8ad4bcb1ae0e6debb92]
+cluster visualkinematics_v2.show--><g id="cluster_visualkinematics_v2.show"><path d="M235.1563,9.375 L553.9063,9.375 A5.8594,5.8594 0 0 1 557.8125,13.2813 L568.75,44.2139 L899.2188,44.2139 A3.9063,3.9063 0 0 1 903.125,48.1201 L903.125,1450.7813 A3.9063,3.9063 0 0 1 899.2188,1454.6875 L235.1563,1454.6875 A3.9063,3.9063 0 0 1 231.25,1450.7813 L231.25,13.2813 A3.9063,3.9063 0 0 1 235.1563,9.375 " fill="none" style="stroke:#000000;stroke-width:2.34375;"/><line style="stroke:#000000;stroke-width:2.34375;" x1="231.25" x2="568.75" y1="44.2139" y2="44.2139"/><text fill="#000000" font-family="sans-serif" font-size="21.875" font-weight="bold" lengthAdjust="spacing" textLength="317.1875" x="237.5" y="32.8049">visualkinematics_v2.show</text></g><!--MD5=[8eddb4c85c32d1b04d39103dae5d48d1]
+class visualkinematics_v2.manipulator.DHKinematicModel--><g id="elem_visualkinematics_v2.manipulator.DHKinematicModel"><rect codeLine="16" fill="#F1F1F1" height="238.6963" id="visualkinematics_v2.manipulator.DHKinematicModel" rx="3.9063" ry="3.9063" style="stroke:#181818;stroke-width:0.78125;" width="195.3125" x="35.1563" y="1982.8125"/><ellipse cx="58.5938" cy="2007.8125" fill="#ADD1B2" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M63.2324,2016.626 Q62.3291,2017.0898 61.3281,2017.3096 Q60.3271,2017.5537 59.2285,2017.5537 Q55.3223,2017.5537 53.2471,2014.9902 Q51.1963,2012.4023 51.1963,2007.5195 Q51.1963,2002.6367 53.2471,2000.0488 Q55.3223,1997.4609 59.2285,1997.4609 Q60.3271,1997.4609 61.3281,1997.7051 Q62.3535,1997.9492 63.2324,1998.4131 L63.2324,2002.6611 Q62.2559,2001.7578 61.3281,2001.3428 Q60.4004,2000.9033 59.4238,2000.9033 Q57.3242,2000.9033 56.25,2002.5879 Q55.1758,2004.248 55.1758,2007.5195 Q55.1758,2010.791 56.25,2012.4756 Q57.3242,2014.1357 59.4238,2014.1357 Q60.4004,2014.1357 61.3281,2013.7207 Q62.2559,2013.2813 63.2324,2012.3779 L63.2324,2016.626 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="145.3125" x="80.4688" y="2013.2217">DHKinematicModel</text><line style="stroke:#181818;stroke-width:0.78125;" x1="36.7188" x2="228.9063" y1="2032.8125" y2="2032.8125"/><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="151.5625" x="44.5313" y="2053.566">dh_parameters: dict</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="157.8125" x="44.5313" y="2071.7545">symbolic_thetas: dict</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="123.4375" x="44.5313" y="2089.9429">joint_angles: dict</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="154.6875" x="44.5313" y="2108.1314">base_to_dh: ndarray</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="146.875" x="44.5313" y="2126.3199">dh_to_tool: ndarray</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="64.0625" x="44.5313" y="2144.5084">fk: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="139.0625" x="44.5313" y="2162.6968">fk_pos_func: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="134.375" x="44.5313" y="2180.8853">fk_rot_func: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="151.5625" x="44.5313" y="2199.0738">jacobian_func: None</text><line style="stroke:#181818;stroke-width:0.78125;" x1="36.7188" x2="228.9063" y1="2209.0088" y2="2209.0088"/></g><!--MD5=[b344d25f05ac0cba941d507582ed3989]
+class visualkinematics_v2.manipulator.Joint--><g id="elem_visualkinematics_v2.manipulator.Joint"><rect codeLine="27" fill="#F1F1F1" height="220.5078" id="visualkinematics_v2.manipulator.Joint" rx="3.9063" ry="3.9063" style="stroke:#181818;stroke-width:0.78125;" width="421.875" x="262.5" y="1992.1875"/><ellipse cx="450.3906" cy="2017.1875" fill="#ADD1B2" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M455.0293,2026.001 Q454.126,2026.4648 453.125,2026.6846 Q452.124,2026.9287 451.0254,2026.9287 Q447.1191,2026.9287 445.0439,2024.3652 Q442.9932,2021.7773 442.9932,2016.8945 Q442.9932,2012.0117 445.0439,2009.4238 Q447.1191,2006.8359 451.0254,2006.8359 Q452.124,2006.8359 453.125,2007.0801 Q454.1504,2007.3242 455.0293,2007.7881 L455.0293,2012.0361 Q454.0527,2011.1328 453.125,2010.7178 Q452.1973,2010.2783 451.2207,2010.2783 Q449.1211,2010.2783 448.0469,2011.9629 Q446.9727,2013.623 446.9727,2016.8945 Q446.9727,2020.166 448.0469,2021.8506 Q449.1211,2023.5107 451.2207,2023.5107 Q452.1973,2023.5107 453.125,2023.0957 Q454.0527,2022.6563 455.0293,2021.7529 L455.0293,2026.001 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="32.8125" x="482.4219" y="2022.5967">Joint</text><line style="stroke:#181818;stroke-width:0.78125;" x1="264.0625" x2="682.8125" y1="2042.1875" y2="2042.1875"/><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="121.875" x="271.875" y="2062.941">is_mimicer: Bool</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="178.125" x="271.875" y="2081.1295">lower_limit: float | None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="181.25" x="271.875" y="2099.3179">upper_limit: float | None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="160.9375" x="271.875" y="2117.5064">renderable: Object3D</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="98.4375" x="271.875" y="2135.6949">axis: ndarray</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="403.125" x="271.875" y="2153.8834">mimicers: list[tuple[Kinematic_Chain_Element, float]]</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="123.4375" x="271.875" y="2172.0718">dh_frame: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="170.3125" x="271.875" y="2190.2603">dh_alignment: ndarray</text><line style="stroke:#181818;stroke-width:0.78125;" x1="264.0625" x2="682.8125" y1="2200.1953" y2="2200.1953"/></g><!--MD5=[6ffbaab4119c628e075b90fd087d3a89]
+class visualkinematics_v2.manipulator.Kinematic_Chain_Element--><g id="elem_visualkinematics_v2.manipulator.Kinematic_Chain_Element"><rect codeLine="37" fill="#F1F1F1" height="165.9424" id="visualkinematics_v2.manipulator.Kinematic_Chain_Element" rx="3.9063" ry="3.9063" style="stroke:#181818;stroke-width:0.78125;" width="331.25" x="290.625" y="2237.5"/><ellipse cx="351.3281" cy="2262.5" fill="#ADD1B2" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M355.9668,2271.3135 Q355.0635,2271.7773 354.0625,2271.9971 Q353.0615,2272.2412 351.9629,2272.2412 Q348.0566,2272.2412 345.9814,2269.6777 Q343.9307,2267.0898 343.9307,2262.207 Q343.9307,2257.3242 345.9814,2254.7363 Q348.0566,2252.1484 351.9629,2252.1484 Q353.0615,2252.1484 354.0625,2252.3926 Q355.0879,2252.6367 355.9668,2253.1006 L355.9668,2257.3486 Q354.9902,2256.4453 354.0625,2256.0303 Q353.1348,2255.5908 352.1582,2255.5908 Q350.0586,2255.5908 348.9844,2257.2754 Q347.9102,2258.9355 347.9102,2262.207 Q347.9102,2265.4785 348.9844,2267.1631 Q350.0586,2268.8232 352.1582,2268.8232 Q353.1348,2268.8232 354.0625,2268.4082 Q354.9902,2267.9688 355.9668,2267.0654 L355.9668,2271.3135 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="198.4375" x="381.4844" y="2267.9092">Kinematic_Chain_Element</text><line style="stroke:#181818;stroke-width:0.78125;" x1="292.1875" x2="620.3125" y1="2287.5" y2="2287.5"/><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="73.4375" x="300" y="2308.2535">name: str</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="298.4375" x="300" y="2326.442">children: list[Kinematic_Chain_Element]</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="312.5" x="300" y="2344.6304">parent: Kinematic_Chain_Element | None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="160.9375" x="300" y="2362.8189">renderable: Object3D</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="126.5625" x="300" y="2381.0074">frame: Object3D</text><line style="stroke:#181818;stroke-width:0.78125;" x1="292.1875" x2="620.3125" y1="2390.9424" y2="2390.9424"/></g><!--MD5=[834d88b6374d3e5fdec0d284810347bd]
+class visualkinematics_v2.manipulator.Link--><g id="elem_visualkinematics_v2.manipulator.Link"><rect codeLine="44" fill="#F1F1F1" height="93.1885" id="visualkinematics_v2.manipulator.Link" rx="3.9063" ry="3.9063" style="stroke:#181818;stroke-width:0.78125;" width="150" x="559.375" y="2582.8125"/><ellipse cx="614.4531" cy="2607.8125" fill="#ADD1B2" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M619.0918,2616.626 Q618.1885,2617.0898 617.1875,2617.3096 Q616.1865,2617.5537 615.0879,2617.5537 Q611.1816,2617.5537 609.1064,2614.9902 Q607.0557,2612.4023 607.0557,2607.5195 Q607.0557,2602.6367 609.1064,2600.0488 Q611.1816,2597.4609 615.0879,2597.4609 Q616.1865,2597.4609 617.1875,2597.7051 Q618.2129,2597.9492 619.0918,2598.4131 L619.0918,2602.6611 Q618.1152,2601.7578 617.1875,2601.3428 Q616.2598,2600.9033 615.2832,2600.9033 Q613.1836,2600.9033 612.1094,2602.5879 Q611.0352,2604.248 611.0352,2607.5195 Q611.0352,2610.791 612.1094,2612.4756 Q613.1836,2614.1357 615.2832,2614.1357 Q616.2598,2614.1357 617.1875,2613.7207 Q618.1152,2613.2813 619.0918,2612.3779 L619.0918,2616.626 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="29.6875" x="643.3594" y="2613.2217">Link</text><line style="stroke:#181818;stroke-width:0.78125;" x1="560.9375" x2="707.8125" y1="2632.8125" y2="2632.8125"/><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="131.25" x="568.75" y="2653.566">renderable: Mesh</text><line style="stroke:#181818;stroke-width:0.78125;" x1="560.9375" x2="707.8125" y1="2663.501" y2="2663.501"/></g><!--MD5=[ea920bcc98e982338d2678b000559eb7]
+class visualkinematics_v2.manipulator.Manipulator--><g id="elem_visualkinematics_v2.manipulator.Manipulator"><rect codeLine="47" fill="#F1F1F1" height="420.5811" id="visualkinematics_v2.manipulator.Manipulator" rx="3.9063" ry="3.9063" style="stroke:#181818;stroke-width:0.78125;" width="246.875" x="628.125" y="1546.875"/><ellipse cx="700.3906" cy="1571.875" fill="#ADD1B2" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M705.0293,1580.6885 Q704.126,1581.1523 703.125,1581.3721 Q702.124,1581.6162 701.0254,1581.6162 Q697.1191,1581.6162 695.0439,1579.0527 Q692.9932,1576.4648 692.9932,1571.582 Q692.9932,1566.6992 695.0439,1564.1113 Q697.1191,1561.5234 701.0254,1561.5234 Q702.124,1561.5234 703.125,1561.7676 Q704.1504,1562.0117 705.0293,1562.4756 L705.0293,1566.7236 Q704.0527,1565.8203 703.125,1565.4053 Q702.1973,1564.9658 701.2207,1564.9658 Q699.1211,1564.9658 698.0469,1566.6504 Q696.9727,1568.3105 696.9727,1571.582 Q696.9727,1574.8535 698.0469,1576.5381 Q699.1211,1578.1982 701.2207,1578.1982 Q702.1973,1578.1982 703.125,1577.7832 Q704.0527,1577.3438 705.0293,1576.4404 L705.0293,1580.6885 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="89.0625" x="732.4219" y="1577.2842">Manipulator</text><line style="stroke:#181818;stroke-width:0.78125;" x1="629.6875" x2="873.4375" y1="1596.875" y2="1596.875"/><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="67.1875" x="637.5" y="1617.6285">k0: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="118.75" x="637.5" y="1635.817">inspector: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="146.875" x="637.5" y="1654.0054">environment: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="73.4375" x="637.5" y="1672.1939">name: str</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="103.125" x="637.5" y="1690.3824">links: list[Link]</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="114.0625" x="637.5" y="1708.5709">joints: list[Joint]</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="228.125" x="637.5" y="1726.7593">dh: DHKinematicModel | None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="148.4375" x="637.5" y="1744.9478">urdf_dictionary: dict</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="121.875" x="637.5" y="1763.1363">tool: Tool | None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="157.8125" x="637.5" y="1781.3248">learned_poses: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="128.125" x="637.5" y="1799.5132">tcp_target: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="78.125" x="637.5" y="1817.7017">tool: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="106.25" x="637.5" y="1835.8902">base_link: Link</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="220.3125" x="637.5" y="1854.0787">base_link_to_link_1_joint: Joint</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="129.6875" x="637.5" y="1872.2672">base: Link | None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="121.875" x="637.5" y="1890.4556">mesh: Object3D</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="207.8125" x="637.5" y="1908.6441">base_to_baselink_joint: Joint</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="207.8125" x="637.5" y="1926.8326">baselink_to_base_joint: Joint</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="164.0625" x="637.5" y="1945.0211">link_to_tool_joint: Joint</text><line style="stroke:#181818;stroke-width:0.78125;" x1="629.6875" x2="873.4375" y1="1954.9561" y2="1954.9561"/></g><!--MD5=[11cf70e9b515cae563034c4c266311fd]
+class visualkinematics_v2.manipulator.Tool--><g id="elem_visualkinematics_v2.manipulator.Tool"><rect codeLine="68" fill="#F1F1F1" height="147.7539" id="visualkinematics_v2.manipulator.Tool" rx="3.9063" ry="3.9063" style="stroke:#181818;stroke-width:0.78125;" width="167.1875" x="550.7813" y="2418.75"/><ellipse cx="613.5938" cy="2443.75" fill="#ADD1B2" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M618.2324,2452.5635 Q617.3291,2453.0273 616.3281,2453.2471 Q615.3271,2453.4912 614.2285,2453.4912 Q610.3223,2453.4912 608.2471,2450.9277 Q606.1963,2448.3398 606.1963,2443.457 Q606.1963,2438.5742 608.2471,2435.9863 Q610.3223,2433.3984 614.2285,2433.3984 Q615.3271,2433.3984 616.3281,2433.6426 Q617.3535,2433.8867 618.2324,2434.3506 L618.2324,2438.5986 Q617.2559,2437.6953 616.3281,2437.2803 Q615.4004,2436.8408 614.4238,2436.8408 Q612.3242,2436.8408 611.25,2438.5254 Q610.1758,2440.1855 610.1758,2443.457 Q610.1758,2446.7285 611.25,2448.4131 Q612.3242,2450.0732 614.4238,2450.0732 Q615.4004,2450.0732 616.3281,2449.6582 Q617.2559,2449.2188 618.2324,2448.3154 L618.2324,2452.5635 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="29.6875" x="644.2188" y="2449.1592">Tool</text><line style="stroke:#181818;stroke-width:0.78125;" x1="552.3438" x2="716.4063" y1="2468.75" y2="2468.75"/><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="103.125" x="560.1563" y="2489.5035">links: list[Link]</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="114.0625" x="560.1563" y="2507.692">joints: list[Joint]</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="148.4375" x="560.1563" y="2525.8804">urdf_dictionary: dict</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="131.25" x="560.1563" y="2544.0689">renderable: None</text><line style="stroke:#181818;stroke-width:0.78125;" x1="552.3438" x2="716.4063" y1="2554.0039" y2="2554.0039"/></g><!--MD5=[aef45a6f20a136f4c380c0d4558f6624]
+class visualkinematics_v2.manipulator.irb6640_185_280--><g id="elem_visualkinematics_v2.manipulator.irb6640_185_280"><rect codeLine="74" fill="#F1F1F1" height="75" id="visualkinematics_v2.manipulator.irb6640_185_280" rx="3.9063" ry="3.9063" style="stroke:#181818;stroke-width:0.78125;" width="178.125" x="784.375" y="2064.8438"/><ellipse cx="807.8125" cy="2089.8438" fill="#ADD1B2" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M812.4512,2098.6572 Q811.5479,2099.1211 810.5469,2099.3408 Q809.5459,2099.585 808.4473,2099.585 Q804.541,2099.585 802.4658,2097.0215 Q800.415,2094.4336 800.415,2089.5508 Q800.415,2084.668 802.4658,2082.0801 Q804.541,2079.4922 808.4473,2079.4922 Q809.5459,2079.4922 810.5469,2079.7363 Q811.5723,2079.9805 812.4512,2080.4443 L812.4512,2084.6924 Q811.4746,2083.7891 810.5469,2083.374 Q809.6191,2082.9346 808.6426,2082.9346 Q806.543,2082.9346 805.4688,2084.6191 Q804.3945,2086.2793 804.3945,2089.5508 Q804.3945,2092.8223 805.4688,2094.5068 Q806.543,2096.167 808.6426,2096.167 Q809.6191,2096.167 810.5469,2095.752 Q811.4746,2095.3125 812.4512,2094.4092 L812.4512,2098.6572 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="128.125" x="829.6875" y="2095.253">irb6640_185_280</text><line style="stroke:#181818;stroke-width:0.78125;" x1="785.9375" x2="960.9375" y1="2114.8438" y2="2114.8438"/><line style="stroke:#181818;stroke-width:0.78125;" x1="785.9375" x2="960.9375" y1="2127.3438" y2="2127.3438"/></g><!--MD5=[e17d31db665a50399a537ef0c06e3b75]
+class visualkinematics_v2.manipulator.kr6r900_2--><g id="elem_visualkinematics_v2.manipulator.kr6r900_2"><rect codeLine="76" fill="#F1F1F1" height="75" id="visualkinematics_v2.manipulator.kr6r900_2" rx="3.9063" ry="3.9063" style="stroke:#181818;stroke-width:0.78125;" width="125" x="993.75" y="2064.8438"/><ellipse cx="1017.1875" cy="2089.8438" fill="#ADD1B2" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M1021.8262,2098.6572 Q1020.9229,2099.1211 1019.9219,2099.3408 Q1018.9209,2099.585 1017.8223,2099.585 Q1013.916,2099.585 1011.8408,2097.0215 Q1009.79,2094.4336 1009.79,2089.5508 Q1009.79,2084.668 1011.8408,2082.0801 Q1013.916,2079.4922 1017.8223,2079.4922 Q1018.9209,2079.4922 1019.9219,2079.7363 Q1020.9473,2079.9805 1021.8262,2080.4443 L1021.8262,2084.6924 Q1020.8496,2083.7891 1019.9219,2083.374 Q1018.9941,2082.9346 1018.0176,2082.9346 Q1015.918,2082.9346 1014.8438,2084.6191 Q1013.7695,2086.2793 1013.7695,2089.5508 Q1013.7695,2092.8223 1014.8438,2094.5068 Q1015.918,2096.167 1018.0176,2096.167 Q1018.9941,2096.167 1019.9219,2095.752 Q1020.8496,2095.3125 1021.8262,2094.4092 L1021.8262,2098.6572 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="75" x="1039.0625" y="2095.253">kr6r900_2</text><line style="stroke:#181818;stroke-width:0.78125;" x1="995.3125" x2="1117.1875" y1="2114.8438" y2="2114.8438"/><line style="stroke:#181818;stroke-width:0.78125;" x1="995.3125" x2="1117.1875" y1="2127.3438" y2="2127.3438"/></g><!--MD5=[7aa57b78d3f3017c4473d731d7fda7f3]
+class visualkinematics_v2.manipulator.lbr_iiwa_14_r820--><g id="elem_visualkinematics_v2.manipulator.lbr_iiwa_14_r820"><rect codeLine="78" fill="#F1F1F1" height="75" id="visualkinematics_v2.manipulator.lbr_iiwa_14_r820" rx="3.9063" ry="3.9063" style="stroke:#181818;stroke-width:0.78125;" width="173.4375" x="1150.7813" y="2064.8438"/><ellipse cx="1174.2188" cy="2089.8438" fill="#ADD1B2" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M1178.8574,2098.6572 Q1177.9541,2099.1211 1176.9531,2099.3408 Q1175.9521,2099.585 1174.8535,2099.585 Q1170.9473,2099.585 1168.8721,2097.0215 Q1166.8213,2094.4336 1166.8213,2089.5508 Q1166.8213,2084.668 1168.8721,2082.0801 Q1170.9473,2079.4922 1174.8535,2079.4922 Q1175.9521,2079.4922 1176.9531,2079.7363 Q1177.9785,2079.9805 1178.8574,2080.4443 L1178.8574,2084.6924 Q1177.8809,2083.7891 1176.9531,2083.374 Q1176.0254,2082.9346 1175.0488,2082.9346 Q1172.9492,2082.9346 1171.875,2084.6191 Q1170.8008,2086.2793 1170.8008,2089.5508 Q1170.8008,2092.8223 1171.875,2094.5068 Q1172.9492,2096.167 1175.0488,2096.167 Q1176.0254,2096.167 1176.9531,2095.752 Q1177.8809,2095.3125 1178.8574,2094.4092 L1178.8574,2098.6572 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="123.4375" x="1196.0938" y="2095.253">lbr_iiwa_14_r820</text><line style="stroke:#181818;stroke-width:0.78125;" x1="1152.3438" x2="1322.6563" y1="2114.8438" y2="2114.8438"/><line style="stroke:#181818;stroke-width:0.78125;" x1="1152.3438" x2="1322.6563" y1="2127.3438" y2="2127.3438"/></g><!--MD5=[271b7b7b4692ec24aca7c0b303ff83d2]
+class visualkinematics_v2.show.Environment--><g id="elem_visualkinematics_v2.show.Environment"><rect codeLine="80" fill="#F1F1F1" height="347.8271" id="visualkinematics_v2.show.Environment" rx="3.9063" ry="3.9063" style="stroke:#181818;stroke-width:0.78125;" width="293.75" x="445.3125" y="64.0625"/><ellipse cx="536.3281" cy="89.0625" fill="#ADD1B2" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M540.9668,97.876 Q540.0635,98.3398 539.0625,98.5596 Q538.0615,98.8037 536.9629,98.8037 Q533.0566,98.8037 530.9814,96.2402 Q528.9307,93.6523 528.9307,88.7695 Q528.9307,83.8867 530.9814,81.2988 Q533.0566,78.7109 536.9629,78.7109 Q538.0615,78.7109 539.0625,78.9551 Q540.0879,79.1992 540.9668,79.6631 L540.9668,83.9111 Q539.9902,83.0078 539.0625,82.5928 Q538.1348,82.1533 537.1582,82.1533 Q535.0586,82.1533 533.9844,83.8379 Q532.9102,85.498 532.9102,88.7695 Q532.9102,92.041 533.9844,93.7256 Q535.0586,95.3857 537.1582,95.3857 Q538.1348,95.3857 539.0625,94.9707 Q539.9902,94.5313 540.9668,93.6279 L540.9668,97.876 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="98.4375" x="568.3594" y="94.4717">Environment</text><line style="stroke:#181818;stroke-width:0.78125;" x1="446.875" x2="737.5" y1="114.0625" y2="114.0625"/><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="96.875" x="454.6875" y="134.816">frame: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="78.125" x="454.6875" y="153.0045">grid: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="93.75" x="454.6875" y="171.1929">scene: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="218.75" x="454.6875" y="189.3814">camera: PerspectiveCamera</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="96.875" x="454.6875" y="207.5699">frame: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="78.125" x="454.6875" y="225.7584">grid: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="81.25" x="454.6875" y="243.9468">light: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="107.8125" x="454.6875" y="262.1353">children: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="198.4375" x="454.6875" y="280.3238">widgets_on_bottom: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="115.625" x="454.6875" y="298.5123">renderer: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="162.5" x="454.6875" y="316.7007">frame_widgets: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="107.8125" x="454.6875" y="334.8892">widgets: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="275" x="454.6875" y="353.0777">gizmo_controls: list[Gizmo_Controls]</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="189.0625" x="454.6875" y="371.2662">inspectors: list[Inspector]</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="156.25" x="454.6875" y="389.4547">info_container: VBox</text><line style="stroke:#181818;stroke-width:0.78125;" x1="446.875" x2="737.5" y1="399.3896" y2="399.3896"/></g><!--MD5=[6a33e680854a4803e21f8bdbf6800ee3]
+class visualkinematics_v2.show.Gizmo_Controls--><g id="elem_visualkinematics_v2.show.Gizmo_Controls"><rect codeLine="97" fill="#F1F1F1" height="111.377" id="visualkinematics_v2.show.Gizmo_Controls" rx="3.9063" ry="3.9063" style="stroke:#181818;stroke-width:0.78125;" width="301.5625" x="257.0313" y="428.125"/><ellipse cx="341.0156" cy="453.125" fill="#ADD1B2" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M345.6543,461.9385 Q344.751,462.4023 343.75,462.6221 Q342.749,462.8662 341.6504,462.8662 Q337.7441,462.8662 335.6689,460.3027 Q333.6182,457.7148 333.6182,452.832 Q333.6182,447.9492 335.6689,445.3613 Q337.7441,442.7734 341.6504,442.7734 Q342.749,442.7734 343.75,443.0176 Q344.7754,443.2617 345.6543,443.7256 L345.6543,447.9736 Q344.6777,447.0703 343.75,446.6553 Q342.8223,446.2158 341.8457,446.2158 Q339.7461,446.2158 338.6719,447.9004 Q337.5977,449.5605 337.5977,452.832 Q337.5977,456.1035 338.6719,457.7881 Q339.7461,459.4482 341.8457,459.4482 Q342.8223,459.4482 343.75,459.0332 Q344.6777,458.5938 345.6543,457.6904 L345.6543,461.9385 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="120.3125" x="373.0469" y="458.5342">Gizmo_Controls</text><line style="stroke:#181818;stroke-width:0.78125;" x1="258.5938" x2="557.0313" y1="478.125" y2="478.125"/><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="207.8125" x="266.4063" y="498.8785">view: Gizmo_Controls_View</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="282.8125" x="266.4063" y="517.067">controller: Gizmo_Controls_Controller</text><line style="stroke:#181818;stroke-width:0.78125;" x1="258.5938" x2="557.0313" y1="527.002" y2="527.002"/></g><!--MD5=[103cf92092d0e1f078f2f64e14037410]
+class visualkinematics_v2.show.Gizmo_Controls_Controller--><g id="elem_visualkinematics_v2.show.Gizmo_Controls_Controller"><rect codeLine="101" fill="#F1F1F1" height="165.9424" id="visualkinematics_v2.show.Gizmo_Controls_Controller" rx="3.9063" ry="3.9063" style="stroke:#181818;stroke-width:0.78125;" width="253.125" x="257.8125" y="591.4063"/><ellipse cx="281.25" cy="616.4063" fill="#ADD1B2" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M285.8887,625.2197 Q284.9854,625.6836 283.9844,625.9033 Q282.9834,626.1475 281.8848,626.1475 Q277.9785,626.1475 275.9033,623.584 Q273.8525,620.9961 273.8525,616.1133 Q273.8525,611.2305 275.9033,608.6426 Q277.9785,606.0547 281.8848,606.0547 Q282.9834,606.0547 283.9844,606.2988 Q285.0098,606.543 285.8887,607.0068 L285.8887,611.2549 Q284.9121,610.3516 283.9844,609.9365 Q283.0566,609.4971 282.0801,609.4971 Q279.9805,609.4971 278.9063,611.1816 Q277.832,612.8418 277.832,616.1133 Q277.832,619.3848 278.9063,621.0693 Q279.9805,622.7295 282.0801,622.7295 Q283.0566,622.7295 283.9844,622.3145 Q284.9121,621.875 285.8887,620.9717 L285.8887,625.2197 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="203.125" x="303.125" y="621.8155">Gizmo_Controls_Controller</text><line style="stroke:#181818;stroke-width:0.78125;" x1="259.375" x2="509.375" y1="641.4063" y2="641.4063"/><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="207.8125" x="267.1875" y="662.1597">view: Gizmo_Controls_View</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="201.5625" x="267.1875" y="680.3482">callback: Callable[[], None]</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="71.875" x="267.1875" y="698.5367">obj: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="160.9375" x="267.1875" y="716.7252">obj_renderable: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="160.9375" x="267.1875" y="734.9136">obj_renderable: None</text><line style="stroke:#181818;stroke-width:0.78125;" x1="259.375" x2="509.375" y1="744.8486" y2="744.8486"/></g><!--MD5=[492252e5d996d425bec9e1885869fdb7]
+class visualkinematics_v2.show.Gizmo_Controls_View--><g id="elem_visualkinematics_v2.show.Gizmo_Controls_View"><rect codeLine="108" fill="#F1F1F1" height="384.2041" id="visualkinematics_v2.show.Gizmo_Controls_View" rx="3.9063" ry="3.9063" style="stroke:#181818;stroke-width:0.78125;" width="259.375" x="256.25" y="927.3438"/><ellipse cx="300.0781" cy="952.3438" fill="#ADD1B2" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M304.7168,961.1572 Q303.8135,961.6211 302.8125,961.8408 Q301.8115,962.085 300.7129,962.085 Q296.8066,962.085 294.7314,959.5215 Q292.6807,956.9336 292.6807,952.0508 Q292.6807,947.168 294.7314,944.5801 Q296.8066,941.9922 300.7129,941.9922 Q301.8115,941.9922 302.8125,942.2363 Q303.8379,942.4805 304.7168,942.9443 L304.7168,947.1924 Q303.7402,946.2891 302.8125,945.874 Q301.8848,945.4346 300.9082,945.4346 Q298.8086,945.4346 297.7344,947.1191 Q296.6602,948.7793 296.6602,952.0508 Q296.6602,955.3223 297.7344,957.0068 Q298.8086,958.667 300.9082,958.667 Q301.8848,958.667 302.8125,958.252 Q303.7402,957.8125 304.7168,956.9092 L304.7168,961.1572 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="164.0625" x="326.4844" y="957.753">Gizmo_Controls_View</text><line style="stroke:#181818;stroke-width:0.78125;" x1="257.8125" x2="514.0625" y1="977.3438" y2="977.3438"/><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="201.5625" x="265.625" y="998.0972">callback: Callable[[], None]</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="71.875" x="265.625" y="1016.2857">obj: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="107.8125" x="265.625" y="1034.4742">content: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="160.9375" x="265.625" y="1052.6627">obj_renderable: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="160.9375" x="265.625" y="1070.8511">obj_renderable: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="153.125" x="265.625" y="1089.0396">x_trans_slider: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="153.125" x="265.625" y="1107.2281">y_trans_slider: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="151.5625" x="265.625" y="1125.4166">z_trans_slider: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="135.9375" x="265.625" y="1143.605">x_rot_slider: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="135.9375" x="265.625" y="1161.7935">y_rot_slider: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="134.375" x="265.625" y="1179.982">z_rot_slider: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="151.5625" x="265.625" y="1198.1705">x_scale_slider: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="151.5625" x="265.625" y="1216.3589">y_scale_slider: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="150" x="265.625" y="1234.5474">z_scale_slider: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="240.625" x="265.625" y="1252.7359">rotation_order_dropdown: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="220.3125" x="265.625" y="1270.9244">local_space_check_box: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="100" x="265.625" y="1289.1129">widget: None</text><line style="stroke:#181818;stroke-width:0.78125;" x1="257.8125" x2="514.0625" y1="1299.0479" y2="1299.0479"/></g><!--MD5=[4d35b3014c7642984785a873182edadf]
+class visualkinematics_v2.show.Inspector--><g id="elem_visualkinematics_v2.show.Inspector"><rect codeLine="127" fill="#F1F1F1" height="111.377" id="visualkinematics_v2.show.Inspector" rx="3.9063" ry="3.9063" style="stroke:#181818;stroke-width:0.78125;" width="251.5625" x="625.7813" y="428.125"/><ellipse cx="709.7656" cy="453.125" fill="#ADD1B2" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M714.4043,461.9385 Q713.501,462.4023 712.5,462.6221 Q711.499,462.8662 710.4004,462.8662 Q706.4941,462.8662 704.4189,460.3027 Q702.3682,457.7148 702.3682,452.832 Q702.3682,447.9492 704.4189,445.3613 Q706.4941,442.7734 710.4004,442.7734 Q711.499,442.7734 712.5,443.0176 Q713.5254,443.2617 714.4043,443.7256 L714.4043,447.9736 Q713.4277,447.0703 712.5,446.6553 Q711.5723,446.2158 710.5957,446.2158 Q708.4961,446.2158 707.4219,447.9004 Q706.3477,449.5605 706.3477,452.832 Q706.3477,456.1035 707.4219,457.7881 Q708.4961,459.4482 710.5957,459.4482 Q711.5723,459.4482 712.5,459.0332 Q713.4277,458.5938 714.4043,457.6904 L714.4043,461.9385 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="70.3125" x="741.7969" y="458.5342">Inspector</text><line style="stroke:#181818;stroke-width:0.78125;" x1="627.3438" x2="875.7813" y1="478.125" y2="478.125"/><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="150" x="635.1563" y="498.8785">view: InspectorView</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="232.8125" x="635.1563" y="517.067">controller: Inspector_Controller</text><line style="stroke:#181818;stroke-width:0.78125;" x1="627.3438" x2="875.7813" y1="527.002" y2="527.002"/></g><!--MD5=[05b7f6b2d291a668f7785dffc5277027]
+class visualkinematics_v2.show.InspectorView--><g id="elem_visualkinematics_v2.show.InspectorView"><rect codeLine="131" fill="#F1F1F1" height="620.6543" id="visualkinematics_v2.show.InspectorView" rx="3.9063" ry="3.9063" style="stroke:#181818;stroke-width:0.78125;" width="239.0625" x="547.6563" y="809.375"/><ellipse cx="608.3594" cy="834.375" fill="#ADD1B2" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M612.998,843.1885 Q612.0947,843.6523 611.0938,843.8721 Q610.0928,844.1162 608.9941,844.1162 Q605.0879,844.1162 603.0127,841.5527 Q600.9619,838.9648 600.9619,834.082 Q600.9619,829.1992 603.0127,826.6113 Q605.0879,824.0234 608.9941,824.0234 Q610.0928,824.0234 611.0938,824.2676 Q612.1191,824.5117 612.998,824.9756 L612.998,829.2236 Q612.0215,828.3203 611.0938,827.9053 Q610.166,827.4658 609.1895,827.4658 Q607.0898,827.4658 606.0156,829.1504 Q604.9414,830.8105 604.9414,834.082 Q604.9414,837.3535 606.0156,839.0381 Q607.0898,840.6982 609.1895,840.6982 Q610.166,840.6982 611.0938,840.2832 Q612.0215,839.8438 612.998,838.9404 L612.998,843.1885 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="106.25" x="638.5156" y="839.7842">InspectorView</text><line style="stroke:#181818;stroke-width:0.78125;" x1="549.2188" x2="785.1563" y1="859.375" y2="859.375"/><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="204.6875" x="557.0313" y="880.1285">environment: Environment</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="142.1875" x="557.0313" y="898.317">sliders_signs: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="143.75" x="557.0313" y="916.5054">joints_sliders: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="189.0625" x="557.0313" y="934.6939">manipulator: Manipulator</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="107.8125" x="557.0313" y="952.8824">content: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="145.3125" x="557.0313" y="971.0709">pose_names: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="206.25" x="557.0313" y="989.2593">pose_dropdown: Dropdown</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="192.1875" x="557.0313" y="1007.4478">save_pose_textfield: Text</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="154.6875" x="557.0313" y="1025.6363">save_button: Button</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="217.1875" x="557.0313" y="1043.8248">take_position_button: Button</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="159.375" x="557.0313" y="1062.0132">trans_x_minus: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="143.75" x="557.0313" y="1080.2017">trans_x_plus: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="159.375" x="557.0313" y="1098.3902">trans_y_minus: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="143.75" x="557.0313" y="1116.5787">trans_y_plus: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="157.8125" x="557.0313" y="1134.7672">trans_z_minus: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="142.1875" x="557.0313" y="1152.9556">trans_z_plus: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="142.1875" x="557.0313" y="1171.1441">rot_x_minus: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="126.5625" x="557.0313" y="1189.3326">rot_x_plus: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="142.1875" x="557.0313" y="1207.5211">rot_y_minus: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="126.5625" x="557.0313" y="1225.7095">rot_y_plus: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="140.625" x="557.0313" y="1243.898">rot_z_minus: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="125" x="557.0313" y="1262.0865">rot_z_plus: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="220.3125" x="557.0313" y="1280.275">local_space_check_box: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="195.3125" x="557.0313" y="1298.4634">x_current_pos_text: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="195.3125" x="557.0313" y="1316.6519">y_current_pos_text: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="193.75" x="557.0313" y="1334.8404">z_current_pos_text: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="190.625" x="557.0313" y="1353.0289">x_current_rot_text: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="190.625" x="557.0313" y="1371.2173">y_current_rot_text: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="189.0625" x="557.0313" y="1389.4058">z_current_rot_text: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="100" x="557.0313" y="1407.5943">widget: None</text><line style="stroke:#181818;stroke-width:0.78125;" x1="549.2188" x2="785.1563" y1="1417.5293" y2="1417.5293"/></g><!--MD5=[c4ff6e16606d6d447f1750e02157cb34]
+class visualkinematics_v2.show.Inspector_Controller--><g id="elem_visualkinematics_v2.show.Inspector_Controller"><rect codeLine="163" fill="#F1F1F1" height="238.6963" id="visualkinematics_v2.show.Inspector_Controller" rx="3.9063" ry="3.9063" style="stroke:#181818;stroke-width:0.78125;" width="207.8125" x="669.5313" y="554.6875"/><ellipse cx="695.0781" cy="579.6875" fill="#ADD1B2" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M699.7168,588.501 Q698.8135,588.9648 697.8125,589.1846 Q696.8115,589.4287 695.7129,589.4287 Q691.8066,589.4287 689.7314,586.8652 Q687.6807,584.2773 687.6807,579.3945 Q687.6807,574.5117 689.7314,571.9238 Q691.8066,569.3359 695.7129,569.3359 Q696.8115,569.3359 697.8125,569.5801 Q698.8379,569.8242 699.7168,570.2881 L699.7168,574.5361 Q698.7402,573.6328 697.8125,573.2178 Q696.8848,572.7783 695.9082,572.7783 Q693.8086,572.7783 692.7344,574.4629 Q691.6602,576.123 691.6602,579.3945 Q691.6602,582.666 692.7344,584.3506 Q693.8086,586.0107 695.9082,586.0107 Q696.8848,586.0107 697.8125,585.5957 Q698.7402,585.1563 699.7168,584.2529 L699.7168,588.501 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="153.125" x="717.4219" y="585.0967">Inspector_Controller</text><line style="stroke:#181818;stroke-width:0.78125;" x1="671.0938" x2="875.7813" y1="604.6875" y2="604.6875"/><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" text-decoration="underline" textLength="140.625" x="678.9063" y="625.441">mouse_down: bool</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="150" x="678.9063" y="643.6295">view: InspectorView</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="146.875" x="678.9063" y="661.8179">environment: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="189.0625" x="678.9063" y="680.0064">manipulator: Manipulator</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="129.6875" x="678.9063" y="698.1949">trans_step: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="112.5" x="678.9063" y="716.3834">rot_step: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="181.25" x="678.9063" y="734.5718">button_wait_time: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="137.5" x="678.9063" y="752.7603">lower_limits: None</text><text fill="#000000" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="140.625" x="678.9063" y="770.9488">upper_limits: None</text><line style="stroke:#181818;stroke-width:0.78125;" x1="671.0938" x2="875.7813" y1="780.8838" y2="780.8838"/></g><!--MD5=[44b1ba76c7e36deb05f93d9fa3988f01]
+reverse link visualkinematics_v2.manipulator.Joint to visualkinematics_v2.manipulator.Kinematic_Chain_Element--><g id="link_visualkinematics_v2.manipulator.Joint_visualkinematics_v2.manipulator.Kinematic_Chain_Element"><path codeLine="174" d="M373.4375,2232.9219 C373.4375,2232.9219 373.4375,2237.0938 373.4375,2237.0938 " fill="none" id="visualkinematics_v2.manipulator.Joint-backto-visualkinematics_v2.manipulator.Kinematic_Chain_Element" style="stroke:#181818;stroke-width:1.5625;"/><polygon fill="#181818" points="373.4375,2212.6094,367.1875,2221.9844,373.4375,2231.3594,379.6875,2221.9844,373.4375,2212.6094" style="stroke:#181818;stroke-width:1.5625;"/></g><!--MD5=[c03ed2374866875588967751990993f0]
+reverse link visualkinematics_v2.manipulator.Kinematic_Chain_Element to visualkinematics_v2.manipulator.Joint--><g id="link_visualkinematics_v2.manipulator.Kinematic_Chain_Element_visualkinematics_v2.manipulator.Joint"><path codeLine="175" d="M456.25,2215.4844 C456.25,2215.4844 456.25,2213.0625 456.25,2213.0625 " fill="none" id="visualkinematics_v2.manipulator.Kinematic_Chain_Element-backto-visualkinematics_v2.manipulator.Joint" style="stroke:#181818;stroke-width:1.5625;"/><polygon fill="none" points="467.1875,2206.0313,456.25,2237.2813,445.3125,2206.0313,467.1875,2206.0313" style="stroke:#181818;stroke-width:1.5625;"/></g><!--MD5=[dad3e693dbd742580da31336169ffc1d]
+reverse link visualkinematics_v2.manipulator.Kinematic_Chain_Element to visualkinematics_v2.manipulator.Kinematic_Chain_Element--><g id="link_visualkinematics_v2.manipulator.Kinematic_Chain_Element_visualkinematics_v2.manipulator.Kinematic_Chain_Element"><path codeLine="176" d="M539.0625,2230.4531 C539.0625,2230.4531 539.0625,2229.6875 539.0625,2229.6875 C539.0625,2229.6875 642.7031,2229.6875 642.7031,2229.6875 C642.7031,2229.6875 642.7031,2410.9375 642.7031,2410.9375 C642.7031,2410.9375 598.1719,2410.9375 598.1719,2410.9375 C598.1719,2410.9375 598.1719,2408.0156 598.1719,2403.2031 " fill="none" id="visualkinematics_v2.manipulator.Kinematic_Chain_Element-backto-visualkinematics_v2.manipulator.Kinematic_Chain_Element" style="stroke:#181818;stroke-width:1.5625;"/><polygon fill="#181818" points="539.0625,2237.4219,545.3228,2228.0537,539.0831,2218.6719,532.8228,2228.04,539.0625,2237.4219" style="stroke:#181818;stroke-width:1.5625;"/></g><!--MD5=[dc7c348a317746f6f5c9a502474fc4c9]
+reverse link visualkinematics_v2.manipulator.Kinematic_Chain_Element to visualkinematics_v2.manipulator.Link--><g id="link_visualkinematics_v2.manipulator.Kinematic_Chain_Element_visualkinematics_v2.manipulator.Link"><path codeLine="177" d="M420.7031,2434.4688 C420.7031,2434.4688 420.7031,2629.6875 420.7031,2629.6875 C420.7031,2629.6875 497.5313,2629.6875 559.0469,2629.6875 " fill="none" id="visualkinematics_v2.manipulator.Kinematic_Chain_Element-backto-visualkinematics_v2.manipulator.Link" style="stroke:#181818;stroke-width:1.5625;"/><polygon fill="none" points="409.7656,2434.4688,420.7031,2403.2188,431.6406,2434.4688,409.7656,2434.4688" style="stroke:#181818;stroke-width:1.5625;"/></g><!--MD5=[51c9ef6da3e0fde756c81a58348f7638]
+reverse link visualkinematics_v2.manipulator.Manipulator to visualkinematics_v2.manipulator.Link--><g id="link_visualkinematics_v2.manipulator.Manipulator_visualkinematics_v2.manipulator.Link"><path codeLine="178" d="M751.1719,1988.0312 C751.1719,1988.0312 751.1719,2629.6875 751.1719,2629.6875 C751.1719,2629.6875 732.2656,2629.6875 709.6719,2629.6875 " fill="none" id="visualkinematics_v2.manipulator.Manipulator-backto-visualkinematics_v2.manipulator.Link" style="stroke:#181818;stroke-width:1.5625;"/><polygon fill="#181818" points="751.1719,1967.7187,744.9219,1977.0937,751.1719,1986.4687,757.4219,1977.0937,751.1719,1967.7187" style="stroke:#181818;stroke-width:1.5625;"/></g><!--MD5=[a30c03ab62cf37b21a04936b5c2b6bcc]
+reverse link visualkinematics_v2.manipulator.Manipulator to visualkinematics_v2.manipulator.Joint--><g id="link_visualkinematics_v2.manipulator.Manipulator_visualkinematics_v2.manipulator.Joint"><path codeLine="179" d="M656.25,1987.6719 C656.25,1987.6719 656.25,1991.8281 656.25,1991.8281 " fill="none" id="visualkinematics_v2.manipulator.Manipulator-backto-visualkinematics_v2.manipulator.Joint" style="stroke:#181818;stroke-width:1.5625;"/><polygon fill="#181818" points="656.25,1967.3594,650,1976.7344,656.25,1986.1094,662.5,1976.7344,656.25,1967.3594" style="stroke:#181818;stroke-width:1.5625;"/></g><!--MD5=[797fdf58cdae368dc2db6b9433ff6a8a]
+reverse link visualkinematics_v2.manipulator.Manipulator to visualkinematics_v2.manipulator.DHKinematicModel--><g id="link_visualkinematics_v2.manipulator.Manipulator_visualkinematics_v2.manipulator.DHKinematicModel"><path codeLine="180" d="M607.5313,1757.8125 C607.5313,1757.8125 132.8125,1757.8125 132.8125,1757.8125 C132.8125,1757.8125 132.8125,1883.2969 132.8125,1982.8125 " fill="none" id="visualkinematics_v2.manipulator.Manipulator-backto-visualkinematics_v2.manipulator.DHKinematicModel" style="stroke:#181818;stroke-width:1.5625;"/><polygon fill="#181818" points="627.8438,1757.8125,618.4688,1751.5625,609.0938,1757.8125,618.4688,1764.0625,627.8438,1757.8125" style="stroke:#181818;stroke-width:1.5625;"/></g><!--MD5=[ffcb67ea84fbea6746123c00d96d4227]
+reverse link visualkinematics_v2.manipulator.Manipulator to visualkinematics_v2.manipulator.Tool--><g id="link_visualkinematics_v2.manipulator.Manipulator_visualkinematics_v2.manipulator.Tool"><path codeLine="181" d="M701.1719,1987.7344 C701.1719,1987.7344 701.1719,2418.4531 701.1719,2418.4531 " fill="none" id="visualkinematics_v2.manipulator.Manipulator-backto-visualkinematics_v2.manipulator.Tool" style="stroke:#181818;stroke-width:1.5625;"/><polygon fill="#181818" points="701.1719,1967.4219,694.9219,1976.7969,701.1719,1986.1719,707.4219,1976.7969,701.1719,1967.4219" style="stroke:#181818;stroke-width:1.5625;"/></g><!--MD5=[646eaec5db116b47974836afafc1993d]
+reverse link visualkinematics_v2.manipulator.Tool to visualkinematics_v2.manipulator.Link--><g id="link_visualkinematics_v2.manipulator.Tool_visualkinematics_v2.manipulator.Link"><path codeLine="182" d="M634.375,2580.6406 C634.375,2580.6406 634.375,2582.125 634.375,2582.125 " fill="none" id="visualkinematics_v2.manipulator.Tool-backto-visualkinematics_v2.manipulator.Link" style="stroke:#181818;stroke-width:1.5625;"/><polygon fill="#181818" points="634.375,2567.3281,628.125,2576.7031,634.375,2586.0781,640.625,2576.7031,634.375,2567.3281" style="stroke:#181818;stroke-width:1.5625;"/></g><!--MD5=[16fee94d13a6b48fda1612a8ac8bbb85]
+reverse link visualkinematics_v2.manipulator.Tool to visualkinematics_v2.manipulator.Joint--><g id="link_visualkinematics_v2.manipulator.Tool_visualkinematics_v2.manipulator.Joint"><path codeLine="183" d="M663.5469,2398.2656 C663.5469,2398.2656 663.5469,2212.6719 663.5469,2212.6719 " fill="none" id="visualkinematics_v2.manipulator.Tool-backto-visualkinematics_v2.manipulator.Joint" style="stroke:#181818;stroke-width:1.5625;"/><polygon fill="#181818" points="663.5469,2418.5781,669.7969,2409.2031,663.5469,2399.8281,657.2969,2409.2031,663.5469,2418.5781" style="stroke:#181818;stroke-width:1.5625;"/></g><!--MD5=[c2f77ae9248a7d0268739dab9da6fd61]
+reverse link visualkinematics_v2.manipulator.Kinematic_Chain_Element to visualkinematics_v2.manipulator.Tool--><g id="link_visualkinematics_v2.manipulator.Kinematic_Chain_Element_visualkinematics_v2.manipulator.Tool"><path codeLine="184" d="M574.4844,2417.0938 C574.4844,2417.0938 574.4844,2418.5781 574.4844,2418.5781 " fill="none" id="visualkinematics_v2.manipulator.Kinematic_Chain_Element-backto-visualkinematics_v2.manipulator.Tool" style="stroke:#181818;stroke-width:1.5625;"/><polygon fill="none" points="563.5469,2434.8594,574.4844,2403.6094,585.4219,2434.8594,563.5469,2434.8594" style="stroke:#181818;stroke-width:1.5625;"/></g><!--MD5=[550472878e203eae6133c88c0b434371]
+reverse link visualkinematics_v2.manipulator.Manipulator to visualkinematics_v2.manipulator.irb6640_185_280--><g id="link_visualkinematics_v2.manipulator.Manipulator_visualkinematics_v2.manipulator.irb6640_185_280"><path codeLine="185" d="M829.6875,1998.6094 C829.6875,1998.6094 829.6875,2064.75 829.6875,2064.75 " fill="none" id="visualkinematics_v2.manipulator.Manipulator-backto-visualkinematics_v2.manipulator.irb6640_185_280" style="stroke:#181818;stroke-width:1.5625;"/><polygon fill="none" points="818.75,1998.6094,829.6875,1967.3594,840.625,1998.6094,818.75,1998.6094" style="stroke:#181818;stroke-width:1.5625;"/></g><!--MD5=[1f468182e60c907ed8b9d737fbe0123f]
+reverse link visualkinematics_v2.manipulator.Manipulator to visualkinematics_v2.manipulator.kr6r900_2--><g id="link_visualkinematics_v2.manipulator.Manipulator_visualkinematics_v2.manipulator.kr6r900_2"><path codeLine="186" d="M906.2969,1828.125 C906.2969,1828.125 1056.25,1828.125 1056.25,1828.125 C1056.25,1828.125 1056.25,1989.6875 1056.25,2064.7969 " fill="none" id="visualkinematics_v2.manipulator.Manipulator-backto-visualkinematics_v2.manipulator.kr6r900_2" style="stroke:#181818;stroke-width:1.5625;"/><polygon fill="none" points="906.2969,1839.0625,875.0469,1828.125,906.2969,1817.1875,906.2969,1839.0625" style="stroke:#181818;stroke-width:1.5625;"/></g><!--MD5=[7ecf0d10b266dd12854080d89adc855a]
+reverse link visualkinematics_v2.manipulator.Manipulator to visualkinematics_v2.manipulator.lbr_iiwa_14_r820--><g id="link_visualkinematics_v2.manipulator.Manipulator_visualkinematics_v2.manipulator.lbr_iiwa_14_r820"><path codeLine="187" d="M906.6875,1687.5 C906.6875,1687.5 1237.5,1687.5 1237.5,1687.5 C1237.5,1687.5 1237.5,1962.6875 1237.5,2064.7969 " fill="none" id="visualkinematics_v2.manipulator.Manipulator-backto-visualkinematics_v2.manipulator.lbr_iiwa_14_r820" style="stroke:#181818;stroke-width:1.5625;"/><polygon fill="none" points="906.6875,1698.4375,875.4375,1687.5,906.6875,1676.5625,906.6875,1698.4375" style="stroke:#181818;stroke-width:1.5625;"/></g><!--MD5=[c760a0f7a444dcc35056b51410ee0768]
+reverse link visualkinematics_v2.show.Environment to visualkinematics_v2.show.Gizmo_Controls--><g id="link_visualkinematics_v2.show.Environment_visualkinematics_v2.show.Gizmo_Controls"><path codeLine="188" d="M501.9531,426.5 C501.9531,426.5 501.9531,428.0313 501.9531,428.0313 " fill="none" id="visualkinematics_v2.show.Environment-backto-visualkinematics_v2.show.Gizmo_Controls" style="stroke:#181818;stroke-width:1.5625;"/><polygon fill="#181818" points="501.9531,412.6406,495.7031,422.0156,501.9531,431.3906,508.2031,422.0156,501.9531,412.6406" style="stroke:#181818;stroke-width:1.5625;"/></g><!--MD5=[a8ae4b9fc1fd1f814a2a1aa5828ce508]
+reverse link visualkinematics_v2.show.Environment to visualkinematics_v2.show.Inspector--><g id="link_visualkinematics_v2.show.Environment_visualkinematics_v2.show.Inspector"><path codeLine="189" d="M682.4219,426.5 C682.4219,426.5 682.4219,428.0313 682.4219,428.0313 " fill="none" id="visualkinematics_v2.show.Environment-backto-visualkinematics_v2.show.Inspector" style="stroke:#181818;stroke-width:1.5625;"/><polygon fill="#181818" points="682.4219,412.6406,676.1719,422.0156,682.4219,431.3906,688.6719,422.0156,682.4219,412.6406" style="stroke:#181818;stroke-width:1.5625;"/></g><!--MD5=[941fdc0d76c65c6e6c70b957d6bfdcc7]
+reverse link visualkinematics_v2.show.Gizmo_Controls to visualkinematics_v2.show.Gizmo_Controls_View--><g id="link_visualkinematics_v2.show.Gizmo_Controls_visualkinematics_v2.show.Gizmo_Controls_View"><path codeLine="190" d="M531.6406,559.8594 C531.6406,559.8594 531.6406,1120.3125 531.6406,1120.3125 C531.6406,1120.3125 525.625,1120.3125 516.0469,1120.3125 " fill="none" id="visualkinematics_v2.show.Gizmo_Controls-backto-visualkinematics_v2.show.Gizmo_Controls_View" style="stroke:#181818;stroke-width:1.5625;"/><polygon fill="#181818" points="531.6406,539.5469,525.3906,548.9219,531.6406,558.2969,537.8906,548.9219,531.6406,539.5469" style="stroke:#181818;stroke-width:1.5625;"/></g><!--MD5=[800560c12084ebb4ebf4d17e4fe24c02]
+reverse link visualkinematics_v2.show.Gizmo_Controls to visualkinematics_v2.show.Gizmo_Controls_Controller--><g id="link_visualkinematics_v2.show.Gizmo_Controls_visualkinematics_v2.show.Gizmo_Controls_Controller"><path codeLine="191" d="M384.375,559.5625 C384.375,559.5625 384.375,591.2188 384.375,591.2188 " fill="none" id="visualkinematics_v2.show.Gizmo_Controls-backto-visualkinematics_v2.show.Gizmo_Controls_Controller" style="stroke:#181818;stroke-width:1.5625;"/><polygon fill="#181818" points="384.375,539.25,378.125,548.625,384.375,558,390.625,548.625,384.375,539.25" style="stroke:#181818;stroke-width:1.5625;"/></g><!--MD5=[f6feff9a2ae325b1e2a30977d073a56a]
+reverse link visualkinematics_v2.show.Gizmo_Controls_Controller to visualkinematics_v2.show.Gizmo_Controls_View--><g id="link_visualkinematics_v2.show.Gizmo_Controls_Controller_visualkinematics_v2.show.Gizmo_Controls_View"><path codeLine="192" d="M384.375,777.7656 C384.375,777.7656 384.375,927.25 384.375,927.25 " fill="none" id="visualkinematics_v2.show.Gizmo_Controls_Controller-backto-visualkinematics_v2.show.Gizmo_Controls_View" style="stroke:#181818;stroke-width:1.5625;"/><polygon fill="#181818" points="384.375,757.4531,378.125,766.8281,384.375,776.2031,390.625,766.8281,384.375,757.4531" style="stroke:#181818;stroke-width:1.5625;"/></g><!--MD5=[6e4a58b9abcf036f608ae9af7ff1d40f]
+reverse link visualkinematics_v2.show.Inspector to visualkinematics_v2.show.InspectorView--><g id="link_visualkinematics_v2.show.Inspector_visualkinematics_v2.show.InspectorView"><path codeLine="193" d="M647.6563,559.7813 C647.6563,559.7813 647.6563,808.7187 647.6563,808.7187 " fill="none" id="visualkinematics_v2.show.Inspector-backto-visualkinematics_v2.show.InspectorView" style="stroke:#181818;stroke-width:1.5625;"/><polygon fill="#181818" points="647.6563,539.4688,641.4063,548.8438,647.6563,558.2188,653.9063,548.8438,647.6563,539.4688" style="stroke:#181818;stroke-width:1.5625;"/></g><!--MD5=[9b9dbfd598043673e9a4c646a174076b]
+reverse link visualkinematics_v2.show.Inspector to visualkinematics_v2.show.Inspector_Controller--><g id="link_visualkinematics_v2.show.Inspector_visualkinematics_v2.show.Inspector_Controller"><path codeLine="194" d="M773.4375,552.6875 C773.4375,552.6875 773.4375,554.1875 773.4375,554.1875 " fill="none" id="visualkinematics_v2.show.Inspector-backto-visualkinematics_v2.show.Inspector_Controller" style="stroke:#181818;stroke-width:1.5625;"/><polygon fill="#181818" points="773.4375,539.25,767.1875,548.625,773.4375,558,779.6875,548.625,773.4375,539.25" style="stroke:#181818;stroke-width:1.5625;"/></g><!--MD5=[aca590049b4d98689b04b32c64cc72a4]
+reverse link visualkinematics_v2.show.InspectorView to visualkinematics_v2.show.Environment--><g id="link_visualkinematics_v2.show.InspectorView_visualkinematics_v2.show.Environment"><path codeLine="195" d="M592.1875,788.5156 C592.1875,788.5156 592.1875,413.0312 592.1875,413.0312 " fill="none" id="visualkinematics_v2.show.InspectorView-backto-visualkinematics_v2.show.Environment" style="stroke:#181818;stroke-width:1.5625;"/><polygon fill="#181818" points="592.1875,808.8281,598.4375,799.4531,592.1875,790.0781,585.9375,799.4531,592.1875,808.8281" style="stroke:#181818;stroke-width:1.5625;"/></g><!--MD5=[cc98d61b175783ad719059a2192eed0b]
+reverse link visualkinematics_v2.show.InspectorView to visualkinematics_v2.manipulator.Manipulator--><g id="link_visualkinematics_v2.show.InspectorView_visualkinematics_v2.manipulator.Manipulator"><path codeLine="196" d="M707.4219,1450.1875 C707.4219,1450.1875 707.4219,1546.7031 707.4219,1546.7031 " fill="none" id="visualkinematics_v2.show.InspectorView-backto-visualkinematics_v2.manipulator.Manipulator" style="stroke:#181818;stroke-width:1.5625;"/><polygon fill="#181818" points="707.4219,1429.875,701.1719,1439.25,707.4219,1448.625,713.6719,1439.25,707.4219,1429.875" style="stroke:#181818;stroke-width:1.5625;"/></g><!--MD5=[e437ba5e92029bf924d8b0f91481c8cd]
+reverse link visualkinematics_v2.show.Inspector_Controller to visualkinematics_v2.show.InspectorView--><g id="link_visualkinematics_v2.show.Inspector_Controller_visualkinematics_v2.show.InspectorView"><path codeLine="197" d="M728.125,807.5781 C728.125,807.5781 728.125,809.0625 728.125,809.0625 " fill="none" id="visualkinematics_v2.show.Inspector_Controller-backto-visualkinematics_v2.show.InspectorView" style="stroke:#181818;stroke-width:1.5625;"/><polygon fill="#181818" points="728.125,794.1406,721.875,803.5156,728.125,812.8906,734.375,803.5156,728.125,794.1406" style="stroke:#181818;stroke-width:1.5625;"/></g><!--MD5=[eb60f3cedfbc8c3c574ca74d1be31ef8]
+reverse link visualkinematics_v2.show.Inspector_Controller to visualkinematics_v2.manipulator.Manipulator--><g id="link_visualkinematics_v2.show.Inspector_Controller_visualkinematics_v2.manipulator.Manipulator"><path codeLine="198" d="M830.8594,814.5469 C830.8594,814.5469 830.8594,1546.4063 830.8594,1546.4063 " fill="none" id="visualkinematics_v2.show.Inspector_Controller-backto-visualkinematics_v2.manipulator.Manipulator" style="stroke:#181818;stroke-width:1.5625;"/><polygon fill="#181818" points="830.8594,794.2344,824.6094,803.6094,830.8594,812.9844,837.1094,803.6094,830.8594,794.2344" style="stroke:#181818;stroke-width:1.5625;"/></g><rect fill="none" height="18.1885" style="stroke:none;stroke-width:1.5625;" width="175" x="581.25" y="2710.9375"/><text fill="#888888" font-family="sans-serif" font-size="15.625" lengthAdjust="spacing" textLength="104.6875" x="581.25" y="2725.441">Generated by</text><text fill="#888888" font-family="sans-serif" font-size="15.625" font-style="italic" lengthAdjust="spacing" textLength="65.625" x="690.625" y="2725.441">py2puml</text><!--MD5=[6ba147ed56e88c3278abe5a379bf98de]
+@startuml
+!pragma useIntermediatePackages false
+
+' Kompaktes Layout und kleinere Schrift
+skinparam dpi 150
+skinparam classAttributeIconSize 0
+skinparam classFontSize 10
+skinparam classArrowFontSize 10
+skinparam linetype ortho
+skinparam nodesep 20
+skinparam ranksep 10
+
+' Optional: Querformat bevorzugen
+
+
+
+class visualkinematics_v2.manipulator.DHKinematicModel {
+  dh_parameters: dict
+  symbolic_thetas: dict
+  joint_angles: dict
+  base_to_dh: ndarray
+  dh_to_tool: ndarray
+  fk: None
+  fk_pos_func: None
+  fk_rot_func: None
+  jacobian_func: None
+}
+class visualkinematics_v2.manipulator.Joint {
+  is_mimicer: Bool
+  lower_limit: float | None
+  upper_limit: float | None
+  renderable: Object3D
+  axis: ndarray
+  mimicers: list[tuple[Kinematic_Chain_Element, float]]
+  dh_frame: None
+  dh_alignment: ndarray
+}
+class visualkinematics_v2.manipulator.Kinematic_Chain_Element {
+  name: str
+  children: list[Kinematic_Chain_Element]
+  parent: Kinematic_Chain_Element | None
+  renderable: Object3D
+  frame: Object3D
+}
+class visualkinematics_v2.manipulator.Link {
+  renderable: Mesh
+}
+class visualkinematics_v2.manipulator.Manipulator {
+  k0: None
+  inspector: None
+  environment: None
+  name: str
+  links: list[Link]
+  joints: list[Joint]
+  dh: DHKinematicModel | None
+  urdf_dictionary: dict
+  tool: Tool | None
+  learned_poses: None
+  tcp_target: None
+  tool: None
+  base_link: Link
+  base_link_to_link_1_joint: Joint
+  base: Link | None
+  mesh: Object3D
+  base_to_baselink_joint: Joint
+  baselink_to_base_joint: Joint
+  link_to_tool_joint: Joint
+}
+class visualkinematics_v2.manipulator.Tool {
+  links: list[Link]
+  joints: list[Joint]
+  urdf_dictionary: dict
+  renderable: None
+}
+class visualkinematics_v2.manipulator.irb6640_185_280 {
+}
+class visualkinematics_v2.manipulator.kr6r900_2 {
+}
+class visualkinematics_v2.manipulator.lbr_iiwa_14_r820 {
+}
+class visualkinematics_v2.show.Environment {
+  frame: None
+  grid: None
+  scene: None
+  camera: PerspectiveCamera
+  frame: None
+  grid: None
+  light: None
+  children: None
+  widgets_on_bottom: None
+  renderer: None
+  frame_widgets: None
+  widgets: None
+  gizmo_controls: list[Gizmo_Controls]
+  inspectors: list[Inspector]
+  info_container: VBox
+}
+class visualkinematics_v2.show.Gizmo_Controls {
+  view: Gizmo_Controls_View
+  controller: Gizmo_Controls_Controller
+}
+class visualkinematics_v2.show.Gizmo_Controls_Controller {
+  view: Gizmo_Controls_View
+  callback: Callable[[], None]
+  obj: None
+  obj_renderable: None
+  obj_renderable: None
+}
+class visualkinematics_v2.show.Gizmo_Controls_View {
+  callback: Callable[[], None]
+  obj: None
+  content: None
+  obj_renderable: None
+  obj_renderable: None
+  x_trans_slider: None
+  y_trans_slider: None
+  z_trans_slider: None
+  x_rot_slider: None
+  y_rot_slider: None
+  z_rot_slider: None
+  x_scale_slider: None
+  y_scale_slider: None
+  z_scale_slider: None
+  rotation_order_dropdown: None
+  local_space_check_box: None
+  widget: None
+}
+class visualkinematics_v2.show.Inspector {
+  view: InspectorView
+  controller: Inspector_Controller
+}
+class visualkinematics_v2.show.InspectorView {
+  environment: Environment
+  sliders_signs: None
+  joints_sliders: None
+  manipulator: Manipulator
+  content: None
+  pose_names: None
+  pose_dropdown: Dropdown
+  save_pose_textfield: Text
+  save_button: Button
+  take_position_button: Button
+  trans_x_minus: None
+  trans_x_plus: None
+  trans_y_minus: None
+  trans_y_plus: None
+  trans_z_minus: None
+  trans_z_plus: None
+  rot_x_minus: None
+  rot_x_plus: None
+  rot_y_minus: None
+  rot_y_plus: None
+  rot_z_minus: None
+  rot_z_plus: None
+  local_space_check_box: None
+  x_current_pos_text: None
+  y_current_pos_text: None
+  z_current_pos_text: None
+  x_current_rot_text: None
+  y_current_rot_text: None
+  z_current_rot_text: None
+  widget: None
+}
+class visualkinematics_v2.show.Inspector_Controller {
+  mouse_down: bool {static}
+  view: InspectorView
+  environment: None
+  manipulator: Manipulator
+  trans_step: None
+  rot_step: None
+  button_wait_time: None
+  lower_limits: None
+  upper_limits: None
+}
+visualkinematics_v2.manipulator.Joint *- - visualkinematics_v2.manipulator.Kinematic_Chain_Element
+visualkinematics_v2.manipulator.Kinematic_Chain_Element <|- - visualkinematics_v2.manipulator.Joint
+visualkinematics_v2.manipulator.Kinematic_Chain_Element *- - visualkinematics_v2.manipulator.Kinematic_Chain_Element
+visualkinematics_v2.manipulator.Kinematic_Chain_Element <|- - visualkinematics_v2.manipulator.Link
+visualkinematics_v2.manipulator.Manipulator *- - visualkinematics_v2.manipulator.Link
+visualkinematics_v2.manipulator.Manipulator *- - visualkinematics_v2.manipulator.Joint
+visualkinematics_v2.manipulator.Manipulator *- - visualkinematics_v2.manipulator.DHKinematicModel
+visualkinematics_v2.manipulator.Manipulator *- - visualkinematics_v2.manipulator.Tool
+visualkinematics_v2.manipulator.Tool *- - visualkinematics_v2.manipulator.Link
+visualkinematics_v2.manipulator.Tool *- - visualkinematics_v2.manipulator.Joint
+visualkinematics_v2.manipulator.Kinematic_Chain_Element <|- - visualkinematics_v2.manipulator.Tool
+visualkinematics_v2.manipulator.Manipulator <|- - visualkinematics_v2.manipulator.irb6640_185_280
+visualkinematics_v2.manipulator.Manipulator <|- - visualkinematics_v2.manipulator.kr6r900_2
+visualkinematics_v2.manipulator.Manipulator <|- - visualkinematics_v2.manipulator.lbr_iiwa_14_r820
+visualkinematics_v2.show.Environment *- - visualkinematics_v2.show.Gizmo_Controls
+visualkinematics_v2.show.Environment *- - visualkinematics_v2.show.Inspector
+visualkinematics_v2.show.Gizmo_Controls *- - visualkinematics_v2.show.Gizmo_Controls_View
+visualkinematics_v2.show.Gizmo_Controls *- - visualkinematics_v2.show.Gizmo_Controls_Controller
+visualkinematics_v2.show.Gizmo_Controls_Controller *- - visualkinematics_v2.show.Gizmo_Controls_View
+visualkinematics_v2.show.Inspector *- - visualkinematics_v2.show.InspectorView
+visualkinematics_v2.show.Inspector *- - visualkinematics_v2.show.Inspector_Controller
+visualkinematics_v2.show.InspectorView *- - visualkinematics_v2.show.Environment
+visualkinematics_v2.show.InspectorView *- - visualkinematics_v2.manipulator.Manipulator
+visualkinematics_v2.show.Inspector_Controller *- - visualkinematics_v2.show.InspectorView
+visualkinematics_v2.show.Inspector_Controller *- - visualkinematics_v2.manipulator.Manipulator
+footer Generated by //py2puml//
+@enduml
+
+@startuml
+!pragma useIntermediatePackages false
+
+skinparam dpi 150
+skinparam classAttributeIconSize 0
+skinparam classFontSize 10
+skinparam classArrowFontSize 10
+skinparam linetype ortho
+skinparam nodesep 20
+skinparam ranksep 10
+
+
+
+
+class visualkinematics_v2.manipulator.DHKinematicModel {
+  dh_parameters: dict
+  symbolic_thetas: dict
+  joint_angles: dict
+  base_to_dh: ndarray
+  dh_to_tool: ndarray
+  fk: None
+  fk_pos_func: None
+  fk_rot_func: None
+  jacobian_func: None
+}
+class visualkinematics_v2.manipulator.Joint {
+  is_mimicer: Bool
+  lower_limit: float | None
+  upper_limit: float | None
+  renderable: Object3D
+  axis: ndarray
+  mimicers: list[tuple[Kinematic_Chain_Element, float]]
+  dh_frame: None
+  dh_alignment: ndarray
+}
+class visualkinematics_v2.manipulator.Kinematic_Chain_Element {
+  name: str
+  children: list[Kinematic_Chain_Element]
+  parent: Kinematic_Chain_Element | None
+  renderable: Object3D
+  frame: Object3D
+}
+class visualkinematics_v2.manipulator.Link {
+  renderable: Mesh
+}
+class visualkinematics_v2.manipulator.Manipulator {
+  k0: None
+  inspector: None
+  environment: None
+  name: str
+  links: list[Link]
+  joints: list[Joint]
+  dh: DHKinematicModel | None
+  urdf_dictionary: dict
+  tool: Tool | None
+  learned_poses: None
+  tcp_target: None
+  tool: None
+  base_link: Link
+  base_link_to_link_1_joint: Joint
+  base: Link | None
+  mesh: Object3D
+  base_to_baselink_joint: Joint
+  baselink_to_base_joint: Joint
+  link_to_tool_joint: Joint
+}
+class visualkinematics_v2.manipulator.Tool {
+  links: list[Link]
+  joints: list[Joint]
+  urdf_dictionary: dict
+  renderable: None
+}
+class visualkinematics_v2.manipulator.irb6640_185_280 {
+}
+class visualkinematics_v2.manipulator.kr6r900_2 {
+}
+class visualkinematics_v2.manipulator.lbr_iiwa_14_r820 {
+}
+class visualkinematics_v2.show.Environment {
+  frame: None
+  grid: None
+  scene: None
+  camera: PerspectiveCamera
+  frame: None
+  grid: None
+  light: None
+  children: None
+  widgets_on_bottom: None
+  renderer: None
+  frame_widgets: None
+  widgets: None
+  gizmo_controls: list[Gizmo_Controls]
+  inspectors: list[Inspector]
+  info_container: VBox
+}
+class visualkinematics_v2.show.Gizmo_Controls {
+  view: Gizmo_Controls_View
+  controller: Gizmo_Controls_Controller
+}
+class visualkinematics_v2.show.Gizmo_Controls_Controller {
+  view: Gizmo_Controls_View
+  callback: Callable[[], None]
+  obj: None
+  obj_renderable: None
+  obj_renderable: None
+}
+class visualkinematics_v2.show.Gizmo_Controls_View {
+  callback: Callable[[], None]
+  obj: None
+  content: None
+  obj_renderable: None
+  obj_renderable: None
+  x_trans_slider: None
+  y_trans_slider: None
+  z_trans_slider: None
+  x_rot_slider: None
+  y_rot_slider: None
+  z_rot_slider: None
+  x_scale_slider: None
+  y_scale_slider: None
+  z_scale_slider: None
+  rotation_order_dropdown: None
+  local_space_check_box: None
+  widget: None
+}
+class visualkinematics_v2.show.Inspector {
+  view: InspectorView
+  controller: Inspector_Controller
+}
+class visualkinematics_v2.show.InspectorView {
+  environment: Environment
+  sliders_signs: None
+  joints_sliders: None
+  manipulator: Manipulator
+  content: None
+  pose_names: None
+  pose_dropdown: Dropdown
+  save_pose_textfield: Text
+  save_button: Button
+  take_position_button: Button
+  trans_x_minus: None
+  trans_x_plus: None
+  trans_y_minus: None
+  trans_y_plus: None
+  trans_z_minus: None
+  trans_z_plus: None
+  rot_x_minus: None
+  rot_x_plus: None
+  rot_y_minus: None
+  rot_y_plus: None
+  rot_z_minus: None
+  rot_z_plus: None
+  local_space_check_box: None
+  x_current_pos_text: None
+  y_current_pos_text: None
+  z_current_pos_text: None
+  x_current_rot_text: None
+  y_current_rot_text: None
+  z_current_rot_text: None
+  widget: None
+}
+class visualkinematics_v2.show.Inspector_Controller {
+  mouse_down: bool {static}
+  view: InspectorView
+  environment: None
+  manipulator: Manipulator
+  trans_step: None
+  rot_step: None
+  button_wait_time: None
+  lower_limits: None
+  upper_limits: None
+}
+visualkinematics_v2.manipulator.Joint *- - visualkinematics_v2.manipulator.Kinematic_Chain_Element
+visualkinematics_v2.manipulator.Kinematic_Chain_Element <|- - visualkinematics_v2.manipulator.Joint
+visualkinematics_v2.manipulator.Kinematic_Chain_Element *- - visualkinematics_v2.manipulator.Kinematic_Chain_Element
+visualkinematics_v2.manipulator.Kinematic_Chain_Element <|- - visualkinematics_v2.manipulator.Link
+visualkinematics_v2.manipulator.Manipulator *- - visualkinematics_v2.manipulator.Link
+visualkinematics_v2.manipulator.Manipulator *- - visualkinematics_v2.manipulator.Joint
+visualkinematics_v2.manipulator.Manipulator *- - visualkinematics_v2.manipulator.DHKinematicModel
+visualkinematics_v2.manipulator.Manipulator *- - visualkinematics_v2.manipulator.Tool
+visualkinematics_v2.manipulator.Tool *- - visualkinematics_v2.manipulator.Link
+visualkinematics_v2.manipulator.Tool *- - visualkinematics_v2.manipulator.Joint
+visualkinematics_v2.manipulator.Kinematic_Chain_Element <|- - visualkinematics_v2.manipulator.Tool
+visualkinematics_v2.manipulator.Manipulator <|- - visualkinematics_v2.manipulator.irb6640_185_280
+visualkinematics_v2.manipulator.Manipulator <|- - visualkinematics_v2.manipulator.kr6r900_2
+visualkinematics_v2.manipulator.Manipulator <|- - visualkinematics_v2.manipulator.lbr_iiwa_14_r820
+visualkinematics_v2.show.Environment *- - visualkinematics_v2.show.Gizmo_Controls
+visualkinematics_v2.show.Environment *- - visualkinematics_v2.show.Inspector
+visualkinematics_v2.show.Gizmo_Controls *- - visualkinematics_v2.show.Gizmo_Controls_View
+visualkinematics_v2.show.Gizmo_Controls *- - visualkinematics_v2.show.Gizmo_Controls_Controller
+visualkinematics_v2.show.Gizmo_Controls_Controller *- - visualkinematics_v2.show.Gizmo_Controls_View
+visualkinematics_v2.show.Inspector *- - visualkinematics_v2.show.InspectorView
+visualkinematics_v2.show.Inspector *- - visualkinematics_v2.show.Inspector_Controller
+visualkinematics_v2.show.InspectorView *- - visualkinematics_v2.show.Environment
+visualkinematics_v2.show.InspectorView *- - visualkinematics_v2.manipulator.Manipulator
+visualkinematics_v2.show.Inspector_Controller *- - visualkinematics_v2.show.InspectorView
+visualkinematics_v2.show.Inspector_Controller *- - visualkinematics_v2.manipulator.Manipulator
+footer Generated by //py2puml//
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 17:01:30 UTC 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>

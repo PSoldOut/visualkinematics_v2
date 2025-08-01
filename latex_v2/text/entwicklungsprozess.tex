@@ -800,138 +800,126 @@ Dies erklärt auch die leicht erhöhte GPU Auslastung auf dem Client.
 
 
 
-\section{Aufbau}
+\section{Aufbau des Frameworks}
 
 
-
-\vspace{1em}
-\begin{table}[H]
-\centering
-\begin{tabular}{|p{4.5cm}|p{9.5cm}|}
-\hline
-\textbf{Komponente} & \textbf{Spezifikation} \\
-\hline
-Gerätetyp & Laptop \\
-\hline
-Hersteller & HP \\
-\hline
-Modell & Pavilion Laptop 14-bf0xx \\
-\hline
-Prozessor (CPU) & Intel\textsuperscript{\textregistered} Core\texttrademark\ i5-7200U CPU mit 2,50\,GHz, 2 Kerne, 4 Threads \\
-\hline
-Arbeitsspeicher (RAM) & 8\,GB (1x 8\,GB, DDR4, 2133\,MHz, SODIMM, SK Hynix) \\
-\hline
-Grafikeinheit (GPU) & Intel HD Graphics 620 (integriert) \newline NVIDIA GeForce 940MX (dediziert) \\
-\hline
-Massenspeicher & Samsung SSD 256\,GB \\
-\hline
-Betriebssystem & Linux Mint 21.3 „Virginia“ (64-bit) \\
-\hline
-\end{tabular}
-\caption{Technische Spezifikationen des Testsystems „System B LT“}
-\label{tab:system_b_lt}
-\end{table}
-\vspace{1em}
-
-
-
-
-
-
-
+\subsection{Technischer Aufbau}
+Das entwickelte Framework ist als eigenständiges Python-Paket organisiert und wurde mithilfe des Packaging-Werkzeugs poetry erstellt.
+Diese Struktur ermöglicht eine modulare Organisation des Quellcodes,
+die saubere Trennung von Abhängigkeiten sowie eine einfache Verteilung und Wiederverwendbarkeit des Frameworks \doublecite[1]{python_packages}.
+Die Verzeichnisstruktur folgt dem üblichen Aufbau für Python-Pakete mit einem root directory, den entsprechenden Python Modulen,
+einer pyproject.toml, einer README.md sowie verschiedenen Tests \doublecite[22]{python_packages}:
 
 \vspace{1em}
-\begin{table}[H]
-\centering
-\begin{tabular}{|p{4.5cm}|p{9.5cm}|}
-\hline
-\textbf{Komponente} & \textbf{Spezifikation} \\
-\hline
-Gerätetyp & Workstation (Micro Form Factor) \\
-\hline
-Hersteller & Dell \\
-\hline
-Modell & OptiPlex 7000 Micro \\
-\hline
-Prozessor (CPU) & Intel\textsuperscript{\textregistered} Core\texttrademark\ i5-12500T CPU mit 2,00–4,60\,GHz, 6 Kerne, 12 logische Prozessoren \\
-\hline
-Arbeitsspeicher (RAM) & 16\,GB DDR4 (1× 16\,GB, 3200\,MHz, SODIMM) \\
-\hline
-Grafikeinheit (GPU) & Integrierte Intel UHD Graphics 770 \\
-\hline
-Massenspeicher & 256\,GB NVMe SSD (PCIe 3.0 x4, M.2) \\
-\hline
-Betriebssystem & Windows 11 Pro (64-bit), Version 22H2 (Build 22621) \\
-\hline
-\end{tabular}
-\caption{Technische Spezifikationen des Testsystems „System C WS“}
-\label{tab:system_c_ws}
-\end{table}
+\begin{figure}[H]
+    \dirtree{%
+    .1 visualkinematics\_v2.
+    .2 poetry.lock.
+    .2 pyproject.toml.
+    .2 README.md.
+    .2 assets.
+    .3 custom-package-sets.
+    .3 ros-package-sets.
+    .2 src.
+    .3 examples.
+    .4 industrial\_robot\_example.ipynb.
+    .4 quader\_example.ipynb.
+    .4 robot\_example.ipynb.
+    .4 rotations\_example,ipynb.
+    .3 visualkinematics\_v2.
+    .4 \_\_init\_\_.py.
+    .4 manager.py.
+    .4 manipulator.py.
+    .4 show.py.
+    .4 util.py.
+    .2 tests.
+    }
+\caption{Verzeichnisstruktur des Packets visualkinematics\_v2}
+\label{fig:dir_structure}
+\end{figure}
 \vspace{1em}
 
 
+Durch diese Paketstruktur kann das Framework problemlos in andere Projekte integriert, installiert oder erweitert werden.
+Der Code ist in einzelne Module gegliedert, die jeweils einer bestimmten Verantwortlichkeit zugeordnet sind. 
+Ein Überblick über die zentralen Module und deren Beziehungen ist in Abbildung \ref{fig:package_diagramm} (siehe Anhang) in Form eines Packetdiagramms dargestellt. 
+Dabei besteht das Packet insgesammt aus 5 Modulen: util.py, manipulator.py, manager.py und show.py.
+Das Zusammenspiel dieser Module folgt der Softwarearchitektur des Model-View-Controller (MVC) Paradigmas,
+welches sich für grafische Echtzeitanwendungen eignet.
+
+Ziel dieser Trennung ist eine modulare Struktur, die eine klare Abgrenzung zwischen Daten (Model),
+Präsentation (View) und Interaktion/Steuerung (Controller) ermöglicht.
+Diese Struktur erleichtert die Erweiterbarkeit und Wartbarkeit des Frameworks \doublecite[1000]{Encyclopedia_of_Computer_Graphics_and_Games}.
+
+
+
+
+\subsection{Model-Komponente}
+Das modul util.py stellt eine zustandslose Sammlung Fachspezifischer Kern- und Hilfsfunktionen dar und lässt sich am ehesten der Model-Komponente
+zuordnen Es wird von allen anderen Modulen importiert und genutzt.
+Die Model-Komponente wird vor allem durch die Module manipulator und manager realisiert.  
+Sie bildet die strukturelle und funktionale Grundlage des Frameworks und kapselt die kinematische Struktur des Roboters sowie dessen aktuellen Zustand.
+
+Das Modul manipulator enthält zentrale Klassen wie:
+
+\begin{itemize}
+    \item \texttt{Manipulator} – verwaltet den Gesamtaufbau des Roboters, einschließlich aller Glieder und Gelenke.
+    \item \texttt{Link} – repräsentiert ein einzelnes physisches Glied der kinematischen Kette und enthält Informationen zur Geometrie und lokalen Transformation.
+    \item \texttt{Joint} – modelliert ein Gelenk zwischen zwei Gliedern inklusive Typ, Bewegungsbereich und aktuellem Winkel.
+    \item \texttt{DHKinematicModel} – implementiert das Vorwärtskinematik-Modell auf Basis der Denavit-Hartenberg-Parameter.
+\end{itemize}
+
+Innerhalb dieser Klassen werden alle relevanten Informationen zur Beschreibung und Steuerung eines Industrieroboters zusammengeführt.  
+Dazu zählen die Hierarchie der Glieder, die Relativtransformationen entlang der kinematischen Kette sowie der aktuelle Gelenkzustand (z.\,B. Positionen und Winkel der Achsen).  
+Diese Daten bilden die Grundlage für die spätere grafische Darstellung und Animation.
+
+Innerhalb der Model-Komponente wird die Datenhaltung und somit der Zugriff auf den persistenten Speicher in das Modul manager entkoppelt.
+Hier befinden sich Funktionen zum Laden und Speichern von 3D-Modellen sowie URDF-Dateien.
+
+
+
+\subsection{View-Komponente}
+Die View ist für die Darstellung der Szene im Jupyter Notebook zuständig und wird durch das Modul show dargestellt.
+Sie verwendet pythreejs sowie ipywidgets zur visuellen Repräsentation und enthält folgende Klassen und Funktionen:
+
+\begin{itemize}
+    \item \texttt{Environment\_View}: erzeugt die 3D-Szene mit Licht, Kamera, Koordinatensystem usw.
+    \item \texttt{\_ipython\_display\_()}: bindet die Szene beim aufrufen von display() als interaktives Widget in das Notebook ein.
+    \item \texttt{Inspector\_View}: enthält GUI-Elemente wie Schieberegler und Knöpfe für einen Roboter.
+    \item \texttt{Gizmo\_Controls\_View}: enthält GUI-Elemente für die Translation, Rotation und Skalierung eines beliebigen Körpers.
+\end{itemize}
+
+\subsection{Controller-Komponente}
+Der Controller bildet die Schnittstelle zwischen Benutzerinteraktion und Datenmodell.
+Er verbindet die GUI-Elemente der View mit Funktionen aus dem Model und steuert das Verhalten des Frameworks für den jeweiligen Input.
+Der Controller ist ebenfalls in dem Modul Show enthalten und wird in den folgenden Klassen gekapselt:
+
+\begin{itemize}
+    \item \texttt{Inspector\_Controller}: Verbindet die GUI-Elemente von Inspector\_View mit Funktionen und speichert Zustände wie mouse\_down.
+    \item \texttt{Gizmo\_Controls\_Controller}: Verbindet die GUI-Elemente der Gizmo\_Con\-trols\_View mit Funktionen.
+\end{itemize}
+
+
+Eine genauere Darstellung der Module, Klassen und deren Beziehungen wird in Abbildung \ref{fig:class_diagramm} (siehe Anhang) in Form eines Klassendiagramms Dargestellt.
+
+\subsection{Einbindung in das Notebook}
+Ein zentrales Merkmal des Frameworks ist die Integration in Jupyter Notebooks.
+Durch die Verwendung der display()-Funktion aus dem Modul IPython.display wird der Viewport direkt in der Ausgabezelle eingebettet.
+Dies erlaubt eine interaktive Visualisierung und Steuerung des Roboters innerhalb eines Jupyter Notebooks.
 
 
 
 
 
-\vspace{1em}
-\begin{table}[H]
-\centering
-\begin{tabular}{|p{4.5cm}|p{9.5cm}|}
-\hline
-\textbf{Komponente} & \textbf{Spezifikation} \\
-\hline
-Gerätetyp & Access Point (Indoor) \\
-\hline
-Hersteller & TP-Link \\
-\hline
-Modell & TL-WA801N \\
-\hline
-WLAN-Standard & IEEE 802.11b/g/n (2.4\,GHz) \\
-\hline
-Maximale Übertragungsrate & 300\,Mbit/s \\
-\hline
-Ethernet-Anschluss & 1× Fast Ethernet (10/100\,Mbit/s) \\
-\hline
-Antennen & 2× externe, abnehmbare Antennen \\
-\hline
-Betriebssystem & Eigenständige Firmware (Webinterface konfigurierbar) \\
-\hline
-\end{tabular}
-\caption{Technische Spezifikationen des Testsystems „System D AP“}
-\label{tab:system_d_ap}
-\end{table}
-\vspace{1em}
 
 
 
 
 
 
-\vspace{1em}
-\begin{table}[H]
-\centering
-\begin{tabular}{|p{4.5cm}|p{9.5cm}|}
-\hline
-\textbf{Komponente} & \textbf{Spezifikation} \\
-\hline
-Gerätetyp & Desktop \\
-\hline
-Hersteller & Eigenbau (ASUS-Mainboard, OEM-Konfiguration) \\
-\hline
-Prozessor (CPU) & Intel\textsuperscript{\textregistered} Core\texttrademark\ i7-9700K CPU mit 3,60\,GHz, 8 Kerne, 8 logische Prozessoren \\
-\hline
-Arbeitsspeicher (RAM) & 16\,GB (2x 8\,GB, 3000\,MHz, DIMM) \\
-\hline
-Grafikeinheit (GPU) & NVIDIA GeForce RTX 2070 \\
-\hline
-Massenspeicher & Samsung SSD 970 EVO Plus 500\,GB \\
-\hline
-Betriebssystem & Windows 10 Home (64-bit), Version 10.0.19045 Build 19045 \\
-\hline
-\end{tabular}
-\caption{Technische Spezifikationen des Testsystems „System A DT“}
-\label{tab:system_a_dt}
-\end{table}
-\vspace{1em}
+
+
+
+
+
+

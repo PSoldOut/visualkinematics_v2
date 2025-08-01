@@ -7,8 +7,8 @@ from IPython.display import display
 from pythreejs import *
 import time
 from scipy.spatial.transform import Rotation as R, Slerp
-import visualkinematics_v2.manager as manager
-import visualkinematics_v2.util as util
+from visualkinematics_v2 import manager
+from visualkinematics_v2 import util
 from threading import Timer
 from numba import njit
 from typing import *
@@ -729,8 +729,8 @@ class Link(Kinematic_Chain_Element):
 class Manipulator:
     def __init__(self, name:str, tool_name:str = "robotiq_arg2f_140_model", position:np.ndarray = np.array([0,0,0])):
         self.k0 = None
-        self.inspector:Manipulator.Inspector|None = None
-        self.environment:util.Environment|None = None
+        self.inspector = None
+        self.environment = None
         self.name:str = name
         self.links:list[Link] = []
         self.joints:list[Joint] = []

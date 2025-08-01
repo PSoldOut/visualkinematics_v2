@@ -19,6 +19,37 @@
 
 \refsection{0}
   \datalist[entry]{nyt/global//global/global/global}
+    \entry{python_packages}{book}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=9a23ce3f308a5de693db1e78e1de69fe}{%
+           family={Beuzen},
+           familyi={B\bibinitperiod},
+           given={Tomas},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {CRC Press}%
+      }
+      \strng{namehash}{9a23ce3f308a5de693db1e78e1de69fe}
+      \strng{fullhash}{9a23ce3f308a5de693db1e78e1de69fe}
+      \strng{fullhashraw}{9a23ce3f308a5de693db1e78e1de69fe}
+      \strng{bibnamehash}{9a23ce3f308a5de693db1e78e1de69fe}
+      \strng{authorbibnamehash}{9a23ce3f308a5de693db1e78e1de69fe}
+      \strng{authornamehash}{9a23ce3f308a5de693db1e78e1de69fe}
+      \strng{authorfullhash}{9a23ce3f308a5de693db1e78e1de69fe}
+      \strng{authorfullhashraw}{9a23ce3f308a5de693db1e78e1de69fe}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9781003189251}
+      \field{title}{Python Packages}
+      \field{year}{2022}
+      \keyw{Computer ScienceMathematics & Statistics}
+    \endentry
     \entry{Robotics_Vision_and_Control}{book}{}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=c0e503339314930d140b67b5e7c55c3e}{%
@@ -215,6 +246,45 @@
       \verb{url}
       \verb https://www.kuka.com/de-de/feedback/erfolgsmeldung
       \endverb
+    \endentry
+    \entry{Encyclopedia_of_Computer_Graphics_and_Games}{incollection}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=a3f5e08df1fd46526ddcffeadee34f75}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={Newton},
+           giveni={N\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {eng}%
+      }
+      \list{location}{1}{%
+        {Cham}%
+      }
+      \list{publisher}{1}{%
+        {Springer International Publishing}%
+      }
+      \strng{namehash}{a3f5e08df1fd46526ddcffeadee34f75}
+      \strng{fullhash}{a3f5e08df1fd46526ddcffeadee34f75}
+      \strng{fullhashraw}{a3f5e08df1fd46526ddcffeadee34f75}
+      \strng{bibnamehash}{a3f5e08df1fd46526ddcffeadee34f75}
+      \strng{authorbibnamehash}{a3f5e08df1fd46526ddcffeadee34f75}
+      \strng{authornamehash}{a3f5e08df1fd46526ddcffeadee34f75}
+      \strng{authorfullhash}{a3f5e08df1fd46526ddcffeadee34f75}
+      \strng{authorfullhashraw}{a3f5e08df1fd46526ddcffeadee34f75}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Encyclopedia of Computer Graphics and Games}
+      \field{isbn}{3031231597}
+      \field{title}{MVC Architecture}
+      \field{year}{2024}
+      \field{pages}{1223\bibrangedash 1223}
+      \range{pages}{1}
     \endentry
     \entry{philipp}{article}{}{}
       \name{author}{1}{}{%

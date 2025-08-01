@@ -19,38 +19,36 @@
 
 \refsection{0}
   \datalist[entry]{nyt/global//global/global/global}
-    \entry{coppeliaSim_manual}{online}{}{}
+    \entry{python_packages}{book}{}{}
       \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=d0a08affc2ffbda3cb539391daa8f954}{%
-           family={CoppeliaRobotics},
-           familyi={C\bibinitperiod}}}%
+        {{un=0,uniquepart=base,hash=9a23ce3f308a5de693db1e78e1de69fe}{%
+           family={Beuzen},
+           familyi={B\bibinitperiod},
+           given={Tomas},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
       }
-      \strng{namehash}{d0a08affc2ffbda3cb539391daa8f954}
-      \strng{fullhash}{d0a08affc2ffbda3cb539391daa8f954}
-      \strng{fullhashraw}{d0a08affc2ffbda3cb539391daa8f954}
-      \strng{bibnamehash}{d0a08affc2ffbda3cb539391daa8f954}
-      \strng{authorbibnamehash}{d0a08affc2ffbda3cb539391daa8f954}
-      \strng{authornamehash}{d0a08affc2ffbda3cb539391daa8f954}
-      \strng{authorfullhash}{d0a08affc2ffbda3cb539391daa8f954}
-      \strng{authorfullhashraw}{d0a08affc2ffbda3cb539391daa8f954}
-      \field{sortinit}{C}
-      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \list{publisher}{1}{%
+        {CRC Press}%
+      }
+      \strng{namehash}{9a23ce3f308a5de693db1e78e1de69fe}
+      \strng{fullhash}{9a23ce3f308a5de693db1e78e1de69fe}
+      \strng{fullhashraw}{9a23ce3f308a5de693db1e78e1de69fe}
+      \strng{bibnamehash}{9a23ce3f308a5de693db1e78e1de69fe}
+      \strng{authorbibnamehash}{9a23ce3f308a5de693db1e78e1de69fe}
+      \strng{authornamehash}{9a23ce3f308a5de693db1e78e1de69fe}
+      \strng{authorfullhash}{9a23ce3f308a5de693db1e78e1de69fe}
+      \strng{authorfullhashraw}{9a23ce3f308a5de693db1e78e1de69fe}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{title}{Manual}
-      \field{urlday}{5}
-      \field{urlmonth}{5}
-      \field{urlyear}{2025}
-      \field{year}{2025}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://manual.coppeliarobotics.com/
-      \endverb
-      \verb{url}
-      \verb https://manual.coppeliarobotics.com/
-      \endverb
+      \field{isbn}{9781003189251}
+      \field{title}{Python Packages}
+      \field{year}{2022}
+      \keyw{Computer ScienceMathematics & Statistics}
     \endentry
     \entry{Robotics_Vision_and_Control}{book}{}{}
       \name{author}{1}{}{%
@@ -94,515 +92,829 @@
       \field{year}{2023}
       \keyw{Artificial intelligence ; Cognitive psychology ; Computer algorithms ; Computer vision ; Engineering ; Python (Computer program language) ; Robotics}
     \endentry
-    \entry{python3_das_umfassende_handbuch}{book}{}{}
-      \name{author}{2}{}{%
-        {{un=0,uniquepart=base,hash=6156fc5cb7213bd41c6ff3ac8bcbc7ab}{%
-           family={Ernesti},
-           familyi={E\bibinitperiod},
-           given={Johannes},
-           giveni={J\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=4dc05d10b5dc185241ec9b41eadc2e46}{%
-           family={Kaiser},
-           familyi={K\bibinitperiod},
-           given={Peter},
-           giveni={P\bibinitperiod},
-           givenun=0}}%
+    \entry{GrabCAD_Company}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=32eb9127adf054add97d41c6a58245d3}{%
+           family={{GrabCAD Contributors}},
+           familyi={G\bibinitperiod}}}%
       }
-      \list{language}{1}{%
-        {ger}%
-      }
-      \list{location}{1}{%
-        {Bonn}%
-      }
-      \list{publisher}{1}{%
-        {Rheinwerk Verlag}%
-      }
-      \strng{namehash}{82054b18b6cde7f1e5313be588fad181}
-      \strng{fullhash}{82054b18b6cde7f1e5313be588fad181}
-      \strng{fullhashraw}{82054b18b6cde7f1e5313be588fad181}
-      \strng{bibnamehash}{82054b18b6cde7f1e5313be588fad181}
-      \strng{authorbibnamehash}{82054b18b6cde7f1e5313be588fad181}
-      \strng{authornamehash}{82054b18b6cde7f1e5313be588fad181}
-      \strng{authorfullhash}{82054b18b6cde7f1e5313be588fad181}
-      \strng{authorfullhashraw}{82054b18b6cde7f1e5313be588fad181}
-      \field{sortinit}{E}
-      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{booktitle}{Python 3 das umfassende Handbuch}
-      \field{edition}{5., aktualisierte Auflage}
-      \field{isbn}{9783836258647}
-      \field{series}{Rheinwerk Computing}
-      \field{title}{Python 3 : das umfassende Handbuch}
-      \field{year}{2017}
-      \keyw{Python 3.6 ; Python 3.0}
-    \endentry
-    \entry{The_Second_Handbook_of_Research_on_the_Psychology_of_Mathematics_Education}{book}{}{}
-      \name{author}{6}{}{%
-        {{un=0,uniquepart=base,hash=e757f28e1ec32466b4cadca58fd45f6c}{%
-           family={Gutiérrez},
-           familyi={G\bibinitperiod},
-           given={Ángel},
-           giveni={Á\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=2d78789a2a81407fb71284dac890d986}{%
-           family={Leder},
-           familyi={L\bibinitperiod},
-           given={Gilah\bibnamedelima C},
-           giveni={G\bibinitperiod\bibinitdelim C\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=abee34255591c0ce8a7dd90ce1304889}{%
-           family={Boero},
-           familyi={B\bibinitperiod},
-           given={Paolo},
-           giveni={P\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=abee34255591c0ce8a7dd90ce1304889}{%
-           family={Boero},
-           familyi={B\bibinitperiod},
-           given={Paolo},
-           giveni={P\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=e757f28e1ec32466b4cadca58fd45f6c}{%
-           family={Gutiérrez},
-           familyi={G\bibinitperiod},
-           given={Ángel},
-           giveni={Á\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=2d78789a2a81407fb71284dac890d986}{%
-           family={Leder},
-           familyi={L\bibinitperiod},
-           given={Gilah\bibnamedelima C.},
-           giveni={G\bibinitperiod\bibinitdelim C\bibinitperiod},
-           givenun=0}}%
-      }
-      \list{language}{1}{%
-        {eng}%
-      }
-      \list{location}{1}{%
-        {Rotterdam}%
-      }
-      \list{publisher}{1}{%
-        {Springer}%
-      }
-      \strng{namehash}{8f6b0ed16da2f709f4da432a0d6cbd4b}
-      \strng{fullhash}{8305095fcd79e02dcf6ab5e8a223b5bf}
-      \strng{fullhashraw}{8305095fcd79e02dcf6ab5e8a223b5bf}
-      \strng{bibnamehash}{8305095fcd79e02dcf6ab5e8a223b5bf}
-      \strng{authorbibnamehash}{8305095fcd79e02dcf6ab5e8a223b5bf}
-      \strng{authornamehash}{8f6b0ed16da2f709f4da432a0d6cbd4b}
-      \strng{authorfullhash}{8305095fcd79e02dcf6ab5e8a223b5bf}
-      \strng{authorfullhashraw}{8305095fcd79e02dcf6ab5e8a223b5bf}
+      \strng{namehash}{32eb9127adf054add97d41c6a58245d3}
+      \strng{fullhash}{32eb9127adf054add97d41c6a58245d3}
+      \strng{fullhashraw}{32eb9127adf054add97d41c6a58245d3}
+      \strng{bibnamehash}{32eb9127adf054add97d41c6a58245d3}
+      \strng{authorbibnamehash}{32eb9127adf054add97d41c6a58245d3}
+      \strng{authornamehash}{32eb9127adf054add97d41c6a58245d3}
+      \strng{authorfullhash}{32eb9127adf054add97d41c6a58245d3}
+      \strng{authorfullhashraw}{32eb9127adf054add97d41c6a58245d3}
       \field{sortinit}{G}
       \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{The book is divided into four main sections: Cognitive aspects of learning and teaching content areas; Cognitive aspects of learning and teaching transverse areas; Social aspects of learning and teaching mathematics; and Professional aspects of teaching mathematics. The selection for each chapter of a team of at least two authors, mostly located in different parts of the world, ensured effective coverage of each field. High quality was further enhanced by the scrupulous review of early chapter drafts by two leaders in the relevant field.}
-      \field{edition}{1}
-      \field{isbn}{9463005609}
-      \field{title}{The Second Handbook of Research on the Psychology of Mathematics Education: The Journey Continues}
-      \field{year}{2016}
-      \keyw{Education ; General education ; Mathematics ; Psychological aspects ; Study and teaching}
-    \endentry
-    \entry{webgl_wiki}{online}{}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=aca6527292aa3ef1dcae92901392e942}{%
-           family={Khronos-Group},
-           familyi={K\bibinithyphendelim G\bibinitperiod}}}%
-      }
-      \strng{namehash}{aca6527292aa3ef1dcae92901392e942}
-      \strng{fullhash}{aca6527292aa3ef1dcae92901392e942}
-      \strng{fullhashraw}{aca6527292aa3ef1dcae92901392e942}
-      \strng{bibnamehash}{aca6527292aa3ef1dcae92901392e942}
-      \strng{authorbibnamehash}{aca6527292aa3ef1dcae92901392e942}
-      \strng{authornamehash}{aca6527292aa3ef1dcae92901392e942}
-      \strng{authorfullhash}{aca6527292aa3ef1dcae92901392e942}
-      \strng{authorfullhashraw}{aca6527292aa3ef1dcae92901392e942}
-      \field{extraname}{1}
-      \field{sortinit}{K}
-      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
-      \field{extradate}{1}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{Getting Started}
-      \field{urlday}{2}
-      \field{urlmonth}{5}
+      \field{title}{About GrabCAD}
+      \field{urlday}{10}
+      \field{urlmonth}{7}
       \field{urlyear}{2025}
       \field{year}{2025}
       \field{urldateera}{ce}
       \verb{urlraw}
-      \verb https://www.khronos.org/webgl/wiki/Getting_Started
+      \verb https://resources.grabcad.com/company/
       \endverb
       \verb{url}
-      \verb https://www.khronos.org/webgl/wiki/Getting_Started
+      \verb https://resources.grabcad.com/company/
       \endverb
     \endentry
-    \entry{opengl_doc}{online}{}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=aca6527292aa3ef1dcae92901392e942}{%
-           family={Khronos-Group},
-           familyi={K\bibinithyphendelim G\bibinitperiod}}}%
-      }
-      \strng{namehash}{aca6527292aa3ef1dcae92901392e942}
-      \strng{fullhash}{aca6527292aa3ef1dcae92901392e942}
-      \strng{fullhashraw}{aca6527292aa3ef1dcae92901392e942}
-      \strng{bibnamehash}{aca6527292aa3ef1dcae92901392e942}
-      \strng{authorbibnamehash}{aca6527292aa3ef1dcae92901392e942}
-      \strng{authornamehash}{aca6527292aa3ef1dcae92901392e942}
-      \strng{authorfullhash}{aca6527292aa3ef1dcae92901392e942}
-      \strng{authorfullhashraw}{aca6527292aa3ef1dcae92901392e942}
-      \field{extraname}{2}
-      \field{sortinit}{K}
-      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
-      \field{extradate}{2}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{The Industry's Foundation for High Performance Graphics}
-      \field{urlday}{2}
-      \field{urlmonth}{5}
-      \field{urlyear}{2025}
-      \field{year}{2025}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://www.khronos.org/opengl/
-      \endverb
-      \verb{url}
-      \verb https://www.khronos.org/opengl/
-      \endverb
-    \endentry
-    \entry{BabylonJS}{online}{}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=9139443ae238d22cd631f232b90d727d}{%
-           family={Project-BabylonJS},
-           familyi={P\bibinithyphendelim B\bibinitperiod}}}%
-      }
-      \strng{namehash}{9139443ae238d22cd631f232b90d727d}
-      \strng{fullhash}{9139443ae238d22cd631f232b90d727d}
-      \strng{fullhashraw}{9139443ae238d22cd631f232b90d727d}
-      \strng{bibnamehash}{9139443ae238d22cd631f232b90d727d}
-      \strng{authorbibnamehash}{9139443ae238d22cd631f232b90d727d}
-      \strng{authornamehash}{9139443ae238d22cd631f232b90d727d}
-      \strng{authorfullhash}{9139443ae238d22cd631f232b90d727d}
-      \strng{authorfullhashraw}{9139443ae238d22cd631f232b90d727d}
-      \field{extraname}{1}
-      \field{sortinit}{P}
-      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
-      \field{extradate}{1}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{BabylonJS}
-      \field{urlday}{30}
-      \field{urlmonth}{4}
-      \field{urlyear}{2025}
-      \field{year}{2025}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://www.babylonjs.com/
-      \endverb
-      \verb{url}
-      \verb https://www.babylonjs.com/
-      \endverb
-    \endentry
-    \entry{BabylonJS_Documentation_Physics}{online}{}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=9139443ae238d22cd631f232b90d727d}{%
-           family={Project-BabylonJS},
-           familyi={P\bibinithyphendelim B\bibinitperiod}}}%
-      }
-      \strng{namehash}{9139443ae238d22cd631f232b90d727d}
-      \strng{fullhash}{9139443ae238d22cd631f232b90d727d}
-      \strng{fullhashraw}{9139443ae238d22cd631f232b90d727d}
-      \strng{bibnamehash}{9139443ae238d22cd631f232b90d727d}
-      \strng{authorbibnamehash}{9139443ae238d22cd631f232b90d727d}
-      \strng{authornamehash}{9139443ae238d22cd631f232b90d727d}
-      \strng{authorfullhash}{9139443ae238d22cd631f232b90d727d}
-      \strng{authorfullhashraw}{9139443ae238d22cd631f232b90d727d}
-      \field{extraname}{2}
-      \field{sortinit}{P}
-      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
-      \field{extradate}{2}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{BabylonJS Dokumentation Physics}
-      \field{urlday}{30}
-      \field{urlmonth}{4}
-      \field{urlyear}{2025}
-      \field{year}{2025}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://doc.babylonjs.com/features/featuresDeepDive/physics/
-      \endverb
-      \verb{url}
-      \verb https://doc.babylonjs.com/features/featuresDeepDive/physics/
-      \endverb
-    \endentry
-    \entry{BabylonJS_specification}{online}{}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=9139443ae238d22cd631f232b90d727d}{%
-           family={Project-BabylonJS},
-           familyi={P\bibinithyphendelim B\bibinitperiod}}}%
-      }
-      \strng{namehash}{9139443ae238d22cd631f232b90d727d}
-      \strng{fullhash}{9139443ae238d22cd631f232b90d727d}
-      \strng{fullhashraw}{9139443ae238d22cd631f232b90d727d}
-      \strng{bibnamehash}{9139443ae238d22cd631f232b90d727d}
-      \strng{authorbibnamehash}{9139443ae238d22cd631f232b90d727d}
-      \strng{authornamehash}{9139443ae238d22cd631f232b90d727d}
-      \strng{authorfullhash}{9139443ae238d22cd631f232b90d727d}
-      \strng{authorfullhashraw}{9139443ae238d22cd631f232b90d727d}
-      \field{extraname}{3}
-      \field{sortinit}{P}
-      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
-      \field{extradate}{3}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{BabylonJS Specification}
-      \field{urlday}{30}
-      \field{urlmonth}{4}
-      \field{urlyear}{2025}
-      \field{year}{2025}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://www.babylonjs.com/specifications/
-      \endverb
-      \verb{url}
-      \verb https://www.babylonjs.com/specifications/
-      \endverb
-    \endentry
-    \entry{numpy_doc}{online}{}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=57458abad0d4ab6a1e14834e3d34b92b}{%
-           family={Project-Numpy},
-           familyi={P\bibinithyphendelim N\bibinitperiod}}}%
-      }
-      \strng{namehash}{57458abad0d4ab6a1e14834e3d34b92b}
-      \strng{fullhash}{57458abad0d4ab6a1e14834e3d34b92b}
-      \strng{fullhashraw}{57458abad0d4ab6a1e14834e3d34b92b}
-      \strng{bibnamehash}{57458abad0d4ab6a1e14834e3d34b92b}
-      \strng{authorbibnamehash}{57458abad0d4ab6a1e14834e3d34b92b}
-      \strng{authornamehash}{57458abad0d4ab6a1e14834e3d34b92b}
-      \strng{authorfullhash}{57458abad0d4ab6a1e14834e3d34b92b}
-      \strng{authorfullhashraw}{57458abad0d4ab6a1e14834e3d34b92b}
-      \field{sortinit}{P}
-      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{what is numpy}
-      \field{urlday}{3}
-      \field{urlmonth}{5}
-      \field{urlyear}{2025}
-      \field{year}{2025}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://numpy.org/devdocs/user/whatisnumpy.html
-      \endverb
-      \verb{url}
-      \verb https://numpy.org/devdocs/user/whatisnumpy.html
-      \endverb
-    \endentry
-    \entry{pythreejs_doc_intro}{online}{}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=833862724e950b9fc223796089142806}{%
-           family={Project-Pythreejs},
-           familyi={P\bibinithyphendelim P\bibinitperiod}}}%
-      }
-      \strng{namehash}{833862724e950b9fc223796089142806}
-      \strng{fullhash}{833862724e950b9fc223796089142806}
-      \strng{fullhashraw}{833862724e950b9fc223796089142806}
-      \strng{bibnamehash}{833862724e950b9fc223796089142806}
-      \strng{authorbibnamehash}{833862724e950b9fc223796089142806}
-      \strng{authornamehash}{833862724e950b9fc223796089142806}
-      \strng{authorfullhash}{833862724e950b9fc223796089142806}
-      \strng{authorfullhashraw}{833862724e950b9fc223796089142806}
-      \field{extraname}{1}
-      \field{sortinit}{P}
-      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
-      \field{extradate}{1}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{Introduction}
-      \field{urlday}{4}
-      \field{urlmonth}{5}
-      \field{urlyear}{2025}
-      \field{year}{2025}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://pythreejs.readthedocs.io/en/stable/introduction.html
-      \endverb
-      \verb{url}
-      \verb https://pythreejs.readthedocs.io/en/stable/introduction.html
-      \endverb
-    \endentry
-    \entry{pythreejs_doc}{online}{}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=833862724e950b9fc223796089142806}{%
-           family={Project-Pythreejs},
-           familyi={P\bibinithyphendelim P\bibinitperiod}}}%
-      }
-      \strng{namehash}{833862724e950b9fc223796089142806}
-      \strng{fullhash}{833862724e950b9fc223796089142806}
-      \strng{fullhashraw}{833862724e950b9fc223796089142806}
-      \strng{bibnamehash}{833862724e950b9fc223796089142806}
-      \strng{authorbibnamehash}{833862724e950b9fc223796089142806}
-      \strng{authornamehash}{833862724e950b9fc223796089142806}
-      \strng{authorfullhash}{833862724e950b9fc223796089142806}
-      \strng{authorfullhashraw}{833862724e950b9fc223796089142806}
-      \field{extraname}{2}
-      \field{sortinit}{P}
-      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
-      \field{extradate}{2}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{pythreejs}
-      \field{urlday}{4}
-      \field{urlmonth}{5}
-      \field{urlyear}{2025}
-      \field{year}{2025}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://pythreejs.readthedocs.io/en/stable/index.html
-      \endverb
-      \verb{url}
-      \verb https://pythreejs.readthedocs.io/en/stable/index.html
-      \endverb
-    \endentry
-    \entry{sympy_doc_advanced_usage}{online}{}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=0283d90f71a32407bba7efa066e66402}{%
-           family={Project-Sympy},
-           familyi={P\bibinithyphendelim S\bibinitperiod}}}%
-      }
-      \strng{namehash}{0283d90f71a32407bba7efa066e66402}
-      \strng{fullhash}{0283d90f71a32407bba7efa066e66402}
-      \strng{fullhashraw}{0283d90f71a32407bba7efa066e66402}
-      \strng{bibnamehash}{0283d90f71a32407bba7efa066e66402}
-      \strng{authorbibnamehash}{0283d90f71a32407bba7efa066e66402}
-      \strng{authornamehash}{0283d90f71a32407bba7efa066e66402}
-      \strng{authorfullhash}{0283d90f71a32407bba7efa066e66402}
-      \strng{authorfullhashraw}{0283d90f71a32407bba7efa066e66402}
-      \field{sortinit}{P}
-      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{advanced usage}
-      \field{urlday}{3}
-      \field{urlmonth}{5}
-      \field{urlyear}{2025}
-      \field{year}{2025}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://docs.sympy.org/latest/explanation/best-practices.html#advanced-usage
-      \endverb
-      \verb{url}
-      \verb https://docs.sympy.org/latest/explanation/best-practices.html#advanced-usage
-      \endverb
-    \endentry
-    \entry{threeJS_manual}{online}{}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=a0c9179c74e3b0bf13aad0eb7410eca0}{%
-           family={Project-ThreeJS},
-           familyi={P\bibinithyphendelim T\bibinitperiod}}}%
-      }
-      \strng{namehash}{a0c9179c74e3b0bf13aad0eb7410eca0}
-      \strng{fullhash}{a0c9179c74e3b0bf13aad0eb7410eca0}
-      \strng{fullhashraw}{a0c9179c74e3b0bf13aad0eb7410eca0}
-      \strng{bibnamehash}{a0c9179c74e3b0bf13aad0eb7410eca0}
-      \strng{authorbibnamehash}{a0c9179c74e3b0bf13aad0eb7410eca0}
-      \strng{authornamehash}{a0c9179c74e3b0bf13aad0eb7410eca0}
-      \strng{authorfullhash}{a0c9179c74e3b0bf13aad0eb7410eca0}
-      \strng{authorfullhashraw}{a0c9179c74e3b0bf13aad0eb7410eca0}
-      \field{sortinit}{P}
-      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{ThreeJS Manual Fundamentals}
-      \field{urlday}{30}
-      \field{urlmonth}{4}
-      \field{urlyear}{2025}
-      \field{year}{2025}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://threejs.org/manual/#en/fundamentals
-      \endverb
-      \verb{url}
-      \verb https://threejs.org/manual/#en/fundamentals
-      \endverb
-    \endentry
-    \entry{autonomous_mobile_robots}{book}{}{}
+    \entry{HALLMANN2019293}{article}{}{}
       \name{author}{3}{}{%
-        {{un=0,uniquepart=base,hash=6ee8958bbf32527489012d8ca7c95ee3}{%
-           family={Siegwart},
-           familyi={S\bibinitperiod},
-           given={Roland},
-           giveni={R\bibinitperiod},
+        {{un=0,uniquepart=base,hash=d268d05e2650fd4a9f4c1651e6e2bf51}{%
+           family={Hallmann},
+           familyi={H\bibinitperiod},
+           given={Martin},
+           giveni={M\bibinitperiod},
            givenun=0}}%
-        {{un=0,uniquepart=base,hash=1ba5776eed1d9ff0afe0bb5fbfa0c473}{%
-           family={Nourbakhsh},
-           familyi={N\bibinitperiod},
-           given={Illah\bibnamedelima Reza},
-           giveni={I\bibinitperiod\bibinitdelim R\bibinitperiod},
+        {{un=0,uniquepart=base,hash=fcbff119935e2ff3b0ae38c525a8ec58}{%
+           family={Goetz},
+           familyi={G\bibinitperiod},
+           given={Stefan},
+           giveni={S\bibinitperiod},
            givenun=0}}%
-        {{un=0,uniquepart=base,hash=dac21ab4ede215439fcc6b051be53a11}{%
-           family={Scaramuzza},
+        {{un=0,uniquepart=base,hash=c10d9a5259a9a6ece7530be43547507c}{%
+           family={Schleich},
            familyi={S\bibinitperiod},
-           given={Davide},
-           giveni={D\bibinitperiod},
+           given={Benjamin},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{e67bc3dd92db0e4f0b65d621bc2fb0ac}
+      \strng{fullhash}{023864a5b58163563bc97eea0d326b71}
+      \strng{fullhashraw}{023864a5b58163563bc97eea0d326b71}
+      \strng{bibnamehash}{023864a5b58163563bc97eea0d326b71}
+      \strng{authorbibnamehash}{023864a5b58163563bc97eea0d326b71}
+      \strng{authornamehash}{e67bc3dd92db0e4f0b65d621bc2fb0ac}
+      \strng{authorfullhash}{023864a5b58163563bc97eea0d326b71}
+      \strng{authorfullhashraw}{023864a5b58163563bc97eea0d326b71}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0010-4485}
+      \field{journaltitle}{Computer-Aided Design}
+      \field{title}{Mapping of GD(and)T information and PMI between 3D product models in the STEP and STL format}
+      \field{volume}{115}
+      \field{year}{2019}
+      \field{pages}{293\bibrangedash 306}
+      \range{pages}{14}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.cad.2019.06.006
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0010448518305359
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0010448518305359
+      \endverb
+      \keyw{STEP,PMI,STL,GD&T,Feature recognition}
+    \endentry
+    \entry{xacrodoc}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=9e27ae5fc4b1314d90518c406f1330d1}{%
+           family={Heins},
+           familyi={H\bibinitperiod},
+           given={Adam},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{9e27ae5fc4b1314d90518c406f1330d1}
+      \strng{fullhash}{9e27ae5fc4b1314d90518c406f1330d1}
+      \strng{fullhashraw}{9e27ae5fc4b1314d90518c406f1330d1}
+      \strng{bibnamehash}{9e27ae5fc4b1314d90518c406f1330d1}
+      \strng{authorbibnamehash}{9e27ae5fc4b1314d90518c406f1330d1}
+      \strng{authornamehash}{9e27ae5fc4b1314d90518c406f1330d1}
+      \strng{authorfullhash}{9e27ae5fc4b1314d90518c406f1330d1}
+      \strng{authorfullhashraw}{9e27ae5fc4b1314d90518c406f1330d1}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{reference xacrodoc 0.7.0 documentation}
+      \field{urlday}{14}
+      \field{urlmonth}{7}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://xacrodoc.readthedocs.io/en/latest/reference.html#
+      \endverb
+      \verb{url}
+      \verb https://xacrodoc.readthedocs.io/en/latest/reference.html#
+      \endverb
+    \endentry
+    \entry{lbr_image}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=90071ed97da30a524f483bfebe27056c}{%
+           family={{KUKA Contributors}},
+           familyi={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{90071ed97da30a524f483bfebe27056c}
+      \strng{fullhash}{90071ed97da30a524f483bfebe27056c}
+      \strng{fullhashraw}{90071ed97da30a524f483bfebe27056c}
+      \strng{bibnamehash}{90071ed97da30a524f483bfebe27056c}
+      \strng{authorbibnamehash}{90071ed97da30a524f483bfebe27056c}
+      \strng{authornamehash}{90071ed97da30a524f483bfebe27056c}
+      \strng{authorfullhash}{90071ed97da30a524f483bfebe27056c}
+      \strng{authorfullhashraw}{90071ed97da30a524f483bfebe27056c}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Feedback Erfolgsmeldung}
+      \field{urlday}{2}
+      \field{urlmonth}{7}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.kuka.com/de-de/feedback/erfolgsmeldung
+      \endverb
+      \verb{url}
+      \verb https://www.kuka.com/de-de/feedback/erfolgsmeldung
+      \endverb
+    \endentry
+    \entry{Encyclopedia_of_Computer_Graphics_and_Games}{incollection}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=a3f5e08df1fd46526ddcffeadee34f75}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={Newton},
+           giveni={N\bibinitperiod},
            givenun=0}}%
       }
       \list{language}{1}{%
         {eng}%
       }
       \list{location}{1}{%
-        {Cambridge, Mass. [u.a}%
+        {Cham}%
       }
       \list{publisher}{1}{%
-        {MIT Press}%
+        {Springer International Publishing}%
       }
-      \strng{namehash}{5d9ef354cd4bda2a3935c6909059aea8}
-      \strng{fullhash}{d3875fcd18d3abff99854ffcc032ec96}
-      \strng{fullhashraw}{d3875fcd18d3abff99854ffcc032ec96}
-      \strng{bibnamehash}{d3875fcd18d3abff99854ffcc032ec96}
-      \strng{authorbibnamehash}{d3875fcd18d3abff99854ffcc032ec96}
-      \strng{authornamehash}{5d9ef354cd4bda2a3935c6909059aea8}
-      \strng{authorfullhash}{d3875fcd18d3abff99854ffcc032ec96}
-      \strng{authorfullhashraw}{d3875fcd18d3abff99854ffcc032ec96}
-      \field{sortinit}{S}
-      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \strng{namehash}{a3f5e08df1fd46526ddcffeadee34f75}
+      \strng{fullhash}{a3f5e08df1fd46526ddcffeadee34f75}
+      \strng{fullhashraw}{a3f5e08df1fd46526ddcffeadee34f75}
+      \strng{bibnamehash}{a3f5e08df1fd46526ddcffeadee34f75}
+      \strng{authorbibnamehash}{a3f5e08df1fd46526ddcffeadee34f75}
+      \strng{authornamehash}{a3f5e08df1fd46526ddcffeadee34f75}
+      \strng{authorfullhash}{a3f5e08df1fd46526ddcffeadee34f75}
+      \strng{authorfullhashraw}{a3f5e08df1fd46526ddcffeadee34f75}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{edition}{2. ed.}
-      \field{isbn}{9780262015356}
-      \field{series}{Intelligent robotics and autonomous agents}
-      \field{title}{Introduction to autonomous mobile robots}
-      \field{year}{2011}
-      \keyw{Robotik ; Autonomer Roboter ; Mobile robots ; Autonomous robots}
+      \field{booktitle}{Encyclopedia of Computer Graphics and Games}
+      \field{isbn}{3031231597}
+      \field{title}{MVC Architecture}
+      \field{year}{2024}
+      \field{pages}{1223\bibrangedash 1223}
+      \range{pages}{1}
+    \endentry
+    \entry{philipp}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=a0643525f2404fda419e000dc8f11693}{%
+           family={Mikos},
+           familyi={M\bibinitperiod},
+           given={Philipp},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{a0643525f2404fda419e000dc8f11693}
+      \strng{fullhash}{a0643525f2404fda419e000dc8f11693}
+      \strng{fullhashraw}{a0643525f2404fda419e000dc8f11693}
+      \strng{bibnamehash}{a0643525f2404fda419e000dc8f11693}
+      \strng{authorbibnamehash}{a0643525f2404fda419e000dc8f11693}
+      \strng{authornamehash}{a0643525f2404fda419e000dc8f11693}
+      \strng{authorfullhash}{a0643525f2404fda419e000dc8f11693}
+      \strng{authorfullhashraw}{a0643525f2404fda419e000dc8f11693}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Projektarbeit, Fachhochschule Dortmund, Studiengang BA Informatik}
+      \field{title}{Visualisierung kinematischer Kennwerte}
+      \field{volume}{1}
+      \field{year}{2025}
+    \endentry
+    \entry{mileff2024per}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=a74b59658e99b0a71c0f7dae2f86be41}{%
+           family={Mileff},
+           familyi={M\bibinitperiod},
+           given={Péter},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{a74b59658e99b0a71c0f7dae2f86be41}
+      \strng{fullhash}{a74b59658e99b0a71c0f7dae2f86be41}
+      \strng{fullhashraw}{a74b59658e99b0a71c0f7dae2f86be41}
+      \strng{bibnamehash}{a74b59658e99b0a71c0f7dae2f86be41}
+      \strng{authorbibnamehash}{a74b59658e99b0a71c0f7dae2f86be41}
+      \strng{authornamehash}{a74b59658e99b0a71c0f7dae2f86be41}
+      \strng{authorfullhash}{a74b59658e99b0a71c0f7dae2f86be41}
+      \strng{authorfullhashraw}{a74b59658e99b0a71c0f7dae2f86be41}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Production Systems and Information Engineering}
+      \field{number}{3}
+      \field{title}{PER-PIXEL LIGHTING FOR MULTI-OBJECT MODELS}
+      \field{volume}{12}
+      \field{year}{2024}
+      \field{pages}{42\bibrangedash 59}
+      \range{pages}{18}
+    \endentry
+    \entry{numpy_npy_npz_format}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=267bb7114749b70c51ec25020c66b955}{%
+           family={{NumPy Contributors}},
+           familyi={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{267bb7114749b70c51ec25020c66b955}
+      \strng{fullhash}{267bb7114749b70c51ec25020c66b955}
+      \strng{fullhashraw}{267bb7114749b70c51ec25020c66b955}
+      \strng{bibnamehash}{267bb7114749b70c51ec25020c66b955}
+      \strng{authorbibnamehash}{267bb7114749b70c51ec25020c66b955}
+      \strng{authornamehash}{267bb7114749b70c51ec25020c66b955}
+      \strng{authorfullhash}{267bb7114749b70c51ec25020c66b955}
+      \strng{authorfullhashraw}{267bb7114749b70c51ec25020c66b955}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{NumPy .npy and .npz file format}
+      \field{urlday}{11}
+      \field{urlmonth}{7}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://numpy.org/devdocs/reference/generated/numpy.savez.html
+      \endverb
+      \verb{url}
+      \verb https://numpy.org/devdocs/reference/generated/numpy.savez.html
+      \endverb
+    \endentry
+    \entry{ROS_Packages_Design}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=ee129c16ea7bb397a736406a9ec55a1e}{%
+           family={{Open Source Robotics Foundation}},
+           familyi={O\bibinitperiod}}}%
+      }
+      \strng{namehash}{ee129c16ea7bb397a736406a9ec55a1e}
+      \strng{fullhash}{ee129c16ea7bb397a736406a9ec55a1e}
+      \strng{fullhashraw}{ee129c16ea7bb397a736406a9ec55a1e}
+      \strng{bibnamehash}{ee129c16ea7bb397a736406a9ec55a1e}
+      \strng{authorbibnamehash}{ee129c16ea7bb397a736406a9ec55a1e}
+      \strng{authornamehash}{ee129c16ea7bb397a736406a9ec55a1e}
+      \strng{authorfullhash}{ee129c16ea7bb397a736406a9ec55a1e}
+      \strng{authorfullhashraw}{ee129c16ea7bb397a736406a9ec55a1e}
+      \field{sortinit}{O}
+      \field{sortinithash}{2cd7140a07aea5341f9e2771efe90aae}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Packages - ROS Wiki}
+      \field{urlday}{10}
+      \field{urlmonth}{7}
+      \field{urlyear}{2025}
+      \field{year}{2023}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://wiki.ros.org/Packages
+      \endverb
+      \verb{url}
+      \verb https://wiki.ros.org/Packages
+      \endverb
+    \endentry
+    \entry{ipyevents}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=61c15e4cb14571e7097e570e39aa5942}{%
+           family={{Project Jupyter contributors}},
+           familyi={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{61c15e4cb14571e7097e570e39aa5942}
+      \strng{fullhash}{61c15e4cb14571e7097e570e39aa5942}
+      \strng{fullhashraw}{61c15e4cb14571e7097e570e39aa5942}
+      \strng{bibnamehash}{61c15e4cb14571e7097e570e39aa5942}
+      \strng{authorbibnamehash}{61c15e4cb14571e7097e570e39aa5942}
+      \strng{authornamehash}{61c15e4cb14571e7097e570e39aa5942}
+      \strng{authorfullhash}{61c15e4cb14571e7097e570e39aa5942}
+      \strng{authorfullhashraw}{61c15e4cb14571e7097e570e39aa5942}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{ipyevents pypi}
+      \field{urlday}{26}
+      \field{urlmonth}{7}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://pypi.org/project/ipyevents/
+      \endverb
+      \verb{url}
+      \verb https://pypi.org/project/ipyevents/
+      \endverb
+    \endentry
+    \entry{onShape}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=e095b8133a2dbdc23b300f5d39211ec0}{%
+           family={PTC},
+           familyi={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{e095b8133a2dbdc23b300f5d39211ec0}
+      \strng{fullhash}{e095b8133a2dbdc23b300f5d39211ec0}
+      \strng{fullhashraw}{e095b8133a2dbdc23b300f5d39211ec0}
+      \strng{bibnamehash}{e095b8133a2dbdc23b300f5d39211ec0}
+      \strng{authorbibnamehash}{e095b8133a2dbdc23b300f5d39211ec0}
+      \strng{authornamehash}{e095b8133a2dbdc23b300f5d39211ec0}
+      \strng{authorfullhash}{e095b8133a2dbdc23b300f5d39211ec0}
+      \strng{authorfullhashraw}{e095b8133a2dbdc23b300f5d39211ec0}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{why Onshape?}
+      \field{urlday}{11}
+      \field{urlmonth}{7}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.onshape.com/en/why-onshape
+      \endverb
+      \verb{url}
+      \verb https://www.onshape.com/en/why-onshape
+      \endverb
+    \endentry
+    \entry{pythreejs_doc}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=c1af4118d358acbd6d0a6adf6460fc1f}{%
+           family={{pythreejs Contributors}},
+           familyi={p\bibinitperiod}}}%
+      }
+      \strng{namehash}{c1af4118d358acbd6d0a6adf6460fc1f}
+      \strng{fullhash}{c1af4118d358acbd6d0a6adf6460fc1f}
+      \strng{fullhashraw}{c1af4118d358acbd6d0a6adf6460fc1f}
+      \strng{bibnamehash}{c1af4118d358acbd6d0a6adf6460fc1f}
+      \strng{authorbibnamehash}{c1af4118d358acbd6d0a6adf6460fc1f}
+      \strng{authornamehash}{c1af4118d358acbd6d0a6adf6460fc1f}
+      \strng{authorfullhash}{c1af4118d358acbd6d0a6adf6460fc1f}
+      \strng{authorfullhashraw}{c1af4118d358acbd6d0a6adf6460fc1f}
+      \field{extraname}{1}
+      \field{sortinit}{p}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradate}{1}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{API reference - pythreejs 2.4.1 documentation}
+      \field{urlday}{10}
+      \field{urlmonth}{7}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://pythreejs.readthedocs.io/en/stable/api/index.html
+      \endverb
+      \verb{url}
+      \verb https://pythreejs.readthedocs.io/en/stable/api/index.html
+      \endverb
+    \endentry
+    \entry{pythreejs_Geometry_types}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=c1af4118d358acbd6d0a6adf6460fc1f}{%
+           family={{pythreejs Contributors}},
+           familyi={p\bibinitperiod}}}%
+      }
+      \strng{namehash}{c1af4118d358acbd6d0a6adf6460fc1f}
+      \strng{fullhash}{c1af4118d358acbd6d0a6adf6460fc1f}
+      \strng{fullhashraw}{c1af4118d358acbd6d0a6adf6460fc1f}
+      \strng{bibnamehash}{c1af4118d358acbd6d0a6adf6460fc1f}
+      \strng{authorbibnamehash}{c1af4118d358acbd6d0a6adf6460fc1f}
+      \strng{authornamehash}{c1af4118d358acbd6d0a6adf6460fc1f}
+      \strng{authorfullhash}{c1af4118d358acbd6d0a6adf6460fc1f}
+      \strng{authorfullhashraw}{c1af4118d358acbd6d0a6adf6460fc1f}
+      \field{extraname}{2}
+      \field{sortinit}{p}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradate}{2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Geometry types}
+      \field{urlday}{10}
+      \field{urlmonth}{7}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://pythreejs.readthedocs.io/en/stable/examples/Geometries.html
+      \endverb
+      \verb{url}
+      \verb https://pythreejs.readthedocs.io/en/stable/examples/Geometries.html
+      \endverb
+    \endentry
+    \entry{Industrieroboter}{book}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=01ca483c93532132393dc53954eadc90}{%
+           family={Reinhart},
+           familyi={R\bibinitperiod},
+           given={Gunther},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=f03495a5c1286e9fc04a976fd311defb}{%
+           family={Flores},
+           familyi={F\bibinitperiod},
+           given={Alejandro\bibnamedelima Magaña},
+           giveni={A\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=f3ec9bc3ead38d8e8eed422785040c1e}{%
+           family={Zwicker},
+           familyi={Z\bibinitperiod},
+           given={Carola},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {ger}%
+      }
+      \list{location}{1}{%
+        {Würzburg}%
+      }
+      \list{publisher}{1}{%
+        {Vogel Communications Group}%
+      }
+      \strng{namehash}{2d49e1928f7457116399c2fc666d199c}
+      \strng{fullhash}{c1c5d44f332eb20e7661ec0abfe37bb0}
+      \strng{fullhashraw}{c1c5d44f332eb20e7661ec0abfe37bb0}
+      \strng{bibnamehash}{c1c5d44f332eb20e7661ec0abfe37bb0}
+      \strng{authorbibnamehash}{c1c5d44f332eb20e7661ec0abfe37bb0}
+      \strng{authornamehash}{2d49e1928f7457116399c2fc666d199c}
+      \strng{authorfullhash}{c1c5d44f332eb20e7661ec0abfe37bb0}
+      \strng{authorfullhashraw}{c1c5d44f332eb20e7661ec0abfe37bb0}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{1. Aufl}
+      \field{isbn}{9783834362360}
+      \field{title}{Industrieroboter}
+      \field{year}{2018}
+    \endentry
+    \entry{ROS_Industrial_repo_search}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=edf5597b33f1c37bcdc1feb666f60f4c}{%
+           family={{ROS-Industrial Contributors}},
+           familyi={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{edf5597b33f1c37bcdc1feb666f60f4c}
+      \strng{fullhash}{edf5597b33f1c37bcdc1feb666f60f4c}
+      \strng{fullhashraw}{edf5597b33f1c37bcdc1feb666f60f4c}
+      \strng{bibnamehash}{edf5597b33f1c37bcdc1feb666f60f4c}
+      \strng{authorbibnamehash}{edf5597b33f1c37bcdc1feb666f60f4c}
+      \strng{authornamehash}{edf5597b33f1c37bcdc1feb666f60f4c}
+      \strng{authorfullhash}{edf5597b33f1c37bcdc1feb666f60f4c}
+      \strng{authorfullhashraw}{edf5597b33f1c37bcdc1feb666f60f4c}
+      \field{extraname}{1}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradate}{1}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Repository search result}
+      \field{urlday}{10}
+      \field{urlmonth}{7}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/search?q=topic%3Amoveit+org%3Aros-industrial+fork%3Atrue&type=repositories
+      \endverb
+      \verb{url}
+      \verb https://github.com/search?q=topic%3Amoveit+org%3Aros-industrial+fork%3Atrue&type=repositories
+      \endverb
+    \endentry
+    \entry{ROS_Industrial}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=edf5597b33f1c37bcdc1feb666f60f4c}{%
+           family={{ROS-Industrial Contributors}},
+           familyi={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{edf5597b33f1c37bcdc1feb666f60f4c}
+      \strng{fullhash}{edf5597b33f1c37bcdc1feb666f60f4c}
+      \strng{fullhashraw}{edf5597b33f1c37bcdc1feb666f60f4c}
+      \strng{bibnamehash}{edf5597b33f1c37bcdc1feb666f60f4c}
+      \strng{authorbibnamehash}{edf5597b33f1c37bcdc1feb666f60f4c}
+      \strng{authornamehash}{edf5597b33f1c37bcdc1feb666f60f4c}
+      \strng{authorfullhash}{edf5597b33f1c37bcdc1feb666f60f4c}
+      \strng{authorfullhashraw}{edf5597b33f1c37bcdc1feb666f60f4c}
+      \field{extraname}{2}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradate}{2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{ROS-Industrial}
+      \field{urlday}{10}
+      \field{urlmonth}{7}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/ros-industrial
+      \endverb
+      \verb{url}
+      \verb https://github.com/ros-industrial
+      \endverb
+    \endentry
+    \entry{threejs_docs_MeshStandardMaterial}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=93f44f49f0ff02d6d2ea5a019750579e}{%
+           family={{Three.js Contributors}},
+           familyi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{93f44f49f0ff02d6d2ea5a019750579e}
+      \strng{fullhash}{93f44f49f0ff02d6d2ea5a019750579e}
+      \strng{fullhashraw}{93f44f49f0ff02d6d2ea5a019750579e}
+      \strng{bibnamehash}{93f44f49f0ff02d6d2ea5a019750579e}
+      \strng{authorbibnamehash}{93f44f49f0ff02d6d2ea5a019750579e}
+      \strng{authornamehash}{93f44f49f0ff02d6d2ea5a019750579e}
+      \strng{authorfullhash}{93f44f49f0ff02d6d2ea5a019750579e}
+      \strng{authorfullhashraw}{93f44f49f0ff02d6d2ea5a019750579e}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{MeshStandardMaterial - three.js docs}
+      \field{urlday}{13}
+      \field{urlmonth}{7}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://threejs.org/docs/#api/en/materials/MeshStandardMaterial
+      \endverb
+      \verb{url}
+      \verb https://threejs.org/docs/#api/en/materials/MeshStandardMaterial
+      \endverb
+    \endentry
+    \entry{trimesh}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=a2424396ed3a6558f3eaa5930516bd27}{%
+           family={{trimesh Contributors}},
+           familyi={t\bibinitperiod}}}%
+      }
+      \strng{namehash}{a2424396ed3a6558f3eaa5930516bd27}
+      \strng{fullhash}{a2424396ed3a6558f3eaa5930516bd27}
+      \strng{fullhashraw}{a2424396ed3a6558f3eaa5930516bd27}
+      \strng{bibnamehash}{a2424396ed3a6558f3eaa5930516bd27}
+      \strng{authorbibnamehash}{a2424396ed3a6558f3eaa5930516bd27}
+      \strng{authornamehash}{a2424396ed3a6558f3eaa5930516bd27}
+      \strng{authorfullhash}{a2424396ed3a6558f3eaa5930516bd27}
+      \strng{authorfullhashraw}{a2424396ed3a6558f3eaa5930516bd27}
+      \field{sortinit}{t}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{url}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{trimesh}
+      \field{urlday}{1}
+      \field{urlmonth}{7}
+      \field{urlyear}{2025}
+      \field{version}{3.2.0}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://trimesh.org/
+      \endverb
+      \verb{url}
+      \verb https://trimesh.org/
+      \endverb
+    \endentry
+    \entry{Thingiverse}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=89a1ad46801d4586db6030193910acff}{%
+           family={UltiMaker},
+           familyi={U\bibinitperiod}}}%
+      }
+      \strng{namehash}{89a1ad46801d4586db6030193910acff}
+      \strng{fullhash}{89a1ad46801d4586db6030193910acff}
+      \strng{fullhashraw}{89a1ad46801d4586db6030193910acff}
+      \strng{bibnamehash}{89a1ad46801d4586db6030193910acff}
+      \strng{authorbibnamehash}{89a1ad46801d4586db6030193910acff}
+      \strng{authornamehash}{89a1ad46801d4586db6030193910acff}
+      \strng{authorfullhash}{89a1ad46801d4586db6030193910acff}
+      \strng{authorfullhashraw}{89a1ad46801d4586db6030193910acff}
+      \field{sortinit}{U}
+      \field{sortinithash}{6901a00e45705986ee5e7ca9fd39adca}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Thingiverse - Digital Designs for Physical Objects}
+      \field{urlday}{10}
+      \field{urlmonth}{7}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.thingiverse.com/about
+      \endverb
+      \verb{url}
+      \verb https://www.thingiverse.com/about
+      \endverb
+    \endentry
+    \entry{universal_robots_ps5}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=7e2a43573468b396d2a6391200ee9959}{%
+           family={{Universal Robots}},
+           familyi={U\bibinitperiod}}}%
+      }
+      \strng{namehash}{7e2a43573468b396d2a6391200ee9959}
+      \strng{fullhash}{7e2a43573468b396d2a6391200ee9959}
+      \strng{fullhashraw}{7e2a43573468b396d2a6391200ee9959}
+      \strng{bibnamehash}{7e2a43573468b396d2a6391200ee9959}
+      \strng{authorbibnamehash}{7e2a43573468b396d2a6391200ee9959}
+      \strng{authornamehash}{7e2a43573468b396d2a6391200ee9959}
+      \strng{authorfullhash}{7e2a43573468b396d2a6391200ee9959}
+      \strng{authorfullhashraw}{7e2a43573468b396d2a6391200ee9959}
+      \field{sortinit}{U}
+      \field{sortinithash}{6901a00e45705986ee5e7ca9fd39adca}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{PolyScope 5}
+      \field{urlday}{15}
+      \field{urlmonth}{7}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.universal-robots.com/products/polyscope-5/
+      \endverb
+      \verb{url}
+      \verb https://www.universal-robots.com/products/polyscope-5/
+      \endverb
+    \endentry
+    \entry{weber-Industrieroboter}{book}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=74e2665774ae87aa06aa0b5961d681f3}{%
+           family={Weber},
+           familyi={W\bibinitperiod},
+           given={Wolfgang},
+           giveni={W\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a756e88d8776c03d3f76db235102ce5e}{%
+           family={Koch},
+           familyi={K\bibinitperiod},
+           given={Heiko},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {München}%
+      }
+      \list{publisher}{1}{%
+        {Carl Hanser Verlag GmbH \&amp; Co. KG}%
+      }
+      \strng{namehash}{6abeb909478e71f6f8c6a5997534997d}
+      \strng{fullhash}{6abeb909478e71f6f8c6a5997534997d}
+      \strng{fullhashraw}{6abeb909478e71f6f8c6a5997534997d}
+      \strng{bibnamehash}{6abeb909478e71f6f8c6a5997534997d}
+      \strng{authorbibnamehash}{6abeb909478e71f6f8c6a5997534997d}
+      \strng{authornamehash}{6abeb909478e71f6f8c6a5997534997d}
+      \strng{authorfullhash}{6abeb909478e71f6f8c6a5997534997d}
+      \strng{authorfullhashraw}{6abeb909478e71f6f8c6a5997534997d}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{5., aktualisierte und erweiterte Auflage}
+      \field{title}{Industrieroboter}
+      \field{year}{2022}
+      \verb{doi}
+      \verb 10.3139/9783446468702
+      \endverb
+      \verb{eprint}
+      \verb https://www.hanser-elibrary.com/doi/pdf/10.3139/9783446468702
+      \endverb
+      \verb{urlraw}
+      \verb https://www.hanser-elibrary.com/doi/abs/10.3139/9783446468702
+      \endverb
+      \verb{url}
+      \verb https://www.hanser-elibrary.com/doi/abs/10.3139/9783446468702
+      \endverb
+    \endentry
+    \entry{WEINGARTSHOFER2019507}{article}{}{}
+      \name{author}{5}{}{%
+        {{un=0,uniquepart=base,hash=959c7c9a97dfe42a61d78b2a72f97f04}{%
+           family={Weingartshofer},
+           familyi={W\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=45d9d62f67c1014f8b2c0a19be99da91}{%
+           family={Schwegel},
+           familyi={S\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=5c600431c5c8f6d3157d1a6654aee6f0}{%
+           family={Hartl-Nesic},
+           familyi={H\bibinithyphendelim N\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=dd417d1d25dab28178210f840fb7e58f}{%
+           family={Glück},
+           familyi={G\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1db479757629c24a58ffebcef5ca461b}{%
+           family={Kugi},
+           familyi={K\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{fed48c497cf516d8429618546553cb18}
+      \strng{fullhash}{0bbad4aca934a2718b2d40736a4b2ae3}
+      \strng{fullhashraw}{0bbad4aca934a2718b2d40736a4b2ae3}
+      \strng{bibnamehash}{0bbad4aca934a2718b2d40736a4b2ae3}
+      \strng{authorbibnamehash}{0bbad4aca934a2718b2d40736a4b2ae3}
+      \strng{authornamehash}{fed48c497cf516d8429618546553cb18}
+      \strng{authorfullhash}{0bbad4aca934a2718b2d40736a4b2ae3}
+      \strng{authorfullhashraw}{0bbad4aca934a2718b2d40736a4b2ae3}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{2405-8963}
+      \field{journaltitle}{IFAC-PapersOnLine}
+      \field{note}{8th IFAC Symposium on Mechatronic Systems MECHATRONICS 2019}
+      \field{number}{15}
+      \field{title}{Collaborative Synchronization of a 7-Axis Robot}
+      \field{volume}{52}
+      \field{year}{2019}
+      \field{pages}{507\bibrangedash 512}
+      \range{pages}{6}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.ifacol.2019.11.726
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S2405896319317185
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S2405896319317185
+      \endverb
+      \keyw{Synchronization,Human-Robot Collaboration,Robot dynamics,Robot control,Lyapunov stability,Path planning}
     \endentry
   \enddatalist
 \endrefsection

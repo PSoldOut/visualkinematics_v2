@@ -1,0 +1,189 @@
+@startuml visualkinematics_v2
+!pragma useIntermediatePackages false
+
+class visualkinematics_v2.manipulator.DHKinematicModel {
+  dh_parameters: dict
+  symbolic_thetas: dict
+  joint_angles: dict
+  base_to_dh: ndarray
+  dh_to_tool: ndarray
+  fk: None
+  fk_pos_func: None
+  fk_rot_func: None
+  jacobian_func: None
+}
+class visualkinematics_v2.manipulator.Joint {
+  is_mimicer: Bool
+  lower_limit: float | None
+  upper_limit: float | None
+  renderable: Object3D
+  axis: ndarray
+  mimicers: list[tuple[Kinematic_Chain_Element, float]]
+  dh_frame: None
+  dh_alignment: ndarray
+}
+class visualkinematics_v2.manipulator.Kinematic_Chain_Element {
+  name: str
+  children: list[Kinematic_Chain_Element]
+  parent: Kinematic_Chain_Element | None
+  renderable: Object3D
+  frame: Object3D
+}
+class visualkinematics_v2.manipulator.Link {
+  renderable: Mesh
+}
+class visualkinematics_v2.manipulator.Manipulator {
+  k0: None
+  inspector: None
+  environment: None
+  name: str
+  links: list[Link]
+  joints: list[Joint]
+  dh: DHKinematicModel | None
+  urdf_dictionary: dict
+  tool: Tool | None
+  learned_poses: None
+  tcp_target: None
+  tool: None
+  base_link: Link
+  base_link_to_link_1_joint: Joint
+  base: Link | None
+  mesh: Object3D
+  base_to_baselink_joint: Joint
+  baselink_to_base_joint: Joint
+  link_to_tool_joint: Joint
+}
+class visualkinematics_v2.manipulator.Tool {
+  links: list[Link]
+  joints: list[Joint]
+  urdf_dictionary: dict
+  renderable: None
+}
+class visualkinematics_v2.manipulator.irb6640_185_280 {
+}
+class visualkinematics_v2.manipulator.kr6r900_2 {
+}
+class visualkinematics_v2.manipulator.lbr_iiwa_14_r820 {
+}
+class visualkinematics_v2.show.Environment {
+  frame: None
+  grid: None
+  scene: None
+  camera: PerspectiveCamera
+  frame: None
+  grid: None
+  light: None
+  children: None
+  widgets_on_bottom: None
+  renderer: None
+  frame_widgets: None
+  widgets: None
+  gizmo_controls: list[Gizmo_Controls]
+  inspectors: list[Inspector]
+  info_container: VBox
+}
+class visualkinematics_v2.show.Gizmo_Controls {
+  view: Gizmo_Controls_View
+  controller: Gizmo_Controls_Controller
+}
+class visualkinematics_v2.show.Gizmo_Controls_Controller {
+  view: Gizmo_Controls_View
+  callback: Callable[[], None]
+  obj: None
+  obj_renderable: None
+  obj_renderable: None
+}
+class visualkinematics_v2.show.Gizmo_Controls_View {
+  callback: Callable[[], None]
+  obj: None
+  content: None
+  obj_renderable: None
+  obj_renderable: None
+  x_trans_slider: None
+  y_trans_slider: None
+  z_trans_slider: None
+  x_rot_slider: None
+  y_rot_slider: None
+  z_rot_slider: None
+  x_scale_slider: None
+  y_scale_slider: None
+  z_scale_slider: None
+  rotation_order_dropdown: None
+  local_space_check_box: None
+  widget: None
+}
+class visualkinematics_v2.show.Inspector {
+  view: InspectorView
+  controller: Inspector_Controller
+}
+class visualkinematics_v2.show.InspectorView {
+  environment: Environment
+  sliders_signs: None
+  joints_sliders: None
+  manipulator: Manipulator
+  content: None
+  pose_names: None
+  pose_dropdown: Dropdown
+  save_pose_textfield: Text
+  save_button: Button
+  take_position_button: Button
+  trans_x_minus: None
+  trans_x_plus: None
+  trans_y_minus: None
+  trans_y_plus: None
+  trans_z_minus: None
+  trans_z_plus: None
+  rot_x_minus: None
+  rot_x_plus: None
+  rot_y_minus: None
+  rot_y_plus: None
+  rot_z_minus: None
+  rot_z_plus: None
+  local_space_check_box: None
+  x_current_pos_text: None
+  y_current_pos_text: None
+  z_current_pos_text: None
+  x_current_rot_text: None
+  y_current_rot_text: None
+  z_current_rot_text: None
+  widget: None
+}
+class visualkinematics_v2.show.Inspector_Controller {
+  mouse_down: bool {static}
+  view: InspectorView
+  environment: None
+  manipulator: Manipulator
+  trans_step: None
+  rot_step: None
+  button_wait_time: None
+  lower_limits: None
+  upper_limits: None
+}
+visualkinematics_v2.manipulator.Joint *-- visualkinematics_v2.manipulator.Kinematic_Chain_Element
+visualkinematics_v2.manipulator.Kinematic_Chain_Element <|-- visualkinematics_v2.manipulator.Joint
+visualkinematics_v2.manipulator.Kinematic_Chain_Element *-- visualkinematics_v2.manipulator.Kinematic_Chain_Element
+visualkinematics_v2.manipulator.Kinematic_Chain_Element <|-- visualkinematics_v2.manipulator.Link
+visualkinematics_v2.manipulator.Manipulator *-- visualkinematics_v2.manipulator.Link
+visualkinematics_v2.manipulator.Manipulator *-- visualkinematics_v2.manipulator.Joint
+visualkinematics_v2.manipulator.Manipulator *-- visualkinematics_v2.manipulator.DHKinematicModel
+visualkinematics_v2.manipulator.Manipulator *-- visualkinematics_v2.manipulator.Tool
+visualkinematics_v2.manipulator.Tool *-- visualkinematics_v2.manipulator.Link
+visualkinematics_v2.manipulator.Tool *-- visualkinematics_v2.manipulator.Joint
+visualkinematics_v2.manipulator.Kinematic_Chain_Element <|-- visualkinematics_v2.manipulator.Tool
+visualkinematics_v2.manipulator.Manipulator <|-- visualkinematics_v2.manipulator.irb6640_185_280
+visualkinematics_v2.manipulator.Manipulator <|-- visualkinematics_v2.manipulator.kr6r900_2
+visualkinematics_v2.manipulator.Manipulator <|-- visualkinematics_v2.manipulator.lbr_iiwa_14_r820
+visualkinematics_v2.show.Environment *-- visualkinematics_v2.show.Gizmo_Controls
+visualkinematics_v2.show.Environment *-- visualkinematics_v2.show.Inspector
+visualkinematics_v2.show.Gizmo_Controls *-- visualkinematics_v2.show.Gizmo_Controls_View
+visualkinematics_v2.show.Gizmo_Controls *-- visualkinematics_v2.show.Gizmo_Controls_Controller
+visualkinematics_v2.show.Gizmo_Controls_Controller *-- visualkinematics_v2.show.Gizmo_Controls_View
+visualkinematics_v2.show.Inspector *-- visualkinematics_v2.show.InspectorView
+visualkinematics_v2.show.Inspector *-- visualkinematics_v2.show.Inspector_Controller
+visualkinematics_v2.show.InspectorView *-- visualkinematics_v2.show.Environment
+visualkinematics_v2.show.InspectorView *-- visualkinematics_v2.manipulator.Manipulator
+visualkinematics_v2.show.Inspector_Controller *-- visualkinematics_v2.show.InspectorView
+visualkinematics_v2.show.Inspector_Controller *-- visualkinematics_v2.manipulator.Manipulator
+footer Generated by //py2puml//
+@enduml
+

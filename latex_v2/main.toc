@@ -22,4 +22,10 @@
 \contentsline {subsubsection}{\numberline {3.10.2}Durchführung}{35}{subsubsection.3.10.2}%
 \contentsline {subsubsection}{\numberline {3.10.3}Ergebnisse}{36}{subsubsection.3.10.3}%
 \contentsline {subsubsection}{\numberline {3.10.4}Interpretation}{36}{subsubsection.3.10.4}%
-\contentsline {section}{\numberline {4}Aufbau}{37}{section.4}%
+\contentsline {section}{\numberline {4}Aufbau des Frameworks}{37}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Technischer Aufbau}{37}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Model-Komponente}{38}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}View-Komponente}{39}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Controller-Komponente}{40}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Einbindung in das Notebook}{40}{subsection.4.5}%
+\contentsline {section}{\numberline {5}Anhang}{41}{section.5}%

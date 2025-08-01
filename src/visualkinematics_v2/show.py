@@ -4,13 +4,12 @@ from ipywidgets import *
 from pythreejs import *
 import time
 from scipy.spatial.transform import Rotation as R, Slerp
-import visualkinematics_v2.util as util
 from numba import njit
 from typing import *
 import threading
 import ipyevents
 import visualkinematics_v2.manipulator
-import visualkinematics_v2.util as util
+from visualkinematics_v2 import util
 from IPython.display import display
 
 
@@ -18,8 +17,8 @@ from IPython.display import display
 
 class Inspector:
     def __init__(self, environment:Environment, manipulator:visualkinematics_v2.manipulator.Manipulator):
-        self.view = InspectorView(env=environment, manipulator=manipulator)
-        self.controller = Inspector_Controller(view=self.view, environment=environment, manipulator=manipulator)
+        self.view:InspectorView = InspectorView(env=environment, manipulator=manipulator)
+        self.controller:Inspector_Controller = Inspector_Controller(view=self.view, environment=environment, manipulator=manipulator)
 
 
 
@@ -789,7 +788,7 @@ class Environment:
         self.grid = grid
         self.scene = Scene()
         self.scene.background = "#DDDDDD"
-        self.camera = PerspectiveCamera(position=[8, 8, 8],aspect=width/height, fov=50)
+        self.camera:PerspectiveCamera = PerspectiveCamera(position=[8, 8, 8],aspect=width/height, fov=50)
         self.camera.up = up
         self.frame = frame
         self.grid = grid
@@ -801,8 +800,8 @@ class Environment:
         self.renderer = Renderer(camera=self.camera, scene=self.scene, controls=[OrbitControls(controlling=self.camera)], width=width, height=height, background_color="#87CEEB", background_opacity=1.0, antialias=True, precision='highp')
         self.frame_widgets = True
         self.widgets = []
-        self.gizmo_controls = []
-        self.inspectors = []
+        self.gizmo_controls:list[Gizmo_Controls] = []
+        self.inspectors:list[Inspector] = []
 
         self.info_container:widgets.VBox = widgets.VBox(layout=self.__class__.info_container_layout)
         
@@ -1173,11 +1172,11 @@ class Gizmo_Controls:
             widgets_vertical:Bool = False,
             continuous_update=True,
             callback: Callable[[], None] = None):
-        self.view = Gizmo_Controls_View(obj=obj, translation=translation, rotation=rotation, scale=scale, name=name,
+        self.view:Gizmo_Controls_View = Gizmo_Controls_View(obj=obj, translation=translation, rotation=rotation, scale=scale, name=name,
                                                 max_trans_x=max_trans_x, max_trans_y=max_trans_y, max_trans_z=max_trans_z,
                                                 min_trans_x=min_trans_x, min_trans_y=min_trans_y, min_trans_z=min_trans_z,
                                                 widgets_vertical=widgets_vertical, continuous_update=continuous_update, callback=callback)
-        self.controller = Gizmo_Controls_Controller(view=self.view, obj=obj, translation=translation, rotation=rotation, scale=scale, name=name,
+        self.controller:Gizmo_Controls_Controller = Gizmo_Controls_Controller(view=self.view, obj=obj, translation=translation, rotation=rotation, scale=scale, name=name,
                                                 max_trans_x=max_trans_x, max_trans_y=max_trans_y, max_trans_z=max_trans_z,
                                                 min_trans_x=min_trans_x, min_trans_y=min_trans_y, min_trans_z=min_trans_z,
                                                 widgets_vertical=widgets_vertical, continuous_update=continuous_update, callback=callback)   
