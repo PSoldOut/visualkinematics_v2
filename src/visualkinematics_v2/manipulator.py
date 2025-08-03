@@ -822,7 +822,7 @@ class Manipulator:
 
 
     def _load_learned_poses(self):
-        filepath = f"{manager.learn_path}/{self.name}.json"
+        filepath = f"{manager.teach_path}/{self.name}.json"
         if os.path.exists(filepath):
             try:
                 with open(filepath, 'r') as f:

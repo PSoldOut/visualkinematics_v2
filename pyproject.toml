@@ -12,8 +12,8 @@ packages = [
 
 
 include = [
-  { path = "assets/*", format = "file" },
-  { path = "src/examples/*", format = "file" }
+  { path = "assets/**", format = "file" },
+  { path = "src/examples/**", format = "file" }
 ]
 
 
@@ -44,7 +44,9 @@ dependencies = [
     "pillow-avif-plugin (>=1.5.2,<2.0.0)",
     "pillow (>=11.3.0,<12.0.0)",
     "ipyevents (>=2.0.2,<3.0.0)",
-    "py2puml (>=0.10.0,<0.11.0)"
+    "py2puml (>=0.10.0,<0.11.0)",
+    "appdirs (>=1.4.4,<2.0.0)",
+    "toml (>=0.10.2,<0.11.0)"
 ]
 
 

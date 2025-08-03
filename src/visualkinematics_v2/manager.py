@@ -1,3 +1,4 @@
+from __future__ import annotations
 import numpy as np
 import pythreejs as three
 from ipywidgets import *
@@ -15,22 +16,64 @@ from collada.common import DaeMalformedError
 import subprocess
 import pywavefront
 from visualkinematics_v2 import util
+from appdirs import user_config_dir
+import toml
+from pathlib import Path
+import visualkinematics_v2
+
 
 #Datenhaltung (Model)
 
-project_path = Path(__file__).resolve().parent.parent.parent 
-#os.chdir(project_path)
-learn_path = f"{project_path}/res/learn"
-scripts_path = f"{project_path}/src/scripts"
-npz_path = f"{project_path}/assets/npz"
-obj_path = f"{project_path}/assets/obj"
 
-base_paths = [
-    f"{project_path}/assets/ros-package-sets",
-    f"{project_path}/assets/custom-package-sets"
-]
+APP_NAME = "visualkinematics_v2"
+CONFIG_FILENAME = "config.toml"
+
+DEFAULT_CONFIG = {
+    "base_paths": [
+        str(Path(visualkinematics_v2.__file__).parent / "_package_data"),
+        str(Path.home() / "Documents" / "visualkinematics_v2" / "assets" / "custom-package-sets"),
+        str(Path.home() / "Documents" / "visualkinematics_v2" / "assets" / "ros-package-sets")
+    ],
+
+    "teach_path" : str(Path.home() / "Documents" / "visualkinematics_v2" / "res" / "teach"),
+    "npz_path" :  str(Path.home() / "Documents" / "visualkinematics_v2" / "assets" / "npz"),
+    "obj_path" :  str(Path.home() / "Documents" / "visualkinematics_v2" / "assets" / "obj")
+}
+
+
+
+def load_config():
+    config_dir = user_config_dir(APP_NAME)
+    os.makedirs(config_dir, exist_ok=True)
+    config_path = os.path.join(config_dir, CONFIG_FILENAME)
+
+    # Wenn die Datei nicht existiert, eine Default-Konfig schreiben
+    if not os.path.exists(config_path):
+        with open(config_path, "w") as f:
+            toml.dump(DEFAULT_CONFIG, f)
+
+    with open(config_path, "r") as f:
+        return toml.load(f)
+
+config = load_config()
+
+
+
+#project_path = Path(__file__).resolve().parent.parent.parent 
+#os.chdir(project_path)
+teach_path = config["teach_path"]
+npz_path = config["npz_path"]
+obj_path = config["obj_path"]
+base_paths = config["base_paths"]
 
 fast_load : bool = True
+
+package_root = Path(visualkinematics_v2.__file__).parent
+#print(package_root)
+
+
+
+
 
 
 
