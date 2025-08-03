@@ -397,7 +397,8 @@ class Inspector_Controller:
         p = self.manipulator.tcp_target.position
         q0 = np.array(list(self.manipulator.dh.joint_angles.values()), float)
         try:
-            q_sol = self.manipulator.dh.inverse_kinematics6D_with_limits(p, r, q0, 20, 0.0001, self.lower_limits, self.upper_limits)
+            #limits funktionieren noch nicht einwandfrei sind aber über self.lower_limits, self.upper_limits verfügbar und können hier übergeben werden
+            q_sol = self.manipulator.dh.inverse_kinematics6D_with_limits(p, r, q0, 20, 0.0001)
             self.manipulator.animate_by_theta(q_sol, 0.04, 1, True, False)
             self.manipulator.update_dh_angles()
             for slider, angle in zip(list(self.view.joints_sliders.values()), list(self.manipulator.dh.joint_angles.values())):

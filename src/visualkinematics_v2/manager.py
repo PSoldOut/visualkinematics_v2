@@ -31,13 +31,13 @@ CONFIG_FILENAME = "config.toml"
 DEFAULT_CONFIG = {
     "base_paths": [
         str(Path(visualkinematics_v2.__file__).parent / "_package_data"),
-        str(Path.home() / "Documents" / "visualkinematics_v2" / "assets" / "custom-package-sets"),
-        str(Path.home() / "Documents" / "visualkinematics_v2" / "assets" / "ros-package-sets")
+        str(user_config_dir(APP_NAME) / "assets" / "custom-package-sets"),
+        str(user_config_dir(APP_NAME) / "assets" / "ros-package-sets")
     ],
 
-    "teach_path" : str(Path.home() / "Documents" / "visualkinematics_v2" / "res" / "teach"),
-    "npz_path" :  str(Path.home() / "Documents" / "visualkinematics_v2" / "assets" / "npz"),
-    "obj_path" :  str(Path.home() / "Documents" / "visualkinematics_v2" / "assets" / "obj")
+    "teach_path" : str(user_config_dir(APP_NAME) / "res" / "teach"),
+    "npz_path" :  str(user_config_dir(APP_NAME) / "assets" / "npz"),
+    "obj_path" :  str(user_config_dir(APP_NAME) / "assets" / "obj")
 }
 
 
