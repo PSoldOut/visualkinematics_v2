@@ -792,7 +792,7 @@ class Environment:
         self.camera.up = up
         self.frame = frame
         self.grid = grid
-        self.light = PointLight(color='white', intensity=1.5, position=[5, 5, 5])
+        self.light : Light = PointLight(color='white', intensity=1.5, position=[5, 5, 5])
         self.scene.add([self.camera, self.light, self.frame, self.grid, AmbientLight(intensity=0.5)])
         self.children = []
         self.widgets_on_bottom = widgets_on_bottom

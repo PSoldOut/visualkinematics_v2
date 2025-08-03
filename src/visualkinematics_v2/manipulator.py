@@ -17,6 +17,9 @@ import threading
 import numba
 import ipyevents
 
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning, message="Gimbal lock detected.*")
+
 fps_text = widgets.Text("empty")
 
 pending_actions = []
