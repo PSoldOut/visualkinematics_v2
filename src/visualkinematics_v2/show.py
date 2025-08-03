@@ -33,7 +33,7 @@ class Inspector_Controller:
         self.manipulator:visualkinematics_v2.manipulator.Manipulator = manipulator
         self.trans_step = 0.05
         self.rot_step = 4.0
-        self.button_wait_time = 0.01
+        self.button_wait_time = 0.1
 
         self.lower_limits = []
         self.upper_limits = []
@@ -179,7 +179,6 @@ class Inspector_Controller:
         self.view.z_current_rot_text.value = f"{rot_vec[0]}"
 
     def _on_trans_x_minus_button(self, event):
-        display("gerdürckt-")
         def down():
             while(self.__class__.mouse_down):
                 self.trans([-self.trans_step,0,0])
@@ -197,7 +196,6 @@ class Inspector_Controller:
         
 
     def _on_trans_x_plus_button(self, event):
-        display("gerdürckt+")
         def down():
             while(self.__class__.mouse_down):
                 self.trans([self.trans_step,0,0])
