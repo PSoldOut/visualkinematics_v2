@@ -179,6 +179,7 @@ class Inspector_Controller:
         self.view.z_current_rot_text.value = f"{rot_vec[0]}"
 
     def _on_trans_x_minus_button(self, event):
+        display("gerdürckt-")
         def down():
             while(self.__class__.mouse_down):
                 self.trans([-self.trans_step,0,0])
@@ -196,6 +197,7 @@ class Inspector_Controller:
         
 
     def _on_trans_x_plus_button(self, event):
+        display("gerdürckt+")
         def down():
             while(self.__class__.mouse_down):
                 self.trans([self.trans_step,0,0])
