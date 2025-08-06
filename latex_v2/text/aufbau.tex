@@ -1,0 +1,130 @@
+\section{Aufbau des Frameworks}
+
+
+\subsection{Technischer Aufbau}
+Das entwickelte Framework ist als eigenständiges Python-Paket organisiert und wurde mithilfe des Packaging-Werkzeugs poetry erstellt.
+Diese Struktur ermöglicht eine modulare Organisation des Quellcodes,
+die saubere Trennung von Abhängigkeiten sowie eine einfache Verteilung und Wiederverwendbarkeit des Frameworks \doublecite[1]{python_packages}.
+Die Verzeichnisstruktur folgt dem üblichen Aufbau für Python-Pakete mit einem root directory, den entsprechenden Python Modulen,
+einer pyproject.toml, einer README.md sowie verschiedenen Tests \doublecite[22]{python_packages}:
+
+\vspace{1em}
+\begin{figure}[H]
+    \dirtree{%
+    .1 visualkinematics\_v2.
+    .2 poetry.lock.
+    .2 pyproject.toml.
+    .2 README.md.
+    .2 assets.
+    .3 custom-package-sets.
+    .3 ros-package-sets.
+    .2 src.
+    .3 examples.
+    .4 industrial\_robot\_example.ipynb.
+    .4 quader\_example.ipynb.
+    .4 robot\_example.ipynb.
+    .4 rotations\_example.ipynb.
+    .3 visualkinematics\_v2.
+    .4 \_\_init\_\_.py.
+    .4 manager.py.
+    .4 manipulator.py.
+    .4 show.py.
+    .4 util.py.
+    .4 \_package\_data.
+    .2 tests.
+    }
+\caption{Verzeichnisstruktur des Packets visualkinematics\_v2}
+\label{fig:dir_structure}
+\end{figure}
+\vspace{1em}
+
+
+Durch diese Paketstruktur kann das Framework problemlos in andere Projekte integriert, installiert oder erweitert werden.
+Vorgefertigte Beispielnotebooks befinden sich im Ordner examples und veranschaulichen die Funktionsweise des Frameworks.
+Darunter befinden sich die Notebooks quader\_example.ipynb, robot\_example.ipynb sowie rotations\_example.ipynb,
+die bereits im Rahmen der Projektarbeit entwickelt worden sind und die Funktionsweise von Transformationen von einfachen Körpern
+sowie von mobilen Robotern in Form von Übungsaufgaben demonstrieren.
+Das Beispielnotebook industrial\_robot\_example.ipynb stellt die Nutzung des Frameworks zur Simulation von Industrierobotern dar.
+Alle Beispiel-Notebooks greifen direkt auf den Quellcode des Pakets zu.
+
+Der Quellcode befindet sich Im Verzeichnis visualkinematics\_v2/src/visualkinematics\_v2.
+Dieser ist in einzelne Module gegliedert, die jeweils einer bestimmten Verantwortlichkeit zugeordnet sind. 
+Ein Überblick über die zentralen Module und deren Beziehungen ist in Abbildung \ref{fig:package_diagramm} (siehe Anhang) in Form eines Packetdiagramms dargestellt. 
+Es wurde darauf geachtet, dass zwischen den Modulen keine bidirektionalen oder zyklischen Abhängigkeiten bestehen.
+
+\subsection{Softwarearchitektur Model-View-Controller}
+Der Quellcode des Packets verteilt sich auf insgesammt 5 Module: util.py, manipulator.py, manager.py und show.py.
+Das Zusammenspiel dieser Module folgt der Softwarearchitektur des Model-View-Controller (MVC) Paradigmas,
+welches sich für grafische Echtzeitanwendungen eignet.
+Ziel dieser Trennung ist eine modulare Struktur, die eine klare Abgrenzung zwischen Daten (Model),
+Präsentation (View) und Interaktion/Steuerung (Controller) ermöglicht.
+Diese Struktur erleichtert die Erweiterbarkeit und Wartbarkeit des Frameworks \doublecite[1000]{Encyclopedia_of_Computer_Graphics_and_Games}.
+
+
+
+
+\subsubsection{Model-Komponente}
+Das modul util.py stellt eine zustandslose Sammlung Fachspezifischer Kern- und Hilfsfunktionen dar und lässt sich am ehesten der Model-Komponente
+zuordnen Es wird von allen anderen Modulen importiert und genutzt.
+Die Model-Komponente wird vor allem durch die Module manipulator und manager realisiert.  
+Sie bildet die strukturelle und funktionale Grundlage des Frameworks und kapselt die kinematische Struktur des Roboters sowie dessen aktuellen Zustand.
+
+Das Modul manipulator enthält zentrale Klassen wie:
+
+\begin{itemize}
+    \item \texttt{Manipulator} – verwaltet den Gesamtaufbau des Roboters, einschließlich aller Glieder und Gelenke.
+    \item \texttt{Link} – repräsentiert ein einzelnes physisches Glied der kinematischen Kette und enthält Informationen zur Geometrie und lokalen Transformation.
+    \item \texttt{Joint} – modelliert ein Gelenk zwischen zwei Gliedern inklusive Bewegungsbereich und aktuellem Winkel.
+    \item \texttt{Kinematic\_Chain\_Element} – Die Oberklasse von Link und Joint und verwaltet die Children und den Parent die sich aus der kinematischen Kette ergeben.
+    \item \texttt{DHKinematicModel} – kapselt die mathematische Berechnung der Vorwärts- und Rürckwärtstransformation auf Basis der Denavit-Hartenberg-Parameter.
+\end{itemize}
+
+Innerhalb dieser Klassen werden alle relevanten Informationen zur Beschreibung und Steuerung eines Industrieroboters zusammengeführt.  
+Dazu zählen die Hierarchie der Glieder, die Relativtransformationen entlang der kinematischen Kette sowie der aktuelle Gelenkzustand (z.\,B. Positionen und Winkel der Achsen).  
+Diese Daten bilden die Grundlage für die spätere grafische Darstellung und Animation.
+Die Denavit-Hartenberg-Konvention sowie die darauf basierende Berechnung der Vorwärts- und Rückwärtstransformation wurden in die Klasse DHKinematicModel ausgelagert.
+Dadurch wird eine saubere Trennung der Zuständigkeiten erreicht und gleichzeitig die Wartbarkeit sowie die Lesbarkeit des Codes verbessert.
+
+Innerhalb der Model-Komponente wird die Datenhaltung und somit der Zugriff auf den persistenten Speicher in das Modul manager entkoppelt.
+Hier befinden sich Funktionen zum Laden und Speichern von 3D-Modellen sowie URDF-Dateien.
+Darüber hinaus erzeugt das Modul manager eine Datei namens config.toml in einem standardisierten Verzeichnis für benutzerspezifische Konfigurationsdaten.
+Der genaue Speicherort ist betriebssystemabhängig. Unter Windows befindet sich dieser beispielsweise unter
+C:/Users/\textless{}Benutzername\textgreater{}/AppData/Local/visualkinematics\_v2,
+während auf Linux-Systemen typischerweise das Verzeichnis
+~/.config/visualkinematics\_v2 verwendet wird.
+Dieses Vorgehen entspricht den Konventionen der jeweiligen Plattformen und ermöglicht eine konsistente sowie benutzerspezifische Speicherung von Anwendungseinstellungen.
+In der Datei config.toml werden die Speicherorte für Ressourcen und Assets definiert. Der Benutzer hat die Möglichkeit,
+diese Pfade bei Bedarf manuell anzupassen, um beispielsweise benutzerdefinierte Verzeichnisse zu verwenden.
+In den konfigurierten Verzeichnissen können benutzereigene 3D-Modelle und URDF-Beschreibungen abgelegt werden.
+Diese stehen dem Framework anschließend zur Verfügung und können direkt geladen werden.
+Damit das bereitgestellte Beispiel-Notebook industrial\_robot\_example.ipynb ohne weitere Anpassungen („out of the box“) lauffähig ist,
+werden mit dem Paket im Verzeichnis \_package\_data bereits einige 3D-Modelle und URDF-Beschreibungen mitgeliefert.
+
+
+\subsubsection{View-Komponente}
+Die View ist für die Darstellung der Szene im Jupyter Notebook zuständig und wird durch das Modul show dargestellt.
+Sie verwendet pythreejs sowie ipywidgets zur visuellen Repräsentation und enthält folgende Klassen und Funktionen:
+
+\begin{itemize}
+    \item \texttt{Environment}: erzeugt die 3D-Szene mit Licht, Kamera, Koordinatensystem usw.
+    \item \texttt{\_ipython\_display\_()}: bindet die Szene beim aufrufen von display() als interaktives Widget in das Notebook ein.
+    \item \texttt{Inspector\_View}: enthält GUI-Elemente wie Schieberegler und Knöpfe für die Steuerung und Konfiguration eines Roboters.
+    \item \texttt{Gizmo\_Controls\_View}: enthält GUI-Elemente für die Translation, Rotation und Skalierung eines beliebigen Körpers.
+\end{itemize}
+
+\subsubsection{Controller-Komponente}
+Der Controller bildet die Schnittstelle zwischen der Benutzerinteraktion und dem zugrunde liegenden Datenmodell.
+Er verknüpft die GUI-Elemente der View mit den Funktionen des Models und steuert das Verhalten des Frameworks in Abhängigkeit von Benutzereingaben.
+Dabei kommt das Modul ipyevents zum Einsatz, das eine Ereignisverarbeitung in Jupyter-Notebooks ermöglicht.
+Der Controller ist wie die View-Komponente ebenfalls im Modul show implementiert und wird dort in den folgenden Klassen gekapselt:
+
+\begin{itemize}
+    \item \texttt{Inspector\_Controller}: Verbindet die GUI-Elemente von Inspector\_View mit Funktionen und speichert Zustände wie mouse\_down.
+    \item \texttt{Gizmo\_Controls\_Controller}: Verbindet die GUI-Elemente der Gizmo\_Con\-trols\_View mit Funktionen.
+\end{itemize}
+
+Zwischen der View und dem Controller sowie zwischen dem Model und dem Controller besteht eine lose Kopplung.
+Die Klasse Inspector\_Controller besitzt eine Referenz auf die Klasse Manipulator (Model), wodurch eine einseitige Assoziation zwischen Controller und Model besteht.
+Die Klasse Inspector\_View kennt die Manipulator-Instanz ebenfalls, allerdings ausschließlich lesend, um beispielsweise Initialwerte für GUI-Elemente wie Schieberegler setzen zu können.
+Eine detaillierte Darstellung der beteiligten Module, Klassen und ihrer Beziehungen befindet sich in Abbildung \ref{fig:class_diagramm} (siehe Anhang) in Form eines Klassendiagramms.
+

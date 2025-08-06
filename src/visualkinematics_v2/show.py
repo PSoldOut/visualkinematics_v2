@@ -33,7 +33,7 @@ class Inspector_Controller:
         self.manipulator:visualkinematics_v2.manipulator.Manipulator = manipulator
         self.trans_step = 0.05
         self.rot_step = 4.0
-        self.button_wait_time = 0.1
+        self.button_wait_time = 0.01
 
         self.lower_limits = []
         self.upper_limits = []
@@ -422,7 +422,7 @@ class Inspector_Controller:
         try:
             button.description = "Pose Einnehmen"
             button.icon='pause'
-            self.manipulator.animate_by_learned_pose(name = self.pose_dropdown.value, synchronous=True, duation=4)
+            self.manipulator.animate_by_learned_pose(name = self.view.pose_dropdown.value, synchronous=True, duation=4)
             
         except Exception as e:
             info = self.manipulator.environment.add_info(f"Beim Einnehmen der Pose ist ein Fehler aufgetreten!: {e}")
@@ -437,12 +437,13 @@ class Inspector_Controller:
 
     def _on_click_save_button(self, button:widgets.Button):
         try:
-            self.manipulator.learn(pose_name = self.save_pose_textfield.value)
-            opts = list(self.pose_dropdown.options)
-            opts.append(self.save_pose_textfield.value)
-            self.pose_dropdown.options = opts
+            self.manipulator.learn(pose_name = self.view.save_pose_textfield.value)
+            opts = list(self.view.pose_dropdown.options)
+            opts.append(self.view.save_pose_textfield.value)
+            self.view.pose_dropdown.options = opts
             button.description = "Gespeichert!"
             button.icon='check'
+            info = self.manipulator.environment.add_info(f"Pose erfolgreich gespeichert!")
         
         except Exception as e:
             self.manipulator.environment.add_info(f"Beim Speichern der Pose ist ein Fehler aufgetreten!: {e}")

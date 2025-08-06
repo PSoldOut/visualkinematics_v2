@@ -732,7 +732,7 @@ class Link(Kinematic_Chain_Element):
 class Manipulator:
     def __init__(self, name:str, tool_name:str = "robotiq_arg2f_140_model", position:np.ndarray = np.array([0,0,0])):
         self.k0 = None
-        self.inspector = None
+        #self.inspector = None
         self.environment = None
         self.name:str = name
         self.links:list[Link] = []
@@ -790,7 +790,7 @@ class Manipulator:
         display(f"POSEN: {self.learned_poses}")
         exists = any(obj["name"] == pose_name for obj in self.learned_poses)
         if exists : raise RuntimeError("Pose mit diesem Namen existiert bereits")
-        filepath = f"{manager.learn_path}/{self.name}.json"
+        filepath = f"{manager.teach_path}/{self.name}.json"
         q = []
         if thetas is None:
             self.update_dh_angles()

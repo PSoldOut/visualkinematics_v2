@@ -1,17 +1,17 @@
 \babel@toc {german}{}\relax 
-\contentsline {figure}{\numberline {1}{\ignorespaces a) Quader mit Freiheitsgrad 3. b) Quader mit Freiheitsgrad 6. Quelle: \doublecite [35]{weber-Industrieroboter}}}{1}{figure.1}%
-\contentsline {figure}{\numberline {2}{\ignorespaces Industrieroboter von Kuka. Quelle: \doublecite [6]{weber-Industrieroboter}}}{3}{figure.2}%
-\contentsline {figure}{\numberline {3}{\ignorespaces Leichtbauroboter iiwa von KUKA. Quelle: \doublecite []{lbr_image}}}{4}{figure.3}%
-\contentsline {figure}{\numberline {4}{\ignorespaces schematischer Aufbau der Vorwärtstransformation. Quelle: \doublecite [49]{weber-Industrieroboter}}}{6}{figure.4}%
-\contentsline {figure}{\numberline {5}{\ignorespaces schematische Zeichnung eines Knickarmroboters mit 6 Gelenken und DH-Koordinatensystemen. Quelle: \doublecite [39]{weber-Industrieroboter}}}{7}{figure.5}%
-\contentsline {figure}{\numberline {6}{\ignorespaces schematische Zeichnung eines Planarroboters mit 2 Achsen. Quelle: \doublecite [51]{weber-Industrieroboter}}}{8}{figure.6}%
-\contentsline {figure}{\numberline {7}{\ignorespaces schematische Zeichnung einer Gelenkstellung die zu Unendlich vielen Lösungen führt. Quelle: \doublecite [51]{weber-Industrieroboter}}}{9}{figure.7}%
-\contentsline {figure}{\numberline {8}{\ignorespaces Ansicht der 3D-Szene des Frameworks mit einzelnen Gliedern des KR6 R900-2 von KUKA}}{19}{figure.8}%
-\contentsline {figure}{\numberline {9}{\ignorespaces Ansicht der 3D-Szene des Frameworks mit dem KR6 R900-2 von KUKA in Nullstellung mit Greifer}}{21}{figure.9}%
-\contentsline {figure}{\numberline {10}{\ignorespaces Benutzeroberfläche von PolyScope5. Quelle: \doublecite []{universal_robots_ps5}}}{23}{figure.10}%
-\contentsline {figure}{\numberline {11}{\ignorespaces Viewport mit grafischer Benutzeroberfläche}}{25}{figure.11}%
-\contentsline {figure}{\numberline {12}{\ignorespaces Ansicht der 3D-Szene des Frameworks mit dem KR6 R900-2 von KUKA mit Denavit-Hartenberg-Koordinatensystemen}}{28}{figure.12}%
-\contentsline {figure}{\numberline {13}{\ignorespaces Testaufbau der Ressourcen- und Performance-Analyse}}{35}{figure.13}%
-\contentsline {figure}{\numberline {14}{\ignorespaces Verzeichnisstruktur des Packets visualkinematics\_v2}}{38}{figure.14}%
-\contentsline {figure}{\numberline {15}{\ignorespaces UML-Klassendiagramm des Frameworks (vereinfacht)}}{43}{figure.15}%
-\contentsline {figure}{\numberline {16}{\ignorespaces UML-Packagediagramm der Module (vereinfacht)}}{44}{figure.16}%
+\contentsline {figure}{\numberline {1}{\ignorespaces a) Quader mit Freiheitsgrad 3. b) Quader mit Freiheitsgrad 6. Quelle: \doublecite [35]{weber-Industrieroboter}}}{2}{figure.1}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Industrieroboter von Kuka. Quelle: \doublecite [6]{weber-Industrieroboter}}}{4}{figure.2}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Leichtbauroboter iiwa von KUKA. Quelle: \doublecite []{lbr_image}}}{5}{figure.3}%
+\contentsline {figure}{\numberline {4}{\ignorespaces schematischer Aufbau der Vorwärtstransformation. Quelle: \doublecite [49]{weber-Industrieroboter}}}{7}{figure.4}%
+\contentsline {figure}{\numberline {5}{\ignorespaces schematische Zeichnung eines Knickarmroboters mit 6 Gelenken und DH-Koordinatensystemen. Quelle: \doublecite [39]{weber-Industrieroboter}}}{8}{figure.5}%
+\contentsline {figure}{\numberline {6}{\ignorespaces schematische Zeichnung eines Planarroboters mit 2 Achsen. Quelle: \doublecite [51]{weber-Industrieroboter}}}{9}{figure.6}%
+\contentsline {figure}{\numberline {7}{\ignorespaces schematische Zeichnung einer Gelenkstellung die zu Unendlich vielen Lösungen führt. Quelle: \doublecite [51]{weber-Industrieroboter}}}{10}{figure.7}%
+\contentsline {figure}{\numberline {8}{\ignorespaces Ansicht der 3D-Szene des Frameworks mit einzelnen Gliedern des KR6 R900-2 von KUKA}}{20}{figure.8}%
+\contentsline {figure}{\numberline {9}{\ignorespaces Ansicht der 3D-Szene des Frameworks mit dem KR6 R900-2 von KUKA in Nullstellung mit Greifer}}{22}{figure.9}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Benutzeroberfläche von PolyScope5. Quelle: \doublecite []{universal_robots_ps5}}}{24}{figure.10}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Viewport mit grafischer Benutzeroberfläche}}{26}{figure.11}%
+\contentsline {figure}{\numberline {12}{\ignorespaces Ansicht der 3D-Szene des Frameworks mit dem KR6 R900-2 von KUKA mit Denavit-Hartenberg-Koordinatensystemen}}{29}{figure.12}%
+\contentsline {figure}{\numberline {13}{\ignorespaces Verzeichnisstruktur des Packets visualkinematics\_v2}}{35}{figure.13}%
+\contentsline {figure}{\numberline {14}{\ignorespaces Testaufbau der Ressourcen- und Performance-Analyse}}{41}{figure.14}%
+\contentsline {figure}{\numberline {15}{\ignorespaces UML-Klassendiagramm des Frameworks generiert mit dem Tool py2puml}}{46}{figure.15}%
+\contentsline {figure}{\numberline {16}{\ignorespaces UML-Packagediagramm der Module}}{47}{figure.16}%

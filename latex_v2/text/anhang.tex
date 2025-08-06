@@ -136,12 +136,48 @@ Betriebssystem & Windows 10 Home (64-bit), Version 10.0.19045 Build 19045 \\
 
 
 
+\vspace{1em}
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{4.5cm}|p{9.5cm}|}
+\hline
+\textbf{Komponente} & \textbf{Spezifikation} \\
+\hline
+Gerätetyp & Virtuelle Maschine (KVM) \\
+\hline
+Prozessor (CPU) & AMD EPYC Processor, 3{,}0\,GHz, 8 Kerne, 8 Threads \\
+\hline
+Arbeitsspeicher (RAM) & 16\,GB \\
+\hline
+Cache & L1: 256\,KiB, L2: 4\,MiB, L3: 64\,MiB \\
+\hline
+Betriebssystem & Ubuntu 20.04.6 LTS (64-bit) \\
+\hline
+Kernel-Version & Linux 5.4.0-216-generic \\
+\hline
+Architektur & x86\_64 (64-bit) \\
+\hline
+Hypervisor & KVM \\
+\hline
+Virtualisierungstyp & Vollvirtualisierung \\
+\hline
+\end{tabular}
+\caption{Technische Spezifikationen des Zielservers (JupyterHub-VM)}
+\label{tab:jupyterhub_vm}
+\end{table}
+\vspace{1em}
+
+
+
+
+
+
 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.75\textwidth]{images/class_diagramm.png}
-    \caption{UML-Klassendiagramm des Frameworks (vereinfacht)}
+    \includegraphics[width=1.0\textwidth]{images/class_diagramm.png}
+    \caption{UML-Klassendiagramm des Frameworks generiert mit dem Tool py2puml}
     \label{fig:class_diagramm}
 \end{figure}
 
@@ -149,6 +185,11 @@ Betriebssystem & Windows 10 Home (64-bit), Version 10.0.19045 Build 19045 \\
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{images/package_diagramm.png}
-    \caption{UML-Packagediagramm der Module (vereinfacht)}
+    \caption{UML-Packagediagramm der Module}
     \label{fig:package_diagramm}
 \end{figure}
+
+
+
+
+

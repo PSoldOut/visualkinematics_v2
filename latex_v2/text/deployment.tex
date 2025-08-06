@@ -1,0 +1,60 @@
+\section{Deployment des Frameworks}
+Das Framework wird auf einem zentralen Server (siehe Tabelle \ref{tab:jupyterhub_vm}) des Instituts für die Digitalisierung von Arbeits- und Lebenswelten (IDiAL) der Fachhochschule Dortmund gehostet.
+Ziel ist es, einen benutzerdefinierten Python-Kernel bereitzustellen,
+der allen Benutzern zentral zur Verfügung steht und auf das Framework samt Abhängigkeiten zugreifen kann.
+Die Paketverwaltung erfolgt mithilfe von Poetry Version 2.1.2, um eine reproduzierbare und isolierte Entwicklungsumgebung sicherzustellen.
+Das Zielsystem stellte standardmäßig Python in Version 3.8.10 bereit,
+welche jedoch nicht kompatibel mit allen Abhängigkeiten des Projekts war.
+Daher wurde Python 3.10 von python.org heruntergeladenen und manuell im Home-Verzeichnisses des Benutzers philipp kompiliert und installiert.
+Dabei wurde die Systeminstallation Python 3.8.10 nicht verändern oder oder gelöscht:
+
+\begin{center}
+    \begin{verbatim}
+        ./configure --prefix=$HOME/python-3.10
+        make
+        make install
+        export PATH="$HOME/python-3.10/bin:$PATH"
+        source ~/.bashrc
+    \end{verbatim}
+\end{center}
+
+Anschließend wurde das Repositorie von GitHub geklont.
+Da es sich um ein privates Repositorie handelt wurde ein SSH-Schlüssel generiert und dieser bei GitHub eingerichtet.
+Danach wurde das Projekt eingerichtet und anschließénd in das Verzeichnis /opt verschoben um eine zentrale Nutzung zu ermöglichen:
+
+\begin{center}
+    \begin{verbatim}
+        git clone git@github.com:PSoldOut/visualkinematics_v2.git
+        cd visualkinematics_v2
+        poetry install
+        sudo mv ../visualkinematics_v2 /opt
+    \end{verbatim}
+\end{center}
+
+Die dadurch erstellte virtuelle Umgebung wurde als globaler Kernel für alle JupyterHub-Nutzer registriert. Dazu wurde
+folgender Befehl genutzt:
+
+
+
+ \begin{center}
+    \begin{verbatim}
+        'sudo $(poetry run which python) -m ipykernel install
+        --name=visualkinematics_v2
+        --display-name "VisualKinematics v2"
+        --prefix=/usr/local'
+    \end{verbatim}
+\end{center}
+
+ Dies installiert den Kernel systemweit in /usr/local/share/jupyter/kernels/.
+ Danach ist der Kernel im JupyterHub sichtbar und kann von allen Nutzern verwendet werden. Der Zugriff auf
+ das Poetry-Projekt und dessen Bibliotheken ist gegeben. Nutzer können nun direkt mit dem
+ Framework in Jupyter arbeiten.
+ Damit die Schieberegler und Knöpfe des Frameworks ordnungsgemäß Funktionieren,
+ musste ipyevents und die zugehörige Labextension auf dem Host instaliert werden:
+
+ \begin{center}
+    \begin{verbatim}
+        sudo /opt/tljh/user/bin/python3 -m pip install ipyevents
+        sudo /opt/tljh/user/bin/jupyter labextension install ipyevents
+    \end{verbatim}
+\end{center}
