@@ -12,6 +12,7 @@
 \contentsline {figure}{\numberline {11}{\ignorespaces Viewport mit grafischer Benutzeroberfläche}}{26}{figure.11}%
 \contentsline {figure}{\numberline {12}{\ignorespaces Ansicht der 3D-Szene des Frameworks mit dem KR6 R900-2 von KUKA mit Denavit-Hartenberg-Koordinatensystemen}}{29}{figure.12}%
 \contentsline {figure}{\numberline {13}{\ignorespaces Verzeichnisstruktur des Packets visualkinematics\_v2}}{35}{figure.13}%
-\contentsline {figure}{\numberline {14}{\ignorespaces Testaufbau der Ressourcen- und Performance-Analyse}}{41}{figure.14}%
-\contentsline {figure}{\numberline {15}{\ignorespaces UML-Klassendiagramm des Frameworks generiert mit dem Tool py2puml}}{46}{figure.15}%
-\contentsline {figure}{\numberline {16}{\ignorespaces UML-Packagediagramm der Module}}{47}{figure.16}%
+\contentsline {figure}{\numberline {14}{\ignorespaces Testaufbau der Ressourcen- und Performance-Analyse}}{42}{figure.14}%
+\contentsline {figure}{\numberline {15}{\ignorespaces Verteilung der gemessenen SPS-Werte je nach Anzahl der Clients}}{44}{figure.15}%
+\contentsline {figure}{\numberline {16}{\ignorespaces UML-Klassendiagramm des Frameworks generiert mit dem Tool py2puml}}{48}{figure.16}%
+\contentsline {figure}{\numberline {17}{\ignorespaces UML-Packagediagramm der Module}}{49}{figure.17}%

@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 1754458857.29453 "main.bcf" "main.bbl" "main" 1754464194.08358 0
-  "main.bcf" 1754464193 113722 5caa260e381447dc6269ff9f0201e7f2 "pdflatex"
+["biber main"] 1754602654.25015 "main.bcf" "main.bbl" "main" 1754605713.11375 0
+  "main.bcf" 1754605712 113722 5caa260e381447dc6269ff9f0201e7f2 "pdflatex"
   "quellen.bib" 1754050396 9504 ca6a71f22d151e7d1ed78ccb61f86235 ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1754464190.48356 "c:/Users/Philipp/Desktop/gitProjects/visualkinematics_v2/latex_v2/main.tex" "main.pdf" "main" 1754464194.08422 0
+["pdflatex"] 1754605709.49152 "c:/Users/Philipp/Desktop/gitProjects/visualkinematics_v2/latex_v2/main.tex" "main.pdf" "main" 1754605713.11439 0
   "C:/Users/Philipp/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1754048852 82686 2381c3433487640bf26aa76a10db7eb2 ""
   "C:/Users/Philipp/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1744032231 12037097 f1aaf3e725f1267bdc89a46b152a8116 ""
   "C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc" 1256929440 3486 c7eadf5dcc57b3b2d11736679f6636ba ""
@@ -252,6 +252,7 @@
   "c:/Users/Philipp/Desktop/gitProjects/visualkinematics_v2/latex_v2/main.tex" 1754455008 4449 2cad85a06e63c23e68ba9388c9b81496 ""
   "images/DH_explain2.PNG" 1751644916 40335 384db3432eb0290d0c25ee40b7e0a101 ""
   "images/DOF_exp.PNG" 1751573881 58837 0369d78f5759ca592dc4820463d12228 ""
+  "images/SPS_Boxplot.png" 1754572369 24508 c5a45e068a471baa74f179aab8d05b78 ""
   "images/UI.PNG" 1753543912 162836 25893bf23d8c01d17354994f617395b7 ""
   "images/aufbau.JPG" 1753628981 2086809 c943a52dde31f067653bf20b12af1da4 ""
   "images/class_diagramm.png" 1754336017 275167 7aed650a34fbe34c0fe779e365aecc6e ""
@@ -265,22 +266,22 @@
   "images/package_diagramm.png" 1754053295 15091 3b31a426983d3c85bfb46b8489a73ec7 ""
   "images/polyscope5.PNG" 1752583001 475285 153d9c68a02fdb2f451e6f83d95da2e1 ""
   "images/robot_with_dh.PNG" 1752779078 103835 35d386bfe29ad524a75b17b80210f30c ""
-  "main.aux" 1754464193 21985 bf20197d9aba8ed197aed4a5b37ae2c5 "pdflatex"
-  "main.bbl" 1754458859 38691 50904db7caea78c2ce998f7c01b370fd "biber main"
-  "main.loa" 1754464193 506 4e67a704b7413997e6189421df2b29b7 "pdflatex"
-  "main.lof" 1754464193 2496 ba3083fc2e4f07ac4c13f46cad273502 "pdflatex"
-  "main.lot" 1754464193 896 f8425922828fb2e7e8cc31d597d3bad9 "pdflatex"
-  "main.out" 1754464193 5746 bfc4eec14a1fbb75d7c4c4f47ecbd00c "pdflatex"
-  "main.run.xml" 1754464193 2307 3de67e6f1ed5bca0492f00cf768167cb "pdflatex"
+  "main.aux" 1754605712 22484 f831a4add6704e5edd246ec68eb71f0e "pdflatex"
+  "main.bbl" 1754602656 38691 50904db7caea78c2ce998f7c01b370fd "biber main"
+  "main.loa" 1754605712 506 4e67a704b7413997e6189421df2b29b7 "pdflatex"
+  "main.lof" 1754605712 2631 c95e3d2702ecf22cd8f0d8e15707e925 "pdflatex"
+  "main.lot" 1754605712 896 83a46ff543f0d24741d77488bd7e123a "pdflatex"
+  "main.out" 1754605712 5874 b6b0de525b90c8171ca2d2979ed142c8 "pdflatex"
+  "main.run.xml" 1754605712 2307 3de67e6f1ed5bca0492f00cf768167cb "pdflatex"
   "main.tex" 1754455008 4449 2cad85a06e63c23e68ba9388c9b81496 ""
-  "main.toc" 1754464193 2982 ecc305a1d6619d121b04bb04c49377e7 "pdflatex"
+  "main.toc" 1754605712 3071 dacebc7f7b3747ddc4406d0b0189d3ee "pdflatex"
   "text/anforderungen.tex" 1753701969 4250 3847ed96b888d2da21474efba5ac49a7 ""
   "text/anhang.tex" 1754411195 4526 ce450ab35aa34d79c7d39e33ea081bef ""
   "text/aufbau.tex" 1754381249 9192 a6a72f99e325c8cbf497fec219a71cf5 ""
   "text/deployment.tex" 1754411339 2825 f14b0feebfcc9259c7a372e8fd044bf5 ""
-  "text/einleitung.tex" 1754464189 2012 4ed9f0fda7aa4d68a684767e78207ae1 ""
+  "text/einleitung.tex" 1754464819 2012 4ed9f0fda7aa4d68a684767e78207ae1 ""
   "text/entwicklungsprozess.tex" 1754412103 43952 8fee233c39eb01a51e70d0ca9bdabcf2 ""
-  "text/evaluation.tex" 1754412118 5659 da67b594cf76efce47679bd25e0374fd ""
+  "text/evaluation.tex" 1754605708 8957 c012d9992a187c7792a00c2dbde427a9 ""
   "text/theoretischer_hintergrund.tex" 1752858452 18717 af683ff3746e597b2ea3b6f7fd54285f ""
   (generated)
   "main.aux"

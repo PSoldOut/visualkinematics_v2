@@ -12,11 +12,16 @@ da es lediglich einmalig beim Start des Frameworks erfolgt.
 
 
 \subsubsection{Testaufbau}
-Der Stresstest wurde im Computerraum C.1.30 des Fachbereichs Informatik der Fachhochschule Dortmund durchgeführt.
+Der Stresstest wurde am 25.07.2025 und 06.08.2025 im Computerraum C.1.30 des Fachbereichs Informatik der Fachhochschule Dortmund durchgeführt.
 Dabei kam ein Laptop der Marke HP (System B LT, siehe Tabelle \ref{tab:system_b_lt}) als Server zum Einsatz.
 Als Clients wurden acht Workstations der Marke Dell (System C WS, siehe Tabelle \ref{tab:system_c_ws}) verwendet.
-Für die Netzwerkkommunikation wurde ein Access Point der Marke TP-Link (System D AP, siehe Tabelle \ref{tab:system_d_ap}) eingesetzt.
-Server und Clients waren über WLAN mit dem Access Point verbunden.
+Für die Netzwerkkommunikation wurde ein Access Point der Marke TP-Link (System D AP, siehe Tabelle \ref{tab:system_d_ap}) mit einem Frequenzbereich von 2.4GHz eingesetzt.
+Dieser wurde ausschließlich für den Test verwendet, sodass keine zusätzliche Auslastung des WLANs vorlag.
+Server und Clients waren alle gleichzeitig über WLAN mit dem Access Point verbunden.
+Für die Kommunikation zwischen Clients und Server wurde JupyterLab verwendet.
+Jeder Client kommunizierte mit genau einem eigenen Kernel-Prozess über den Google Chrome Webbrowser.
+Somit bestand immer eine 1:1-Zuordnung zwischen Kernel und Client.
+
 
 
 \vspace{1em}
@@ -29,24 +34,50 @@ Server und Clients waren über WLAN mit dem Access Point verbunden.
 \vspace{1em}
 
 
+\subsubsection{Messmethoden}
+\label{chap:messmethoden}
+Um bei der Durchführung des Tests die Aktualisierungsrate einer Animation messen zu können wurde temporär eine Anzeige im UI des Frameworks hinzugefügt. 
+Diese zeigte jeweils die aktuell berechneten Schritte pro Sekunde (SPS) an.
+Zu diesem Zweck wurde in der Animationsschleife eine entsprechende Funktion integriert,
+die die Anzeige bei jedem Zyklus aktualisierte.
+Die Bildrate (FPS) der Animation im Browser wurde über die „FPS“-Extension aus dem Chrome Web Store gemessen.
+Die Unterscheidung zwischen FPS (Frames per Second) und SPS (Steps per Second) ist notwendig, da eine flüssige Bildrate im Browser allein nicht garantiert,
+dass die visuellen Schritte der Animation performant genug sind. Auch bei stabilen 60 FPS kann eine zu langsame Verarbeitung der einzelnen Schritte zu sichtbaren Rucklern führen.
+Zur Messung der Systemauslastung auf dem Server (System B LT) wurde alle 5 Sekunden die Ausgabe des Kommandozeilenprogramms top in eine Datei geschrieben.
+Um die Auslastungswerte auf den Clients zu messen wurde der Taskmanager von Windows verwendet.
+
+
+
 \subsubsection{Durchführung}
-Auf dem System B LT wurden 8 unabhängige JupyterLab-Instanzen jeweils mit einem eigenen Kernel-Prozess gestartet.
-Auf jedem der 8 Clients wurde ein Browser-Tab in Google Chrome geöffnet, um eine Verbindung zu jeweils einem dieser Kernel herzustellen.
-Dadurch war jedem Kernel genau ein Client zugeordnet und umgekehrt. 
-Auf jedem der Clients wurde eine Dauerschleife ausgeführt in der fortlaufend die Rückwärtstransformation berechnet und eine Animation durchgeführt wurde.
-Die Rückwärtstransformation beinhaltet dabei die Berechnung der Vorwärtstransformation.
-Zur Messung der Systemauslastung auf dem Server (System B LT) wurde über eine Dauer von 3 Minuten alle 5 Sekunden die Ausgabe des Kommandozeilenwerkzeugs top in eine Datei geschrieben.
-Auf einem der Clients wurden während der Ausführung die Auslastungswerte des Taskmanagers mithilfe des Snipping Tools dokumentiert.
-Anschließend wurde der gleiche Test erneut durchgeführt,
-jedoch mit nur 4 Clients und 4 JupyterLab-Instanzen bzw. Kernel-Prozessen.
+Zur Durchführung des Tests wurden am 25.07.2025 zunächst auf dem System B LT acht unabhängige JupyterLab-Instanzen gestartet,
+wobei jede Instanz mit einem eigenen Kernel-Prozess verbunden war.
+Parallel dazu wurde auf acht Clients jeweils ein Browser-Tab in Google Chrome geöffnet, der mit genau einer dieser Kernel-Instanzen kommunizierte.
+Dann wurde auf jedem Client eine Endlosschleife ausgeführt,
+in der kontinuierlich eine Rückwärtstransformation berechnet und eine Animation ausgeführt wurde.
+Die Rückwärtstransformation beinhaltet auch die Berechnung der Vorwärtstransformation.
+Währenddessen wurde die Systemauslastung auf dem Server über einen Zeitraum von 3 Minuten gemessen,
+und zwar entsprechend der in Kapitel \ref{chap:messmethoden} beschriebenen Methode.
+gleichzeitig wurden auf einem der Clients zusätzlich die Auslastungswerte aus dem Taskmanager mithilfe des Snipping Tools dokumentiert.
+Nach Abschluss der Messung mit 8 Clients wurde das gleiche Verfahren mit nur 4 Clients und 4 JupyterLab-Instanzen wiederholt.
+Aus zeitlichen Gründen musste an dieser stelle der Test unterbrochen und am 06.08.2025 fortgesetzt werden.
+Zur Fortsetzung des Tests wurde auf dem Server eine JupyterLab-Instanz gestartet mit der ein Client über den Browser kommunizierte und die Endlosschleife ausführte.
+Währenddessen wurde die Bildrate (FPS) der Animation im Browser für die restliche Dauer des Tests in der FPS Extension beobachtet.
+Gleichzeitig wurde Die SPS der Animation über die temporär hinzugefügte Anzeige im UI des Frameworks bestimmt.
+Dafür wurden nach jeweils zufälligen Zeitintervallen insgesamt 10 SPS-Werte auf ganze Zahlen gerundet und manuell notiert.
+Im weiteren Verlauf wurden auf dem Server (System B LT) 4 und dann 8 JupyterLab-Instanz gestartet mit der jeweils ein Client kommunizierte und die Endlosschleife ausführte.
+Dabei wurden die FPS und SPS pro Verbindung auf die selbe weise erhoben.
+
+
+
 
 \subsubsection{Ergebnisse}
-Die top-Ausgabe zeigt für 8 Instanzen eine durchschnittliche CPU-Auslastung von 98.8\% davon 92.33\% im User Space wo die JupyterLab-Instanzen ausgeführt worden sind.
-Der Load Average lag bei 12.15.
+Die top-Ausgabe, welche dieser Arbeit als top\_out8clients.txt und top\_out4clients.txt im Ordner perfTest beiliegt,
+zeigt für 8 Instanzen eine durchschnittliche CPU-Auslastung von 98{,}8\% davon 92{,}33\% im User Space wo die JupyterLab-Instanzen ausgeführt worden sind.
+Der Load Average lag bei 12{,}15.
 Die gesamte RES-Speichernutzung der 8 JupyterLab-Instanzen lag im Durchschnitt bei 3483.22\,MiB
-Für 4 Instancen lag eine durchschnittliche CPU-Auslastung von 98.9\% davon 69.57\% im User Space.
-Der Load Average lad hier bei 8.07.
-Die gesamte RES-Speichernutzung bei 1621.85\,MiB
+Für 4 Instancen lag eine durchschnittliche CPU-Auslastung von 98{,}9\% davon 69{,}57\% im User Space.
+Der Load Average lag hier bei 8{,}07.
+Die gesamte RES-Speichernutzung bei 1621{,}85\,MiB
 
 
 
@@ -65,13 +96,31 @@ Die gesamte RES-Speichernutzung bei 1621.85\,MiB
 \end{table}
 
 
-Zusätzlich zur Systemauslastung wurde das Verhalten der Clients während des Tests beobachtet.
-Trotz der hohen CPU-Last auf dem Server (System B LT) lief die Animation auf allen Clients durchgehend flüssig ab.
-Auch die Berechnung der Rückwärtstransformationen zeigte keine spürbaren Verzögerungen im Ablauf.
-Zwar wurden hierfür keine exakten Zeitmessungen durchgeführt,
-jedoch ergaben sich augenscheinlich keine nennenswerten Beeinträchtigungen der Benutzererfahrung.
 
-Der Taskmanager des Clients zeigte eine CPU Auslastung von 12\%, eine GPU Auslastung von 18\% und 7.2\,GB belegter RAM.
+Die Aktualisierungsrate der Animation (siehe Anhang) unterlag deutlichen Schwankungen.
+Der Mittelwert lag bei 216{,}7 SPS bei 8 Clients, 79{,}25 SPS bei 4 Clients und 40{,}9 SPS bei einem einzelnen Client.
+Abbildung \ref{fig:sps_boxplot} zeigt ein Boxplot-Diagramm der erhobenen Messwerte.
+
+\vspace{1em}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{images/SPS_Boxplot.png}
+    \caption{Verteilung der gemessenen SPS-Werte je nach Anzahl der Clients}
+    \label{fig:sps_boxplot}
+\end{figure}
+\vspace{1em}
+
+Die gestrichelte grüne Linie markiert den jeweiligen Mittelwert.
+Die orangefarbene Linie kennzeichnet den Median.
+Die sogenannten Whisker (schwarze Linien mit Endstrichen) zeigen die Spannweite der Daten unter Berücksichtigung der Standardabweichung.
+Ausreißer werden durch die roten Punkte gekennzeichnet.
+Trotz der hohen CPU-Last auf dem Server (System B LT) lief die Animation auf allen Clients weitestgehend flüssig ab.
+Die Bildrate in den Browserfenstern blieb bei allen Clients über die gesamte Dauer des Tests stabil zwischen 59 und 60 FPS.
+Auf einem der Clients zeigte der Windows-Taskmanager während des Tests eine CPU-Auslastung von 12\,\%, eine GPU-Auslastung von 18\,\% sowie eine RAM-Nutzung von 7{,}2\,GB.
+
+
+
+
 
 
 \subsubsection{Interpretation}
@@ -79,7 +128,7 @@ Die Messergebnisse verdeutlichen,
 dass bereits bei 4 gleichzeitig verbundenen Clients eine nahezu vollständige Auslastung der CPU des Testsystems (System B LT) erreicht wurde.
 Bei 8 Instanzen stieg die CPU-Auslastung im User Space von 69.6\% auf 92.3\%, was auf eine erhebliche Steigerung der Rechenlast durch die zusätzlichen JupyterLab-Instanzen hinweist.
 
-Der Load Average überschritt in beiden Fällen deutlich die Anzahl verfügbarer logischer CPU-Kerne (vermutlich 4 Threads),
+Der Load Average überschritt in beiden Fällen deutlich die Anzahl verfügbarer logischer CPU-Kerne,
 was bedeutet, dass viele Prozesse gleichzeitig auf CPU-Zeit warteten.
 Besonders bei 8 Instanzen mit einem Load Average von 12.15 ist eine deutliche Systemüberlastung erkennbar.
 
