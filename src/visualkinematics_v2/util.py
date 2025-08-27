@@ -228,14 +228,16 @@ def quaternion_multiply(q1, q2):
 
 def create_axes(len, font_scale=0.4, show_labels=True, name="", arrow_size:float = 1.0, transparent_arrows=True):
     '''
-    Erstellt ein 3D-Koordinatensystem mit den Achsen X, Y, Z und optionalen Beschriftungen.
+    Erstellt ein 3D-Koordinatensystem mit den Achsen X, Y, Z, optionalen Beschriftungen und Pfeilspitzen.
 
     :param len: Länge der Achsen.
     :param font_scale: Skalierung der Schriftgröße für die Achsenbeschriftungen.
     :param show_labels: Boolescher Wert, der angibt, ob die Achsenbeschriftungen angezeigt werden sollen.
     :param name: Optionaler Name, der in der Mitte des Koordinatensystems angezeigt wird.
+    :param arrow_size: Skalierungsfaktor für die Größe der Pfeilspitzen an den Achsen.
+    :param transparent_arrows: Boolescher Wert, der angibt, ob die Pfeilspitzen transparent dargestellt werden sollen.
 
-    :return: Ein 3D-Objekt (Group), das das Koordinatensystem mit Achsen und optionalen Beschriftungen enthält.
+    :return: Ein 3D-Objekt (Group), das das Koordinatensystem mit Achsen, Pfeilspitzen, optionalen Beschriftungen und optionalem Namen enthält.
     '''
     line_material_x = three.LineBasicMaterial(color='red')
     line_material_y = three.LineBasicMaterial(color='green')
@@ -320,12 +322,14 @@ def create_axes(len, font_scale=0.4, show_labels=True, name="", arrow_size:float
 
 def create_grid_XY(size, density, pos=[0,0,0], color='#777777'):
     '''
-    Erstellt ein 3D-Gitter im XY-Plane mit der angegebenen Größe und Dichte.
+    Erstellt ein 3D-Gitter in der XY-Ebene mit der angegebenen Größe und Dichte.
 
-    :param size: Die Größe des Gitters (die Ausdehnung in X und Y Richtung).
+    :param size: Die Größe des Gitters (die Ausdehnung in X- und Y-Richtung).
     :param density: Die Dichte des Gitters, die angibt, wie viele Linien innerhalb des Gitters erstellt werden.
+    :param pos: Die Position des Gitters im Raum als [x, y, z]-Koordinaten.
+    :param color: Die Linienfarbe des Gitters (Hex-String, z. B. '#777777').
 
-    :return: Ein 3D-Objekt (Group), das das Gitter mit Linien im XY-Plane enthält.
+    :return: Ein 3D-Objekt (Group), das das Gitter mit Linien in der XY-Ebene enthält.
     '''
     line_material = three.LineBasicMaterial(color = color)
     line_material.transparent = True
@@ -351,12 +355,14 @@ def create_grid_XY(size, density, pos=[0,0,0], color='#777777'):
 
 def create_grid_XZ(size, density, pos=[0,0,0], color='#777777'):
     '''
-    Erstellt ein 3D-Gitter im XZ-Plane mit der angegebenen Größe und Dichte.
+    Erstellt ein 3D-Gitter in der XZ-Ebene mit der angegebenen Größe und Dichte.
 
-    :param size: Die Größe des Gitters (die Ausdehnung in X und Y Richtung).
+    :param size: Die Größe des Gitters (die Ausdehnung in X- und Z-Richtung).
     :param density: Die Dichte des Gitters, die angibt, wie viele Linien innerhalb des Gitters erstellt werden.
+    :param pos: Die Position des Gitters im Raum als [x, y, z]-Koordinaten.
+    :param color: Die Linienfarbe des Gitters (Hex-String, z. B. '#777777').
 
-    :return: Ein 3D-Objekt (Group), das das Gitter mit Linien im XZ-Plane enthält.
+    :return: Ein 3D-Objekt (Group), das das Gitter mit Linien in der XY-Ebene enthält.
     '''
     line_material = three.LineBasicMaterial(color = color)
     line_material.transparent = True
@@ -382,6 +388,17 @@ def create_grid_XZ(size, density, pos=[0,0,0], color='#777777'):
 
 
 def apply_transformation_matrix(obj, transform_matrix):
+    '''
+    Wendet eine Transformationsmatrix auf ein 3D-Objekt an. Die Matrix bestimmt
+    die neue Position und Orientierung (Rotation) des Objekts im Raum.
+
+    :param obj: Das Zielobjekt, auf das die Transformation angewendet wird. Kann ein direktes
+                3D-Objekt oder ein Objekt mit einer `get_renderable`-Methode sein.
+    :param transform_matrix: Eine 4x4-Transformationsmatrix (z. B. aus SymPy oder NumPy),
+                             die Translation und Rotation des Objekts definiert.
+
+    :return: None. Das übergebene Objekt wird in-place transformiert.
+    '''
     if isinstance(transform_matrix,(sp.Basic, sp.MatrixBase)):
         transform_matrix.evalf()
     pos = transform_matrix[:3, 3]
@@ -459,7 +476,7 @@ def create_colored_quad(pos, width, height, depth,
 
 
 
-def create_quad(pos, width, height, depth, color=[0,255,0], transparent=True):
+def create_box(pos, width, height, depth, color=[0,255,0], transparent=True):
     '''
     Erzeugt ein Quader-Mesh (Box) mit der angegebenen Position, Größe und Farbe.
 

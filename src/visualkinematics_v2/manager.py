@@ -43,6 +43,14 @@ DEFAULT_CONFIG = {
 
 
 def load_config():
+    """
+    Lädt die Konfigurationsdatei der Anwendung.  
+
+    Falls die Konfigurationsdatei noch nicht existiert, wird ein Standardwert 
+    aus DEFAULT_CONFIG erzeugt und gespeichert.  
+
+    :return: Ein Dictionary mit den geladenen Konfigurationswerten.
+    """
     config_dir = user_config_dir(APP_NAME)
     os.makedirs(config_dir, exist_ok=True)
     config_path = os.path.join(config_dir, CONFIG_FILENAME)
@@ -82,18 +90,14 @@ package_root = Path(visualkinematics_v2.__file__).parent
 def find_xacro_filepath_by_robot_name(robot_name: str, base_paths: List[str] = base_paths) -> str:
     """
     Durchsucht rekursiv alle Pfade in base_paths nach einer .xacro-Datei mit dem Namen <robot_name>.xacro,
-    ignoriert dabei aber <robot_name>_macro.xacro.
+    ignoriert dabei aber <robot_name>_macro.xacro. 
 
-    Args:
-        base_paths: Liste von Basisverzeichnissen, in denen gesucht werden soll.
-        robot_name: Name des Roboters (z.B. "irb1600_10_145").
-
-    Returns:
-        Vollständiger Pfad zur gefundenen .xacro-Datei.
-
-    Raises:
-        FileNotFoundError: Wenn keine passende Datei gefunden wurde.
+    :param robot_name: Name des Roboters, dessen XACRO-Datei gesucht wird.  
+    :param base_paths: Liste von Verzeichnissen, in denen gesucht werden soll (Standard: `base_paths`).  
+    :return: Absoluter Pfad zur gefundenen XACRO-Datei.  
+    :raises FileNotFoundError: Falls keine passende Datei gefunden wird.
     """
+
     expected_filename = f"{robot_name}.xacro"
 
     for base_path in base_paths:
@@ -112,6 +116,12 @@ def find_xacro_filepath_by_robot_name(robot_name: str, base_paths: List[str] = b
 
 
 def find_ros_packages(base_paths: list[str]) -> dict:
+    """
+    Sucht alle ROS-Pakete in den angegebenen Basisverzeichnissen und gibt eine Zuordnung von Paketnamen zu deren Pfaden zurück.
+
+    :param base_paths: Liste von Verzeichnissen, in denen nach ROS-Paketen gesucht werden soll.
+    :return: Dictionary, das Paketnamen (str) den zugehörigen Paketpfaden (str) zuordnet.
+    """
     package_map = {}
     for base in base_paths:
         base_path = Path(base).expanduser().resolve()
@@ -130,7 +140,18 @@ def find_ros_packages(base_paths: list[str]) -> dict:
 
 
 
+
+
+
 def xacro_to_urdf_string(xacro_file_path: str, package_paths = base_paths, mappings: dict = {}) -> str:
+    """
+    Konvertiert eine XACRO-Datei in einen URDF-String unter Berücksichtigung von optionalen Paketpfaden und Makro-Mappings.
+
+    :param xacro_file_path: Pfad zur XACRO-Datei, die konvertiert werden soll.
+    :param package_paths: Liste von Pfaden, in denen ROS-Pakete gesucht werden (Standard: base_paths).
+    :param mappings: Dictionary von Makro-Mappings zur Anpassung der XACRO-Datei.
+    :return: URDF-Datei als String.
+    """
     xd.packages.look_in(package_paths)
     return xd.XacroDoc.from_file(xacro_file_path, walk_up=False, subargs=mappings).to_urdf_string()
 
@@ -140,6 +161,14 @@ def xacro_to_urdf_string(xacro_file_path: str, package_paths = base_paths, mappi
 
 
 def parse_urdf(urdf_str: str) -> dict:
+    """
+    Parst einen URDF-String und extrahiert die Informationen über Links und Gelenke in ein Python-Dictionary.
+
+    :param urdf_str: URDF-Datei als String.
+    :return: Dictionary mit zwei Schlüsseln:
+             - "links": Liste von Dictionaries, die alle Links mit ihren Visual-, Collision- und Inertial-Informationen enthalten.
+             - "joints": Liste von Dictionaries, die alle Gelenke mit Typ, Eltern-/Kind-Links, Achse, Mimic- und Limit-Informationen enthalten.
+    """
     root = ET.fromstring(urdf_str)
 
     links = []
@@ -209,8 +238,22 @@ def parse_urdf(urdf_str: str) -> dict:
 
 
 
+
+
+
+
 def parse_geometry_block(tag):
-    """Parst <visual> oder <collision> und gibt Pfad, origin, scale etc. zurück"""
+    """
+    Parst ein <visual> oder <collision>-Tag aus einem URDF und extrahiert Geometrie-, Ursprung- und Materialinformationen.
+
+    :param tag: XML-Tag (<visual> oder <collision>) aus dem URDF.
+    :return: Dictionary mit folgenden Schlüsseln, falls eine Geometrie definiert ist:
+             - "origin": Ursprung des Elements (Position & Rotation)
+             - "geometry": Informationen über Geometrie-Typ, Dateipfad (bei Mesh) oder Parameter (bei primitiven Formen)
+             - "material": Materialinformationen inklusive Name und optionaler RGBA-Farbe
+             Gibt None zurück, falls keine Geometrie definiert ist.
+    """
+
     info = {
         "origin": None,
         "geometry": None,
@@ -275,6 +318,15 @@ def parse_geometry_block(tag):
 
 
 def to_npz(filepath_in, filepath_out):
+    """
+    Lädt eine 3D-Mesh-Datei, berechnet die Normalen und speichert die Daten in einem .npz-Format.
+
+    Unterstützte Eingabeformate: OBJ, STL, DAE (Collada). Bei DAE-Dateien wird versucht, fehlerhafte Dateien zu bereinigen.
+
+    :param filepath_in: Pfad zur Eingabemesh-Datei.
+    :param filepath_out: Pfad zur Ausgabedatei im .npz-Format. Der Zielordner wird automatisch erstellt.
+    :raises ValueError: Wenn die Mesh-Datei leer oder ungültig ist.
+    """
     # Zielordner erstellen, falls nicht vorhanden
     target_dir = Path(filepath_out).parent
     os.makedirs(target_dir, exist_ok=True)
@@ -305,6 +357,14 @@ def to_npz(filepath_in, filepath_out):
 
 
 def _clean_dae(filepath):
+    """
+    Bereinigt eine fehlerhafte DAE (Collada)-Datei, indem alles nach dem </COLLADA>-Tag entfernt wird,
+    und lädt das bereinigte Mesh anschließend.
+
+    :param filepath: Pfad zur fehlerhaften DAE-Datei.
+    :return: Ein Trimesh-Mesh-Objekt der bereinigten Datei.
+    :raises RuntimeError: Wenn kein </COLLADA>-Tag gefunden wird.
+    """
     with open(filepath, "r", encoding="utf-8") as f:
         content = f.read()
 
@@ -327,7 +387,21 @@ def _clean_dae(filepath):
 
 
 
+
+
 def load_mesh_auto_compatibility(filepath, color="lightgray", opacity=1.0, robot_name:str = "robot"):
+    """
+    Lädt ein 3D-Mesh und stellt sicher, dass es kompatibel ist, auch bei DAE-Dateien oder fehlenden NPZ-Caches.
+    Kann optional Farbe und Transparenz setzen.
+
+    :param filepath: Pfad zur Mesh-Datei (.obj, .dae, etc.).
+    :param color: Farbe des Meshes (Standard: "lightgray").
+    :param opacity: Transparenzwert zwischen 0 und 1 (Standard: 1.0).
+    :param robot_name: Name des Roboters, verwendet für den NPZ-Cache (Standard: "robot").
+    :return: Ein Mesh-Objekt, bereit für die Darstellung in Three.js/Three.py.
+    :raises FileNotFoundError: Wenn die Datei nicht existiert.
+    :raises ValueError: Wenn das geladene Mesh leer oder ungültig ist.
+    """
     if fast_load:
         npz_filepath = f"{npz_path}/{robot_name}/{Path(filepath).stem}.npz"
         if not os.path.isfile(npz_filepath):
@@ -379,6 +453,13 @@ def load_mesh_auto_compatibility(filepath, color="lightgray", opacity=1.0, robot
 
 
 def load_mesh_from_npz(filepath, color="lightgray"):
+    """
+    Lädt ein 3D-Mesh aus einer NPZ-Datei und erstellt ein darstellbares Mesh-Objekt.
+
+    :param filepath: Pfad zur NPZ-Datei, die 'vertices', 'indices' und 'normals' enthält.
+    :param color: Farbe des Meshes (Standard: "lightgray").
+    :return: Ein Mesh-Objekt, bereit für die Darstellung in Three.js/Three.py.
+    """
     data = np.load(filepath)
     vertices = data["vertices"]
     indices = data["indices"]

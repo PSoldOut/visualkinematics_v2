@@ -72,7 +72,21 @@ class Inspector_Controller:
 
 
 
+
+
+
+
     def connect_sliders(self, joint, theta_rot_slider):
+        """
+        Verbindet einen Slider mit einem Gelenk, sodass Änderungen am Slider die Rotation des
+        Gelenks in Echtzeit aktualisieren. Die Orientierung wird basierend auf der DH-Achse
+        des Gelenks korrekt angepasst, und das TCP-Ziel des Manipulators wird ebenfalls
+        synchronisiert.
+
+        :param joint: Das zu steuernde Joint-Objekt.
+        :param theta_rot_slider: Slider-Widget, das die Rotationsänderung liefert.
+        """
+
         #display(f"joint:{joint.name}    slider:{theta_rot_slider.value}")
         renderable = joint
         if hasattr(joint, "get_renderable"):
@@ -126,7 +140,22 @@ class Inspector_Controller:
         mouse_events.on_dom_event(handle_event)
 
 
+
+
+
+
+
     def rot_x(self, change):
+        """
+        Rotiert das TCP-Ziel um die X-Achse entsprechend der Slider-Änderung.
+
+        Die Rotation wird entweder lokal oder global angewendet, abhängig von der
+        Einstellung des Kontrollkästchens `local_space_check_box`. Anschließend
+        werden die neuen Euler-Winkel im GUI-Textfeld aktualisiert.
+
+        :param change: Änderung des Rotationswertes in Radiant.
+        """
+
         if self.view.local_space_check_box.value:
             util.rotate(self.manipulator.tcp_target, [change, 0, 0], "XYZ")
         else:
@@ -136,7 +165,20 @@ class Inspector_Controller:
         self.set_rotation_text(euler)
 
 
+
+
+
+
     def rot_y(self, change):
+        """
+        Rotiert das TCP-Ziel um die Y-Achse entsprechend der Slider-Änderung.
+
+        Die Rotation wird entweder lokal oder global angewendet, abhängig von der
+        Einstellung des Kontrollkästchens `local_space_check_box`. Anschließend
+        werden die neuen Euler-Winkel im GUI-Textfeld aktualisiert.
+
+        :param change: Änderung des Rotationswertes in Radiant.
+        """
         if self.view.local_space_check_box.value:
             util.rotate(self.manipulator.tcp_target, [change, 0, 0], "YXZ")
         else:
@@ -146,7 +188,19 @@ class Inspector_Controller:
         self.set_rotation_text(euler)
 
 
+
+
+
     def rot_z(self, change):
+        """
+        Rotiert das TCP-Ziel um die Z-Achse entsprechend der Slider-Änderung.
+
+        Die Rotation wird entweder lokal oder global angewendet, abhängig von der
+        Einstellung des Kontrollkästchens `local_space_check_box`. Anschließend
+        werden die neuen Euler-Winkel im GUI-Textfeld aktualisiert.
+
+        :param change: Änderung des Rotationswertes in Radiant.
+        """
         if self.view.local_space_check_box.value:
             util.rotate(self.manipulator.tcp_target, [change, 0, 0], "ZYX")
         else:
@@ -158,7 +212,18 @@ class Inspector_Controller:
 
 
 
+
     def trans(self, v):#noch fehler drin
+        """
+        Verschiebt das TCP-Ziel um einen gegebenen Vektor `v`.
+
+        Die Verschiebung wird entweder im lokalen Koordinatensystem des TCP oder
+        im globalen Koordinatensystem angewendet, abhängig von der Einstellung
+        des Kontrollkästchens `local_space_check_box`. Nach der Verschiebung
+        werden die neuen Positionen im GUI-Textfeld aktualisiert.
+
+        :param v: 3D-Vektor (Liste oder NumPy-Array), um den das TCP verschoben werden soll.
+        """
         rot_mat = R.from_quat(list(self.manipulator.tcp_target.quaternion)).as_matrix()
         if self.view.local_space_check_box.value:
             final_v = rot_mat @ v
@@ -167,16 +232,46 @@ class Inspector_Controller:
         self.set_position_text(self.manipulator.tcp_target.position)
 
 
+
+
+
+
     def set_position_text(self, pos_vec):
+        """
+        Aktualisiert die Positionsanzeige im GUI für das TCP-Ziel.
+
+        Setzt die Werte der Textfelder für X, Y und Z auf die jeweiligen
+        Komponenten des übergebenen Positionsvektors.
+
+        :param pos_vec: 3D-Vektor (Liste oder NumPy-Array) mit den aktuellen
+                        Positionskoordinaten des TCP.
+        """
         self.view.x_current_pos_text.value = f"{pos_vec[0]}"
         self.view.y_current_pos_text.value = f"{pos_vec[1]}"
         self.view.z_current_pos_text.value = f"{pos_vec[2]}"
         
 
+
+
+
+
     def set_rotation_text(self, rot_vec):
+        """
+        Aktualisiert die Rotationsanzeige im GUI für das TCP-Ziel.
+
+        Setzt die Werte der Textfelder für X, Y und Z auf die jeweiligen
+        Komponenten des übergebenen Rotationsvektors (Euler-Winkel).
+
+        :param rot_vec: 3D-Vektor (Liste oder NumPy-Array) mit den aktuellen
+                        Rotationswerten des TCP in Radiant.
+        """
         self.view.x_current_rot_text.value = f"{rot_vec[2]}"
         self.view.y_current_rot_text.value = f"{rot_vec[1]}"
         self.view.z_current_rot_text.value = f"{rot_vec[0]}"
+
+
+
+
 
     def _on_trans_x_minus_button(self, event):
         def down():
