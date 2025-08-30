@@ -1,6 +1,23 @@
 \section{Entwicklungsprozess}
-hier sollte noch was darüber stehen dass die basis des Frameworks die in der projektarbeit entwickelt wurde fähig ist den pythreejs Renderer
-über die display funktion in ein jupyter notebook einzubinden und der viewport dann wie ein widget bei ausführung der zelle in das Notebook eingebunden wird.
+In diesem Kapitel wird der Entwicklungsprozess des Frameworks ausführlich beschrieben.
+Dabei werden grundlegende Designentscheidungen erläutert,
+ihre Einordnung begründet sowie auftretende Probleme und die entsprechenden Lösungsansätze dargestellt.  
+Zunächst wird dargestellt, wie die 3D-Modelle beschafft wurden und welche Kriterien dabei zu berücksichtigen waren.
+Im Anschluss folgt die Beschreibung des Ladeprozesses in den Arbeitsspeicher sowie der Umgang mit auftretenden Ladezeiten.
+Darauf aufbauend wird erläutert, wie die grafische Darstellung innerhalb des Frameworks realisiert wurde und welche Rolle die Rendering-API pythreejs hierbei spielt.
+Anschließend wird gezeigt, wie die Glieder des Industrieroboters mithilfe von URDF-Beschreibungen korrekt positioniert und die entsprechenden Dateien geparst werden.
+Abschließend wird die Implementierung der Rückwärtstransformation im Framework beschrieben.
+
+
+In der vorangegangenen Projektarbeit wurde bereits ein grundlegender Teil des Frameworks entwickelt.
+Dadurch kann im Jupyter-Umfeld die typische display-Funktion genutzt werden,
+um einen Renderer der Rendering-API pythreejs in ein Jupyter-Notebook einzubinden.
+Der Viewport wird anschließend wie ein Widget beim Ausführen der Zelle direkt im Notebook dargestellt.
+
+
+
+%hier sollte noch was darüber stehen dass die basis des Frameworks die in der projektarbeit entwickelt wurde fähig ist den pythreejs Renderer
+%über die display funktion in ein jupyter notebook einzubinden und der viewport dann wie ein widget bei ausführung der zelle in das Notebook eingebunden wird.
 
 
 \subsection{Beschaffung von 3D-Modellen}

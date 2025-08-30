@@ -1,4 +1,16 @@
 \section{Einleitung}
+Der globale Markt für Industrieroboter wächst sehr stark und wird bis 2027 auf mehr als 66 Milliarden USD geschätzt.
+Dabei liegt das Jährliche Wachstum bei über 15\,\% \doublecite[]{T2021Kinematic}.
+Mit diesem starken Wachstum steigt auch die Nachfrage nach qualifiziertem Personal \doublecite[]{Shmatko2020Bridging}.
+Gefragt sind nicht nur Entwicklerinnen und Entwickler von Robotersystemen, sondern ebenso Ingenieurinnen und Ingenieure sowie Fachkräfte für Wartung, Betrieb und Implementierung \doublecite[1-8]{Sergeyev2017Promoting}.
+Die Lehre im Bereich Robotik steht daher vor der Herausforderung, eine große Zahl an Studierenden praxisnah und fundiert auf diese Anforderungen vorzubereiten.
+Der Einsatz realer Roboterhardware ist dabei jedoch oft mit hohen Kosten, organisatorischem Aufwand und begrenzter Verfügbarkeit verbunden.
+Gerade in größeren Lehrveranstaltungen lassen sich praktische Übungen mit physischer Hardware kaum flächendeckend umsetzen. 
+Eine geeignete Lösung stellt der Einsatz von Robotersimulationssoftware dar.
+Sie ermöglicht es, zentrale Konzepte der Robotik realitätsnah, interaktiv und unabhängig von physischer Hardware zu vermitteln.
+Zudem findet Simulationssoftware längst auch in der Industrie Anwendung.
+Damit ist ihr Einsatz in der akademischen Ausbildung nicht nur eine didaktische Unterstützung, sondern bereitet Studierende zugleich auf berufliche Praxisanforderungen vor.  
+
 Bei der Robotersimulation geht es darum das Verhalten eines Roboters in einer Softwareumgebung virtuell nachzubilden und
 somit das Testen und Programmieren des Roboters außerhalb der Produktivumgebung zu ermöglichen.
 Dabei werden häufig grafische Softwaresysteme verwendet, die die Umgebung und Bewegung des Roboters visuell darstellen.
@@ -18,3 +30,13 @@ Aufbauend auf diesen Ergebnissen wird das entwickelte Framework in dieser Arbeit
 
 Ziel dieser Arbeit ist die Erweiterung bestehender Jupyter-Notebooks im Lehrbetrieb der Fachhochschule Dortmund um visuelle und interaktive Komponenten, insbesondere im technischen Modulbereich wie der Robotik.
 Durch die Integration anschaulicher Visualisierungen und direkter Benutzerinteraktionen soll das Verständnis kinematischer Zusammenhänge gefördert und die Lehre praxisnäher gestaltet werden.
+
+\subsection{Aufbau der Arbeit}
+Kapitel 2 behandelt zunächst den theoretischen Hintergrund, der für das Verständnis dieser Arbeit erforderlich ist.
+Dazu werden die Konzepte der Freiheitsgrade und der Industrieroboter vorgestellt sowie die Denavit-Hartenberg-Konvention mit Vorwärts- und Rückwärtstransformation erläutert.
+Darüber hinaus wird auch auf URDF-Beschreibungen eingegangen.
+In Kapitel 3 werden die funktionalen und nicht-funktionalen Anforderungen spezifiziert.
+Kapitel 4 beschreibt den gesamten Entwicklungsprozess des Frameworks.
+In Kapitel 5 wird anschließend der Aufbau des Frameworks vorgestellt, bevor in Kapitel 6 die Bereitstellung (Deployment) des Frameworks erläutert wird.  
+Abschließend wird in Kapitel 7 evaluiert, inwiefern die formulierten Anforderungen erfüllt werden konnten.
+

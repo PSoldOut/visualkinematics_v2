@@ -1,5 +1,47 @@
 \section{Evaluation}
+In diesem Kapitel wird untersucht, inwieweit die im Rahmen dieser Arbeit definierten funktionalen und nicht-funktionalen Anforderungen durch das entwickelte Framework erfüllt werden.  
+Die funktionalen Anforderungen werden dabei einzeln überprüft und deren Umsetzung anhand konkreter Beispiele dargestellt.  
+Die nicht-funktionalen Anforderungen werden ebenfalls bewertet; die Anforderung der effizienten Ausführung wird aufgrund ihrer besonderen Relevanz und des hierfür durchgeführten Stresstests in einem gesonderten Kapitel behandelt.
 
+\begin{itemize}
+    \item \textbf{Funktionale Anforderungen:}
+    \begin{itemize}
+        \item \textbf{Integration eines Knickarmroboters:} \\
+        Die Integration eines Knickarmroboters erfolgt durch das Laden von URDF-Beschreibungen und den zugehörigen 3D-Modellen.
+        Im Framework sind bereits Beispielmodelle enthalten, es können jedoch auch weitere URDF-Beschreibungen und 3D-Modelle hinzugefügt werden, sodass verschiedene Knickarmroboter integriert werden können. Damit ist diese Anforderung erfüllt.
+
+        \item \textbf{Vorwärts- und Rückwärtstransformation:} \\
+        Das Framework ermöglicht die Berechnung der Endeffektorposition mittels Vorwärtstransformation sowie die Bestimmung der Gelenkkonfiguration aus einer gegebenen Endeffektorposition mittels Rückwärtstransformation. Die Anforderung ist somit erfüllt.
+
+        \item \textbf{Endeffektorsteuerung durch interaktive Bewegung des Koordinatensystems:} \\
+        Das Framework bietet die Möglichkeit, das Koordinatensystem des Endeffektors interaktiv zu verschieben. Die Rückwärtstransformation wird dabei genutzt, um eine passende Gelenkkonfiguration zu berechnen. Die Anforderung ist erfüllt.
+
+        \item \textbf{Bewegung im lokalen und globalen Koordinatensystem:} \\
+        Die Bewegung des Endeffektors kann sowohl im lokalen als auch im globalen Koordinatensystem erfolgen, wodurch diese Anforderung erfüllt wird.
+
+        \item \textbf{Manuelle Konfiguration der Gelenkwinkel:} \\
+        Mittels interaktiver Schieberegler können die Gelenkwinkel des Roboters manuell angepasst werden. Änderungen werden sofort in der Visualisierung übernommen, sodass die Anforderung erfüllt ist.
+    \end{itemize}
+
+
+
+
+    \item \textbf{Nicht-Funktionale Anforderungen:}
+    \begin{itemize}
+        \item \textbf{Benutzerfreundliche Bedienbarkeit:} \\
+        Die Benutzeroberfläche des Frameworks orientiert sich an der Bedienoberfläche von PolyScope5 und ist so gestaltet, dass sie intuitiv und ohne vorherige Schulung nutzbar ist. 
+        Eine abschließende Bewertung der Benutzerfreundlichkeit erfordert jedoch eine Untersuchung durch Experten oder Nutzerstudien, welche in dieser Arbeit nicht durchgeführt wurden.
+
+        \item \textbf{Intuitive Vermittlung kinematischer Konzepte:} \\
+        Die Vermittlung kinematischer Konzepte ist möglichst intuitiv gestaltet worden, indem bei der Steuerung des Roboters über die Benutzeroberfläche der Roboter in Echtzeit mitbewegt wird
+        und die Denavit-Hartenberg Koordinatensdysteme visuell dargestellt werden. Auch für diese Anforderung müsste eine Untersuchung durch Experten oder eine Nutzerstudie erfolgen,
+        welche in dieser Arbeit nicht durchgeführt wurden.
+    \end{itemize}
+
+\end{itemize}
+
+
+Die Nicht-Funktionale Anforderung der Effizienten Ausführung wird im folgenden in einem eigenem Kapitel behandelt da hierzu ein Umfassender Stresstest durchgeführt wurde.
 
 
 \subsection{Stresstest zur Ressourcen- und Performance-Analyse}
@@ -9,6 +51,8 @@ Im Fokus standen dabei insbesondere die Ausführung von Animationen sowie die Be
 da das Funktionen sind die im realen Betrieb durchgehend aufgerufen werden.
 Das Laden der Meshes wurde in diesem Test nicht berücksichtigt,
 da es lediglich einmalig beim Start des Frameworks erfolgt.
+
+
 
 
 \subsubsection{Testaufbau}
@@ -143,3 +187,19 @@ Sie zeigen jedoch, dass bei Mehrfachnutzung eine ausreichend leistungsfähige Se
 Die Tatsache, dass die Animation auf den Clients dennoch Flüssig lief bestätigt, dass die Berechnungen für das
 Rendering im Frontend durchgeführt werden und das Framework somit trotz überlastung eine stabile Nutzererfahrung ermöglicht.
 Dies erklärt auch die leicht erhöhte GPU Auslastung auf dem Client.
+
+Insgesamt liegt die durchschnittliche Bildrate bei einer und bei 4 Verbindungen bei über 60 FPS.
+Auch die Aktualisierung der Roboterpose, also die Schritte pro Sekunde lag im Durchschnitt bei über 60\,Hz.
+Damit ist die formulierte nicht-funktionale Anforderung einer effizienten Ausführung erfüllt. 
+
+
+
+
+\subsection{Zusammenfassung der Evaluation}
+Insgesamt konnten die formulierten funktionalen Anforderungen vollständig erfüllt werden.
+Die nicht-funktionalen Anforderungen zur Benutzerfreundlichkeit und zur intuitiven Vermittlung kinematischer Konzepte
+wurden bei der Entwicklung berücksichtigt, sollten aber in Zukunft anhand von Nutzerstudien bewertet werden.
+Die nicht-funktionale Anforderung der effizienten Ausführung wurde durch einen Stresstest überprüft,
+bei dem mehrere Instancen des Frameworks gleichzeitig auf einem Server ausgeführt worden sind.
+Auch hier konnten die Anforderungen vollständig erfüllt werden.
+Damit konnten alle für diese Arbeit formulierten Anforderungen erfüllt werden.

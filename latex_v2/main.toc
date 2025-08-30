@@ -1,35 +1,37 @@
 \babel@toc {german}{}\relax 
 \contentsline {section}{\numberline {1}Einleitung}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Aufbau der Arbeit}{2}{subsection.1.1}%
 \contentsline {section}{\numberline {2}Theoretischer Hintergrund}{2}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Freiheitsgrad}{2}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Industrieroboter}{3}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}Vorwärtstransformation}{6}{subsection.2.3}%
-\contentsline {subsection}{\numberline {2.4}Denavit-Hartenberg-Konvention}{7}{subsection.2.4}%
-\contentsline {subsection}{\numberline {2.5}Rückwärtstransformation}{9}{subsection.2.5}%
-\contentsline {subsection}{\numberline {2.6}Unified Robot Description Format (URDF)}{10}{subsection.2.6}%
-\contentsline {section}{\numberline {3}Anforderungen}{11}{section.3}%
-\contentsline {section}{\numberline {4}Entwicklungsprozess}{13}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Beschaffung von 3D-Modellen}{13}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Laden von 3D-Modellen}{16}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Graphische Darstellung von Industrierobotern}{17}{subsection.4.3}%
-\contentsline {subsection}{\numberline {4.4}URDF-Parsing und Verarbeitung}{20}{subsection.4.4}%
-\contentsline {subsection}{\numberline {4.5}Objektorientierte Modellierung der Kinematik}{21}{subsection.4.5}%
-\contentsline {subsection}{\numberline {4.6}Animation}{22}{subsection.4.6}%
-\contentsline {subsection}{\numberline {4.7}grafische Benutzeroberfläche}{24}{subsection.4.7}%
-\contentsline {subsection}{\numberline {4.8}Denavit-Hartenberg-Konvention}{27}{subsection.4.8}%
-\contentsline {subsection}{\numberline {4.9}Rückwärtstransformation (Inverse Kinematik)}{30}{subsection.4.9}%
-\contentsline {section}{\numberline {5}Aufbau des Frameworks}{35}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Technischer Aufbau}{35}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Softwarearchitektur Model-View-Controller}{36}{subsection.5.2}%
-\contentsline {subsubsection}{\numberline {5.2.1}Model-Komponente}{36}{subsubsection.5.2.1}%
-\contentsline {subsubsection}{\numberline {5.2.2}View-Komponente}{38}{subsubsection.5.2.2}%
-\contentsline {subsubsection}{\numberline {5.2.3}Controller-Komponente}{38}{subsubsection.5.2.3}%
-\contentsline {section}{\numberline {6}Deployment des Frameworks}{39}{section.6}%
-\contentsline {section}{\numberline {7}Evaluation}{41}{section.7}%
-\contentsline {subsection}{\numberline {7.1}Stresstest zur Ressourcen- und Performance-Analyse}{41}{subsection.7.1}%
-\contentsline {subsubsection}{\numberline {7.1.1}Testaufbau}{41}{subsubsection.7.1.1}%
-\contentsline {subsubsection}{\numberline {7.1.2}Messmethoden}{42}{subsubsection.7.1.2}%
-\contentsline {subsubsection}{\numberline {7.1.3}Durchführung}{43}{subsubsection.7.1.3}%
-\contentsline {subsubsection}{\numberline {7.1.4}Ergebnisse}{43}{subsubsection.7.1.4}%
-\contentsline {subsubsection}{\numberline {7.1.5}Interpretation}{45}{subsubsection.7.1.5}%
-\contentsline {section}{\numberline {8}Anhang}{46}{section.8}%
+\contentsline {subsection}{\numberline {2.1}Freiheitsgrad}{3}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Industrieroboter}{4}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Vorwärtstransformation}{7}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Denavit-Hartenberg-Konvention}{8}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Rückwärtstransformation}{10}{subsection.2.5}%
+\contentsline {subsection}{\numberline {2.6}Unified Robot Description Format (URDF)}{12}{subsection.2.6}%
+\contentsline {section}{\numberline {3}Anforderungen}{12}{section.3}%
+\contentsline {section}{\numberline {4}Entwicklungsprozess}{14}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Beschaffung von 3D-Modellen}{15}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Laden von 3D-Modellen}{18}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Graphische Darstellung von Industrierobotern}{19}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}URDF-Parsing und Verarbeitung}{22}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Objektorientierte Modellierung der Kinematik}{23}{subsection.4.5}%
+\contentsline {subsection}{\numberline {4.6}Animation}{24}{subsection.4.6}%
+\contentsline {subsection}{\numberline {4.7}grafische Benutzeroberfläche}{26}{subsection.4.7}%
+\contentsline {subsection}{\numberline {4.8}Denavit-Hartenberg-Konvention}{29}{subsection.4.8}%
+\contentsline {subsection}{\numberline {4.9}Rückwärtstransformation (Inverse Kinematik)}{32}{subsection.4.9}%
+\contentsline {section}{\numberline {5}Aufbau des Frameworks}{37}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Technischer Aufbau}{37}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Softwarearchitektur Model-View-Controller}{39}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}Model-Komponente}{39}{subsubsection.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.2}View-Komponente}{40}{subsubsection.5.2.2}%
+\contentsline {subsubsection}{\numberline {5.2.3}Controller-Komponente}{41}{subsubsection.5.2.3}%
+\contentsline {section}{\numberline {6}Deployment des Frameworks}{42}{section.6}%
+\contentsline {section}{\numberline {7}Evaluation}{43}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Stresstest zur Ressourcen- und Performance-Analyse}{45}{subsection.7.1}%
+\contentsline {subsubsection}{\numberline {7.1.1}Testaufbau}{45}{subsubsection.7.1.1}%
+\contentsline {subsubsection}{\numberline {7.1.2}Messmethoden}{46}{subsubsection.7.1.2}%
+\contentsline {subsubsection}{\numberline {7.1.3}Durchführung}{47}{subsubsection.7.1.3}%
+\contentsline {subsubsection}{\numberline {7.1.4}Ergebnisse}{47}{subsubsection.7.1.4}%
+\contentsline {subsubsection}{\numberline {7.1.5}Interpretation}{49}{subsubsection.7.1.5}%
+\contentsline {subsection}{\numberline {7.2}Zusammenfassung der Evaluation}{50}{subsection.7.2}%
+\contentsline {section}{\numberline {8}Anhang}{50}{section.8}%

@@ -666,6 +666,149 @@
       \verb https://github.com/ros-industrial
       \endverb
     \endentry
+    \entry{Sergeyev2017Promoting}{article}{}{}
+      \name{author}{6}{}{%
+        {{un=0,uniquepart=base,hash=600de2b054ceebcb22fc52784bffe351}{%
+           family={Sergeyev},
+           familyi={S\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e65f6237e9ff0f18bcfe4bdfbae363ff}{%
+           family={Alaraje},
+           familyi={A\bibinitperiod},
+           given={N.},
+           giveni={N\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=cd005b2fe27bc16ad4cbf53c4c30abe1}{%
+           family={Parmar},
+           familyi={P\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=51ffacbd95593084098c0a4eba15d9ff}{%
+           family={Kuhl},
+           familyi={K\bibinitperiod},
+           given={Scott},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=df05835dca37abb8b69258c80b0a8fe4}{%
+           family={Druschke},
+           familyi={D\bibinitperiod},
+           given={V.},
+           giveni={V\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=8e2ec65c61042a86e1e394adc4f92819}{%
+           family={Hooker},
+           familyi={H\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{5904c2ee36d13e256f1b460abe7e3164}
+      \strng{fullhash}{af6be291c487a55bdddea476f8f2bb45}
+      \strng{fullhashraw}{af6be291c487a55bdddea476f8f2bb45}
+      \strng{bibnamehash}{af6be291c487a55bdddea476f8f2bb45}
+      \strng{authorbibnamehash}{af6be291c487a55bdddea476f8f2bb45}
+      \strng{authornamehash}{5904c2ee36d13e256f1b460abe7e3164}
+      \strng{authorfullhash}{af6be291c487a55bdddea476f8f2bb45}
+      \strng{authorfullhashraw}{af6be291c487a55bdddea476f8f2bb45}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{2017 Annual IEEE International Systems Conference (SysCon)}
+      \field{title}{Promoting industrial robotics education by curriculum, robotic simulation software, and advanced robotic workcell development and implementation}
+      \field{year}{2017}
+      \field{pages}{1\bibrangedash 8}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1109/SYSCON.2017.7934754
+      \endverb
+    \endentry
+    \entry{Shmatko2020Bridging}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=d9e3142186f03a8b4116f4c52ab8461c}{%
+           family={Shmatko},
+           familyi={S\bibinitperiod},
+           given={Natalia\bibnamedelima A.},
+           giveni={N\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=f2412682458fa36a31d811cd32a3dfae}{%
+           family={Volkova},
+           familyi={V\bibinitperiod},
+           given={G.},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{f1303808609431004670a5647ba251b9}
+      \strng{fullhash}{f1303808609431004670a5647ba251b9}
+      \strng{fullhashraw}{f1303808609431004670a5647ba251b9}
+      \strng{bibnamehash}{f1303808609431004670a5647ba251b9}
+      \strng{authorbibnamehash}{f1303808609431004670a5647ba251b9}
+      \strng{authornamehash}{f1303808609431004670a5647ba251b9}
+      \strng{authorfullhash}{f1303808609431004670a5647ba251b9}
+      \strng{authorfullhashraw}{f1303808609431004670a5647ba251b9}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{SAGE Open}
+      \field{title}{Bridging the Skill Gap in Robotics: Global and National Environment}
+      \field{volume}{10}
+      \field{year}{2020}
+      \verb{doi}
+      \verb 10.1177/2158244020958736
+      \endverb
+    \endentry
+    \entry{T2021Kinematic}{article}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=2ed7c3a10736fe13344486127601eb58}{%
+           family={T},
+           familyi={T\bibinitperiod},
+           given={Aravinthkumar},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=7a663caea1b722a63dc2868158ed584d}{%
+           family={M},
+           familyi={M\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=fbbb48ffaf5c2cfea4a679dfc81953c7}{%
+           family={B},
+           familyi={B\bibinitperiod},
+           given={Vinod},
+           giveni={V\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{b5ccdbd9c242fb19b7745b18064ccb2e}
+      \strng{fullhash}{77cdcc5382a636433a576d395b7f8304}
+      \strng{fullhashraw}{77cdcc5382a636433a576d395b7f8304}
+      \strng{bibnamehash}{77cdcc5382a636433a576d395b7f8304}
+      \strng{authorbibnamehash}{77cdcc5382a636433a576d395b7f8304}
+      \strng{authornamehash}{b5ccdbd9c242fb19b7745b18064ccb2e}
+      \strng{authorfullhash}{77cdcc5382a636433a576d395b7f8304}
+      \strng{authorfullhashraw}{77cdcc5382a636433a576d395b7f8304}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Kinematic Analysis of 6 DOF Articulated Robotic Arm}
+      \field{volume}{3}
+      \field{year}{2021}
+      \field{pages}{1\bibrangedash 5}
+      \range{pages}{5}
+      \verb{doi}
+      \verb 10.34256/IRJMT2111
+      \endverb
+    \endentry
     \entry{threejs_docs_MeshStandardMaterial}{misc}{}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=93f44f49f0ff02d6d2ea5a019750579e}{%

@@ -1,5 +1,7 @@
 \section{Aufbau des Frameworks}
-
+In diesem Kapitel wird zunächst der technische Aufbau des Frameworks beschrieben.  
+Darauf aufbauend wird die Softwarearchitektur erläutert,
+wobei das Zusammenspiel der zentralen Module im Rahmen des Model-View-Controller-Paradigmas dargestellt wird.
 
 \subsection{Technischer Aufbau}
 Das entwickelte Framework ist als eigenständiges Python-Paket organisiert und wurde mithilfe des Packaging-Werkzeugs poetry erstellt.
@@ -51,6 +53,7 @@ Der Quellcode befindet sich Im Verzeichnis visualkinematics\_v2/src/visualkinema
 Dieser ist in einzelne Module gegliedert, die jeweils einer bestimmten Verantwortlichkeit zugeordnet sind. 
 Ein Überblick über die zentralen Module und deren Beziehungen ist in Abbildung \ref{fig:package_diagramm} (siehe Anhang) in Form eines Packetdiagramms dargestellt. 
 Es wurde darauf geachtet, dass zwischen den Modulen keine bidirektionalen oder zyklischen Abhängigkeiten bestehen.
+Eine Ausführliche Dokumentation des Quellcodes liegt der Arbeit als HTML-Datei im Verzeichnis docs bei.
 
 \subsection{Softwarearchitektur Model-View-Controller}
 Der Quellcode des Packets verteilt sich auf insgesammt 5 Module: util.py, manipulator.py, manager.py und show.py.
