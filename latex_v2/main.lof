@@ -11,7 +11,7 @@
 \contentsline {figure}{\numberline {10}{\ignorespaces Benutzeroberfläche von PolyScope5. Quelle: \doublecite []{universal_robots_ps5}}}{26}{figure.10}%
 \contentsline {figure}{\numberline {11}{\ignorespaces Viewport mit grafischer Benutzeroberfläche}}{28}{figure.11}%
 \contentsline {figure}{\numberline {12}{\ignorespaces Ansicht der 3D-Szene des Frameworks mit dem KR6 R900-2 von KUKA mit Denavit-Hartenberg-Koordinatensystemen}}{31}{figure.12}%
-\contentsline {figure}{\numberline {13}{\ignorespaces Verzeichnisstruktur des Packets visualkinematics\_v2}}{38}{figure.13}%
+\contentsline {figure}{\numberline {13}{\ignorespaces Verzeichnisstruktur des Pakets visualkinematics\_v2}}{38}{figure.13}%
 \contentsline {figure}{\numberline {14}{\ignorespaces Testaufbau der Ressourcen- und Performance-Analyse}}{46}{figure.14}%
 \contentsline {figure}{\numberline {15}{\ignorespaces Verteilung der gemessenen SPS-Werte je nach Anzahl der Clients}}{48}{figure.15}%
 \contentsline {figure}{\numberline {16}{\ignorespaces UML-Klassendiagramm des Frameworks generiert mit dem Tool py2puml}}{53}{figure.16}%

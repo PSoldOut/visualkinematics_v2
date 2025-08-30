@@ -27,7 +27,7 @@ Dafür wird im Backend die Rendering-API pythreejs verwendet.
 Diese bietet anhand von vorgefertigten Klassen wie BoxGeometry und CylinderGeometry eine einfache
 Möglichkeit primitive Geometrien zu erstellen und zu rendern \doublecite{pythreejs_Geometry_types}.
 Für die Erstellung von komplexen und individuellen Geometrien, wie die eines Industrieroboters oder dessen Glieder,
-bietet pythreejs die Klasse BufferGeometry, welche expliziet mit den Vertices, Indices und Normals
+bietet pythreejs die Klasse BufferGeometry, welche explizit mit den Vertices, Indices und Normals
 eines Mesh-Modells initialisiert werden kann \doublecite[]{pythreejs_doc}. Diese Daten können entweder aus bestehenden 3D-Dateien
 (z.B .stl, .obj, .dae) extrahiert oder durch eigene Verfahren erzeugt werden.
 
@@ -66,7 +66,7 @@ Peter Corke Robotics Toolbox & Kinematik- und Modellbibliothek für Lehre und Fo
 
 ROS-Industrial ist ein Open-Source-Projekt welches Module und Ressourcen bereitstellt die innerhalb des ROS-Ökosystems genutzt werden können.
 Dabei werden diese Ressourcen sowohl von der Community genutzt wie auch gewartet und sind komplett Quelloffen.
-Viele dieser Ressourcen können unter Github von ROS-Industrial runtergeladen werden \doublecite[]{ROS_Industrial}.
+Viele dieser Ressourcen können unter Github von ROS-Industrial heruntergeladen werden \doublecite[]{ROS_Industrial}.
 Zu diesen Ressourcen zählen auch 3D-Modelle von Industrierobotern die unter dem Github-Topic moveit gefunden werden können.
 Dort finden sich zahlreiche Repositories,
 die jeweils die Roboterbeschreibungen eines bestimmten Herstellers enthalten \doublecite[]{ROS_Industrial_repo_search}.
@@ -114,7 +114,7 @@ Diese Informationen liegen üblicherweise im URDF-Format vor.
 Obwohl es grundsätzlich möglich ist, diese Informationen manuell zu rekonstruieren und in das URDF-Format zu übertragen,
 ist dies mit erheblichem Aufwand verbunden.
 Daher sind Quellen, die neben den 3D-Modellen bereits eine vollständige URDF-Beschreibung bereitstellen, von besonderem Vorteil.
-von den genannten Quellen stellen nur ROS-Industrial und die Robotics-Toolbox von Peter Corke solche URDF-Beschreibungen zur verfügung.
+von den genannten Quellen stellen nur ROS-Industrial und die Robotics-Toolbox von Peter Corke solche URDF-Beschreibungen zur Verfügung.
 Darüber hinaus ist die Anzahl der Dreiecke in den Meshes dieser beiden Quellen bereits reduziert, was die Ladezeit verbessert.
 Aus diesen Gründen sind im weiteren Verlauf des Entwicklungsprozesses hauptsächlich diese beiden Quellen verwendet worden.
 
@@ -395,7 +395,7 @@ Dazu wurde die Library ipyevents genutzt, welche für das Verarbeiten von Maus- 
 Die kontinuierliche Interaktion mit einem Knopf wird im Framework durch Auswertung von Mauszuständen realisiert, aus denen ein boolescher Steuerwert abgeleitet wird.
 Sobald dieser auf True gesetzt ist, wird ein Thread gestartet, der eine while-Schleife ausführt und so lange aktiv bleibt, bis der Wert wieder auf False wechselt.
 So können im Framework Knöpfe genutzt werden um die Position sowie Orientierung des TCP im Raum zu steuern.
-Abbildung \ref{fig:gui} zeigt das Framework mit viewport und Benutzeroberfläche während der Ausführung innerhalb eines Jupyter-Notebooks
+Abbildung \ref{fig:gui} zeigt das Framework mit Viewport und Benutzeroberfläche während der Ausführung innerhalb eines Jupyter-Notebooks
 
 
 \vspace{1em}
@@ -717,6 +717,7 @@ Damit konnte die Aktualisierungsrate des Roboters effektiv gesteigert werden.
 Im gegensatz zum Rendering findet die Berechnung der Rückwärtstransformation im Backend statt.
 Daher steigt die Belastung des Servers bei mehreren Clients die gleichzeitig versuchen die Rückwärtstransformation
 zu berechnen.
+
 
 
 

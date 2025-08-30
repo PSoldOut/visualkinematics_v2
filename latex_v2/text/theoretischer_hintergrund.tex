@@ -6,7 +6,7 @@ Darauf aufbauend folgt eine Definition des Industrieroboters und eine Abgrenzung
 Anschließend werden die Vorwärtstransformation sowie die Denavit-Hartenberg-Konvention erläutert,
 bevor die Rückwärtstransformation behandelt wird.
 Zum Abschluss wird die URDF-Beschreibung vorgestellt und deren Einsatzmöglichkeiten erläutert.
-Anschließend wird die Objektorientierte Struktur erklärt und welche Klassen zur sauberen strukturierung erstellt worden sind.
+Anschließend wird die Objektorientierte Struktur erklärt und welche Klassen zur sauberen Strukturierung erstellt worden sind.
 Danach wird die Umsetzung der Animation erläutert und der Animationsalgorithmus präsentiert.
 Danach wird darauf eingegangen wie die Benutzeroberfläche entwickelt worden ist, und wieso das Das Design so gewählt worden ist.
 Danach wird erklärt wie die Denavit-Hartenberg-Konvention in das Framework eingebracht worden ist.
@@ -15,7 +15,7 @@ Danach wird erklärt wie die Denavit-Hartenberg-Konvention in das Framework eing
 \subsection{Freiheitsgrad}
 "Der Freiheitsgrad $f$ eines Körpers ist die Anzahl der möglichen unabhängigen Bewegungen eines starren Körpers gegenüber einem Bezugskoordinatensystem"
 \doublecite[35]{weber-Industrieroboter}.
-Dabei ist $f$ die kleineste Menge von Parametern, die benötigt wird um die Lage des Körpers im Raum zu beschreiben
+Dabei ist $f$ die kleinste Menge von Parametern, die benötigt wird um die Lage des Körpers im Raum zu beschreiben
 \doublecite[35]{weber-Industrieroboter}.
 Abbildung \ref{fig:DOF_explanation} zeigt jeweils einen Quader mit dem Freiheitsgrad 3 und dem Freiheitsgrad 6.
 
@@ -68,7 +68,7 @@ miteinander verbunden sind. Der Industrieroboter führt seine Bewegung über sei
 Es gibt zwei Hauptklassen kinematischer Strukturen:
 Die serielle Kinematik und die Parallelkinematik. Die Parallelkinematik wird nur in spezielleren Fällen verwendet wo eine besonders schnelle Handhabung notwendig ist
 und wird in dieser Arbeit nicht näher beleuchtet.
-Die serielle Kinematik ist in der Industrie häufiger verteten.
+Die serielle Kinematik ist in der Industrie häufiger vertreten.
 Die folgende Abbildung zeigt einen Industrieroboter von KUKA, welcher 6 Drehgelenke hat und zu den Seriellen Robotern gehört.
 
  \vspace{1em}
@@ -97,10 +97,10 @@ Die Bewegungsmöglichkeit des Roboters hängt direkt von der Anzahl der Achsen a
 Man spricht bei der Anzahl unabhängig angetriebener Achsen vom mechanischen- oder Getriebe-Freiheitsgrad.
 Bei mindestens 6 unabhängig angetriebener Achsen in geeigneter Anordnung hat der Endeffektor den Freiheitsgrad 6 und kann eine beliebige Pose einnehmen
 \doublecite[3-6]{weber-Industrieroboter}.
-Der Bereich im Raum, der vom Endeffektor erreicht werden kann, wird Arbeitsraum des Roboters genannt und ist abhängig von der Bewegunsform,
+Der Bereich im Raum, der vom Endeffektor erreicht werden kann, wird Arbeitsraum des Roboters genannt und ist abhängig von der Bewegungsform,
 der Anordnung und Anzahl der Achsen sowie der Länge der einzelnen Glieder.
 Der Arbeitsraum eines Industrieroboters kann z.B quaderförmig, zylindrisch oder Kugelförmig sein.
-der Arbeitsraum eines klassichen Sechs-Achs-Knickarmroboters ist kugelförmig wie in Abbildung \ref{fig:KUKA-IR} durch den grauen Bereich dargestellt ist.
+der Arbeitsraum eines klassischen Sechs-Achs-Knickarmroboters ist kugelförmig wie in Abbildung \ref{fig:KUKA-IR} durch den grauen Bereich dargestellt ist.
 \doublecite[18]{Industrieroboter}.
 Es gibt auch Roboter mit mehr Achsen und einem höheren Freiheitsgrad, sowie weniger Achsen und einem geringeren Freiheitsgrad.
 Die Kinematik bei Robotern mit einem Freiheitsgrad $>$ 6 ist redundant und gilt als überbestimmt
@@ -131,7 +131,7 @@ Die Online-Programmierung wird meistens durch sogenannte Teach-In verfahren durc
 an bestimmte Punkte im Raum. Anschließend wird diese Position gespeichert, sodass sie in Zukunft ohne erneute Steuerung angefahren werden kann.
 Die Offline-Programmierung umfasst die Verfahren zur Programmierung des Roboters ohne diesen einzubinden und eignet sich besonders wenn der Roboter komplexe Bahnen verfahren muss
 \doublecite[149-150]{Industrieroboter}.
-Dabei stellt die textuelle Programmierung, bei der die "[...] Befehle in eine Textdatei geschrieben werden und [...] sequentiell von der Robotersteuerung abgeabeitet [...]" werden,
+Dabei stellt die textuelle Programmierung, bei der die "[...] Befehle in eine Textdatei geschrieben werden und [...] sequentiell von der Robotersteuerung abgearbeitet [...]" werden,
 das am häufigsten verwendete Verfahren dar
 \doublecite[149]{Industrieroboter}. 
 
@@ -139,7 +139,7 @@ In der heutigen Zeit findet die simulationsgestützte Programmierung, welche ebe
 Schon innerhalb des Produktionsprozesses sämtlicher Roboter-Komponenten werden CAD-Daten erstellt, die ein Digitales Modell dieser Komponenten darstellen.
 Mithilfe dieser CAD-Daten kann innerhalb von simulationsgestützten Offline-Tools ein Roboter dargestellt und simuliert werden.
 Diese Art der Roboter-Programmierung birgt viele Vorteile wie das Testen auf Kollision ohne Gefahr oder die Zeit und Kostenberechnung des Robotereinsatzes in der Planungsphase.
-Mit der Erstellung dieser simulationsgestützten Offline-Tools geht allerdings ein hohes Expertenwissen im bereich der Robotik einher
+Mit der Erstellung dieser simulationsgestützten Offline-Tools geht allerdings ein hohes Expertenwissen im Bereich der Robotik einher
 \doublecite[150-152]{Industrieroboter}. 
 
 
@@ -185,7 +185,7 @@ Daraus ergeben sich die vier Denavit-Hartenberg-Parameter(DH-Parameter):
 
   $\theta_i$: der Gelenkwinkel, Rotation um die z-Achse
 
-  $d_i$: Verschiebung entland der z-Achse
+  $d_i$: Verschiebung entlang der z-Achse
 
   $a_i$: Verschiebung entlang der x-Achse
 
@@ -208,7 +208,7 @@ Die folgende Abbildung zeigt eine schematische Zeichnung eines Knickarmroboters 
 Die erste Transformationsmatrix beschreibt das Basiskoordinatensystem $K_0$ und ist fest mit der ruhenden Basis, also dem ersten Glied verbunden.
 Der Ursprung von $K_0$ muss dabei auf die erste Gelenkachse gelegt werden.
 Die $z_0$-Achse von $K_0$ zeigt entlang der ersten Gelenkachse.
-Die $x_0$- und $y_0$-Achse sind anschließend frei wählbar unter der bedingung das die zugehörigen Einheitsvektoren $x_0, y_0$ und $z_0$ ein Rechtssystem bilden.
+Die $x_0$- und $y_0$-Achse sind anschließend frei wählbar unter der Bedingung das die zugehörigen Einheitsvektoren $x_0, y_0$ und $z_0$ ein Rechtssystem bilden.
 
 Jedes weitere Koordinatensystem $K_i$,
 welches durch eine Transformationsmatrix repräsentiert wird, das aus den DH-Parametern gebildet wird, muss einen Satz fest definierter Bedingungen erfüllen:
@@ -219,7 +219,7 @@ Wenn die Achsen sich nicht schneiden und auch nicht parallel sind wird die gemei
 Schnittpunkt der gemeinsamen Normalen mit der Gelenkachse $i+1$ gelegt.
 
 Die Gesamttransformation vom Basis-Koordinatensystem $K_0$ zum Koordinatensystem des Endeffektors $K_i$ ergibt sich durch sukzessive Multiplikation aller einzelnen Transformationsmatrizen $K_0, K_1, ..., K_n$ entlang der kinematischen Kette.
-Das entspricht der durchführung der Vorwärtstransformation.
+Das entspricht der Durchführung der Vorwärtstransformation.
 \doublecite[38-44]{weber-Industrieroboter}
 
 
@@ -229,7 +229,7 @@ Das entspricht der durchführung der Vorwärtstransformation.
 Die Rückwärtstransformation, auch als inverse Kinematik bezeichnet, wird verwendet um aus der gegebenen Pose des Endeffektors die Gelenkkoordinaten $q_0,q_1...,q_n$ zu berechnen
 und stellt somit das gegenstück zu Vorwärtstransformation dar.
 Im Gegensatz zur Vorwärtstransformation bringt die Rückwärtstransformation einige Schwierigkeiten wie Mehrdeutigkeiten und Singularitäten mit sich.
-Eine Pose des Endeffektor innerhalb des Arbeitsraums kann unter umständen mit mehreren verschiedenen Gelenkstellungen des Roboters erreicht werden.
+Eine Pose des Endeffektor innerhalb des Arbeitsraums kann unter Umständen mit mehreren verschiedenen Gelenkstellungen des Roboters erreicht werden.
 Die folgende Abbildung veranschaulicht eben diesen Umstand.
 
 
@@ -284,6 +284,6 @@ URDF-Dateien werden oft mit Xacro, einer XML macro Sprache erstellt um die Datei
 URDF-Dateien enthalten viele Informationen wie die Orientierung und Position von Gelenken und Gliedern, den Pfad zu den 3D-Modellen,
 welche die Glieder repräsentieren, Hierarchien innerhalb der kinematischen Kette sowie Minimal- und Maximal-Grenze der Gelenke und viele weitere
 Technische Informationen.
-Es existieren viele URDF-Dateien zu bekannten Industrierobotern die aus dem Internet von Seiten wie Github frei Runtergeladen und verwendet werden können
+Es existieren viele URDF-Dateien zu bekannten Industrierobotern die aus dem Internet von Seiten wie Github frei heruntergeladen und verwendet werden können
 \doublecite[270-271]{Robotics_Vision_and_Control}.
 
