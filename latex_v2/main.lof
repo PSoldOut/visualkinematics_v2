@@ -1,15 +1,15 @@
 \babel@toc {german}{}\relax 
-\contentsline {figure}{\numberline {1}{\ignorespaces a) Quader mit Freiheitsgrad 3. b) Quader mit Freiheitsgrad 6. Quelle: \doublecite [35]{weber-Industrieroboter}.}}{3}{figure.1}%
-\contentsline {figure}{\numberline {2}{\ignorespaces Industrieroboter von Kuka. Quelle: \doublecite [6]{weber-Industrieroboter}.}}{5}{figure.2}%
-\contentsline {figure}{\numberline {3}{\ignorespaces Leichtbauroboter iiwa von KUKA. Quelle: \doublecite []{lbr_image}.}}{6}{figure.3}%
-\contentsline {figure}{\numberline {4}{\ignorespaces schematischer Aufbau der Vorwärtstransformation. Quelle: \doublecite [49]{weber-Industrieroboter}.}}{8}{figure.4}%
-\contentsline {figure}{\numberline {5}{\ignorespaces schematische Zeichnung eines Knickarmroboters mit 6 Gelenken und DH-Koordinatensystemen. Quelle: \doublecite [39]{weber-Industrieroboter}.}}{9}{figure.5}%
-\contentsline {figure}{\numberline {6}{\ignorespaces schematische Zeichnung eines Planarroboters mit 2 Achsen. Quelle: \doublecite [51]{weber-Industrieroboter}.}}{10}{figure.6}%
-\contentsline {figure}{\numberline {7}{\ignorespaces schematische Zeichnung einer Gelenkstellung die zu Unendlich vielen Lösungen führt. Quelle: \doublecite [51]{weber-Industrieroboter}.}}{11}{figure.7}%
+\contentsline {figure}{\numberline {1}{\ignorespaces a) Quader mit Freiheitsgrad 3. b) Quader mit Freiheitsgrad 6. Quelle: \doublecite [35]{weber-Industrieroboter}}}{3}{figure.1}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Industrieroboter von Kuka. Quelle: \doublecite [6]{weber-Industrieroboter}}}{5}{figure.2}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Leichtbauroboter iiwa von KUKA. Quelle: \doublecite []{lbr_image}}}{6}{figure.3}%
+\contentsline {figure}{\numberline {4}{\ignorespaces schematischer Aufbau der Vorwärtstransformation. Quelle: \doublecite [49]{weber-Industrieroboter}}}{8}{figure.4}%
+\contentsline {figure}{\numberline {5}{\ignorespaces schematische Zeichnung eines Knickarmroboters mit 6 Gelenken und DH-Koordinatensystemen. Quelle: \doublecite [39]{weber-Industrieroboter}}}{9}{figure.5}%
+\contentsline {figure}{\numberline {6}{\ignorespaces schematische Zeichnung eines Planarroboters mit 2 Achsen. Quelle: \doublecite [51]{weber-Industrieroboter}}}{10}{figure.6}%
+\contentsline {figure}{\numberline {7}{\ignorespaces schematische Zeichnung einer Gelenkstellung die zu Unendlich vielen Lösungen führt. Quelle: \doublecite [51]{weber-Industrieroboter}}}{11}{figure.7}%
 \contentsline {figure}{\numberline {8}{\ignorespaces Ansicht der 3D-Szene des Frameworks mit einzelnen Gliedern des KR6 R900-2 von KUKA.}}{21}{figure.8}%
 \contentsline {figure}{\numberline {9}{\ignorespaces Ansicht der 3D-Szene des Frameworks mit dem KR6 R900-2 von KUKA in Nullstellung mit Greifer.}}{23}{figure.9}%
-\contentsline {figure}{\numberline {10}{\ignorespaces Benutzeroberfläche von PolyScope5. Quelle: \doublecite []{universal_robots_ps5}.}}{25}{figure.10}%
-\contentsline {figure}{\numberline {11}{\ignorespaces Viewport mit grafischer Benutzeroberfläche}}{27}{figure.11}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Benutzeroberfläche von PolyScope5. Quelle: \doublecite []{universal_robots_ps5}}}{25}{figure.10}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Viewport mit grafischer Benutzeroberfläche.}}{27}{figure.11}%
 \contentsline {figure}{\numberline {12}{\ignorespaces Ansicht der 3D-Szene des Frameworks mit dem KR6 R900-2 von KUKA mit Denavit-Hartenberg-Koordinatensystemen.}}{30}{figure.12}%
 \contentsline {figure}{\numberline {13}{\ignorespaces Verzeichnisstruktur des Pakets visualkinematics\_v2.}}{37}{figure.13}%
 \contentsline {figure}{\numberline {14}{\ignorespaces Testaufbau der Ressourcen- und Performance-Analyse.}}{45}{figure.14}%

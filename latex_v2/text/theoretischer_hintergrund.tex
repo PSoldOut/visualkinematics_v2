@@ -10,7 +10,7 @@ Zum Abschluss wird die URDF-Beschreibung vorgestellt und deren Einsatzmöglichke
 
 
 \subsection{Freiheitsgrad}
-\glqq Der Freiheitsgrad $f$ eines Körpers ist die Anzahl der möglichen unabhängigen Bewegungen eines starren Körpers gegenüber einem Bezugskoordinatensystem \grqq{}
+\glqq Der Freiheitsgrad $f$ eines Körpers ist die Anzahl der möglichen unabhängigen Bewegungen eines starren Körpers gegenüber einem Bezugskoordinatensystem\grqq{}
 \doublecite[35]{weber-Industrieroboter}.
 Dabei ist $f$ die kleinste Menge von Parametern, die benötigt wird um die Lage des Körpers im Raum zu beschreiben
 \doublecite[35]{weber-Industrieroboter}.
@@ -21,7 +21,7 @@ Abbildung \ref{fig:DOF_explanation} zeigt jeweils einen Quader mit dem Freiheits
     \begin{figure}[H]
         \centering
         \includegraphics[width=1.0\textwidth]{images/DOF_exp.PNG}
-        \caption{a) Quader mit Freiheitsgrad 3. b) Quader mit Freiheitsgrad 6. Quelle: \doublecite[35]{weber-Industrieroboter}.}
+        \caption{a) Quader mit Freiheitsgrad 3. b) Quader mit Freiheitsgrad 6. Quelle: \doublecite[35]{weber-Industrieroboter}}
         \label{fig:DOF_explanation}
     \end{figure}
 
@@ -66,14 +66,14 @@ Es gibt zwei Hauptklassen kinematischer Strukturen:
 die serielle Kinematik und die Parallelkinematik. Die Parallelkinematik wird nur in spezielleren Fällen verwendet, wo eine besonders schnelle Handhabung notwendig ist
 und wird in dieser Arbeit nicht näher beleuchtet.
 Industrieroboter mit serieller Kinematik sind in der Industrie häufiger vertreten.
-Die folgende Abbildung zeigt einen Industrieroboter von KUKA, welcher 6 Drehgelenke hat und zu den Seriellen Robotern gehört.
+Die folgende Abbildung zeigt einen Industrieroboter von KUKA, welcher 6 Drehgelenke hat und zu den seriellen Robotern gehört.
 
  \vspace{1em}
 
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.5\textwidth]{images/kuka-ir.PNG}
-        \caption{Industrieroboter von Kuka. Quelle: \doublecite[6]{weber-Industrieroboter}.}
+        \caption{Industrieroboter von Kuka. Quelle: \doublecite[6]{weber-Industrieroboter}}
         \label{fig:KUKA-IR}
     \end{figure}
 
@@ -109,7 +109,7 @@ Abbildung \ref{fig:lbr} zeigt den Leichtbauroboter iiwa von KUKA mit 7 Drehachse
     \begin{figure}[H]
         \centering
         \includegraphics[width=1.0\textwidth]{images/lbr2.png}
-        \caption{Leichtbauroboter iiwa von KUKA. Quelle: \doublecite[]{lbr_image}.}
+        \caption{Leichtbauroboter iiwa von KUKA. Quelle: \doublecite[]{lbr_image}}
         \label{fig:lbr}
     \end{figure}
 
@@ -153,7 +153,7 @@ Abbildung \ref{fig:forward_kinematic} zeigt den schematischen Ablauf der Vorwär
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.5\textwidth]{images/forward_kin.PNG}
-        \caption{schematischer Aufbau der Vorwärtstransformation. Quelle: \doublecite[49]{weber-Industrieroboter}.}
+        \caption{schematischer Aufbau der Vorwärtstransformation. Quelle: \doublecite[49]{weber-Industrieroboter}}
         \label{fig:forward_kinematic}
     \end{figure}
 
@@ -162,7 +162,8 @@ Abbildung \ref{fig:forward_kinematic} zeigt den schematischen Ablauf der Vorwär
 Sei $q$ ein Tupel mit $q = (q_1,q_2,....,q_n)^T$, welches die Ge\-lenk\-koordinaten enthält.
 Der Ortsvektor $p$, ausgehend vom Ursprung des Bezugskoordinatensystems und die Orientierung, beschrieben durch die Basisvektoren $x_W,y_W,z_W$ beschreiben die Pose des Endeffektors.
 Durch die Vor\-wärts\-trans\-for\-ma\-tion können diese aus dem Tupel $q$ berechnet werden.
-Genauer betrachtet ist die Vorwärtstransformation die Multiplikation mehrerer homogener Transformationsmatrizen, die jeweils die Lage eines einzelnen Gelenks im Bezug auf das vorherige Gelenk beschreiben.
+Genauer betrachtet ist die Vorwärtstransformation die Multiplikation mehrerer homogener Transformationsmatrizen,
+die jeweils die Lage eines einzelnen Gelenks in Bezug auf das vorherige Gelenk beschreiben.
 \[
 T_W(q) = \prescript{n}{0}{T}(q) = \prescript{1}{0}{T}(q_1) \cdot \prescript{2}{1}{T}(q_2)\cdot\cdot\cdot\prescript{n-1}{n-2}{T}(q_{n-1}) \cdot \prescript{n}{n-1}{T}(q_n)
 \]
@@ -198,7 +199,7 @@ Abbildung \ref{fig:DH_explanation} zeigt eine schematische Zeichnung eines Knick
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.5\textwidth]{images/DH_explain2.PNG}
-        \caption{schematische Zeichnung eines Knickarmroboters mit 6 Gelenken und DH-Koordinatensystemen. Quelle: \doublecite[39]{weber-Industrieroboter}.}
+        \caption{schematische Zeichnung eines Knickarmroboters mit 6 Gelenken und DH-Koordinatensystemen. Quelle: \doublecite[39]{weber-Industrieroboter}}
         \label{fig:DH_explanation}
     \end{figure}
 
@@ -237,7 +238,7 @@ Abbildung \ref{fig:ik_planar_explanation} veranschaulicht eben diesen Umstand.
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.5\textwidth]{images/ik_planar_exp.PNG}
-        \caption{schematische Zeichnung eines Planarroboters mit 2 Achsen. Quelle: \doublecite[51]{weber-Industrieroboter}.}
+        \caption{schematische Zeichnung eines Planarroboters mit 2 Achsen. Quelle: \doublecite[51]{weber-Industrieroboter}}
         \label{fig:ik_planar_explanation}
     \end{figure}
 
@@ -254,7 +255,7 @@ zu gleichen Änderungen am Endeffektor führen. Abbildung \ref{fig:ik_singularit
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.5\textwidth]{images/ik_singularity_explain.PNG}
-        \caption{schematische Zeichnung einer Gelenkstellung die zu Unendlich vielen Lösungen führt. Quelle: \doublecite[51]{weber-Industrieroboter}.}
+        \caption{schematische Zeichnung einer Gelenkstellung die zu Unendlich vielen Lösungen führt. Quelle: \doublecite[51]{weber-Industrieroboter}}
         \label{fig:ik_singularity_explain}
     \end{figure}
 

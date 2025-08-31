@@ -199,7 +199,7 @@ Im STL-Format, welches trianguläre Mesh-Modelle beschreibt und in den genutzten
 Das MeshStandardMaterial, welches in diesem Framework für alle Geometrien verwendet wird verwendet physically based rendering (PBR),
 wobei das Beleuchtungsmodell pro Fragment (pro Pixel) und nicht pro Fläche angewendet wird \doublecite[]{threejs_docs_MeshStandardMaterial}.
 Aus diesem Grund müssen die Vertex-Normalen manuell berechnet werden,
-die dann im Hintergrund von pythreejs baryzentrisch interpoliert werden um einen Normalenvektor pro Pixel zu bestimmen \doublecite[9]{mileff2024per}.
+die dann im Hintergrund von pythreejs baryzentrisch interpoliert werden, um einen Normalenvektor pro Pixel zu bestimmen \doublecite[9]{mileff2024per}.
 Für die Berechnung der Normalen ist ein gängiger Algorithmus implementiert worden.
 Dabei wird für jeden Vertex $v_i \in \{v_0, v_1,...,v_n\} \subset \mathbb{R}^3$ eine gemittelte Normale $n_i \in \mathbb{R}^3$ bestimmt,
 indem zunächst für jedes Dreieck $t_k = (\alpha_k,\beta_k,\gamma_k)$ die Flächennormale $n^{(k)}_{face}$ berechnet wird:
@@ -378,7 +378,7 @@ Abbildung \ref{fig:ps5} zeigt die grafische Benutzeroberfläche von PolyScope5.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{images/polyscope5.PNG}
-    \caption{Benutzeroberfläche von PolyScope5. Quelle: \doublecite[]{universal_robots_ps5}.}
+    \caption{Benutzeroberfläche von PolyScope5. Quelle: \doublecite[]{universal_robots_ps5}}
     \label{fig:ps5}
 \end{figure}
 \vspace{1em}
@@ -407,7 +407,7 @@ Abbildung \ref{fig:gui} zeigt das Framework mit Viewport und Benutzeroberfläche
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{images/UI.PNG}
-    \caption{Viewport mit grafischer Benutzeroberfläche}
+    \caption{Viewport mit grafischer Benutzeroberfläche.}
     \label{fig:gui}
 \end{figure}
 \vspace{1em}
