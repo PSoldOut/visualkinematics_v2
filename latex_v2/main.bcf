@@ -2440,11 +2440,12 @@
     <bcf:citekey order="65" intorder="1">philipp</bcf:citekey>
     <bcf:citekey order="66" intorder="1">weber-Industrieroboter</bcf:citekey>
     <bcf:citekey order="67" intorder="1">universal_robots_ps5</bcf:citekey>
-    <bcf:citekey order="68" intorder="1">ipyevents</bcf:citekey>
-    <bcf:citekey order="69" intorder="1">Robotics_Vision_and_Control</bcf:citekey>
-    <bcf:citekey order="70" intorder="1">python_packages</bcf:citekey>
+    <bcf:citekey order="68" intorder="1">universal_robots_ps5</bcf:citekey>
+    <bcf:citekey order="69" intorder="1">ipyevents</bcf:citekey>
+    <bcf:citekey order="70" intorder="1">Robotics_Vision_and_Control</bcf:citekey>
     <bcf:citekey order="71" intorder="1">python_packages</bcf:citekey>
-    <bcf:citekey order="72" intorder="1">Encyclopedia_of_Computer_Graphics_and_Games</bcf:citekey>
+    <bcf:citekey order="72" intorder="1">python_packages</bcf:citekey>
+    <bcf:citekey order="73" intorder="1">Encyclopedia_of_Computer_Graphics_and_Games</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nyt">

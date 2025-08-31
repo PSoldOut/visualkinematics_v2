@@ -2,11 +2,16 @@
 In diesem Kapitel wird der Entwicklungsprozess des Frameworks ausführlich beschrieben.
 Dabei werden grundlegende Designentscheidungen erläutert,
 ihre Einordnung begründet sowie auftretende Probleme und die entsprechenden Lösungsansätze dargestellt.  
-Zunächst wird dargestellt, wie die 3D-Modelle beschafft wurden und welche Kriterien dabei zu berücksichtigen waren.
-Im Anschluss folgt die Beschreibung des Ladeprozesses in den Arbeitsspeicher sowie der Umgang mit auftretenden Ladezeiten.
-Darauf aufbauend wird erläutert, wie die grafische Darstellung innerhalb des Frameworks realisiert wurde und welche Rolle die Rendering-API pythreejs hierbei spielt.
-Anschließend wird gezeigt, wie die Glieder des Industrieroboters mithilfe von URDF-Beschreibungen korrekt positioniert und die entsprechenden Dateien geparst werden.
-Abschließend wird die Implementierung der Rückwärtstransformation im Framework beschrieben.
+Zunächst wird erläutert, wie die 3D-Modelle beschafft wurden und welche Kriterien dabei zu berücksichtigen waren.
+Darauf folgt die Beschreibung des Ladeprozesses in den Arbeitsspeicher sowie der Umgang mit möglichen Ladezeiten.  
+Im nächsten Schritt wird die grafische Darstellung innerhalb des Frameworks vorgestellt, wobei die Rendering-API pythreejs eine zentrale Rolle spielt.  
+Anschließend wird gezeigt, wie die Glieder des Industrieroboters mithilfe von URDF-Beschreibungen korrekt positioniert und die entsprechenden Dateien effizient geparst werden.
+Ein weiterer Abschnitt widmet sich der objektorientierten Struktur des Frameworks, die durch speziell definierte Klassen eine saubere Trennung der Funktionalitäten gewährleistet.  
+Darüber hinaus wird die Umsetzung der Animation beschrieben und der zugrundeliegende Animationsalgorithmus vorgestellt.  
+Im Anschluss wird die Entwicklung der Benutzeroberfläche diskutiert, wobei insbesondere die gestalterischen Entscheidungen und deren Begründung im Vordergrund stehen.  
+Daraufhin wird die Integration der Denavit-Hartenberg-Konvention in das Framework erläutert. 
+Abschließend wird die Implementierung der Rückwärtstransformation mithilfe des Newton-Raphson-Verfahrens erläutert.
+
 
 
 In der vorangegangenen Projektarbeit wurde bereits ein grundlegender Teil des Frameworks entwickelt.
@@ -39,7 +44,7 @@ Diese Glieder werden anschließend entsprechend ihrer Positionen und Transformat
 
 Da es im Internet viele 3D-Modelle von Industrierobotern in Form solcher 3D-Dateien gibt,
 war der erste Schritt zur Erweiterung des Frameworks die Recherche nach geeigneten Quellen solcher Modelle.
-Die Recherche ergab folgende Ergebnisse:
+Die Recherche ergab die in Tabelle \ref{tab:robotermodelle} zusammengefassten Ergebnisse:
 
 \vspace{1em}
 \begin{table}[H]
@@ -59,13 +64,13 @@ Onshape Public Library & Online-CAD-Modelle mit direktem Export & beliebig \\
 Peter Corke Robotics Toolbox & Kinematik- und Modellbibliothek für Lehre und Forschung & URDF, STL \\
 \hline
 \end{tabular}
-\caption{Online-Quellen für 3D-Robotermodelle}
+\caption{Online-Quellen für 3D-Robotermodelle.}
 \label{tab:robotermodelle}
 \end{table}
 \vspace{1em}
 
-ROS-Industrial ist ein Open-Source-Projekt welches Module und Ressourcen bereitstellt die innerhalb des ROS-Ökosystems genutzt werden können.
-Dabei werden diese Ressourcen sowohl von der Community genutzt wie auch gewartet und sind komplett Quelloffen.
+ROS-Industrial ist ein Open-Source-Projekt, welches Module und Ressourcen bereitstellt die innerhalb des ROS-Ökosystems genutzt werden können.
+Dabei werden diese Ressourcen sowohl von der Community genutzt, wie auch gewartet und sind komplett quelloffen.
 Viele dieser Ressourcen können unter Github von ROS-Industrial heruntergeladen werden \doublecite[]{ROS_Industrial}.
 Zu diesen Ressourcen zählen auch 3D-Modelle von Industrierobotern die unter dem Github-Topic moveit gefunden werden können.
 Dort finden sich zahlreiche Repositories,
@@ -89,7 +94,7 @@ wie beispielsweise FreeCAD öffnen und bearbeiten.
 Weiterhin ist Thingiverse eine Quelle für 3D-Modelle von Industrierobotern.
 Ähnlich wie bei der Online-Plattform von GrabCAD handelt es sich bei Thingiverse
 ebenfalls um eine solche Plattform die von Ultimaker betrieben wird.
-Auch bei dieser Plattform gibt es zahlreiche CAD-Dateien von Industrierobotern
+Auch bei dieser Plattform gibt es zahlreiche CAD-Dateien von Industrierobotern,
 die von der Community geteilt werden, wobei der Fokus eher auf dem 3D-Druck liegt \doublecite[]{Thingiverse}.
 
 
@@ -129,7 +134,7 @@ Die Bibliothek erlaubt das Laden gängiger Formate wie STL, OBJ, DAE und weitere
 Die geladenen Roboter bestehen dabei nicht aus einer einzigen Mesh,
 sondern setzen sich aus mehreren einzelnen Teil-Meshes zusammen, von denen jede durch eine eigene Datei (.stl, .obj, .dae) repräsentiert wird.
 Diese Teilmodelle entsprechen den physischen Gliedern des Roboters.
-Beim Laden der Meshes ist aufgefallen dass der Vorgang pro Mesh einige Sekunden in Anspruch nimmt und Insbesondere bei komplexeren Modellen
+Beim Laden der Meshes ist aufgefallen, dass der Vorgang pro Mesh einige Sekunden in Anspruch nimmt und insbesondere bei komplexeren Modellen
 zu einer Gesamtladezeit von knapp einer Minute pro Roboter-Modell geführt hat.
 Verwendet wurde das in Tabelle \ref{tab:system_a_dt} dargestellte System A DT, wobei es sich um einen Desktop PC handelt.
 Um die Ladezeiten der Meshes zu reduzieren und dadurch die Benutzerfreundlichkeit zu verbessern, wurde das NPZ-Format von NumPy verwendet.
@@ -139,7 +144,7 @@ Die 3D-Modelle wurden in das NPZ-Format konvertiert, um die Ladezeiten zu optimi
 Um die Auswirkung auf die Ladezeit nachzuvollziehen wurde eine Messung durchgeführt.
 Dabei wurde die Ladezeit beim Einlesen einer .npz-Datei mit derjenigen beim Laden der entsprechenden .stl-Datei für dieselbe Mesh verglichen.
 Der Test, welcher dieser Arbeit unter dem Namen benchmark\_npz\_vs\_stl.ipynb beiliegt ergab, dass der Ladevorgang aus der .stl Datei
-c.a 0.7757 Sekunden benötigte. Der Ladevorgang aus der .npz-Datei benötigte hingegen c.a 0.0002 Sekunden und ist damit c.a 2800 mal schneller:
+c.a 0.7757 Sekunden benötigte. Der Ladevorgang aus der .npz-Datei benötigte hingegen c.a 0.0002 Sekunden und ist damit c.a 2800-mal schneller:
 
 \begin{center}
     \begin{verbatim}
@@ -177,7 +182,7 @@ Abhängig vom Ergebnis wird die Datei entweder geladen oder zunächst erstellt:
 
 
 
-\subsection{Graphische Darstellung von Industrierobotern}
+\subsection{Grafische Darstellung von Industrierobotern}
 
 Die geladenen Daten werden anschließend in BufferGeometry-Objekte überführt, wie sie von pythreejs benötigt werden, 
 um als Bestandteil einer Szene gerendert werden zu können. 
@@ -194,7 +199,7 @@ Im STL-Format, welches trianguläre Mesh-Modelle beschreibt und in den genutzten
 Das MeshStandardMaterial, welches in diesem Framework für alle Geometrien verwendet wird verwendet physically based rendering (PBR),
 wobei das Beleuchtungsmodell pro Fragment (pro Pixel) und nicht pro Fläche angewendet wird \doublecite[]{threejs_docs_MeshStandardMaterial}.
 Aus diesem Grund müssen die Vertex-Normalen manuell berechnet werden,
-die dann im Hintergrund von pythreejs baryzentrisch Interpoliert werden um einen Normalenvektor pro Pixel zu bestimmen \doublecite[9]{mileff2024per}.
+die dann im Hintergrund von pythreejs baryzentrisch interpoliert werden um einen Normalenvektor pro Pixel zu bestimmen \doublecite[9]{mileff2024per}.
 Für die Berechnung der Normalen ist ein gängiger Algorithmus implementiert worden.
 Dabei wird für jeden Vertex $v_i \in \{v_0, v_1,...,v_n\} \subset \mathbb{R}^3$ eine gemittelte Normale $n_i \in \mathbb{R}^3$ bestimmt,
 indem zunächst für jedes Dreieck $t_k = (\alpha_k,\beta_k,\gamma_k)$ die Flächennormale $n^{(k)}_{face}$ berechnet wird:
@@ -252,7 +257,7 @@ Abbildung \ref{fig:render_links} zeigt die mithilfe des Frameworks gerenderten E
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{images/load_links.PNG}
-    \caption{Ansicht der 3D-Szene des Frameworks mit einzelnen Gliedern des KR6 R900-2 von KUKA}
+    \caption{Ansicht der 3D-Szene des Frameworks mit einzelnen Gliedern des KR6 R900-2 von KUKA.}
     \label{fig:render_links}
 \end{figure}
 \vspace{1em}
@@ -268,7 +273,7 @@ Um eine korrekte Darstellung zu erreichen, müssen die Glieder entsprechend eine
 Auch Farbinformationen der Glieder sowie der Pfad zum 3D-Modell lassen sich aus den URDF-Dateien der verwendeten Quellen extrahieren.
 Dazu ist es zunächst erforderlich, die vorhandenen .xacro-Dateien einzulesen und in gültiges URDF-Format zu überführen.
 Für diesen Zweck wird die Bibliothek xacrodoc verwendet, die über pip installiert werden kann.
-Mit Hilfe von xacrodoc lassen sich die Xacro-Dateien zur Laufzeit als URDF-String in den Arbeitsspeicher laden \doublecite[]{xacrodoc}.
+Mithilfe von xacrodoc lassen sich die Xacro-Dateien zur Laufzeit als URDF-String in den Arbeitsspeicher laden \doublecite[]{xacrodoc}.
 Im weiteren Verlauf wurde eine Funktion implementiert,
 die diesen URDF-String analysiert und in ein strukturierteres Dictionary überführt,
 das innerhalb des Frameworks weiterverarbeitet werden kann um die Glieder und Gelenke des Roboters zu initialisieren.
@@ -276,7 +281,7 @@ Um die Performance zu steigern, werden die Glieder pro Robotermodell parallel ve
 indem ihre Initialisierung jeweils in einem eigenen Thread erfolgt.
 Diese parallele Verarbeitung ist an dieser Stelle sinnvoll,
 da beim Initialisieren der Glieder auch das Laden der jeweiligen Meshes erfolgt.
-Dieses benötigt pro Mesh, wie in Kapitel \ref{subsec:Laden von 3D-Modellen} gezeigt, eine gewisse Zeit.
+Dieses benötigt pro Mesh, wie in Abschnitt \ref{subsec:Laden von 3D-Modellen} gezeigt, eine gewisse Zeit.
 
 
 
@@ -284,10 +289,10 @@ Dieses benötigt pro Mesh, wie in Kapitel \ref{subsec:Laden von 3D-Modellen} gez
 Um den Code generisch zu halten und den allgemeinen Aufbau eines Industrieroboters abzubilden, wurden an dieser Stelle die Klassen Joint, Link, Tool und Manipulator erstellt.
 Die Klassen Link, Joint und Tool verwalten die relative Pose innerhalb der kinematischen Kette, sowie die Mesh und das Material.
 Die Klasse Joint verwaltet zusätzlich die relative Pose und die Minimal- und Maximalgrenzen sowie die Drehachse eines Gelenks.
-Da ein Joint keine Mesh hat, wurde hier als graphische Repräsentation lediglich die sogenannte Group Klasse von pythreejs genutzt,
+Da ein Joint keine Mesh hat, wurde hier als grafische Repräsentation lediglich die sogenannte Group Klasse von pythreejs genutzt,
 die keine Mesh beinhaltet, jedoch eine Pose im Raum besitzt,
 sodass trotz nicht vorhandener Geometrie dennoch eine Transformationshierarchie aufgestellt werden kann und die Transformationen and die Children weiter gegeben werden.
-Die 3 Klassen Link, Joint und Tool verwalten darüber hinaus ein Array von Children um die Hierarchie innerhalb der kinematischen Kette abzubilden.
+Die 3 Klassen Link, Joint und Tool verwalten darüber hinaus ein Array von Children, um die Hierarchie innerhalb der kinematischen Kette abzubilden.
 Die Klasse Manipulator repräsentiert den Industrieroboter und verwaltet Links, Joints und maximal eine Tool-Instanz.
 Der Konstruktor der Manipulator-Klasse ist so gestaltet worden, dass der Name des Robotermodells übergeben werden muss.
 Anschließend werden auf Basis des zuvor geparsten URDF-Strings automatisch die notwendigen Objekte wie Links und Joints erzeugt und miteinander verknüpft.
@@ -299,7 +304,7 @@ Abbildung \ref{fig:render_robot} zeigt den mithilfe des Frameworks gerenderten K
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{images/load_robot.PNG}
-    \caption{Ansicht der 3D-Szene des Frameworks mit dem KR6 R900-2 von KUKA in Nullstellung mit Greifer}
+    \caption{Ansicht der 3D-Szene des Frameworks mit dem KR6 R900-2 von KUKA in Nullstellung mit Greifer.}
     \label{fig:render_robot}
 \end{figure}
 \vspace{1em}
@@ -314,7 +319,7 @@ Dazu wurde bereits in der vorangegangenen Projektarbeit ein Algorithmus verwende
 Zeitvariable $0 \leq t$ solange um ein $\Delta t$ erhöht wird, wie $t \leq 1$ ist.
 Dabei wird bei jedem Iterationsschritt die Transformation des zu animierenden Objekts mit $t$ zwischen
 der alten und der neuen Transformation interpoliert \doublecite[32]{philipp}.
-Mithilfe dieses Algorithmus können einzelne Objekte unabhängig von einander animiert werden.
+Mithilfe dieses Algorithmus können einzelne Objekte unabhängig voneinander animiert werden.
 Darauf aufbauend wurde ein neuer Algorithmus entworfen, der in jeder Iteration die Rotation
 mehrerer Gelenke $j = \{j_0,j_1,...j_n\}$ um die entsprechene Drehachse interpoliert:
 
@@ -360,7 +365,7 @@ Da die Interpolation der einzelnen Gelenke auf der gemeinsamen Zeitvariable $t$ 
 landen alle Gelenke gleichzeitig in ihrer Zielpose, was der synchronen Point-to-Point Bewegungsplanung entspricht \doublecite[71]{weber-Industrieroboter}.
 
 
-\subsection{grafische Benutzeroberfläche}
+\subsection{Grafische Benutzeroberfläche}
 Das Framework verfügt bereits über die Funktionalität, interaktive Bedienelemente wie Schieberegler oder Checkboxen direkt in ein Jupyter-Notebook einzubetten.
 Dabei wird auf die Bibliothek ipywidgets zurückgegriffen,
 die speziell für die Verwendung innerhalb von Jupyter-Umgebungen entwickelt wurde.
@@ -373,7 +378,7 @@ Abbildung \ref{fig:ps5} zeigt die grafische Benutzeroberfläche von PolyScope5.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{images/polyscope5.PNG}
-    \caption{Benutzeroberfläche von PolyScope5. Quelle: \doublecite[]{universal_robots_ps5}}
+    \caption{Benutzeroberfläche von PolyScope5. Quelle: \doublecite[]{universal_robots_ps5}.}
     \label{fig:ps5}
 \end{figure}
 \vspace{1em}
@@ -394,8 +399,8 @@ Aufgrund dieser Einschränkungen wurde die Variante mit den Schiebereglern verwo
 Dazu wurde die Library ipyevents genutzt, welche für das Verarbeiten von Maus- und Tastatureingaben innerhalb von Jupyter-Widgets verwendet wird \doublecite[]{ipyevents}.
 Die kontinuierliche Interaktion mit einem Knopf wird im Framework durch Auswertung von Mauszuständen realisiert, aus denen ein boolescher Steuerwert abgeleitet wird.
 Sobald dieser auf True gesetzt ist, wird ein Thread gestartet, der eine while-Schleife ausführt und so lange aktiv bleibt, bis der Wert wieder auf False wechselt.
-So können im Framework Knöpfe genutzt werden um die Position sowie Orientierung des TCP im Raum zu steuern.
-Abbildung \ref{fig:gui} zeigt das Framework mit Viewport und Benutzeroberfläche während der Ausführung innerhalb eines Jupyter-Notebooks
+So können im Framework Knöpfe genutzt werden, um die Position sowie Orientierung des TCP im Raum zu steuern.
+Abbildung \ref{fig:gui} zeigt das Framework mit Viewport und Benutzeroberfläche während der Ausführung innerhalb eines Jupyter-Notebooks.
 
 
 \vspace{1em}
@@ -419,8 +424,8 @@ Durch Interaktion mit den Reglern wird die jeweilige Joint-Instanz direkt manipu
 Im Gegensatz zum Animationsalgorithmus erfolgt diese Bewegung nicht zeitlich interpoliert, sondern es wird lediglich die Mesh der jeweiligen Joint-Instanz unmittelbar rotiert.
 Dadurch entsteht eine intuitive und reaktive Steuerung.
 
-In dem Unteren Bereich namens TCP Pose befinden sich die Knöpfe zur Endeffektorsteuerung in sowie eine die Checkbox um die Steuerung in lokale Koordinaten umzuschalten.
-Darunter befinden sich Textfelder um die aktuelle Pose des TCP anzuzeigen, die mithilfe der Vorwärtstransformation berechnet wird.
+In dem unteren Bereich namens TCP Pose befinden sich die Knöpfe zur Endeffektorsteuerung in sowie eine die Checkbox, um die Steuerung in lokale Koordinaten umzuschalten.
+Darunter befinden sich Textfelder, um die aktuelle Pose des TCP anzuzeigen, die mithilfe der Vorwärtstransformation berechnet wird.
 
 
 
@@ -428,7 +433,7 @@ Darunter befinden sich Textfelder um die aktuelle Pose des TCP anzuzeigen, die m
 Um den didaktischen Mehrwert des Frameworks zu erhöhen, wurde die Denavit-Hartenberg-Konvention aufgegriffen und grafisch nachvollziehbar umgesetzt.
 Hierzu wurde eine eigene Klasse mit dem Namen DHKinematicModel entwickelt. Ziel war es, die grafische Darstellung vom mathematischen Berechnungsmodell klar zu trennen,
 um die Wartbarkeit und Lesbarkeit des Codes zu verbessern.
-Die Klasse ermöglicht die Erstellung von Homogenen Transformationsmatrizen anhand der jeweiligen DH-Parameter:
+Die Klasse ermöglicht die Erstellung von homogenen Transformationsmatrizen anhand der jeweiligen DH-Parameter:
 \begin{itemize}
     \item \( \theta_i \): Rotationswinkel um die \( z \)-Achse
     \item \( d_i \): Verschiebung entlang der \( z \)-Achse
@@ -505,19 +510,19 @@ dargestellt wird.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{images/robot_with_dh.PNG}
-    \caption{Ansicht der 3D-Szene des Frameworks mit dem KR6 R900-2 von KUKA mit Denavit-Hartenberg-Koordinatensystemen}
+    \caption{Ansicht der 3D-Szene des Frameworks mit dem KR6 R900-2 von KUKA mit Denavit-Hartenberg-Koordinatensystemen.}
     \label{fig:robot_with_dh}
 \end{figure}
 \vspace{1em}
 
-Dazu ist eine Funktion des Frameworks genutzt worden, die bereits im Rahmen der Projektarbeit entwickelt wurde und eine graphische Repräsentation eines Koordinatensystems erstellt.
+Dazu ist eine Funktion des Frameworks genutzt worden, die bereits im Rahmen der Projektarbeit entwickelt wurde und eine grafische Repräsentation eines Koordinatensystems erstellt.
 Diese Koordinatensysteme sind aber nicht direkt anhand der Transformationsmatrizen $\mathcal{F}^{(i)}$ transformiert worden.
 Das hätte den nachteil, dass die Berechnung nach jeder Bewegung des Roboters wiederholt werden müsste.
-stadessen wurde der Joint-Klasse eine Variable zur verwaltung des Koordinatensystems $K_i$ hinzugefügt und diese dem Group-Objekt (graphische Repräsentation) des vorherhigen Gelenks $j_{i-1}$ in der kinematischen Kette als Child zugewiesen,
+stadessen wurde der Joint-Klasse eine Variable zur verwaltung des Koordinatensystems $K_i$ hinzugefügt und diese dem Group-Objekt (grafische Repräsentation) des vorherhigen Gelenks $j_{i-1}$ in der kinematischen Kette als Child zugewiesen,
 sodass die Transformation von $j_{i-1}$ an das Koordinatensystem $K_i$ weitergegeben wird.
 Da die Transformation von $K_i$ nun relativ zur Transformation des Gelenks $j_{i-1}$ angewendet wird,
 ist es notwendig die relative Transformation $T_{rel}$ zu berechnen die auf das Koordinatensystem $K_i$
-anzuwenden ist um die korrekte Lage zu erhalten.
+anzuwenden ist, um die korrekte Lage zu erhalten.
 Dazu wird die globale Transformation des Gelenks bzw. des Group-Objekts $T_{j_{i-1}}$ invertiert und mit der globalen Transformation des DH-Koordinatensystems $T_{glob_i}$ multipliziert:
 \[
     T_{rel_i} = T_{j_{i-1}}^{-1} \cdot T_{glob_i}
@@ -710,12 +715,12 @@ Die Algorithmusstruktur folgt damit eng dem theoretischen Aufbau:
 
 
 Nachdem die Rückwärtstransformation implementiert worden ist,
-wird diese beim verschieben des TCP-Koordinatensystems in der 3D-Szene aufgerufen um die Gelenke und Glieder des Roboters entsprechend mitzubewegen.
+wird diese beim Verschieben des TCP-Koordinatensystems in der 3D-Szene aufgerufen um die Gelenke und Glieder des Roboters entsprechend mitzubewegen.
 Da die implementierte Rückwärtstransformation anhand des Newton-Raphson-Verfahrens sehr rechenintensiv ist, wird die symbolische Vorbereitung für jeden
-Roboter nur einmalig bei der Initialisierung dessen berechnet um Ressourcen zu sparen.
+Roboter nur einmalig bei der Initialisierung dessen berechnet, um Ressourcen zu sparen.
 Damit konnte die Aktualisierungsrate des Roboters effektiv gesteigert werden.
 Im gegensatz zum Rendering findet die Berechnung der Rückwärtstransformation im Backend statt.
-Daher steigt die Belastung des Servers bei mehreren Clients die gleichzeitig versuchen die Rückwärtstransformation
+Daher steigt die Belastung des Servers bei mehreren Clients, die gleichzeitig versuchen die Rückwärtstransformation
 zu berechnen.
 
 
