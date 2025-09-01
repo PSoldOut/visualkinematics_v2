@@ -1062,7 +1062,7 @@ class InspectorView:
 
         #self.gizmo_controls = env.Gizmo_Controls(manipulator.tcp_target, True, True, False, "TCP-Target", 3, 3, 3, -3, -3, -3, widgets_vertical=True, continuous_update=True, callback=self._on_gizmo_controls)
         #self.content.append(self.gizmo_controls.widget)
-        self.content.append(visualkinematics_v2.manipulator.fps_text)
+        #self.content.append(visualkinematics_v2.manipulator.fps_text)
         self.widget = widgets.VBox(children = self.content, layout=self.__class__.widget_layout)
 
 

@@ -288,7 +288,7 @@ Dieses benötigt pro Mesh, wie in Abschnitt \ref{subsec:Laden von 3D-Modellen} g
 \subsection{Objektorientierte Modellierung der Kinematik}
 Um den Code generisch zu halten und den allgemeinen Aufbau eines Industrieroboters abzubilden, wurden an dieser Stelle die Klassen Joint, Link, Tool und Manipulator erstellt.
 Die Klassen Link, Joint und Tool verwalten die relative Pose innerhalb der kinematischen Kette, sowie die Mesh und das Material.
-Die Klasse Joint verwaltet zusätzlich die relative Pose und die Minimal- und Maximalgrenzen sowie die Drehachse eines Gelenks.
+Die Klasse Joint verwaltet zusätzlich zu der relativen Pose die Minimal- und Maximalgrenzen sowie die Drehachse eines Gelenks.
 Da ein Joint keine Mesh hat, wurde hier als grafische Repräsentation lediglich die sogenannte Group Klasse von pythreejs genutzt,
 die keine Mesh beinhaltet, jedoch eine Pose im Raum besitzt,
 sodass trotz nicht vorhandener Geometrie dennoch eine Transformationshierarchie aufgestellt werden kann und die Transformationen and die Children weiter gegeben werden.

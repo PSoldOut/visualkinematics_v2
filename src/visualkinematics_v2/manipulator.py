@@ -20,7 +20,7 @@ import ipyevents
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning, message="Gimbal lock detected.*")
 
-fps_text = widgets.Text("empty")
+#fps_text = widgets.Text("empty")
 
 pending_actions = []
 max_pending_actions = 100
@@ -1699,7 +1699,7 @@ class Manipulator:
                 fps_end = time.perf_counter()
                 fps_diff = fps_end - fps_start
                 fps_start = fps_end
-                fps_text.value= f"{(1/fps_diff)}"
+                #fps_text.value= f"{(1/fps_diff)}"
             block(1, self.base_link, step)
 
             if self.environment is not None and with_tcp_target:

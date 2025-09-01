@@ -767,8 +767,8 @@
     \endentry
     \entry{T2021Kinematic}{article}{}{}
       \name{author}{3}{}{%
-        {{un=0,uniquepart=base,hash=2ed7c3a10736fe13344486127601eb58}{%
-           family={T},
+        {{un=0,uniquepart=base,hash=e30764e1881637c35d923c49ae004d9e}{%
+           family={Thangavelu},
            familyi={T\bibinitperiod},
            given={Aravinthkumar},
            giveni={A\bibinitperiod},
@@ -786,14 +786,14 @@
            giveni={V\bibinitperiod},
            givenun=0}}%
       }
-      \strng{namehash}{b5ccdbd9c242fb19b7745b18064ccb2e}
-      \strng{fullhash}{77cdcc5382a636433a576d395b7f8304}
-      \strng{fullhashraw}{77cdcc5382a636433a576d395b7f8304}
-      \strng{bibnamehash}{77cdcc5382a636433a576d395b7f8304}
-      \strng{authorbibnamehash}{77cdcc5382a636433a576d395b7f8304}
-      \strng{authornamehash}{b5ccdbd9c242fb19b7745b18064ccb2e}
-      \strng{authorfullhash}{77cdcc5382a636433a576d395b7f8304}
-      \strng{authorfullhashraw}{77cdcc5382a636433a576d395b7f8304}
+      \strng{namehash}{09c359a8650e0f777f5e5584d83d919e}
+      \strng{fullhash}{f7c5382fe49da0496571e2f93cab321c}
+      \strng{fullhashraw}{f7c5382fe49da0496571e2f93cab321c}
+      \strng{bibnamehash}{f7c5382fe49da0496571e2f93cab321c}
+      \strng{authorbibnamehash}{f7c5382fe49da0496571e2f93cab321c}
+      \strng{authornamehash}{09c359a8650e0f777f5e5584d83d919e}
+      \strng{authorfullhash}{f7c5382fe49da0496571e2f93cab321c}
+      \strng{authorfullhashraw}{f7c5382fe49da0496571e2f93cab321c}
       \field{sortinit}{T}
       \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
       \field{extradatescope}{labelyear}
