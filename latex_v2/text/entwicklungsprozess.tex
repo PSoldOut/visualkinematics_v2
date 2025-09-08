@@ -71,7 +71,7 @@ Peter Corke Robotics Toolbox & Kinematik- und Modellbibliothek für Lehre und Fo
 
 ROS-Industrial ist ein Open-Source-Projekt, welches Module und Ressourcen bereitstellt die innerhalb des ROS-Ökosystems genutzt werden können.
 Dabei werden diese Ressourcen sowohl von der Community genutzt, wie auch gewartet und sind komplett quelloffen.
-Viele dieser Ressourcen können unter Github von ROS-Industrial heruntergeladen werden \doublecite[]{ROS_Industrial}.
+Viele dieser Ressourcen können unter \href{https://github.com/ros-industrial}{Github} von ROS-Industrial heruntergeladen werden \doublecite[]{ROS_Industrial}.
 Zu diesen Ressourcen zählen auch 3D-Modelle von Industrierobotern die unter dem Github-Topic moveit gefunden werden können.
 Dort finden sich zahlreiche Repositories,
 die jeweils die Roboterbeschreibungen eines bestimmten Herstellers enthalten \doublecite[]{ROS_Industrial_repo_search}.
@@ -115,11 +115,11 @@ Die genannten Quellen stellen eine geeignete Möglichkeit zur Beschaffung der 3D
 Da es innerhalb des Frameworks auch möglich sein soll die Bewegung der Roboter zu simulieren,
 werden weitere Informationen wie die Position und Orientierung von Gelenken und Gliedern,
 Hierarchien innerhalb der kinematischen Kette sowie Minimal- und Maximal-Grenze der Gelenke benötigt.
-Diese Informationen liegen üblicherweise im URDF-Format vor.
-Obwohl es grundsätzlich möglich ist, diese Informationen manuell zu rekonstruieren und in das URDF-Format zu übertragen,
+Diese Informationen liegen üblicherweise im URDF vor.
+Obwohl es grundsätzlich möglich ist, diese Informationen manuell zu rekonstruieren und in das URDF zu übertragen,
 ist dies mit erheblichem Aufwand verbunden.
 Daher sind Quellen, die neben den 3D-Modellen bereits eine vollständige URDF-Beschreibung bereitstellen, von besonderem Vorteil.
-von den genannten Quellen stellen nur ROS-Industrial und die Robotics-Toolbox von Peter Corke solche URDF-Beschreibungen zur Verfügung.
+Von den genannten Quellen stellen nur ROS-Industrial und die Robotics-Toolbox von Peter Corke solche URDF-Beschreibungen zur Verfügung.
 Darüber hinaus ist die Anzahl der Dreiecke in den Meshes dieser beiden Quellen bereits reduziert, was die Ladezeit verbessert.
 Aus diesen Gründen sind im weiteren Verlauf des Entwicklungsprozesses hauptsächlich diese beiden Quellen verwendet worden.
 
@@ -198,8 +198,10 @@ Auf diese Weise bewegen sich alle nachfolgenden Glieder korrekt mit, wenn ein vo
 Im STL-Format, welches trianguläre Mesh-Modelle beschreibt und in den genutzten Quellen häufig verwendet wird, werden nur die Normalenvektoren pro Fläche eines Dreiecks gespeichert \doublecite[297]{HALLMANN2019293}.
 Das MeshStandardMaterial, welches in diesem Framework für alle Geometrien verwendet wird verwendet physically based rendering (PBR),
 wobei das Beleuchtungsmodell pro Fragment (pro Pixel) und nicht pro Fläche angewendet wird \doublecite[]{threejs_docs_MeshStandardMaterial}.
-Aus diesem Grund müssen die Vertex-Normalen manuell berechnet werden,
-die dann im Hintergrund von pythreejs baryzentrisch interpoliert werden, um einen Normalenvektor pro Pixel zu bestimmen \doublecite[9]{mileff2024per}.
+Aus diesem Grund müssen die Vertex-Normalen manuell berechnet werden.
+Ein Vertex ist ein Punkt im Raum der durch seine Koordinaten eindeutig beschrieben wird.
+Eine Vertex-Normale ist ein normalisierter Richtungsvektor der zusammen mit dem Vertex gespeichert wird und eine Ausrichtung der Oberfläche an diesem Punkt beschreibt.
+die Vertex-Normalen werden dann im Hintergrund von pythreejs baryzentrisch interpoliert, um einen Normalenvektor pro Pixel zu bestimmen \doublecite[9]{mileff2024per}.
 Für die Berechnung der Normalen ist ein gängiger Algorithmus implementiert worden.
 Dabei wird für jeden Vertex $v_i \in \{v_0, v_1,...,v_n\} \subset \mathbb{R}^3$ eine gemittelte Normale $n_i \in \mathbb{R}^3$ bestimmt,
 indem zunächst für jedes Dreieck $t_k = (\alpha_k,\beta_k,\gamma_k)$ die Flächennormale $n^{(k)}_{face}$ berechnet wird:
@@ -249,7 +251,7 @@ Zuletzt wird $n_i$ mit $n_i \leftarrow \frac{n_i}{||n_i||}$ normiert, sofern $||
 
 
 
-Die so berechneten Normalen müssen dem BufferGeometry-Objekt übergeben werden und können dann für das Shading pro Pixel verwendet werden.
+Die so berechneten Vertex-Normalen müssen dem BufferGeometry-Objekt übergeben werden und können dann für das Shading pro Pixel verwendet werden.
 Durch diese Form des Shadings wirken die Oberflächen von Komplexen Geometrien realistisch und glatt \doublecite[]{threejs_docs_MeshStandardMaterial}.
 Abbildung \ref{fig:render_links} zeigt die mithilfe des Frameworks gerenderten Einzelglieder des KR6 R900-2 von KUKA.
 

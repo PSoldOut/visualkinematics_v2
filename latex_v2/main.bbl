@@ -378,6 +378,55 @@
       \verb https://numpy.org/devdocs/reference/generated/numpy.savez.html
       \endverb
     \endentry
+    \entry{Nwankwo2022ROMR:}{article}{}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=7bdb2df5c9c5117347a387a08aacbb47}{%
+           family={Nwankwo},
+           familyi={N\bibinitperiod},
+           given={Linus},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=818614b23ab961917fcb5fcd07005ab8}{%
+           family={Fritze},
+           familyi={F\bibinitperiod},
+           given={Clemens},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6660aa16114bf224cd48b5f9e00c1adb}{%
+           family={Bartsch},
+           familyi={B\bibinitperiod},
+           given={Konrad},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=5ca45aed63716175f3a3fa7b95435b85}{%
+           family={Rueckert},
+           familyi={R\bibinitperiod},
+           given={Elmar},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{44d4777983d2dbc88cd49cca3e4cc3da}
+      \strng{fullhash}{c02975482878500391b0a7e25e0a9a85}
+      \strng{fullhashraw}{c02975482878500391b0a7e25e0a9a85}
+      \strng{bibnamehash}{c02975482878500391b0a7e25e0a9a85}
+      \strng{authorbibnamehash}{c02975482878500391b0a7e25e0a9a85}
+      \strng{authornamehash}{44d4777983d2dbc88cd49cca3e4cc3da}
+      \strng{authorfullhash}{c02975482878500391b0a7e25e0a9a85}
+      \strng{authorfullhashraw}{c02975482878500391b0a7e25e0a9a85}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{HardwareX}
+      \field{title}{ROMR: A ROS-based open-source mobile robot}
+      \field{volume}{14}
+      \field{year}{2022}
+      \verb{doi}
+      \verb 10.1016/j.ohx.2023.e00426
+      \endverb
+    \endentry
     \entry{ROS_Packages_Design}{misc}{}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=ee129c16ea7bb397a736406a9ec55a1e}{%

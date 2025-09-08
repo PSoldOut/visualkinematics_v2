@@ -38,7 +38,7 @@ Das sind die 3 Freiheitsgrade der Translation. Hinzu kommen die 3 Freiheitsgrade
 \doublecite[35]{weber-Industrieroboter}.
 
 In der Robotik bezeichnet der Arbeitsraum den Bereich im Raum, welcher vom Roboter erreicht werden kann.
-Ein Roboter der sich im Euklidischen Raum bewegt hätte den Arbeitsraum $T \subset \mathbb{R}^3 \times SO(3)$
+Ein Roboter der sich im euklidischen Raum bewegt hätte den Arbeitsraum $T \subset \mathbb{R}^3 \times SO(3)$
 
 Neben dem eben erwähnten Freiheitsgrad, der sich auf den Arbeitsraum bezieht, gibt es noch den Freiheitsgrad im Konfigurationsraum.
 In der Mechanik bezeichnet man die kleinste Menge von Parametern, die benötigt werden um die Lage eines Systems im Arbeitsraum zu beschreiben als Konfiguration eines Systems, die durch einen Punkt $q$ dargestellt werden kann.
@@ -46,13 +46,13 @@ Die Menge aller möglichen Konfigurationen bildet den sogenannten Konfigurations
 Ein Roboter mit 2 Drehgelenken hätte beispielsweise den Konfigurationsraum $C \subset SO(1) \times SO(1)$ und seine Konfiguration könnte anhand von zwei Parametern $(q_1,q_2)$ beschrieben werden.
 Folglich hätte dieser Roboter einen Freiheitsgrad von 2 im Konfigurationsraum.
 
-Jeder Punkt im Konfigurationsraum kann auf einen Punkt im Arbeitsraum abgebildet werden, wobei i.A nicht jeder Punkt im Arbeitsraum auf einen Punkt im Konfigurationsraum abgebildet werden kann.
+Jeder Punkt im Konfigurationsraum kann auf einen Punkt im Arbeitsraum abgebildet werden, wobei im Allgemeinen nicht jeder Punkt im Arbeitsraum auf einen Punkt im Konfigurationsraum abgebildet werden kann.
 \doublecite[78]{Robotics_Vision_and_Control}.
 
 
 
 \subsection{Industrieroboter}
-Ein Industrieroboter (engl. industrial-robot, manipulator), ist gemäß DIN EN ISO 10 218-1 ein frei Programmierbarer Mehrzweck-Manipulator,
+Ein Industrieroboter (engl. industrial-robot, manipulator), ist gemäß DIN EN ISO 10 218-1 ein frei programmierbarer Mehrzweck-Manipulator,
 der in 3 oder mehr Achsen Programmierbar ist
 \doublecite[17]{Industrieroboter}.
 Er ist universell einsetzbar und wird häufig für Schweiß-, -Lackierarbeiten, Montageaufgaben und viele weitere Fertigungs- und Handhabeaufgaben verwendet
@@ -128,14 +128,14 @@ Die Online-Programmierung wird meistens durch sogenannte Teach-In verfahren durc
 an bestimmte Punkte im Raum. Anschließend wird diese Position gespeichert, sodass sie in Zukunft ohne erneute Steuerung angefahren werden kann.
 Die Offline-Programmierung umfasst die Verfahren zur Programmierung des Roboters, ohne diesen einzubinden und eignet sich besonders, wenn der Roboter komplexe Bahnen verfahren muss
 \doublecite[149-150]{Industrieroboter}.
-Dabei stellt die textuelle Programmierung, bei der die "[...] Befehle in eine Textdatei geschrieben werden und [...] sequentiell von der Robotersteuerung abgearbeitet [...]" werden,
+Dabei stellt die textuelle Programmierung, bei der die \enquote{[...] Befehle in eine Textdatei geschrieben werden und [...] sequentiell von der Robotersteuerung abgearbeitet [...]} werden,
 das am häufigsten verwendete Verfahren dar
 \doublecite[149]{Industrieroboter}. 
 
 In der heutigen Zeit findet die simulationsgestützte Programmierung, welche ebenfalls zu den Offline-Verfahren gehört, immer mehr Anwendung.     %nachfragen ob das noch als sinngemäß übernommen gilt
 Schon innerhalb des Produktionsprozesses sämtlicher Roboter-Komponenten werden CAD-Daten erstellt, die ein digitales Modell dieser Komponenten darstellen.
 Mithilfe dieser CAD-Daten kann innerhalb von simulationsgestützten Offline-Tools ein Roboter dargestellt und simuliert werden.
-Diese Art der Roboter-Programmierung birgt viele Vorteile wie das Testen auf Kollision ohne Gefahr oder die Zeit und Kostenberechnung des Robotereinsatzes in der Planungsphase.
+Diese Art der Roboter-Programmierung birgt viele Vorteile wie das Testen auf Kollision ohne Gefahr oder die Zeit- und Kostenberechnung des Robotereinsatzes in der Planungsphase.
 Mit der Erstellung dieser simulationsgestützten Offline-Tools geht allerdings ein hohes Expertenwissen im Bereich der Robotik einher
 \doublecite[150-152]{Industrieroboter}. 
 
@@ -160,7 +160,7 @@ Abbildung \ref{fig:forward_kinematic} zeigt den schematischen Ablauf der Vorwär
 \vspace{1em}
 
 Sei $q$ ein Tupel mit $q = (q_1,q_2,....,q_n)^T$, welches die Ge\-lenk\-koordinaten enthält.
-Der Ortsvektor $p$, ausgehend vom Ursprung des Bezugskoordinatensystems und die Orientierung, beschrieben durch die Basisvektoren $x_W,y_W,z_W$ beschreiben die Pose des Endeffektors.
+Der Ortsvektor $p$, ausgehend vom Ursprung des Bezugskoordinatensystems und die Orientierung, beschrieben durch die Basisvektoren $x_W,y_W,z_W$, beschreiben die Pose des Endeffektors.
 Durch die Vor\-wärts\-trans\-for\-ma\-tion können diese aus dem Tupel $q$ berechnet werden.
 Genauer betrachtet ist die Vorwärtstransformation die Multiplikation mehrerer homogener Transformationsmatrizen,
 die jeweils die Lage eines einzelnen Gelenks in Bezug auf das vorherige Gelenk beschreiben.
@@ -180,7 +180,7 @@ Sie ist ein standardisiertes Verfahren zur Modellierung der Kinematik serieller 
 Ziel der Konvention ist es, die Position und Orientierung jedes Gliedes relativ zum vorhergehenden Glied mit einem minimalen Satz von Parametern darzustellen.
 Die Transformation von einem Glied zum nächsten wird durch eine homogene Transformationsmatrix beschrieben, die vier aufeinanderfolgende Operationen zusammenfasst:
 zwei Rotationen und zwei Translationen.
-Daraus ergeben sich die vier Denavit-Hartenberg-Parameter(DH-Parameter):
+Daraus ergeben sich die vier Denavit-Hartenberg-Parameter (DH-Parameter):
 
   $\theta_i$: der Gelenkwinkel, Rotation um die z-Achse
 
@@ -265,7 +265,7 @@ In der vorliegenden Gelenkstellung von $q_5$ gibt es zu jeder Gelenkstellung von
 Daraus folgen unendlich viele Konfigurationen die für den Roboter möglich wären, um die gegebene Pose des Endeffektors zu erreichen.
 Um solche Singularitäten aufzulösen kann ein Gütekriterium als Nebenbedingung formuliert werden, um eine definierte Lösung zu erhalten.
 
-Für die gängigen Knickarmroboter mit 6 Gelenken kann das geometrische verfahren angewendet werden, um aus der Endeffektor Pose die Gelenkkoordinaten zu erhalten.
+Für die gängigen Knickarmroboter mit 6 Gelenken kann das geometrische Verfahren angewendet werden, um aus der Endeffektor Pose die Gelenkkoordinaten zu erhalten.
 Diese Methode wird in der Praxis bevorzugt angewendet. 
 Für viele andere Roboter, wie beispielsweise Knickarmroboter mit mehr als 6 Gelenken kann das geometrische Verfahren nicht angewendet werden.
 In solchen Fällen werden numerische Verfahren wie zum Beispiel das Newton-Raphson-Verfahren verwendet um eine geeignete Näherungslösung zu approximieren
