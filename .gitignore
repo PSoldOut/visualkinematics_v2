@@ -1,6 +1,5 @@
 node_modules/
 .venv/
-
 main.aux
 main.fdb_latexmk
 main.fls
