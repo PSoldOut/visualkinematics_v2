@@ -1,10 +1,18 @@
 node_modules/
 .venv/
-main.aux
-main.fdb_latexmk
-main.fls
-main.log
-main.out
-main.synctex.gz
-main.tex
-main.toc
+
+# LaTeX build files
+*.aux
+*.bcf
+*.blg
+*.blg_latexmk
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.toc
+*.lof
+*.lot
+*.loa
+*.synctex.gz
