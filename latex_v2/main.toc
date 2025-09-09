@@ -34,4 +34,5 @@
 \contentsline {subsubsection}{\numberline {7.1.4}Ergebnisse}{47}{subsubsection.7.1.4}%
 \contentsline {subsubsection}{\numberline {7.1.5}Interpretation}{49}{subsubsection.7.1.5}%
 \contentsline {subsection}{\numberline {7.2}Zusammenfassung der Evaluation}{50}{subsection.7.2}%
-\contentsline {section}{\numberline {8}Anhang}{50}{section.8}%
+\contentsline {section}{\numberline {8}Ausblick und weiterentwicklung}{50}{section.8}%
+\contentsline {section}{\numberline {9}Anhang}{50}{section.9}%
