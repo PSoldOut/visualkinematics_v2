@@ -11,15 +11,15 @@ Die folgenden funktionalen und nicht-funktionalen Anforderungen ergeben sich aus
         Das Framework soll um ein Modell eines typischen Industrieroboters mit Knickarmstruktur erweitert werden. Dieses Modell bildet die Grundlage für die Umsetzung kinematischer Verfahren.
 
         \item \textbf{Vorwärts- und Rückwärtstransformation:} \\
-        Das Denavit-Hartenberg Modell des Roboters soll sowohl die Berechnung der Endeffektorposition aus gegebenen Gelenkwinkeln (Vorwärtstransformation) als auch die Bestimmung notwendiger Gelenkkonfigurationen für eine gegebene Endeffektorposition (Rückwärtstransformation) ermöglichen.
-        Beide Transformationen sollen visuell nachvollziehbar simuliert und dargestellt werden.
+        Das Denavit-Hartenberg Modell des Roboters soll sowohl die Berechnung der Endeffektorposition aus gegebenen Gelenkwinkeln (Vorwärtstransformation), als auch die Bestimmung notwendiger Gelenkkonfigurationen für eine gegebene Endeffektorposition (Rückwärtstransformation) ermöglichen.
+        
 
         \item \textbf{Endeffektorsteuerung durch interaktive Bewegung des Koordinatensystems:} \\
         Es soll möglich sein, das Koordinatensystem des TCP im dreidimensionalen Raum interaktiv zu verschieben und zu rotieren.
         Der Roboter soll dieser Bewegung durch inverse Kinematik folgen, wie es in gängigen Robotersteuerungen (z.B. bei Universal Robots) üblich ist.
 
         \item \textbf{Bewegung im lokalen und globalen Koordinatensystem:} \\
-        Die Steuerung des TCP soll sowohl im lokalen Werkzeugkoordinatensystem als auch im globalen Weltkoordinatensystem erfolgen können. Eine Umschaltung zwischen diesen Modi soll benutzerfreundlich möglich sein.
+        Die Steuerung des TCP soll sowohl im lokalen Werkzeugkoordinatensystem, als auch im globalen Weltkoordinatensystem erfolgen können. Eine Umschaltung zwischen diesen Modi soll möglich sein.
 
         \item \textbf{Manuelle Konfiguration der Gelenkwinkel:} \\
         Über interaktive Schieberegler (Slider) soll der Nutzer die Gelenkwinkel des Roboters direkt beeinflussen können.
@@ -32,7 +32,8 @@ Die folgenden funktionalen und nicht-funktionalen Anforderungen ergeben sich aus
         \item \textbf{Effiziente Ausführung:} \\
         Die Anwendung soll unter typischen Systemvoraussetzungen eine flüssige Benutzerinteraktion ohne spürbare Ruckler ermöglichen.
         Die 3D-Szene soll unter typischen Systemvoraussetzungen mit einer Bildwiederholrate von mindestens 60 Bildern pro Sekunde (FPS) gerendert werden.
-        Die Aktualisierung der Roboterpose muss unter typischen Systemvoraussetzungen mindestens mit einer Frequenz von 60\,Hz erfolgen, um eine flüssige Bewegung unabhängig von der tatsächlichen Bildwiederholrate im Browser sicherzustellen.
+        Die Aktualisierung der Roboterpose muss unter typischen Systemvoraussetzungen mindestens mit einer Frequenz von 60\,Hz erfolgen,
+        um eine flüssige Bewegung unabhängig von der tatsächlichen Bildwiederholrate im Browser sicherzustellen.
 
         \item \textbf{Benutzerfreundliche Bedienbarkeit:} \\
         Die Benutzeroberfläche soll intuitiv und ohne vorherige Schulung bedienbar sein.

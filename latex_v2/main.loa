@@ -1,4 +1,4 @@
 \contentsline {algorithm}{\numberline {1}{\ignorespaces Laden eines 3D-Modells aus einer NPZ-Datei}}{19}{algorithm.1}%
-\contentsline {algorithm}{\numberline {2}{\ignorespaces Berechnung von Vertex-Normalen}}{20}{algorithm.2}%
-\contentsline {algorithm}{\numberline {3}{\ignorespaces Gleichzeitige Interpolation mehrerer Gelenke}}{24}{algorithm.3}%
-\contentsline {algorithm}{\numberline {4}{\ignorespaces Iterative Inverse Kinematik mit symbolischem Vorwärtspfad und Gelenkwinkelgrenzen}}{34}{algorithm.4}%
+\contentsline {algorithm}{\numberline {2}{\ignorespaces Berechnung von Vertex-Normalen}}{21}{algorithm.2}%
+\contentsline {algorithm}{\numberline {3}{\ignorespaces Gleichzeitige Interpolation mehrerer Gelenke}}{25}{algorithm.3}%
+\contentsline {algorithm}{\numberline {4}{\ignorespaces Iterative Inverse Kinematik mit symbolischem Vorwärtspfad und Gelenkwinkelgrenzen}}{35}{algorithm.4}%

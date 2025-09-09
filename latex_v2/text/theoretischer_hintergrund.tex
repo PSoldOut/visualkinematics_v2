@@ -29,7 +29,7 @@ Abbildung \ref{fig:DOF_explanation} zeigt jeweils einen Quader mit dem Freiheits
 
 Der Quader in Abbildung \ref{fig:DOF_explanation} a) hat den Freiheitsgrad 3 und kann nur auf einer Ebene bewegt werden, die durch den grauen Bereich dargestellt wird.
 Die Position des Quaders wird durch einen Ortsvektor eindeutig beschrieben.
-Zusätzlich kann der Quader noch um eine Achse gedreht werden die Senkrecht zur Ebene steht und durch den Punkt $P$ geht.
+Zusätzlich kann der Quader noch um eine Achse gedreht werden, die senkrecht zur Ebene steht und durch den Punkt $P$ geht.
 Anhand des Ortsvektors und des Drehwinkels wird die Lage des Quaders auf der Ebene eindeutig beschrieben.
 
 Der Quader in Abbildung \ref{fig:DOF_explanation} b) hat den Freiheitsgrad 6 und kann sich frei im Raum bewegen.
@@ -40,8 +40,9 @@ Das sind die 3 Freiheitsgrade der Translation. Hinzu kommen die 3 Freiheitsgrade
 In der Robotik bezeichnet der Arbeitsraum den Bereich im Raum, welcher vom Roboter erreicht werden kann.
 Ein Roboter der sich im euklidischen Raum bewegt hätte den Arbeitsraum $T \subset \mathbb{R}^3 \times SO(3)$
 
-Neben dem eben erwähnten Freiheitsgrad, der sich auf den Arbeitsraum bezieht, gibt es noch den Freiheitsgrad im Konfigurationsraum.
-In der Mechanik bezeichnet man die kleinste Menge von Parametern, die benötigt werden um die Lage eines Systems im Arbeitsraum zu beschreiben als Konfiguration eines Systems, die durch einen Punkt $q$ dargestellt werden kann.
+Neben dem zuvor erwähnten Freiheitsgrad, der sich auf den Arbeitsraum bezieht, gibt es noch den Freiheitsgrad im Konfigurationsraum.
+In der Mechanik bezeichnet man die kleinste Menge von Parametern, die benötigt wird um die Lage eines Systems im Arbeitsraum zu beschreiben,
+als Konfiguration eines Systems. Diese kann durch einen Punkt $q$ dargestellt werden.
 Die Menge aller möglichen Konfigurationen bildet den sogenannten Konfigurationsraum (c-space) $C$, sodass $q \in C$.
 Ein Roboter mit 2 Drehgelenken hätte beispielsweise den Konfigurationsraum $C \subset SO(1) \times SO(1)$ und seine Konfiguration könnte anhand von zwei Parametern $(q_1,q_2)$ beschrieben werden.
 Folglich hätte dieser Roboter einen Freiheitsgrad von 2 im Konfigurationsraum.
@@ -53,9 +54,9 @@ Jeder Punkt im Konfigurationsraum kann auf einen Punkt im Arbeitsraum abgebildet
 
 \subsection{Industrieroboter}
 Ein Industrieroboter (engl. industrial-robot, manipulator), ist gemäß DIN EN ISO 10 218-1 ein frei programmierbarer Mehrzweck-Manipulator,
-der in 3 oder mehr Achsen Programmierbar ist
+der in 3 oder mehr Achsen programmierbar ist
 \doublecite[17]{Industrieroboter}.
-Er ist universell einsetzbar und wird häufig für Schweiß-, -Lackierarbeiten, Montageaufgaben und viele weitere Fertigungs- und Handhabeaufgaben verwendet
+Er ist universell einsetzbar und wird häufig für Schweiß-, Lackierarbeiten, Montageaufgaben und viele weitere Fertigungs- und Handhabeaufgaben verwendet
 \doublecite[2-3]{weber-Industrieroboter}.
 Obwohl ein Industrieroboter sich, im Gegensatz zu mobilen Robotern, nicht frei durch den Raum bewegen kann,
 kann er statt an festen Orten auch beweglich angeordnet werden
@@ -63,8 +64,8 @@ kann er statt an festen Orten auch beweglich angeordnet werden
 Typischerweise besteht ein solcher Roboter aus mehreren starren Segmenten, sogenannten Gliedern (engl. links), welche durch Gelenke bzw. Achsen (engl. joints)
 miteinander verbunden sind. Der Industrieroboter führt seine Bewegung über seine Gelenke und Glieder aus, wobei ihre Anordnung die kinematische Struktur des Roboters bestimmt.
 Es gibt zwei Hauptklassen kinematischer Strukturen:
-die serielle Kinematik und die Parallelkinematik. Die Parallelkinematik wird nur in spezielleren Fällen verwendet, wo eine besonders schnelle Handhabung notwendig ist
-und wird in dieser Arbeit nicht näher beleuchtet.
+die serielle Kinematik und die Parallelkinematik. Die Parallelkinematik wird nur in spezielleren Fällen verwendet,
+in denen eine besonders schnelle Handhabung notwendig ist und wird in dieser Arbeit nicht näher beleuchtet.
 Industrieroboter mit serieller Kinematik sind in der Industrie häufiger vertreten.
 Die folgende Abbildung zeigt einen Industrieroboter von KUKA, welcher 6 Drehgelenke hat und zu den seriellen Robotern gehört.
 
@@ -80,15 +81,15 @@ Die folgende Abbildung zeigt einen Industrieroboter von KUKA, welcher 6 Drehgele
 \vspace{1em}
 
 
-Die durch Pfeile markierten Elemente des Roboters sind die Drehgelenke.
+Die mit Pfeilen markierten Elemente des Roboters sind die Drehgelenke.
 Durch Drehung dieser Gelenke werden die damit verbundenen Glieder im Raum bewegt.
 Die Glieder stehen aneinandergereiht zueinander und bilden eine kinematische Kette, was das Merkmal für Roboter mit serieller Kinematik ist
 \doublecite[3-6]{weber-Industrieroboter}.
 Am oberen Ende des Roboters befindet sich ein Flansch, an den ein beliebiges Werkzeug, wie beispielsweise ein Greifer angebracht werden kann
 \doublecite[17]{Industrieroboter}.
 Ein solches Werkzeug wird dann als Endeffektor bezeichnet und kann als letztes Glied aufgefasst werden.
-Die Werkzeugspitze des Endeffektors wird als Tool Center Point (TCP) bezeichnet und wird verwendet um die sogenannte Pose (Position und Orientierung) des Endeffektors, im Raum zu beschreiben.
-Die Aufgabe eines jeden Industrieroboters ist es den Endeffektor geeignet im Raum zu bewegen um eine bestimmte Tätigkeit auszuführen.
+Die Werkzeugspitze des Endeffektors wird als Tool Center Point (TCP) bezeichnet und wird verwendet, um die sogenannte Pose (Position und Orientierung) des Endeffektors, im Raum zu beschreiben.
+Die Aufgabe eines jeden Industrieroboters ist es den Endeffektor geeignet im Raum zu bewegen, um eine bestimmte Tätigkeit auszuführen.
 Dies wird durch eine passende Konfiguration der Achsen erreicht.
 Die Bewegungsmöglichkeit des Roboters hängt direkt von der Anzahl der Achsen ab.
 Man spricht bei der Anzahl unabhängig angetriebener Achsen vom mechanischen- oder Getriebe-Freiheitsgrad.
@@ -96,11 +97,11 @@ Bei mindestens 6 unabhängig angetriebener Achsen in geeigneter Anordnung hat de
 \doublecite[3-6]{weber-Industrieroboter}.
 Der Bereich im Raum, der vom Endeffektor erreicht werden kann, wird Arbeitsraum des Roboters genannt und ist abhängig von der Bewegungsform,
 der Anordnung und Anzahl der Achsen sowie der Länge der einzelnen Glieder.
-Der Arbeitsraum eines Industrieroboters kann z.B. quaderförmig, zylindrisch oder Kugelförmig sein.
+Der Arbeitsraum eines Industrieroboters kann z.B. quaderförmig, zylindrisch oder kugelförmig sein.
 der Arbeitsraum eines klassischen Sechs-Achs-Knickarmroboters ist kugelförmig wie in Abbildung \ref{fig:KUKA-IR} durch den grauen Bereich dargestellt ist.
 \doublecite[18]{Industrieroboter}.
 Es gibt auch Roboter mit mehr Achsen und einem höheren Freiheitsgrad, sowie weniger Achsen und einem geringeren Freiheitsgrad.
-Die Kinematik bei Robotern mit einem Freiheitsgrad $>$ 6 ist redundant und gilt als überbestimmt
+Die Kinematik bei Robotern mit einem Freiheitsgrad größer 6 ist redundant und gilt als überbestimmt
 \doublecite[4-5]{weber-Industrieroboter}.
 Abbildung \ref{fig:lbr} zeigt den Leichtbauroboter iiwa von KUKA mit 7 Drehachsen.
 
@@ -118,31 +119,31 @@ Abbildung \ref{fig:lbr} zeigt den Leichtbauroboter iiwa von KUKA mit 7 Drehachse
 
 
 Der Vorteil der überbestimmten Kinematik liegt darin, dass die Feinbewegung des Endeffektors verbessert wird und dieser besser mit bewegenden Objekten synchronisiert werden kann.
-Darüber hinaus sind Roboter mit 7 Drehachsen in zusammenarbeit mit Menschen zu bevorzugen,
+Darüber hinaus sind Roboter mit 7 Drehachsen in Zusammenarbeit mit Menschen zu bevorzugen,
 da sie Hindernisse besser umfahren und sich somit der Bewegung von Menschen besser anpassen können
 \doublecite[]{WEINGARTSHOFER2019507}.
 
 Damit ein Industrieroboter durch Bewegung eine spezifische Tätigkeit ausführen kann, muss er zunächst programmiert werden.
-Dabei "[...] wird in der Robotik zwischen zwei wesentlichen Verfahrensgruppen unterschieden: Online- und Offline-\-Pro\-grammie\-rung" \doublecite[149]{Industrieroboter}.
+Dabei \enquote{wird in der Robotik zwischen zwei wesentlichen Verfahrensgruppen unterschieden: Online- und Offline-\-Pro\-grammie\-rung} \doublecite[149]{Industrieroboter}.
 Die Online-Programmierung wird meistens durch sogenannte Teach-In verfahren durchgeführt. Dabei steuert eine Person den Roboter mithilfe eines Programmierhandgeräts
 an bestimmte Punkte im Raum. Anschließend wird diese Position gespeichert, sodass sie in Zukunft ohne erneute Steuerung angefahren werden kann.
 Die Offline-Programmierung umfasst die Verfahren zur Programmierung des Roboters, ohne diesen einzubinden und eignet sich besonders, wenn der Roboter komplexe Bahnen verfahren muss
 \doublecite[149-150]{Industrieroboter}.
-Dabei stellt die textuelle Programmierung, bei der die \enquote{[...] Befehle in eine Textdatei geschrieben werden und [...] sequentiell von der Robotersteuerung abgearbeitet [...]} werden,
+Dabei stellt die textuelle Programmierung, bei der die \enquote{Befehle in eine Textdatei geschrieben werden und [...] sequentiell von der Robotersteuerung abgearbeitet [...]} werden,
 das am häufigsten verwendete Verfahren dar
 \doublecite[149]{Industrieroboter}. 
 
 In der heutigen Zeit findet die simulationsgestützte Programmierung, welche ebenfalls zu den Offline-Verfahren gehört, immer mehr Anwendung.     %nachfragen ob das noch als sinngemäß übernommen gilt
 Schon innerhalb des Produktionsprozesses sämtlicher Roboter-Komponenten werden CAD-Daten erstellt, die ein digitales Modell dieser Komponenten darstellen.
 Mithilfe dieser CAD-Daten kann innerhalb von simulationsgestützten Offline-Tools ein Roboter dargestellt und simuliert werden.
-Diese Art der Roboter-Programmierung birgt viele Vorteile wie das Testen auf Kollision ohne Gefahr oder die Zeit- und Kostenberechnung des Robotereinsatzes in der Planungsphase.
-Mit der Erstellung dieser simulationsgestützten Offline-Tools geht allerdings ein hohes Expertenwissen im Bereich der Robotik einher
+Diese Art der Roboter-Programmierung birgt viele Vorteile, wie das Testen auf Kollision ohne Gefahr vor Beschädigung oder die Zeit- und Kostenberechnung des Robotereinsatzes in der Planungsphase.
+Mit der Erstellung solcher simulationsgestützten Offline-Tools geht allerdings ein hohes Expertenwissen im Bereich der Robotik einher
 \doublecite[150-152]{Industrieroboter}. 
 
 
 
 \subsection{Vorwärtstransformation}
-Die Vorwärtstransformation, auch direktes kinematisches Problem genannt, ist ein zentrales Konzept für die Steuerung und Simulation von Industrierobotern.
+Die Vorwärtstransformation, auch \enquote{direktes kinematisches Problem} genannt, ist ein zentrales Konzept für die Steuerung und Simulation von Industrierobotern.
 Sie ist eine eindeutige Abbildung von Gelenkkoordinaten im Konfigurationsraum auf kartesische Koordinaten im Arbeitsraum.
 Die Pose des Roboters im Arbeitsraum wird vollständig durch die Gelenkkoordinaten beschrieben.
 Insbesondere ist dann auch die Pose des Endeffektors eindeutig festgelegt.
@@ -208,10 +209,10 @@ Abbildung \ref{fig:DH_explanation} zeigt eine schematische Zeichnung eines Knick
 Die erste Transformationsmatrix beschreibt das Basiskoordinatensystem $K_0$ und ist fest mit der ruhenden Basis, also dem ersten Glied verbunden.
 Der Ursprung von $K_0$ muss dabei auf die erste Gelenkachse gelegt werden.
 Die $z_0$-Achse von $K_0$ zeigt entlang der ersten Gelenkachse.
-Die $x_0$- und $y_0$-Achse sind anschließend frei wählbar unter der Bedingung das die zugehörigen Einheitsvektoren $x_0, y_0$ und $z_0$ ein Rechtssystem bilden.
+Die $x_0$- und $y_0$-Achse sind anschließend frei wählbar, unter der Bedingung dass die zugehörigen Einheitsvektoren $x_0, y_0$ und $z_0$ ein rechtshändiges Koordinatensystem bilden.
 
 Jedes weitere Koordinatensystem $K_i$,
-welches durch eine Transformationsmatrix repräsentiert wird, das aus den DH-Parametern gebildet wird, muss einen Satz fest definierter Bedingungen erfüllen:
+welches durch eine Transformationsmatrix repräsentiert wird und aus den DH-Parametern gebildet wird, muss einen Satz fest definierter Bedingungen erfüllen:
 Der Ursprung von $K_i$ sollte auf der Gelenkachse $i+1$ liegen.
 Wenn sich die Gelenkachsen $i$ und $i+1$ schneiden, muss der Ursprung von $K_i$ im Schnittpunkt dieser beiden Achsen liegen.
 Verlaufen die beiden Achsen jedoch parallel, kann der Ursprung von $K_i$ beliebig auf die Gelenkachse $i+1$ gelegt werden.
@@ -227,10 +228,10 @@ Das entspricht der Durchführung der Vorwärtstransformation.
 
 \subsection{Rückwärtstransformation}
 Die Rückwärtstransformation, auch als inverse Kinematik bezeichnet, wird verwendet um aus der gegebenen Pose des Endeffektors die Gelenkkoordinaten $q_0,q_1...,q_n$ zu berechnen
-und stellt somit das gegenstück zu Vorwärtstransformation dar.
-Im Gegensatz zur Vorwärtstransformation bringt die Rückwärtstransformation einige Schwierigkeiten wie Mehrdeutigkeiten und Singularitäten mit sich.
+und stellt somit das Gegenstück zu Vorwärtstransformation dar.
+Im Gegensatz zur Vorwärtstransformation bringt die Rückwärtstransformation einige Schwierigkeiten, wie Mehrdeutigkeiten und Singularitäten mit sich.
 Eine Pose des Endeffektor innerhalb des Arbeitsraums kann unter Umständen mit mehreren verschiedenen Gelenkstellungen des Roboters erreicht werden.
-Abbildung \ref{fig:ik_planar_explanation} veranschaulicht eben diesen Umstand.
+Abbildung \ref{fig:ik_planar_explanation} veranschaulicht diesen Umstand.
 
 
 \vspace{1em}
@@ -255,22 +256,22 @@ zu gleichen Änderungen am Endeffektor führen. Abbildung \ref{fig:ik_singularit
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.5\textwidth]{images/ik_singularity_explain.PNG}
-        \caption{schematische Zeichnung einer Gelenkstellung die zu Unendlich vielen Lösungen führt. Quelle: \doublecite[51]{weber-Industrieroboter}}
+        \caption{schematische Zeichnung einer Gelenkstellung die zu unendlich vielen Lösungen führt. Quelle: \doublecite[51]{weber-Industrieroboter}}
         \label{fig:ik_singularity_explain}
     \end{figure}
 
 \vspace{1em}
 
 In der vorliegenden Gelenkstellung von $q_5$ gibt es zu jeder Gelenkstellung von $q_4$ eine Gelenkstellung von $q_6$ die den Endeffektor in der gegebenen Pose beschreibt.
-Daraus folgen unendlich viele Konfigurationen die für den Roboter möglich wären, um die gegebene Pose des Endeffektors zu erreichen.
-Um solche Singularitäten aufzulösen kann ein Gütekriterium als Nebenbedingung formuliert werden, um eine definierte Lösung zu erhalten.
+Daraus folgen unendlich viele Konfigurationen, die für den Roboter möglich wären, um die gegebene Pose des Endeffektors zu erreichen.
+Um solche Singularitäten aufzulösen, kann ein Gütekriterium als Nebenbedingung formuliert werden, um eine definierte Lösung zu erhalten.
 
 Für die gängigen Knickarmroboter mit 6 Gelenken kann das geometrische Verfahren angewendet werden, um aus der Endeffektor Pose die Gelenkkoordinaten zu erhalten.
 Diese Methode wird in der Praxis bevorzugt angewendet. 
 Für viele andere Roboter, wie beispielsweise Knickarmroboter mit mehr als 6 Gelenken kann das geometrische Verfahren nicht angewendet werden.
-In solchen Fällen werden numerische Verfahren wie zum Beispiel das Newton-Raphson-Verfahren verwendet um eine geeignete Näherungslösung zu approximieren
+In solchen Fällen werden numerische Verfahren, wie zum Beispiel das Newton-Raphson-Verfahren verwendet, um eine geeignete Näherungslösung zu approximieren
 \doublecite[49-56]{weber-Industrieroboter}.
-Da in dieser Arbeit das numerische Verfahren mittels Newton-Raphson-Verfahren dem geometrischen Verfahren vorgezogen wurde, wird dieses in dieser Arbeit 
+Da in dieser Arbeit das numerische Verfahren mittels Newton-Raphson-Verfahren dem geometrischen Verfahren vorgezogen wurde, wird es in dieser Arbeit 
 noch eine ausführlichere Rolle spielen.
 
 
@@ -280,10 +281,10 @@ noch eine ausführlichere Rolle spielen.
 \subsection{Unified Robot Description Format (URDF)}
 URDF ist ein portables, XML-basiertes Dateiformat, welches den Austausch von Ro\-bo\-ter-\-Modellen erlaubt.
 Es erleichtert das Einbinden von Roboter-Modellen in Simulationssoftware und ist in der Robotik sehr verbreitet.
-URDF-Dateien werden oft mit Xacro, einer XML macro Sprache erstellt um die Dateien kürzer und besser lesbar zu machen.
-URDF-Dateien enthalten viele Informationen wie die Orientierung und Position von Gelenken und Gliedern, den Pfad zu den 3D-Modellen,
+URDF-Dateien werden oft mit Xacro, einer XML macro Sprache erstellt, um die Dateien kürzer und besser lesbar zu machen.
+URDF-Dateien enthalten viele Informationen, wie die Orientierung und Position von Gelenken und Gliedern, den Pfad zu den 3D-Modellen,
 welche die Glieder repräsentieren, Hierarchien innerhalb der kinematischen Kette sowie Minimal- und Maximal-Grenze der Gelenke und viele weitere
 technische Informationen.
-Es existieren viele URDF-Dateien zu bekannten Industrierobotern die aus dem Internet von Seiten wie Github frei heruntergeladen und verwendet werden können
+Es existieren viele URDF-Dateien zu bekannten Industrierobotern, die aus dem Internet von Seiten wie Github frei heruntergeladen und verwendet werden können
 \doublecite[270-271]{Robotics_Vision_and_Control}.
 

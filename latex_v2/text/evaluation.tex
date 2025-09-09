@@ -29,26 +29,27 @@ Die nicht-funktionalen Anforderungen werden ebenfalls bewertet; die Anforderung 
     \item \textbf{Nicht-Funktionale Anforderungen:}
     \begin{itemize}
         \item \textbf{Benutzerfreundliche Bedienbarkeit:} \\
-        Die Benutzeroberfläche des Frameworks orientiert sich an der Bedienoberfläche von PolyScope5 und ist so gestaltet, dass sie intuitiv und ohne vorherige Schulung nutzbar ist. 
+        Die Benutzeroberfläche des Frameworks orientiert sich an der Bedienoberfläche von PolyScope5 und ist so gestaltet, dass sie intuitiv und ohne vorherige Schulung nutzbar ist.
+        Die Hauptfunktionen sind innerhalb von 3 Klicks erreichbar. 
         Eine abschließende Bewertung der Benutzerfreundlichkeit erfordert jedoch eine Untersuchung durch Experten oder Nutzerstudien, welche in dieser Arbeit nicht durchgeführt wurden.
 
         \item \textbf{Intuitive Vermittlung kinematischer Konzepte:} \\
         Die Vermittlung kinematischer Konzepte ist möglichst intuitiv gestaltet worden, indem bei der Steuerung des Roboters über die Benutzeroberfläche der Roboter in Echtzeit mitbewegt wird
-        und die Denavit-Hartenberg Koordinatensysteme visuell dargestellt werden. Auch für diese Anforderung müsste eine Untersuchung durch Experten oder eine Nutzerstudie erfolgen,
+        und die Denavit-Hartenberg Koordinatensysteme visuell dargestellt werden. Auch für die abschließende Bewertung dieser Anforderung müsste eine Untersuchung durch Experten oder eine Nutzerstudie erfolgen,
         welche in dieser Arbeit nicht durchgeführt wurden.
     \end{itemize}
 
 \end{itemize}
 
 
-Die Nicht-Funktionale Anforderung der Effizienten Ausführung wird im folgenden in einem eigenen Kapitel behandelt, da hierzu ein Umfassender Stresstest durchgeführt wurde.
+Die Nicht-Funktionale Anforderung der effizienten Ausführung wird im folgenden in einem eigenen Kapitel behandelt, da hierzu ein umfassender Stresstest durchgeführt wurde.
 
 
 \subsection{Stresstest zur Ressourcen- und Performance-Analyse}
 Um den Ressourcenverbrauch und die Performance des Frameworks unter Mehrfachverbindungen zu analysieren,
 wurde ein Stresstest durchgeführt.
 Im Fokus standen dabei insbesondere die Ausführung von Animationen sowie die Berechnung der Vorwärts- und Rückwärtstransformationen während des Betriebs,
-da das Funktionen sind, die im realen Betrieb durchgehend aufgerufen werden.
+da dies Funktionen sind, die im realen Betrieb durchgehend aufgerufen werden.
 Das Laden der Meshes wurde in diesem Test nicht berücksichtigt,
 da es lediglich einmalig beim Start des Frameworks erfolgt.
 
@@ -102,14 +103,14 @@ in der kontinuierlich eine Rückwärtstransformation berechnet und eine Animatio
 Die Rückwärtstransformation beinhaltet auch die Berechnung der Vorwärtstransformation.
 Währenddessen wurde die Systemauslastung auf dem Server über einen Zeitraum von 3 Minuten gemessen,
 und zwar entsprechend der in Abschnitt \ref{chap:messmethoden} beschriebenen Methode.
-gleichzeitig wurden auf einem der Clients zusätzlich die Auslastungswerte aus dem Taskmanager mithilfe des Snipping Tools dokumentiert.
+Gleichzeitig wurden auf einem der Clients zusätzlich die Auslastungswerte aus dem Taskmanager mithilfe des Snipping Tools dokumentiert.
 Nach Abschluss der Messung mit 8 Clients wurde das gleiche Verfahren mit nur 4 Clients und 4 JupyterLab-Instanzen wiederholt.
 Aus zeitlichen Gründen musste an dieser Stelle der Test unterbrochen und am 06.08.2025 fortgesetzt werden.
 Zur Fortsetzung des Tests wurde auf dem Server eine JupyterLab-Instanz gestartet mit der ein Client über den Browser kommunizierte und die Endlosschleife ausführte.
 Währenddessen wurde die Bildrate (FPS) der Animation im Browser für die restliche Dauer des Tests in der FPS Extension beobachtet.
-Gleichzeitig wurde die SPS der Animation über die temporär hinzugefügte Anzeige im UI des Frameworks bestimmt.
+Gleichzeitig wurden die SPS der Animation über die temporär hinzugefügte Anzeige im UI des Frameworks bestimmt.
 Dafür wurden nach jeweils zufälligen Zeitintervallen insgesamt 10 SPS-Werte auf ganze Zahlen gerundet und manuell notiert.
-Im weiteren Verlauf wurden auf dem Server (System B LT) 4 und dann 8 JupyterLab-Instanz gestartet mit der jeweils ein Client kommunizierte und die Endlosschleife ausführte.
+Im weiteren Verlauf wurden auf dem Server (System B LT) 4 und dann 8 JupyterLab-Instanzen gestartet mit denen jeweils ein Client kommunizierte und die Endlosschleife ausführte.
 Dabei wurden die FPS und SPS pro Verbindung auf dieselbe Weise erhoben.
 
 
@@ -117,10 +118,11 @@ Dabei wurden die FPS und SPS pro Verbindung auf dieselbe Weise erhoben.
 
 \subsubsection{Ergebnisse}
 Die top-Ausgabe, welche dieser Arbeit als top\_out8clients.txt und top\_out4clients.txt im Ordner perfTest beiliegt,
-zeigt für 8 Instanzen eine durchschnittliche CPU-Auslastung von 98{,}8\,\% davon 92{,}33\,\% im User Space wo die JupyterLab-Instanzen ausgeführt worden sind.
+zeigt für 8 Instanzen eine durchschnittliche CPU-Auslastung von 98{,}8\,\%, wobei 92{,}33\,\% der Auslastung im User Space liegt, wo die JupyterLab-Instanzen ausgeführt wurden.
 Der Load Average lag bei 12{,}15.
+Dieser Wert gibt an, wie viele Prozesse gleichzeitig in der CPU-Warteschlange stehen.
 Die gesamte RES-Speichernutzung der 8 JupyterLab-Instanzen lag im Durchschnitt bei 3483.22\,MiB
-Für 4 Instanzen lag eine durchschnittliche CPU-Auslastung von 98{,}9\,\% davon 69{,}57\,\% im User Space.
+Für 4 Instanzen lag eine durchschnittliche CPU-Auslastung von 98{,}9\,\% vor, wobei 69{,}57\,\% im User Space lagen.
 Der Load Average lag hier bei 8{,}07.
 Die gesamte RES-Speichernutzung lag bei 1621{,}85\,MiB.
 Tabelle \ref{tab:jupyterlab} fasst die Ergebnisse zusammen.

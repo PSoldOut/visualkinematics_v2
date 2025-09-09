@@ -69,10 +69,10 @@ Peter Corke Robotics Toolbox & Kinematik- und Modellbibliothek für Lehre und Fo
 \end{table}
 \vspace{1em}
 
-ROS-Industrial ist ein Open-Source-Projekt, welches Module und Ressourcen bereitstellt die innerhalb des ROS-Ökosystems genutzt werden können.
+ROS-Industrial ist ein Open-Source-Projekt, welches Module und Ressourcen bereitstellt, die innerhalb des ROS-Ökosystems genutzt werden können.
 Dabei werden diese Ressourcen sowohl von der Community genutzt, wie auch gewartet und sind komplett quelloffen.
 Viele dieser Ressourcen können unter \href{https://github.com/ros-industrial}{Github} von ROS-Industrial heruntergeladen werden \doublecite[]{ROS_Industrial}.
-Zu diesen Ressourcen zählen auch 3D-Modelle von Industrierobotern die unter dem Github-Topic moveit gefunden werden können.
+Zu diesen Ressourcen zählen auch 3D-Modelle von Industrierobotern, die unter dem Github-Topic moveit gefunden werden können.
 Dort finden sich zahlreiche Repositories,
 die jeweils die Roboterbeschreibungen eines bestimmten Herstellers enthalten \doublecite[]{ROS_Industrial_repo_search}.
 Diese Repositories sind in der Regel als eigenständige ROS-Packages organisiert und enthalten häufig
@@ -85,15 +85,15 @@ Eine weitere Quelle für 3D-Modelle von Industrierobotern ist GrabCAD, ein Unter
 das Softwarelösungen im Bereich 3D-Druck anbietet.
 Darüber hinaus betreibt GrabCAD eine Online-Plattform,
 auf der Mitglieder der Community CAD-Dateien hochladen, teilen und herunterladen können \doublecite[]{GrabCAD_Company}.
-Auf der Online-Plattfrom sind CAD-Dateien von Industrierobotern wie zum Beispiel der kr\_140\_3200\_2 von KUKA,
-der PUMA 560 und viele andere.
-Die CAD-Dateien liegen in den meisten Fällen im STEP-, STL- oder im SLDASM-Format vor und lassen sich mit CAD-Software
+Auf der Online-Plattfrom sind CAD-Dateien von Industrierobotern, wie zum Beispiel der kr\_140\_3200\_2 von KUKA,
+der PUMA 560 und viele andere hinterlegt.
+Die CAD-Dateien liegen in den meisten Fällen im STEP-, STL- oder im SLDASM-Format vor und lassen sich mit CAD-Software,
 wie beispielsweise FreeCAD öffnen und bearbeiten.
 
 
 Weiterhin ist Thingiverse eine Quelle für 3D-Modelle von Industrierobotern.
 Ähnlich wie bei der Online-Plattform von GrabCAD handelt es sich bei Thingiverse
-ebenfalls um eine solche Plattform die von Ultimaker betrieben wird.
+ebenfalls um eine solche Plattform, die von Ultimaker betrieben wird.
 Auch bei dieser Plattform gibt es zahlreiche CAD-Dateien von Industrierobotern,
 die von der Community geteilt werden, wobei der Fokus eher auf dem 3D-Druck liegt \doublecite[]{Thingiverse}.
 
@@ -113,15 +113,15 @@ im Verzeichnis ./robotics-toolbox-python/rtb-data/rtbdata/xacro.
 
 Die genannten Quellen stellen eine geeignete Möglichkeit zur Beschaffung der 3D-Modelle dar.
 Da es innerhalb des Frameworks auch möglich sein soll die Bewegung der Roboter zu simulieren,
-werden weitere Informationen wie die Position und Orientierung von Gelenken und Gliedern,
+werden weitere Informationen, wie die Position und Orientierung von Gelenken und Gliedern,
 Hierarchien innerhalb der kinematischen Kette sowie Minimal- und Maximal-Grenze der Gelenke benötigt.
 Diese Informationen liegen üblicherweise im URDF vor.
 Obwohl es grundsätzlich möglich ist, diese Informationen manuell zu rekonstruieren und in das URDF zu übertragen,
 ist dies mit erheblichem Aufwand verbunden.
-Daher sind Quellen, die neben den 3D-Modellen bereits eine vollständige URDF-Beschreibung bereitstellen, von besonderem Vorteil.
+Daher sind Quellen, die neben den 3D-Modellen bereits eine vollständige URDF-Beschreibung bereitstellen, zu bevorzugen.
 Von den genannten Quellen stellen nur ROS-Industrial und die Robotics-Toolbox von Peter Corke solche URDF-Beschreibungen zur Verfügung.
 Darüber hinaus ist die Anzahl der Dreiecke in den Meshes dieser beiden Quellen bereits reduziert, was die Ladezeit verbessert.
-Aus diesen Gründen sind im weiteren Verlauf des Entwicklungsprozesses hauptsächlich diese beiden Quellen verwendet worden.
+Aus diesen Gründen wurden im weiteren Verlauf des Entwicklungsprozesses hauptsächlich diese beiden Quellen verwendet.
 
 
 
@@ -141,7 +141,7 @@ Um die Ladezeiten der Meshes zu reduzieren und dadurch die Benutzerfreundlichkei
 Im Gegensatz zu den üblichen Text-basierten Formaten handelt es sich beim NPZ-Format um ein binäres Format,
 welches maschinell effizienter eingelesen werden kann \doublecite[]{numpy_npy_npz_format}.
 Die 3D-Modelle wurden in das NPZ-Format konvertiert, um die Ladezeiten zu optimieren.
-Um die Auswirkung auf die Ladezeit nachzuvollziehen wurde eine Messung durchgeführt.
+Um die Auswirkung auf die Ladezeit nachzuvollziehen, wurde eine Messung durchgeführt.
 Dabei wurde die Ladezeit beim Einlesen einer .npz-Datei mit derjenigen beim Laden der entsprechenden .stl-Datei für dieselbe Mesh verglichen.
 Der Test, welcher dieser Arbeit unter dem Namen benchmark\_npz\_vs\_stl.ipynb beiliegt ergab, dass der Ladevorgang aus der .stl Datei
 c.a 0.7757 Sekunden benötigte. Der Ladevorgang aus der .npz-Datei benötigte hingegen c.a 0.0002 Sekunden und ist damit c.a 2800-mal schneller:
@@ -187,7 +187,7 @@ Abhängig vom Ergebnis wird die Datei entweder geladen oder zunächst erstellt:
 Die geladenen Daten werden anschließend in BufferGeometry-Objekte überführt, wie sie von pythreejs benötigt werden, 
 um als Bestandteil einer Szene gerendert werden zu können. 
 Bereits in der vorangegangenen Projektarbeit wurde hierfür eine Klasse namens Environment entwickelt, 
-die die Erstellung einer Szene einschließlich Beleuchtung, Kamera, Basiskoordinatensystem und Gitter kapselt. 
+welche die Erstellung einer Szene einschließlich Beleuchtung, Kamera, Basiskoordinatensystem und Gitter kapselt. 
 Darüber hinaus verwaltet sie alle Objekte, die über die display-Funktion im Jupyter Notebook gerendert werden sollen \doublecite[15]{philipp}.
 Diese Objekte erben von der Klasse Object3D aus pythreejs und können ihrerseits weitere Object3D-Instanzen über ein Array namens Children enthalten. 
 Transformationen werden dabei an die Children weitergegeben, wodurch Transformationshierarchien entstehen. 
@@ -196,7 +196,7 @@ Jedes Glied der kinematischen Kette verwaltet dabei das nachfolgende Gelenk als 
 Auf diese Weise bewegen sich alle nachfolgenden Glieder korrekt mit, wenn ein vorheriges Glied transformiert wird.
 
 Im STL-Format, welches trianguläre Mesh-Modelle beschreibt und in den genutzten Quellen häufig verwendet wird, werden nur die Normalenvektoren pro Fläche eines Dreiecks gespeichert \doublecite[297]{HALLMANN2019293}.
-Das MeshStandardMaterial, welches in diesem Framework für alle Geometrien verwendet wird verwendet physically based rendering (PBR),
+Das MeshStandardMaterial, welches in diesem Framework für alle Geometrien verwendet wird verwendet \enquote{physically based rendering} (PBR),
 wobei das Beleuchtungsmodell pro Fragment (pro Pixel) und nicht pro Fläche angewendet wird \doublecite[]{threejs_docs_MeshStandardMaterial}.
 Aus diesem Grund müssen die Vertex-Normalen manuell berechnet werden.
 Ein Vertex ist ein Punkt im Raum der durch seine Koordinaten eindeutig beschrieben wird.
@@ -371,9 +371,9 @@ landen alle Gelenke gleichzeitig in ihrer Zielpose, was der synchronen Point-to-
 Das Framework verfügt bereits über die Funktionalität, interaktive Bedienelemente wie Schieberegler oder Checkboxen direkt in ein Jupyter-Notebook einzubetten.
 Dabei wird auf die Bibliothek ipywidgets zurückgegriffen,
 die speziell für die Verwendung innerhalb von Jupyter-Umgebungen entwickelt wurde.
-Für die manuele Konfiguration der Gelenkwinkel sowie der Bewegung des Endeffektors im lokalen und globalen Koordinatensystem, wie in der Anforderungen beschrieben,
+Für die manuelle Konfiguration der Gelenkwinkel sowie der Bewegung des Endeffektors im lokalen und globalen Koordinatensystem, wie in den Anforderungen beschrieben,
 wurde ein spezielles Layout entworfen.
-Dabei wurde sich an der grafschen Benutzeroberfläche von PolyScope5, einer Steuerungssoftware von Universal Robots orientiert.
+Dabei wurde sich an der grafischen Benutzeroberfläche von PolyScope5, einer Steuerungssoftware von Universal Robots orientiert.
 Abbildung \ref{fig:ps5} zeigt die grafische Benutzeroberfläche von PolyScope5.
 
 \vspace{1em}
@@ -415,7 +415,7 @@ Abbildung \ref{fig:gui} zeigt das Framework mit Viewport und Benutzeroberfläche
 \vspace{1em}
 
 
-Die beiden Felder oben rechts in der Benutzeroberfläche, wie in Abbildung \ref{fig:gui} dargestellt, dienen der sogenannten Teach-Funktion.
+Die beiden Felder oben rechts in der Benutzeroberfläche in Abbildung \ref{fig:gui} dienen der sogenannten Teach-Funktion.
 Beim Betätigen des Buttons \textquote{Pose speichern} werden die aktuellen Gelenkwinkel unter dem im danebenstehenden Textfeld angegebenen Namen in einer JSON-Datei gespeichert.
 Die so gespeicherte Pose ist anschließend über das Dropdown-Menü unter dem vergebenen Namen auswählbar und kann über den Button \textquote{Pose Einnehmen} mithilfe des Animationsalgorithmus wieder angefahren werden.
 
@@ -426,7 +426,7 @@ Durch Interaktion mit den Reglern wird die jeweilige Joint-Instanz direkt manipu
 Im Gegensatz zum Animationsalgorithmus erfolgt diese Bewegung nicht zeitlich interpoliert, sondern es wird lediglich die Mesh der jeweiligen Joint-Instanz unmittelbar rotiert.
 Dadurch entsteht eine intuitive und reaktive Steuerung.
 
-In dem unteren Bereich namens TCP Pose befinden sich die Knöpfe zur Endeffektorsteuerung in sowie eine die Checkbox, um die Steuerung in lokale Koordinaten umzuschalten.
+In dem unteren Bereich namens TCP Pose befinden sich die Buttons zur Endeffektorsteuerung, sowie eine Checkbox, um die Steuerung in lokale Koordinaten umzuschalten.
 Darunter befinden sich Textfelder, um die aktuelle Pose des TCP anzuzeigen, die mithilfe der Vorwärtstransformation berechnet wird.
 
 
@@ -445,7 +445,7 @@ Die Klasse ermöglicht die Erstellung von homogenen Transformationsmatrizen anha
 
 Die Berechnung erfolgt mithilfe der standardisierten DH-Transformationsmatrix, wie sie beispielsweise in \doublecite[275]{Robotics_Vision_and_Control} dargestellt ist:
 
-\begin{equation}
+\[
     A_i =
     \begin{bmatrix}
     \cos\theta_i & -\sin\theta_i\cos\alpha_i & \sin\theta_i\sin\alpha_i & a_i\cos\theta_i \\
@@ -453,7 +453,8 @@ Die Berechnung erfolgt mithilfe der standardisierten DH-Transformationsmatrix, w
     0            & \sin\alpha_i              & \cos\alpha_i              & d_i \\
     0            & 0                         & 0                         & 1
     \end{bmatrix}
-\end{equation}
+\]
+
 
 
 Darüber hinaus kapselt die Klasse sowohl die Berechnung der Transformationsmatrix vom globalen Basiskoordinatensystem zur Roboterbasis
@@ -465,13 +466,13 @@ Die Transformation von der globalen Szene zur Roboterbasis ist notwendig, um den
 Diese Transformation wird durch folgende homogene Matrix beschrieben:
 
 
-\begin{equation}
+\[
     T_{\text{global} \rightarrow \text{base}} =
     \begin{bmatrix}
     R & \mathbf{p} \\
     \mathbf{0}^\top & 1
     \end{bmatrix}
-\end{equation}
+\]
 
 wobei \( R \in \mathbb{R}^{3 \times 3} \) eine Rotationsmatrix und \( \mathbf{p} \in \mathbb{R}^3 \) ein Translationsvektor ist.
 Die Matrix platziert die Roboterbasis bezüglich des globalen Koordinatensystems und kann der Klasse DHKinematicModel im Konstruktor übergeben werden.
@@ -481,9 +482,9 @@ Die Berechnung der Transformation vom letzten Denavit-Hartenberg-Koordinatensyst
 erfolgt über das Invertieren der Transformation vom globalen Basiskoordinatensystem zum letzten DH-Koordinatensystem und der nachfolgenden
 Multiplikation mit der bekannten Pose des Werkzeugs:
 
-\begin{equation}
+\[
     T_{\text{dh}_n \rightarrow \text{ee}} = T_{\text{global} \rightarrow \text{dh}_n}^{-1} \cdot T_{\text{global} \rightarrow \text{ee}}
-\end{equation}
+\]
 
 Dabei bezeichnet \( T_{\text{global} \rightarrow \text{dh}_n} \) die gesamte Vorwärtstransformation vom globalen Koordinatensystem bis zum letzten DH-Koordinatensystem,
 die sich zusammensetzt aus der Matrix \( T_{\text{global} \rightarrow \text{base}} \cdot A_1 \cdot A_2 \cdots A_n \).
@@ -519,11 +520,11 @@ dargestellt wird.
 
 Dazu ist eine Funktion des Frameworks genutzt worden, die bereits im Rahmen der Projektarbeit entwickelt wurde und eine grafische Repräsentation eines Koordinatensystems erstellt.
 Diese Koordinatensysteme sind aber nicht direkt anhand der Transformationsmatrizen $\mathcal{F}^{(i)}$ transformiert worden.
-Das hätte den nachteil, dass die Berechnung nach jeder Bewegung des Roboters wiederholt werden müsste.
-stadessen wurde der Joint-Klasse eine Variable zur verwaltung des Koordinatensystems $K_i$ hinzugefügt und diese dem Group-Objekt (grafische Repräsentation) des vorherhigen Gelenks $j_{i-1}$ in der kinematischen Kette als Child zugewiesen,
+Das hätte den Nachteil, dass die Berechnung nach jeder Bewegung des Roboters wiederholt werden müsste.
+Stattdessen wurde der Joint-Klasse eine Variable zur Verwaltung des Koordinatensystems $K_i$ hinzugefügt und diese dem Group-Objekt (grafische Repräsentation) des vorherhigen Gelenks $j_{i-1}$ in der kinematischen Kette als Child zugewiesen,
 sodass die Transformation von $j_{i-1}$ an das Koordinatensystem $K_i$ weitergegeben wird.
 Da die Transformation von $K_i$ nun relativ zur Transformation des Gelenks $j_{i-1}$ angewendet wird,
-ist es notwendig die relative Transformation $T_{rel}$ zu berechnen die auf das Koordinatensystem $K_i$
+ist es notwendig die relative Transformation $T_{rel}$ zu berechnen, die auf das Koordinatensystem $K_i$
 anzuwenden ist, um die korrekte Lage zu erhalten.
 Dazu wird die globale Transformation des Gelenks bzw. des Group-Objekts $T_{j_{i-1}}$ invertiert und mit der globalen Transformation des DH-Koordinatensystems $T_{glob_i}$ multipliziert:
 \[
@@ -531,12 +532,12 @@ Dazu wird die globale Transformation des Gelenks bzw. des Group-Objekts $T_{j_{i
 \] 
 Die relative Transformation $T_{rel_i}$ kann dann einmalig auf $K_i$ angewendet werden,
 sodass dieses anschließend die korrekte Lage im Raum einnimmt und bei der Bewegung des Roboters automatisch durch die Transformationshierarchie mittransformiert wird.
-Zur besseren Sichtbarkeit der Koordinatensysteme wurde in der Manipulator-Klasse mit pythreejs eine Funktion ergänzt, die das Robotermodell transparent erscheinen lässt (Abbildung \ref{fig:robot_with_dh}), indem dem Material ein opacity-Wert zugewiesen wird.
-Durch die visuelle Darstellung der DH-Koordinatensysteme kann jede Zwischenkonfiguration entlang der Kinematischen kette nachvollziehbar in der Szene gerendert und analysiert werden, was den abstrakten Berechnungsprozess greifbar und anschaulich macht.
+Zur besseren Sichtbarkeit der Koordinatensysteme wurde in der Manipulator-Klasse mit pythreejs eine Funktion ergänzt, die das Robotermodell transparent erscheinen lässt (s. Abbildung \ref{fig:robot_with_dh}), indem dem Material ein opacity-Wert zugewiesen wird.
+Durch die visuelle Darstellung der DH-Koordinatensysteme kann jede Zwischenkonfiguration entlang der kinematischen Kette nachvollziehbar in der Szene gerendert und analysiert werden, was den abstrakten Berechnungsprozess greifbar und anschaulich macht.
 
 
 
-\subsection{Rückwärtstransformation (Inverse Kinematik)}
+\subsection{Rückwärtstransformation (inverse Kinematik)}
 
 Das Framework soll laut den Anforderungen die Möglichkeit bieten, die Pose des Endeffektors (TCP) sowohl über globale als auch lokale Koordinaten zu steuern.
 Damit sich die Glieder des Roboters entsprechend mitbewegen, müssen aus der Zielpose des TCP die Gelenkkoordinaten $q_0, q_1, \dots, q_n$ im Konfigurationsraum bestimmt werden.
@@ -546,8 +547,8 @@ Da auch Roboter mit mehr als 6 Gelenken, wie der \textit{LBR iiwa} von KUKA, unt
 \noindent
 \textbf{Symbolische Vorbereitung}
 
-Um die symbolischen Ausdrücke für die Vorwärtstransformation effizient aufzubauen, wird die Mathematik-Library \textit{SymPy} in Kombination mit \textit{NumPy} verwendet.
-\textit{SymPy} erlaubt die symbolische Definition der Denavit-Hartenberg-Matrizen
+Um die symbolischen Ausdrücke für die Vorwärtstransformation effizient aufzubauen, wird die Mathematik-Library SymPy in Kombination mit NumPy verwendet.
+SymPy erlaubt die symbolische Definition der Denavit-Hartenberg-Matrizen
 \[
 A_1^{\text{sym}}, A_2^{\text{sym}}, \dots, A_n^{\text{sym}},
 \]
@@ -586,7 +587,7 @@ J_{\text{pos}}^{\text{sym}} =
 \end{bmatrix}
 \]
 
-Diese Matrix wird mit sympy.lambdify in eine effiziente NumPy-Funktion überführt, um zur Laufzeit schnell numerische Werte für gegebene Gelenkwinkel berechnen zu können.
+Diese Matrix wird mit der Funktion sympy.lambdify in eine effiziente NumPy-Funktion überführt, um zur Laufzeit schnell numerische Werte für gegebene Gelenkwinkel berechnen zu können.
 
 \vspace{1em}
 \noindent
@@ -721,7 +722,7 @@ wird diese beim Verschieben des TCP-Koordinatensystems in der 3D-Szene aufgerufe
 Da die implementierte Rückwärtstransformation anhand des Newton-Raphson-Verfahrens sehr rechenintensiv ist, wird die symbolische Vorbereitung für jeden
 Roboter nur einmalig bei der Initialisierung dessen berechnet, um Ressourcen zu sparen.
 Damit konnte die Aktualisierungsrate des Roboters effektiv gesteigert werden.
-Im gegensatz zum Rendering findet die Berechnung der Rückwärtstransformation im Backend statt.
+Im Gegensatz zum Rendering findet die Berechnung der Rückwärtstransformation serverseitig statt.
 Daher steigt die Belastung des Servers bei mehreren Clients, die gleichzeitig versuchen die Rückwärtstransformation
 zu berechnen.
 
