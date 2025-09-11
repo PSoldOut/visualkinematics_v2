@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.3) (preloaded format=pdflatex 2025.4.7)  9 SEP 2025 16:02
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.3) (preloaded format=pdflatex 2025.4.7)  10 SEP 2025 18:08
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1016,14 +1016,11 @@ File: ot1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 
 [1
 
-{C:/Users/Philipp/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}] (text/abstract.tex) (text/zusammenfassung.tex
-Overfull \hbox (34.03168pt too wide) in paragraph at lines 2--12
-\OT1/lmr/m/n/12 striero-bo-tern mit se-ri-el-ler Ki-ne-ma-tik, die mit-hil-fe der Vorw[]arts- und R[]uckw[]artstransformation
- []
+{C:/Users/Philipp/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}] (text/abstract.tex)
 
+[1] (text/zusammenfassung.tex)
 
-
-[1]) (main.toc
+[2] (main.toc
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 3.
  (C:\Users\Philipp\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
@@ -1051,29 +1048,31 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 3.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 
-[2])
+[3])
 \tf@toc=\write5
 \openout5 = `main.toc'.
 
 
 
-[3] (main.lof)
+[4] (main.lof)
 \tf@lof=\write6
 \openout6 = `main.lof'.
 
- (main.lot
 
-[4])
+
+[5] (main.lot)
 \tf@lot=\write7
 \openout7 = `main.lot'.
 
- (main.loa)
+
+
+[6] (main.loa)
 \tf@loa=\write8
 \openout8 = `main.loa'.
 
 
 
-[5] (text/einleitung.tex
+[7] (text/einleitung.tex
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
@@ -1082,25 +1081,14 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has b
 l.30 
       [1
 
-]) (text/theoretischer_hintergrund.tex
-Overfull \hbox (13.12303pt too wide) in paragraph at lines 2--9
-\OT1/lmr/m/n/12 In die-sem Ka-pi-tel wer-den die theo-re-ti-schen Grund-la-gen vor-ge-stellt, die f[]ur das Verst[]andnis
+])
+
+[2] (text/theoretischer_hintergrund.tex
+Overfull \hbox (2.7285pt too wide) in paragraph at lines 2--9
+\OT1/lmr/m/n/12 so-wie die Denavit-Hartenberg-Konvention erl[]autert, be-vor die R[]uckw[]artstransformation
  []
 
-
-Overfull \hbox (1.8224pt too wide) in paragraph at lines 2--9
-\OT1/lmr/m/n/12 und die Um-set-zung der in die-ser Ar-beit be-han-del-ten Kon-zep-te not-wen-dig sind. Zun[]achst
- []
-
-
-Overfull \hbox (4.75146pt too wide) in paragraph at lines 2--9
-\OT1/lmr/m/n/12 wer-den die Be-grif-fe Frei-heits-gra-de im Ar-beits-raum so-wie Kon-fi-gu-ra-ti-ons-raum ein-gef[]uhrt.
- []
-
-
-
-[2]
-<images/DOF_exp.PNG, id=313, 1193.96063pt x 508.90125pt>
+<images/DOF_exp.PNG, id=316, 1193.96063pt x 508.90125pt>
 File: images/DOF_exp.PNG Graphic file (type png)
 <use images/DOF_exp.PNG>
 Package pdftex.def Info: images/DOF_exp.PNG  used on input line 23.
@@ -1111,11 +1099,11 @@ Package pdftex.def Info: images/DOF_exp.PNG  used on input line 23.
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.39 
+l.34 
       <./images/DOF_exp.PNG>]
 
 [4{C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}]
-<images/kuka-ir.PNG, id=339, 658.71094pt x 593.96906pt>
+<images/kuka-ir.PNG, id=342, 658.71094pt x 593.96906pt>
 File: images/kuka-ir.PNG Graphic file (type png)
 <use images/kuka-ir.PNG>
 Package pdftex.def Info: images/kuka-ir.PNG  used on input line 76.
@@ -1128,22 +1116,22 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has
                                                   \__shipout_drop_firstpage_...
 l.107 
        <./images/kuka-ir.PNG>]
-<images/lbr2.png, id=353, 1907.125pt x 1073.00874pt>
+<images/lbr2.png, id=357, 1907.125pt x 1073.00874pt>
 File: images/lbr2.png Graphic file (type png)
 <use images/lbr2.png>
 Package pdftex.def Info: images/lbr2.png  used on input line 112.
 (pdftex.def)             Requested size: 441.01773pt x 248.12938pt.
 
 
-[6
+[6]
+
+[7
 pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.126 D
-       amit ein Industrieroboter durch Bewegung eine spezifische Tätigkeit ... <./images/lbr2.png (PNG copy)>]
-
-[7]
-<images/forward_kin.PNG, id=372, 674.52pt x 280.04625pt>
+l.136 I
+       n der heutigen Zeit findet die simulationsgestützte Programmierung, ... <./images/lbr2.png (PNG copy)>]
+<images/forward_kin.PNG, id=375, 674.52pt x 280.04625pt>
 File: images/forward_kin.PNG Graphic file (type png)
 <use images/forward_kin.PNG>
 Package pdftex.def Info: images/forward_kin.PNG  used on input line 156.
@@ -1154,34 +1142,33 @@ Package pdftex.def Info: images/forward_kin.PNG  used on input line 156.
 pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.186   $
-         \theta_i$: der Gelenkwinkel, Rotation um die z-Achse <./images/forward_kin.PNG>]
+l.168 \[
+         <./images/forward_kin.PNG>]
 Underfull \hbox (badness 10000) in paragraph at lines 192--197
 
  []
 
-<images/DH_explain2.PNG, id=384, 444.15938pt x 402.75468pt>
+<images/DH_explain2.PNG, id=386, 444.15938pt x 402.75468pt>
 File: images/DH_explain2.PNG Graphic file (type png)
 <use images/DH_explain2.PNG>
 Package pdftex.def Info: images/DH_explain2.PNG  used on input line 202.
 (pdftex.def)             Requested size: 220.50887pt x 199.95108pt.
 
 
-[9
+[9]
+
+[10
 pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.221 
+l.235 
        <./images/DH_explain2.PNG>]
-<images/ik_planar_exp.PNG, id=394, 621.07031pt x 530.73282pt>
+<images/ik_planar_exp.PNG, id=401, 621.07031pt x 530.73282pt>
 File: images/ik_planar_exp.PNG Graphic file (type png)
 <use images/ik_planar_exp.PNG>
 Package pdftex.def Info: images/ik_planar_exp.PNG  used on input line 241.
 (pdftex.def)             Requested size: 220.50887pt x 188.43172pt.
-
-
-[10]
-<images/ik_singularity_explain.PNG, id=402, 336.50719pt x 101.62968pt>
+<images/ik_singularity_explain.PNG, id=405, 336.50719pt x 101.62968pt>
 File: images/ik_singularity_explain.PNG Graphic file (type png)
 <use images/ik_singularity_explain.PNG>
 Package pdftex.def Info: images/ik_singularity_explain.PNG  used on input line 258.
@@ -1192,33 +1179,33 @@ Package pdftex.def Info: images/ik_singularity_explain.PNG  used on input line 2
 pdfTeX warning (ext4): destination with the same identifier (name{figure.6}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.276 
+l.268 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.7}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.276 
-       <./images/ik_planar_exp.PNG> <./images/ik_singularity_explain.PNG>]) (text/anforderungen.tex
+l.268 
+       <./images/ik_planar_exp.PNG> <./images/ik_singularity_explain.PNG>])
+
+[12] (text/anforderungen.tex
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 8.
  (C:\Users\Philipp\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-
-[12{C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}]
 Overfull \hbox (4.41252pt too wide) in paragraph at lines 13--15
 \OT1/lmr/m/n/12 End-ef-fek-tor-po-si-ti-on aus ge-ge-be-nen Ge-lenk-win-keln (Vorw[]artstransformation),
  []
 
 
 
-[13]) (text/entwicklungsprozess.tex
+[13{C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}])
+
+[14] (text/entwicklungsprozess.tex
 Overfull \hbox (8.07915pt too wide) in paragraph at lines 2--14
 \OT1/lmr/m/n/12 tie-rung der R[]uckw[]artstransformation mit-hil-fe des Newton-Raphson-Verfahrens erl[]autert. 
  []
 
 
-
-[14]
 Overfull \hbox (10.42073pt too wide) in paragraph at lines 17--21
 \OT1/lmr/m/n/12 ge-nutzt wer-den, um einen Ren-de-rer der Rendering-API py-three-js in ein Jupyter-Notebook
  []
@@ -1246,7 +1233,7 @@ Underfull \hbox (badness 1132) in paragraph at lines 62--62
 pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.92 
+l.83 
      ]
 Overfull \hbox (0.60854pt too wide) in paragraph at lines 94--99
 []\OT1/lmr/m/n/12 Weiterhin ist Thin-gi-ver-se ei-ne Quel-le f[]ur 3D-Modelle von In-du-striero-bo-tern. []Ahnlich
@@ -1255,30 +1242,30 @@ Overfull \hbox (0.60854pt too wide) in paragraph at lines 94--99
 
 
 [17]
+
+[18]
 LaTeX Font Info:    Trying to load font information for OT1+lmtt on input line 150.
  (C:\Users\Philipp\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmtt.fd
 File: ot1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-
-[18{C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rmtt.enc}]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 164.
 
 
-[19]
+[19{C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rmtt.enc}]
 
-[20{C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}]
+[20]
 Overfull \hbox (5.09149pt too wide) in paragraph at lines 254--257
 []\OT1/lmr/m/n/12 Die so be-rech-ne-ten Vertex-Normalen m[]ussen dem BufferGeometry-Objekt []ubergeben
  []
 
-<images/load_links.PNG, id=493, 517.18219pt x 368.1253pt>
+<images/load_links.PNG, id=495, 517.18219pt x 368.1253pt>
 File: images/load_links.PNG Graphic file (type png)
 <use images/load_links.PNG>
 Package pdftex.def Info: images/load_links.PNG  used on input line 261.
 (pdftex.def)             Requested size: 352.81552pt x 251.142pt.
 
 
-[21]
+[21{C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}]
 
 [22
 pdfTeX warning (ext4): destination with the same identifier (name{figure.8}) has been already used, duplicate ignored
@@ -1286,7 +1273,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.8}) has
                                                   \__shipout_drop_firstpage_...
 l.287 
        <./images/load_links.PNG>]
-<images/load_robot.PNG, id=507, 519.44063pt x 370.38374pt>
+<images/load_robot.PNG, id=510, 519.44063pt x 370.38374pt>
 File: images/load_robot.PNG Graphic file (type png)
 <use images/load_robot.PNG>
 Package pdftex.def Info: images/load_robot.PNG  used on input line 308.
@@ -1299,11 +1286,11 @@ Package pdftex.def Info: images/load_robot.PNG  used on input line 308.
 pdfTeX warning (ext4): destination with the same identifier (name{figure.9}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.359 
+l.352 
        <./images/load_robot.PNG>]
 
 [25]
-<images/polyscope5.PNG, id=525, 791.20593pt x 598.48593pt>
+<images/polyscope5.PNG, id=528, 791.20593pt x 598.48593pt>
 File: images/polyscope5.PNG Graphic file (type png)
 <use images/polyscope5.PNG>
 Package pdftex.def Info: images/polyscope5.PNG  used on input line 382.
@@ -1316,7 +1303,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.10}) ha
                                                   \__shipout_drop_firstpage_...
 l.406 
        <./images/polyscope5.PNG>]
-<images/UI.PNG, id=535, 1041.8925pt x 559.33969pt>
+<images/UI.PNG, id=538, 1041.8925pt x 559.33969pt>
 File: images/UI.PNG Graphic file (type png)
 <use images/UI.PNG>
 Package pdftex.def Info: images/UI.PNG  used on input line 411.
@@ -1331,31 +1318,12 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.11}) ha
                                                   \__shipout_drop_firstpage_...
 l.434 \subsection{Denavit-Hartenberg-Konvention}
                                                  <./images/UI.PNG>]
-Overfull \hbox (21.3287pt too wide) in paragraph at lines 435--439
-\OT1/lmr/m/n/12 Um den di-dak-ti-schen Mehr-wert des Fra-me-works zu erh[]ohen, wur-de die Denavit-Hartenberg-
- []
-
-
 
 [29]
-Overfull \hbox (26.0629pt too wide) in paragraph at lines 481--484
-[]\OT1/lmr/m/n/12 Die Be-rech-nung der Trans-for-ma-ti-on vom letz-ten Denavit-Hartenberg-Koordinatensystem
- []
-
-
-Overfull \hbox (30.0731pt too wide) in paragraph at lines 489--492
-\OT1/lmr/m/n/12 schreibt so-mit die re-la-ti-ve La-ge des Werk-zeugs be-zo-gen auf das letz-te DH-Koordinatensystem. 
- []
-
-
-Overfull \hbox (22.69865pt too wide) in paragraph at lines 493--494
-[]\OT1/lmr/m/n/12 Damit ist die ge-sam-te Vorw[]artstransformation nach der Denavit-Hartenberg-Konvention
- []
-
-<images/robot_with_dh.PNG, id=553, 521.69907pt x 372.64218pt>
+<images/robot_with_dh.PNG, id=557, 521.69907pt x 372.64218pt>
 File: images/robot_with_dh.PNG Graphic file (type png)
 <use images/robot_with_dh.PNG>
-Package pdftex.def Info: images/robot_with_dh.PNG  used on input line 515.
+Package pdftex.def Info: images/robot_with_dh.PNG  used on input line 513.
 (pdftex.def)             Requested size: 352.81552pt x 252.01161pt.
 
 
@@ -1365,14 +1333,14 @@ Package pdftex.def Info: images/robot_with_dh.PNG  used on input line 515.
 pdfTeX warning (ext4): destination with the same identifier (name{figure.12}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.537 
+l.535 
        <./images/robot_with_dh.PNG>]
 
 [32]
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <8> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 597.
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 595.
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <6> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 597.
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 595.
 
 
 [33]
@@ -1380,27 +1348,17 @@ LaTeX Font Info:    Font shape `U/lasy/b/n' in size <6> not available
 [34]
 
 [35]
-Overfull \hbox (42.8115pt too wide) in paragraph at lines 698--700
-\OT1/lmr/m/n/12 ak-tu-el-le Po-se des TCP be-rech-net, in-dem die trans-for-mier-te sym-bo-li-sche Vorw[]artstransformation
- []
 
+[36])
 
-
-[36]) (text/aufbau.tex
-
-[37]
-Overfull \hbox (23.3693pt too wide) in paragraph at lines 52--57
-[]\OT1/lmr/m/n/12 Der Quell-co-de be-fin-det sich im Ver-zeich-nis vi-su-al-ki-ne-ma-tics[]v2/src/visualkinematics[]v2.
- []
-
-
+[37] (text/aufbau.tex
 
 [38
 pdfTeX warning (ext4): destination with the same identifier (name{figure.13}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.58 ...Softwarearchitektur Model-View-Controller}
-                                                  ]
+l.51 
+     ]
 
 [39]
 LaTeX Font Info:    Trying to load font information for OML+lmr on input line 95.
@@ -1410,122 +1368,99 @@ File: omllmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 LaTeX Font Info:    Font shape `OML/lmr/m/n' in size <12> not available
 (Font)              Font shape `OML/lmm/m/it' tried instead on input line 95.
 
-Overfull \hbox (25.9535pt too wide) in paragraph at lines 91--105
-\OT1/lmr/m/n/12 ge-la-den wer-den. Da-mit das be-reit-ge-stell-te Beispiel-Notebook in-du-stri-al[]robot[]example.ipynb
- []
-
-
 
 [40]
-Overfull \hbox (22.27309pt too wide) in paragraph at lines 126--127
-[]\OT1/lmtt/m/n/12 Gizmo[]Controls[]Controller\OT1/lmr/m/n/12 : Ver-bin-det die GUI-Elemente der Giz-mo[]Con-trols[]View
- []
 
-) (text/deployment.tex
+[41])
 
-[41]
+[42] (text/deployment.tex
 Overfull \hbox (18.97762pt too wide) in paragraph at lines 34--36
 []\OT1/lmr/m/n/12 Die da-durch er-stell-te vir-tu-el-le Um-ge-bung wur-de als glo-ba-ler Ker-nel f[]ur al-le JupyterHub-
  []
 
 
 
-[42]) (text/evaluation.tex
-Overfull \hbox (45.45001pt too wide) in paragraph at lines 9--12
-\OT1/lmr/m/n/12 reits Bei-spielm-odel-le ent-hal-ten, es k[]onnen je-doch auch wei-te-re URDF-Beschreibungen
+[43])
+
+[44] (text/evaluation.tex
+Overfull \hbox (7.0078pt too wide) in paragraph at lines 9--13
+\OT1/lmr/m/n/12 schrei-bun-gen und 3D-Modelle hin-zu-gef[]ugt wer-den, so-dass ver-schie-de-ne Knick-
  []
 
-
-
-[43]
-
-[44]
-<images/aufbau.JPG, id=636, 4047.12pt x 3035.34pt>
-File: images/aufbau.JPG Graphic file (type jpg)
-<use images/aufbau.JPG>
-Package pdftex.def Info: images/aufbau.JPG  used on input line 76.
-(pdftex.def)             Requested size: 352.81552pt x 264.60045pt.
 
 
 [45]
-Overfull \hbox (55.1882pt too wide) in paragraph at lines 98--115
-\OT1/lmr/m/n/12 wur-de. Die R[]uckw[]artstransformation bein-hal-tet auch die Be-rech-nung der Vorw[]artstransformation.
- []
+
+[46]
+<images/aufbau.JPG, id=647, 4047.12pt x 3035.34pt>
+File: images/aufbau.JPG Graphic file (type jpg)
+<use images/aufbau.JPG>
+Package pdftex.def Info: images/aufbau.JPG  used on input line 78.
+(pdftex.def)             Requested size: 352.81552pt x 264.60045pt.
 
 
-
-[46
+[47
 pdfTeX warning (ext4): destination with the same identifier (name{figure.14}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.115 
-       <./images/aufbau.JPG>]
-Overfull \hbox (5.30461pt too wide) in paragraph at lines 120--129
+l.96 
+      <./images/aufbau.JPG>]
+
+[48]
+Overfull \hbox (5.30461pt too wide) in paragraph at lines 122--131
 \OT1/lmr/m/n/12 im Ord-ner perf-Test bei-liegt, zeigt f[]ur 8 In-stan-zen ei-ne durch-schnitt-li-che CPU-Auslastung
  []
 
 
-
-[47]
-Overfull \hbox (13.05804pt too wide) in paragraph at lines 134--142
+Overfull \hbox (13.05804pt too wide) in paragraph at lines 136--144
  [][] 
  []
 
-<images/SPS_Boxplot.png, id=652, 578.16pt x 361.35pt>
+<images/SPS_Boxplot.png, id=660, 578.16pt x 361.35pt>
 File: images/SPS_Boxplot.png Graphic file (type png)
 <use images/SPS_Boxplot.png>
-Package pdftex.def Info: images/SPS_Boxplot.png  used on input line 155.
+Package pdftex.def Info: images/SPS_Boxplot.png  used on input line 157.
 (pdftex.def)             Requested size: 441.01773pt x 275.63235pt.
 
 
-[48
+[49
 pdfTeX warning (ext4): destination with the same identifier (name{table.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.168 
-      
+l.162 
+      ]
+
+[50
 pdfTeX warning (ext4): destination with the same identifier (name{figure.15}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.168 
-       <./images/SPS_Boxplot.png>]) (text/ausblick_und_weiterentwicklung.tex
-Overfull \hbox (8.38928pt too wide) in paragraph at lines 203--1
+l.184 
+       <./images/SPS_Boxplot.png>])
+Overfull \hbox (8.38928pt too wide) in paragraph at lines 205--188
 \OT1/lmr/m/n/12 soll-ten aber in Zu-kunft an-hand von Nut-zer-stu-di-en be-wer-tet wer-den. Die nicht-funktionale
  []
 
 
 
-[49]) (text/anhang.tex
-
-[50
-pdfTeX warning (ext4): destination with the same identifier (name{table.3}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.68 
-     ]
+[51] (text/anhang.tex
 Underfull \hbox (badness 10000) in paragraph at lines 90--90
 []|\OT1/lmr/m/n/12 Maximale
  []
 
 
 
-[51
+[52
+pdfTeX warning (ext4): destination with the same identifier (name{table.3}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.103 
+      
 pdfTeX warning (ext4): destination with the same identifier (name{table.4}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.169 
-      
-pdfTeX warning (ext4): destination with the same identifier (name{table.5}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.169 
-      
-pdfTeX warning (ext4): destination with the same identifier (name{table.6}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.169 
+l.103 
       ]
-<images/class_diagramm.png, id=672, 2074.75125pt x 2326.6925pt>
+<images/class_diagramm.png, id=679, 2074.75125pt x 2326.6925pt>
 File: images/class_diagramm.png Graphic file (type png)
 <use images/class_diagramm.png>
 Package pdftex.def Info: images/class_diagramm.png  used on input line 179.
@@ -1537,90 +1472,100 @@ Underfull \hbox (badness 1028) in paragraph at lines 180--180
 
 
 
-[52
+[53
+pdfTeX warning (ext4): destination with the same identifier (name{table.5}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.183 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{table.6}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.183 
+      
 pdfTeX warning (ext4): destination with the same identifier (name{table.7}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
 l.183 
       ]
-<images/package_diagramm.png, id=677, 451.6875pt x 371.3875pt>
+<images/package_diagramm.png, id=685, 451.6875pt x 371.3875pt>
 File: images/package_diagramm.png Graphic file (type png)
 <use images/package_diagramm.png>
 Package pdftex.def Info: images/package_diagramm.png  used on input line 187.
 (pdftex.def)             Requested size: 330.76329pt x 271.97765pt.
 
 
-[53
+[54
 pdfTeX warning (ext4): destination with the same identifier (name{figure.16}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
 l.191 
        <./images/class_diagramm.png>])
 
-[54
+[55
 pdfTeX warning (ext4): destination with the same identifier (name{figure.17}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.179 \newpage
+l.191 \newpage
                <./images/package_diagramm.png (PNG copy)>]
-Overfull \hbox (0.26894pt too wide) in paragraph at lines 181--181
+Overfull \hbox (0.26894pt too wide) in paragraph at lines 193--193
 [][]\OT1/lmr/m/n/12 Hallmann, Mar-tin, Ste-fan Goetz und Ben-ja-min Schleich (2019). []  Map-ping of GD(and)T
  []
 
 
-Overfull \hbox (0.16219pt too wide) in paragraph at lines 181--181
+Overfull \hbox (0.16219pt too wide) in paragraph at lines 193--193
 [][]\OT1/lmr/m/n/12 Heins, Adam (2025). \OT1/lmr/m/it/12 re-fe-rence xa-cro-doc 0.7.0 do-cu-men-ta-ti-on\OT1/lmr/m/n/12 . \OT1/lmr/m/sc/12 url\OT1/lmr/m/n/12 : []$\OT1/lmtt/m/n/12 https : / / xacrodoc .
  []
 
 
-Overfull \hbox (5.2602pt too wide) in paragraph at lines 181--181
+Overfull \hbox (5.2602pt too wide) in paragraph at lines 193--193
 \OT1/lmtt/m/n/12 org / devdocs / reference / generated / numpy . savez . html$[] \OT1/lmr/m/n/12 (be-sucht am 11. 07. 2025). 
  []
 
 
-Overfull \hbox (0.13164pt too wide) in paragraph at lines 181--181
+Overfull \hbox (0.13164pt too wide) in paragraph at lines 193--193
 [][]\OT1/lmr/m/n/12 Nwankwo, Li-nus, Cle-mens Frit-ze, Kon-rad Bartsch und El-mar Rueckert (2022). []  ROMR:
  []
 
 
-Overfull \hbox (2.42432pt too wide) in paragraph at lines 181--181
+Overfull \hbox (2.42432pt too wide) in paragraph at lines 193--193
 [][]\OT1/lmr/m/n/12 Project Ju-py-ter con-tri-bu-tors (2025). \OT1/lmr/m/it/12 ipye-vents pypi\OT1/lmr/m/n/12 . \OT1/lmr/m/sc/12 url\OT1/lmr/m/n/12 : []$\OT1/lmtt/m/n/12 https : / / pypi . org / project /
  []
 
 
 
-[55{C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rmsc.enc}]
-Overfull \hbox (15.67506pt too wide) in paragraph at lines 181--181
+[56{C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rmsc.enc}]
+Overfull \hbox (15.67506pt too wide) in paragraph at lines 193--193
 \OT1/lmr/m/n/12 bal and Na-tio-nal En-vi-ron-ment\. In: \OT1/lmr/m/it/12 SA-GE Open \OT1/lmr/m/n/12 10. \OT1/lmr/m/sc/12 doi\OT1/lmr/m/n/12 : []$\OT1/lmtt/m/n/12 10 . 1177 / 2158244020958736$[]\OT1/lmr/m/n/12 . 
  []
 
 
 
-[56]
+[57]
 
-[57] (main.aux)
+[58] (main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 135A01E64565CD0D25D44D9418F1450F;6432.
+(rerunfilecheck)             Checksum: A2EF3C6D406B68FAE71325FD5CEE38D6;6232.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 31197 strings out of 473522
- 580434 string characters out of 5713642
- 1471906 words of memory out of 5000000
- 53754 multiletter control sequences out of 15000+600000
+ 31192 strings out of 473522
+ 580120 string characters out of 5713642
+ 1470907 words of memory out of 5000000
+ 53750 multiletter control sequences out of 15000+600000
  643067 words of font info for 139 fonts, out of 8000000 for 9000
  1143 hyphenation exceptions out of 8191
  78i,14n,81p,2448b,2748s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx8.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi6.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmib10.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy6.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (63 pages, 4700501 bytes).
+Output written on main.pdf (66 pages, 4701661 bytes).
 PDF statistics:
- 875 PDF objects out of 1000 (max. 8388607)
- 156 named destinations out of 1000 (max. 500000)
- 377 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 883 PDF objects out of 1000 (max. 8388607)
+ 158 named destinations out of 1000 (max. 500000)
+ 369 words of extra memory for PDF output out of 10000 (max. 10000000)
 

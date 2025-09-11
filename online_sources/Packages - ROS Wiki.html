@@ -1,0 +1,372 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- saved from url=(0029)https://wiki.ros.org/Packages -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="google-site-verification" content="CjkdY6BqKWAVmQ78_iSq6J7ZZ9AoL7-CjFVBYGg9FU4">
+<link rel="shortcut icon" href="https://wiki.ros.org/custom/favicon.ico" type="image/ico">
+<link rel="stylesheet" href="./Packages - ROS Wiki_files/bootstrap.min.css">
+<script type="text/javascript" async="" src="./Packages - ROS Wiki_files/ga.js.Herunterladen"></script><script src="./Packages - ROS Wiki_files/jquery-1.11.0.min.js.Herunterladen"></script>
+<script src="./Packages - ROS Wiki_files/bootstrap.min.js.Herunterladen"></script>
+<script type="text/javascript" src="./Packages - ROS Wiki_files/sorttable.js.Herunterladen"></script>
+<script type="text/javascript" src="./Packages - ROS Wiki_files/jquery.min.js.Herunterladen"></script>                         
+<script type="text/javascript" src="./Packages - ROS Wiki_files/seesaw.js.Herunterladen"></script> 
+<script type="text/javascript" src="./Packages - ROS Wiki_files/rosversion.js.Herunterladen"></script> 
+<!--script type="text/javascript" src="/custom/libraries/RGraph.common.core.js" ></script Used for metrics only, should be conditional, not at the top-->
+<!--script type="text/javascript" src="/custom/libraries/RGraph.bar.js" ></script same as above -->
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17821189-2']);
+  _gaq.push(['_setDomainName', 'wiki.ros.org']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+<meta name="robots" content="index,nofollow">
+
+<title>Packages - ROS Wiki</title>
+<script type="text/javascript" src="./Packages - ROS Wiki_files/common.js.Herunterladen"></script>
+
+<script type="text/javascript">
+<!--
+var search_hint = "Suche";
+//-->
+</script>
+
+
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="./Packages - ROS Wiki_files/common.css">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="screen" href="./Packages - ROS Wiki_files/screen.css">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="print" href="./Packages - ROS Wiki_files/print.css">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="projection" href="./Packages - ROS Wiki_files/projection.css">
+
+<!-- css only for MS IE6/IE7 browsers -->
+<!--[if lt IE 8]>
+   <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="/moin_static197/rostheme/css/msie.css">
+<![endif]-->
+
+
+
+
+<link rel="canonical" href="http://wiki.ros.org/Packages">
+
+<link rel="Start" href="https://wiki.ros.org/Documentation">
+<link rel="Alternate" title="Wiki Quelltext" href="https://wiki.ros.org/action/raw/Packages?action=raw">
+<link rel="Alternate" media="print" title="Druckansicht" href="https://wiki.ros.org/action/print/Packages?action=print">
+<link rel="Search" href="https://wiki.ros.org/FindPage">
+<link rel="Index" href="https://wiki.ros.org/TitleIndex">
+<link rel="Glossary" href="https://wiki.ros.org/WordIndex">
+<link rel="Help" href="https://wiki.ros.org/HelpOnFormatting">
+</head>
+
+<body lang="de" dir="ltr">
+
+<!-- Google tag (gtag.js) -->
+<script async="" src="./Packages - ROS Wiki_files/js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EVD5Z6G6NH');
+</script>
+
+<script type="text/javascript">
+<!--// Initialize search form
+var f = document.getElementById('searchform');
+if(f) f.getElementsByTagName('label')[0].style.display = 'none';
+var e = document.getElementById('searchinput');
+if(e) {
+  searchChange(e);
+  searchBlur(e);
+}
+
+function handleSubmit() {
+  var f = document.getElementById('searchform');
+  var t = document.getElementById('searchinput');
+  var r = document.getElementById('real_searchinput');
+
+  //alert("handleSubmit "+ t.value);
+  if(t.value.match(/review/)) {
+    r.value = t.value;
+  } else {
+    //r.value = t.value + " -PackageReviewCategory -StackReviewCategory -M3Review -DocReview -ApiReview -HelpOn -BadContent -LocalSpellingWords";
+    r.value = t.value + " -PackageReviewCategory -StackReviewCategory -DocReview -ApiReview";
+  }
+  //return validate(f);
+}
+//-->
+</script>
+
+<div id="dpage">
+  <div id="dpage-inner">
+    <div id="header"><div id="topnav">
+
+<!-- Alert box -->
+<!-- To enable/disable the alert box, uncomment/comment the block below and update the content below the button. -->
+    <div class="alert alert-info alert-dismissable" style="text-align: center;">
+
+<script>
+jQuery(function( $ ){
+    alert_box_name = 'roswiki_eol_alert'
+    state = localStorage.getItem(alert_box_name);
+    if (!state) {
+      localStorage.setItem(alert_box_name, 'open');
+    }
+    state = localStorage.getItem(alert_box_name);
+    if (state == 'closed') {
+        $( '#topnav .alert' ).hide();
+    }
+    $( '.close' ).click(function () {
+	console.log('in .close.click');
+        localStorage.setItem(alert_box_name, 'closed');
+        $( '#topnav .alert' ).hide();
+  });
+});
+</script>
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+      The last ROS 1 release Noetic will go end of life on <a href="https://www.ros.org/blog/noetic-eol/">May 31st</a> with that the ROS Wiki (this website) will also be EOL and transition to being an archive.
+    <strong>Maintainers:</strong>Please migrate any wiki content into your package's README.md file.
+    If you need more help on migrating code please see this <a href="https://docs.ros.org/en/rolling/How-To-Guides/Migrating-from-ROS1.html">migration guide</a>.
+    Or watch Shane's <a href="https://vimeo.com/1026038503?share=copy#t=392.022">Lightning Talk from ROSCon 2024</a>.
+    </div>
+
+<!-- End Alert box -->
+
+      <table id="topnav-table">
+        <tbody><tr>
+          <td width="300" valign="top"><a href="https://wiki.ros.org/"><img border="0" src="./Packages - ROS Wiki_files/ros_org.png" alt="ros.org" width="238" height="51"></a></td>
+          <td width="500" valign="middle">
+            <a href="http://www.ros.org/about-ros">About</a>
+            |
+            <a href="https://wiki.ros.org/Support">Support</a>
+            |
+            <a href="http://discourse.ros.org/">Discussion Forum</a>
+            |
+            <a href="http://index.ros.org/">Index</a>
+            |
+            <a href="http://status.ros.org/">Service Status</a>
+            |
+            <a href="https://robotics.stackexchange.com/questions/tagged/ros">ros @ Robotics Stack Exchange</a>
+          </td>
+
+      </tr>
+      <tr>
+        <td colspan="3" height="53" width="1024"><nobr><img src="./Packages - ROS Wiki_files/menu_left.png" width="17" height="53" alt=""><a href="https://wiki.ros.org/"><img border="0" src="./Packages - ROS Wiki_files/menu_documentation.png" width="237" height="53" alt="Documentation"></a><img src="./Packages - ROS Wiki_files/menu_spacer.png" width="69" height="53"><a href="https://index.ros.org/?search_packages=true"><img border="0" src="./Packages - ROS Wiki_files/menu_browse_software.png" width="268" height="53" alt="Browse Software"></a><img src="./Packages - ROS Wiki_files/menu_spacer.png" width="69" height="53"><a href="https://discourse.ros.org/c/general"><img border="0" src="./Packages - ROS Wiki_files/menu_news.png" width="84" height="53" alt="News"></a><img src="./Packages - ROS Wiki_files/menu_spacer.png" width="69" height="53"><a href="https://wiki.ros.org/ROS/Installation"><img border="0" src="./Packages - ROS Wiki_files/menu_download.png" width="151" height="53" alt="Download"></a><img src="./Packages - ROS Wiki_files/menu_right.png" width="60" height="53"></nobr></td>
+
+      </tr>
+    </tbody></table> <!-- topnav-table -->
+
+    </div> <!-- /#topav -->
+  </div> <!-- /#header -->
+
+
+<div id="header2">
+
+<ul id="pagelocation">
+<li><a href="https://wiki.ros.org/Packages">Packages</a></li>
+</ul>
+
+<div id="locationline">
+</div>
+</div>
+
+<div id="sidebar">
+<h4>ROS 2 Documentation</h4><p>The ROS Wiki is for ROS 1. Are you using ROS 2 (<a href="http://docs.ros.org/en/humble/">Humble</a>, <a href="http://docs.ros.org/en/iron/">Iron</a>, or <a href="http://docs.ros.org/en/rolling/">Rolling</a>)? <br><a href="http://docs.ros.org/">Check out the ROS 2 Project Documentation</a><br>Package specific documentation can be found on <a href="https://index.ros.org/">index.ros.org</a></p>
+<div class="sidepanel">
+<h1>Wiki</h1>
+
+<ul id="navibar">
+<li class="wikilink"><a href="https://wiki.ros.org/Distributions">Distributions</a></li><li class="wikilink"><a href="https://wiki.ros.org/ROS/Installation">ROS/Installation</a></li><li class="wikilink"><a href="https://wiki.ros.org/ROS/Tutorials">ROS/Tutorials</a></li><li class="wikilink"><a href="https://wiki.ros.org/RecentChanges">RecentChanges</a></li><li class="current"><a href="https://wiki.ros.org/Packages">Packages</a></li>
+</ul>
+
+</div>
+<div class="sidepanel">
+<h1>Seite</h1>
+<ul class="editbar"><li><span class="disabled">Geschützte Seite</span></li><li class="toggleCommentsButton" style="display:none;"><a href="https://wiki.ros.org/Packages#" class="nbcomment" onclick="toggleComments();return false;">Kommentare</a></li><li><a class="nbinfo" href="https://wiki.ros.org/action/info/Packages?action=info" rel="nofollow">Info</a></li><li><a class="nbattachments" href="https://wiki.ros.org/action/AttachFile/Packages?action=AttachFile" rel="nofollow">Dateianhänge</a></li><li>
+<form class="actionsmenu" method="GET" action="https://wiki.ros.org/Packages">
+<div>
+    
+    <select name="action" onchange="if ((this.selectedIndex != 0) &amp;&amp;
+                      (this.options[this.selectedIndex].disabled == false)) {
+                this.form.submit();
+            }
+            this.selectedIndex = 0;">
+        <option value="show">Weitere Aktionen:</option><option value="raw">Rohform</option>
+<option value="print">Druckansicht</option>
+<option value="RenderAsDocbook">Als Docbook ausgeben</option>
+<option value="show" disabled="" class="disabled">Cache löschen</option>
+<option value="show" disabled="" class="disabled">-----------------------------------</option>
+<option value="SpellCheck">Rechtschreibung prüfen</option>
+<option value="LikePages">Ähnliche Seiten</option>
+<option value="LocalSiteMap">ÜbersichtsKarte</option>
+<option value="show" disabled="" class="disabled">-----------------------------------</option>
+<option value="RenamePage" disabled="" class="disabled">Seite umbenennen</option>
+<option value="CopyPage">Seite kopieren</option>
+<option value="DeletePage" disabled="" class="disabled">Seite löschen</option>
+<option value="show" disabled="" class="disabled">-----------------------------------</option>
+<option value="MyPages">Meine Seiten</option>
+<option value="show" disabled="" class="disabled">Abo für Benutzer</option>
+<option value="show" disabled="" class="disabled">-----------------------------------</option>
+<option value="show" disabled="" class="disabled">Spam entfernen</option>
+<option value="show" disabled="" class="disabled">Diese Revision restaurieren</option>
+<option value="PackagePages">Seiten einpacken</option>
+<option value="SyncPages">Seiten synchronisieren</option>
+<option value="show" disabled="" class="disabled">-----------------------------------</option>
+<option value="CreatePdfDocument">CreatePdfDocument</option>
+<option value="Load">Laden</option>
+<option value="RawFile">RawFile</option>
+<option value="Save">Speichern</option>
+<option value="SlideShow">SlideShow</option>
+    </select>
+    
+    
+</div>
+<script type="text/javascript">
+<!--// Init menu
+actionsMenuInit('Weitere Aktionen:');
+//-->
+</script>
+</form>
+</li></ul>
+
+</div>
+<div class="sidepanel">
+<h1>Benutzer</h1>
+<ul id="username"><li><a href="https://wiki.ros.org/action/login/Packages?action=login" id="login" rel="nofollow">Anmelden</a></li></ul>
+</div>
+</div>
+
+<div id="page" lang="en" dir="ltr">
+
+<div dir="ltr" id="content" lang="en"><span class="anchor" id="top"></span>
+<span class="anchor" id="line-1"></span><p class="line867"><span class="macro-nav-menu"><strong><em><a href="https://wiki.ros.org/ROS/Concepts">ROS Filesystem Concepts</a></em></strong><em>: Packages | <a href="https://wiki.ros.org/Metapackages">Metapackages</a> | <a href="https://wiki.ros.org/Manifest">Manifest</a> | <a href="https://wiki.ros.org/msg">msg</a> | <a href="https://wiki.ros.org/srv">srv</a></em></span>
+ <span class="anchor" id="line-2"></span><span class="anchor" id="line-3"></span></p><p class="line867"></p><div class="table-of-contents"><p class="table-of-contents-heading">Inhaltsverzeichnis</p><ol><li>
+<a href="https://wiki.ros.org/Packages#Common_Files_and_Directories">Common Files and Directories</a></li><li>
+<a href="https://wiki.ros.org/Packages#Command-line_Tools">Command-line Tools</a></li><li>
+<a href="https://wiki.ros.org/Packages#Client_Library_Support">Client Library Support</a><ol><li>
+<a href="https://wiki.ros.org/Packages#Python">Python</a></li><li>
+<a href="https://wiki.ros.org/Packages#C.2B-.2B-">C++</a></li></ol></li></ol></div><p class="line874"> <span class="anchor" id="line-4"></span><span class="anchor" id="line-5"></span></p><p class="line867"><span class="anchor" id="line-6"></span><span class="anchor" id="line-7"></span></p><div class="yellow"><span class="anchor" id="line-1-1"></span><p class="line862">For rosbuild, see: <a href="https://wiki.ros.org/rosbuild/Packages">rosbuild/Packages</a> </p></div><span class="anchor" id="line-8"></span><span class="anchor" id="line-9"></span><p class="line862">Software in ROS is organized in <em>packages</em>. A package might contain ROS <a href="https://wiki.ros.org/Nodes">nodes</a>, a ROS-independent library, a dataset, configuration files, a third-party piece of software, or anything else that logically constitutes a useful module. The goal of these packages it to provide this useful functionality in an easy-to-consume manner so that software can be easily reused. In general, ROS packages follow a "Goldilocks" principle: enough functionality to be useful, but not too much that the package is heavyweight and difficult to use from other software. <span class="anchor" id="line-10"></span><span class="anchor" id="line-11"></span></p><p class="line862">Packages are easy to create by hand or with tools like <a href="https://wiki.ros.org/catkin/commands/catkin_create_pkg">catkin_create_pkg</a>. A ROS package is simply a directory descended from <tt class="backtick">ROS_PACKAGE_PATH</tt> (see <a href="https://wiki.ros.org/ROS/EnvironmentVariables">ROS Environment Variables</a>) that has a <a href="https://wiki.ros.org/Manifest">package.xml</a> file in it. Packages are the most atomic unit of build and the unit of release. This means that a package is the smallest individual thing you can build in ROS and it is the way software is bundled for release (meaning, for example, there is one debian package for each ROS package), respectively. <span class="anchor" id="line-12"></span><span class="anchor" id="line-13"></span></p><p class="line862">Please see the <a href="https://wiki.ros.org/catkin/package.xml">catkin/package.xml</a> section for documentation on how to read and write <tt class="backtick">package.xml</tt> files. <span class="anchor" id="line-14"></span><span class="anchor" id="line-15"></span></p><p class="line867">
+</p><h2 id="Common_Files_and_Directories">Common Files and Directories</h2>
+<span class="anchor" id="line-16"></span><span class="anchor" id="line-17"></span><p class="line874">ROS packages tend to follow a common structure. Here are some of the directories and files you may notice. <span class="anchor" id="line-18"></span><span class="anchor" id="line-19"></span></p><ul><li><p class="line891"><tt class="backtick">include/package_name</tt>: C++ include headers (make sure to export in the <a href="https://wiki.ros.org/catkin/CMakeLists.txt#catkin_package.28.29">CMakeLists.txt</a>) <span class="anchor" id="line-20"></span></p></li><li><p class="line891"><tt class="backtick">msg/</tt>: <a href="https://wiki.ros.org/msg">Folder containing Message (msg) types</a> <span class="anchor" id="line-21"></span></p></li><li><p class="line891"><tt class="backtick">src/package_name/</tt>: Source files, especially Python source that are exported to other packages. <span class="anchor" id="line-22"></span></p></li><li><p class="line891"><tt class="backtick">srv/</tt>: <a href="https://wiki.ros.org/srv">Folder containing Service (srv) types</a> <span class="anchor" id="line-23"></span></p></li><li><p class="line891"><tt class="backtick">scripts/</tt>: executable scripts <span class="anchor" id="line-24"></span></p></li><li><p class="line891"><tt class="backtick">CMakeLists.txt</tt>: CMake build file (see <a href="https://wiki.ros.org/catkin/CMakeLists.txt">catkin/CMakeLists.txt</a>) <span class="anchor" id="line-25"></span></p></li><li><p class="line891"><tt class="backtick">package.xml</tt>: Package <a href="https://wiki.ros.org/catkin/package.xml">catkin/package.xml</a> <span class="anchor" id="line-26"></span></p></li><li><p class="line891"><tt class="backtick">CHANGELOG.rst</tt>: Many packages will define a changelog which can be automatically injected into binary packaging and into the wiki page for the package <span class="anchor" id="line-27"></span><span class="anchor" id="line-28"></span></p></li></ul><p class="line867">
+</p><h2 id="Command-line_Tools">Command-line Tools</h2>
+<span class="anchor" id="line-29"></span><span class="anchor" id="line-30"></span><p class="line874">Packages are a very central concept to how files in ROS are organized, so there are quite a few tools in ROS that help you manage them. This includes: <span class="anchor" id="line-31"></span><span class="anchor" id="line-32"></span></p><ul><li><p class="line891"><a href="https://wiki.ros.org/rospack">rospack</a>: find and retrieve information about packages <span class="anchor" id="line-33"></span></p></li><li><p class="line891"><a href="https://wiki.ros.org/catkin/commands/catkin_create_pkg">catkin_create_pkg</a>: create a new package <span class="anchor" id="line-34"></span></p></li><li><p class="line891"><a href="https://wiki.ros.org/catkin/commands/catkin_make">catkin_make</a>: build a workspace of packages <span class="anchor" id="line-35"></span></p></li><li><p class="line891"><a href="https://wiki.ros.org/rosdep">rosdep</a>: install system dependencies of a package <span class="anchor" id="line-36"></span></p></li><li><p class="line891"><a href="https://wiki.ros.org/rqt">rqt</a>: In <a href="https://wiki.ros.org/rqt">rqt</a> there is a plugin called "Introspection/Package Graph", which visualizes package dependencies as a graph <span class="anchor" id="line-37"></span><span class="anchor" id="line-38"></span></p></li></ul><p class="line862">There are also extensions to common Unix shells that provide additional functionality to help you navigate and use packages. The most commonly used of these is <a href="https://wiki.ros.org/rosbash">rosbash</a>, which provides ROS-variants of common Unix shell commands. The most commonly used of these is <tt class="backtick">roscd</tt>, which performs a <tt class="backtick">cd</tt> to the directory of a package, e.g. <span class="anchor" id="line-39"></span><span class="anchor" id="line-40"></span></p><p class="line867"><span class="anchor" id="line-41"></span><span class="anchor" id="line-42"></span></p><pre><span class="anchor" id="line-1-2"></span>roscd roscpp_tutorials</pre><span class="anchor" id="line-43"></span><span class="anchor" id="line-44"></span><p class="line867">
+</p><h2 id="Client_Library_Support">Client Library Support</h2>
+<span class="anchor" id="line-45"></span><span class="anchor" id="line-46"></span><p class="line867">
+</p><h3 id="Python">Python</h3>
+<span class="anchor" id="line-47"></span><span class="anchor" id="line-48"></span><p class="line862">In Python, you can use the <tt class="backtick">RosPack</tt> class in the <a class="http" href="http://docs.ros.org/independent/api/rospkg/html/">rospkg</a> library to get information about ROS packages. For example: <span class="anchor" id="line-49"></span><span class="anchor" id="line-50"></span></p><p class="line867"><span class="anchor" id="line-51"></span><span class="anchor" id="line-52"></span><span class="anchor" id="line-53"></span><span class="anchor" id="line-54"></span><span class="anchor" id="line-55"></span><span class="anchor" id="line-56"></span><span class="anchor" id="line-57"></span><span class="anchor" id="line-58"></span><span class="anchor" id="line-59"></span><span class="anchor" id="line-60"></span><span class="anchor" id="line-61"></span><span class="anchor" id="line-1-3"></span></p><div class="highlight python"><div class="codearea" dir="ltr" lang="en">
+<script type="text/javascript">
+function isnumbered(obj) {
+  return obj.childNodes.length && obj.firstChild.childNodes.length && obj.firstChild.firstChild.className == 'LineNumber';
+}
+function nformat(num,chrs,add) {
+  var nlen = Math.max(0,chrs-(''+num).length), res = '';
+  while (nlen>0) { res += ' '; nlen-- }
+  return res+num+add;
+}
+function addnumber(did, nstart, nstep) {
+  var c = document.getElementById(did), l = c.firstChild, n = 1;
+  if (!isnumbered(c)) {
+    if (typeof nstart == 'undefined') nstart = 1;
+    if (typeof nstep  == 'undefined') nstep = 1;
+    var n = nstart;
+    while (l != null) {
+      if (l.tagName == 'SPAN') {
+        var s = document.createElement('SPAN');
+        var a = document.createElement('A');
+        s.className = 'LineNumber';
+        a.appendChild(document.createTextNode(nformat(n,4,'')));
+        a.href = '#' + did + '_' + n;
+        s.appendChild(a);
+        s.appendChild(document.createTextNode(' '));
+        n += nstep;
+        if (l.childNodes.length) {
+          l.insertBefore(s, l.firstChild);
+        }
+        else {
+          l.appendChild(s);
+        }
+      }
+      l = l.nextSibling;
+    }
+  }
+  return false;
+}
+function remnumber(did) {
+  var c = document.getElementById(did), l = c.firstChild;
+  if (isnumbered(c)) {
+    while (l != null) {
+      if (l.tagName == 'SPAN' && l.firstChild.className == 'LineNumber') l.removeChild(l.firstChild);
+      l = l.nextSibling;
+    }
+  }
+  return false;
+}
+function togglenumber(did, nstart, nstep) {
+  var c = document.getElementById(did);
+  if (isnumbered(c)) {
+    remnumber(did);
+  } else {
+    addnumber(did,nstart,nstep);
+  }
+  return false;
+}
+</script>
+
+<script type="text/javascript">
+document.write('<a href="#" onclick="return togglenumber(\'CA-72c9b4b6c6fe057c81fed8fe2f4699d00769aba8\', 1, 1);" \
+                class="codenumbers">Zeilennummern ein/ausschalten<\/a>');
+</script><a href="https://wiki.ros.org/Packages#" onclick="return togglenumber(&#39;CA-72c9b4b6c6fe057c81fed8fe2f4699d00769aba8&#39;, 1, 1);" class="codenumbers">Zeilennummern ein/ausschalten</a>
+<pre dir="ltr" id="CA-72c9b4b6c6fe057c81fed8fe2f4699d00769aba8" lang="en"><span class="line"><span class="LineNumber"><a href="https://wiki.ros.org/Packages#CA-72c9b4b6c6fe057c81fed8fe2f4699d00769aba8_1">   1</a> </span><span class="LineAnchor" id="CA-72c9b4b6c6fe057c81fed8fe2f4699d00769aba8_1"></span><span class="anchor" id="line-1-4"></span><span class="ResWord">import</span> <span class="ID">rospkg</span></span>
+<span class="line"><span class="LineNumber"><a href="https://wiki.ros.org/Packages#CA-72c9b4b6c6fe057c81fed8fe2f4699d00769aba8_2">   2</a> </span><span class="LineAnchor" id="CA-72c9b4b6c6fe057c81fed8fe2f4699d00769aba8_2"></span><span class="anchor" id="line-2-1"></span></span>
+<span class="line"><span class="LineNumber"><a href="https://wiki.ros.org/Packages#CA-72c9b4b6c6fe057c81fed8fe2f4699d00769aba8_3">   3</a> </span><span class="LineAnchor" id="CA-72c9b4b6c6fe057c81fed8fe2f4699d00769aba8_3"></span><span class="anchor" id="line-3-1"></span><span class="Comment"># get an instance of RosPack with the default search paths</span></span>
+<span class="line"><span class="LineNumber"><a href="https://wiki.ros.org/Packages#CA-72c9b4b6c6fe057c81fed8fe2f4699d00769aba8_4">   4</a> </span><span class="LineAnchor" id="CA-72c9b4b6c6fe057c81fed8fe2f4699d00769aba8_4"></span><span class="anchor" id="line-4-1"></span><span class="ID">rospack</span> = <span class="ID">rospkg</span>.<span class="ID">RosPack</span>()</span>
+<span class="line"><span class="LineNumber"><a href="https://wiki.ros.org/Packages#CA-72c9b4b6c6fe057c81fed8fe2f4699d00769aba8_5">   5</a> </span><span class="LineAnchor" id="CA-72c9b4b6c6fe057c81fed8fe2f4699d00769aba8_5"></span><span class="anchor" id="line-5-1"></span></span>
+<span class="line"><span class="LineNumber"><a href="https://wiki.ros.org/Packages#CA-72c9b4b6c6fe057c81fed8fe2f4699d00769aba8_6">   6</a> </span><span class="LineAnchor" id="CA-72c9b4b6c6fe057c81fed8fe2f4699d00769aba8_6"></span><span class="anchor" id="line-6-1"></span><span class="Comment"># list all packages, equivalent to rospack list</span></span>
+<span class="line"><span class="LineNumber"><a href="https://wiki.ros.org/Packages#CA-72c9b4b6c6fe057c81fed8fe2f4699d00769aba8_7">   7</a> </span><span class="LineAnchor" id="CA-72c9b4b6c6fe057c81fed8fe2f4699d00769aba8_7"></span><span class="anchor" id="line-7-1"></span><span class="ID">rospack</span>.<span class="ID">list</span>() </span>
+<span class="line"><span class="LineNumber"><a href="https://wiki.ros.org/Packages#CA-72c9b4b6c6fe057c81fed8fe2f4699d00769aba8_8">   8</a> </span><span class="LineAnchor" id="CA-72c9b4b6c6fe057c81fed8fe2f4699d00769aba8_8"></span><span class="anchor" id="line-8-1"></span></span>
+<span class="line"><span class="LineNumber"><a href="https://wiki.ros.org/Packages#CA-72c9b4b6c6fe057c81fed8fe2f4699d00769aba8_9">   9</a> </span><span class="LineAnchor" id="CA-72c9b4b6c6fe057c81fed8fe2f4699d00769aba8_9"></span><span class="anchor" id="line-9-1"></span><span class="Comment"># get the file path for rospy_tutorials</span></span>
+<span class="line"><span class="LineNumber"><a href="https://wiki.ros.org/Packages#CA-72c9b4b6c6fe057c81fed8fe2f4699d00769aba8_10">  10</a> </span><span class="LineAnchor" id="CA-72c9b4b6c6fe057c81fed8fe2f4699d00769aba8_10"></span><span class="anchor" id="line-10-1"></span><span class="ID">rospack</span>.<span class="ID">get_path</span>(<span class="String">'</span><span class="String">rospy_tutorials</span><span class="String">'</span>)</span>
+</pre></div></div><span class="anchor" id="line-62"></span><span class="anchor" id="line-63"></span><p class="line862">See more at <a class="http" href="http://docs.ros.org/independent/api/rospkg/html/genindex.html">rospkg API index</a>. <span class="anchor" id="line-64"></span><span class="anchor" id="line-65"></span></p><p class="line867">
+</p><h3 id="C.2B-.2B-">C++</h3>
+<span class="anchor" id="line-66"></span><span class="anchor" id="line-67"></span><p class="line862">In C++, you can use <tt class="backtick">ros::package</tt> in the <a href="https://wiki.ros.org/roslib">roslib</a> package to get information about ROS packages. For example:  <span class="anchor" id="line-68"></span><span class="anchor" id="line-69"></span><span class="anchor" id="line-70"></span><span class="anchor" id="line-71"></span><span class="anchor" id="line-72"></span><span class="anchor" id="line-73"></span><span class="anchor" id="line-74"></span><span class="anchor" id="line-75"></span><span class="anchor" id="line-76"></span><span class="anchor" id="line-77"></span></p><pre><span class="anchor" id="line-1-5"></span>#include &lt;ros/package.h&gt;
+<span class="anchor" id="line-2-2"></span>
+<span class="anchor" id="line-3-2"></span>...
+<span class="anchor" id="line-4-2"></span>
+<span class="anchor" id="line-5-2"></span>  std::string path = ros::package::getPath("roslib");
+<span class="anchor" id="line-6-2"></span>  using package::V_string;
+<span class="anchor" id="line-7-2"></span>  V_string packages;
+<span class="anchor" id="line-8-2"></span>  ros::package::getAll(packages);</pre><span class="anchor" id="line-78"></span><span class="anchor" id="bottom"></span></div></div>
+<div id="pagebottom"></div>
+</div>
+
+<p id="pageinfo" class="info" lang="de" dir="ltr">Wiki: Packages  (zuletzt geändert am 2019-04-14 23:31:02 durch <span title="130s @ 47-33-47-138.dhcp.reno.nv.charter.com[47.33.47.138]"><a class="nonexistent" href="https://wiki.ros.org/IsaacSaito" title="130s @ 47-33-47-138.dhcp.reno.nv.charter.com[47.33.47.138]">IsaacSaito</a></span>)</p>
+
+
+
+
+<div style="margin-top: 9px;" class="footer">
+Except where otherwise noted, the ROS wiki is licensed under the <br><a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+<hr style="margin-top: 10px;">
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">
+<a href="https://www.openrobotics.org/"><img style="margin-top: -1px;" src="./Packages - ROS Wiki_files/brought_by_horiz.png"><p></p></a>
+  </div>
+</div>
+</div>
+
+  </div> <!-- /#dpage-inner, /#dpage -->
+
+
+
+
+
+</body></html>

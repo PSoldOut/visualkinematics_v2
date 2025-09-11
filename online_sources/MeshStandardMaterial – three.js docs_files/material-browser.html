@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<!-- saved from url=(0074)https://threejs.org/docs/scenes/material-browser.html#MeshStandardMaterial -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<title>Three.js Material Browser</title>
+		<link rel="shortcut icon" href="https://threejs.org/files/favicon.ico">
+		<style>.lil-gui{--background-color:#1f1f1f;--text-color:#ebebeb;--title-background-color:#111;--title-text-color:#ebebeb;--widget-color:#424242;--hover-color:#4f4f4f;--focus-color:#595959;--number-color:#2cc9ff;--string-color:#a2db3c;--font-size:11px;--input-font-size:11px;--font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;--font-family-mono:Menlo,Monaco,Consolas,"Droid Sans Mono",monospace;--padding:4px;--spacing:4px;--widget-height:20px;--name-width:45%;--slider-knob-width:2px;--slider-input-width:27%;--color-input-width:27%;--slider-input-min-width:45px;--color-input-min-width:45px;--folder-indent:7px;--widget-padding:0 0 0 3px;--widget-border-radius:2px;--checkbox-size:calc(var(--widget-height)*0.75);--scrollbar-width:5px;background-color:var(--background-color);color:var(--text-color);font-family:var(--font-family);font-size:var(--font-size);font-style:normal;font-weight:400;line-height:1;text-align:left;touch-action:manipulation;user-select:none;-webkit-user-select:none}.lil-gui,.lil-gui *{box-sizing:border-box;margin:0;padding:0}.lil-gui.root{display:flex;flex-direction:column;width:var(--width,245px)}.lil-gui.root>.title{background:var(--title-background-color);color:var(--title-text-color)}.lil-gui.root>.children{overflow-x:hidden;overflow-y:auto}.lil-gui.root>.children::-webkit-scrollbar{background:var(--background-color);height:var(--scrollbar-width);width:var(--scrollbar-width)}.lil-gui.root>.children::-webkit-scrollbar-thumb{background:var(--focus-color);border-radius:var(--scrollbar-width)}.lil-gui.force-touch-styles{--widget-height:28px;--padding:6px;--spacing:6px;--font-size:13px;--input-font-size:16px;--folder-indent:10px;--scrollbar-width:7px;--slider-input-min-width:50px;--color-input-min-width:65px}.lil-gui.autoPlace{max-height:100%;position:fixed;right:15px;top:0;z-index:1001}.lil-gui .controller{align-items:center;display:flex;margin:var(--spacing) 0;padding:0 var(--padding)}.lil-gui .controller.disabled{opacity:.5}.lil-gui .controller.disabled,.lil-gui .controller.disabled *{pointer-events:none!important}.lil-gui .controller>.name{flex-shrink:0;line-height:var(--widget-height);min-width:var(--name-width);padding-right:var(--spacing);white-space:pre}.lil-gui .controller .widget{align-items:center;display:flex;min-height:var(--widget-height);position:relative;width:100%}.lil-gui .controller.string input{color:var(--string-color)}.lil-gui .controller.boolean .widget{cursor:pointer}.lil-gui .controller.color .display{border-radius:var(--widget-border-radius);height:var(--widget-height);position:relative;width:100%}.lil-gui .controller.color input[type=color]{cursor:pointer;height:100%;opacity:0;width:100%}.lil-gui .controller.color input[type=text]{flex-shrink:0;font-family:var(--font-family-mono);margin-left:var(--spacing);min-width:var(--color-input-min-width);width:var(--color-input-width)}.lil-gui .controller.option select{max-width:100%;opacity:0;position:absolute;width:100%}.lil-gui .controller.option .display{background:var(--widget-color);border-radius:var(--widget-border-radius);height:var(--widget-height);line-height:var(--widget-height);max-width:100%;overflow:hidden;padding-left:.55em;padding-right:1.75em;pointer-events:none;position:relative;word-break:break-all}.lil-gui .controller.option .display.active{background:var(--focus-color)}.lil-gui .controller.option .display:after{bottom:0;content:"↕";font-family:lil-gui;padding-right:.375em;position:absolute;right:0;top:0}.lil-gui .controller.option .widget,.lil-gui .controller.option select{cursor:pointer}.lil-gui .controller.number input{color:var(--number-color)}.lil-gui .controller.number.hasSlider input{flex-shrink:0;margin-left:var(--spacing);min-width:var(--slider-input-min-width);width:var(--slider-input-width)}.lil-gui .controller.number .slider{background-color:var(--widget-color);border-radius:var(--widget-border-radius);cursor:ew-resize;height:var(--widget-height);overflow:hidden;padding-right:var(--slider-knob-width);touch-action:pan-y;width:100%}.lil-gui .controller.number .slider.active{background-color:var(--focus-color)}.lil-gui .controller.number .slider.active .fill{opacity:.95}.lil-gui .controller.number .fill{border-right:var(--slider-knob-width) solid var(--number-color);box-sizing:content-box;height:100%}.lil-gui-dragging .lil-gui{--hover-color:var(--widget-color)}.lil-gui-dragging *{cursor:ew-resize!important}.lil-gui-dragging.lil-gui-vertical *{cursor:ns-resize!important}.lil-gui .title{--title-height:calc(var(--widget-height) + var(--spacing)*1.25);-webkit-tap-highlight-color:transparent;text-decoration-skip:objects;cursor:pointer;font-weight:600;height:var(--title-height);line-height:calc(var(--title-height) - 4px);outline:none;padding:0 var(--padding)}.lil-gui .title:before{content:"▾";display:inline-block;font-family:lil-gui;padding-right:2px}.lil-gui .title:active{background:var(--title-background-color);opacity:.75}.lil-gui.root>.title:focus{text-decoration:none!important}.lil-gui.closed>.title:before{content:"▸"}.lil-gui.closed>.children{opacity:0;transform:translateY(-7px)}.lil-gui.closed:not(.transition)>.children{display:none}.lil-gui.transition>.children{overflow:hidden;pointer-events:none;transition-duration:.3s;transition-property:height,opacity,transform;transition-timing-function:cubic-bezier(.2,.6,.35,1)}.lil-gui .children:empty:before{content:"Empty";display:block;font-style:italic;height:var(--widget-height);line-height:var(--widget-height);margin:var(--spacing) 0;opacity:.5;padding:0 var(--padding)}.lil-gui.root>.children>.lil-gui>.title{border-width:0;border-bottom:1px solid var(--widget-color);border-left:0 solid var(--widget-color);border-right:0 solid var(--widget-color);border-top:1px solid var(--widget-color);transition:border-color .3s}.lil-gui.root>.children>.lil-gui.closed>.title{border-bottom-color:transparent}.lil-gui+.controller{border-top:1px solid var(--widget-color);margin-top:0;padding-top:var(--spacing)}.lil-gui .lil-gui .lil-gui>.title{border:none}.lil-gui .lil-gui .lil-gui>.children{border:none;border-left:2px solid var(--widget-color);margin-left:var(--folder-indent)}.lil-gui .lil-gui .controller{border:none}.lil-gui input{-webkit-tap-highlight-color:transparent;background:var(--widget-color);border:0;border-radius:var(--widget-border-radius);color:var(--text-color);font-family:var(--font-family);font-size:var(--input-font-size);height:var(--widget-height);outline:none;width:100%}.lil-gui input:disabled{opacity:1}.lil-gui input[type=number],.lil-gui input[type=text]{padding:var(--widget-padding)}.lil-gui input[type=number]:focus,.lil-gui input[type=text]:focus{background:var(--focus-color)}.lil-gui input::-webkit-inner-spin-button,.lil-gui input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}.lil-gui input[type=number]{-moz-appearance:textfield}.lil-gui input[type=checkbox]{appearance:none;-webkit-appearance:none;border-radius:var(--widget-border-radius);cursor:pointer;height:var(--checkbox-size);text-align:center;width:var(--checkbox-size)}.lil-gui input[type=checkbox]:checked:before{content:"✓";font-family:lil-gui;font-size:var(--checkbox-size);line-height:var(--checkbox-size)}.lil-gui button{-webkit-tap-highlight-color:transparent;background:var(--widget-color);border:1px solid var(--widget-color);border-radius:var(--widget-border-radius);color:var(--text-color);cursor:pointer;font-family:var(--font-family);font-size:var(--font-size);height:var(--widget-height);line-height:calc(var(--widget-height) - 4px);outline:none;text-align:center;text-transform:none;width:100%}.lil-gui button:active{background:var(--focus-color)}@font-face{font-family:lil-gui;src:url("data:application/font-woff;charset=utf-8;base64,d09GRgABAAAAAAUsAAsAAAAACJwAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABHU1VCAAABCAAAAH4AAADAImwmYE9TLzIAAAGIAAAAPwAAAGBKqH5SY21hcAAAAcgAAAD0AAACrukyyJBnbHlmAAACvAAAAF8AAACEIZpWH2hlYWQAAAMcAAAAJwAAADZfcj2zaGhlYQAAA0QAAAAYAAAAJAC5AHhobXR4AAADXAAAABAAAABMAZAAAGxvY2EAAANsAAAAFAAAACgCEgIybWF4cAAAA4AAAAAeAAAAIAEfABJuYW1lAAADoAAAASIAAAIK9SUU/XBvc3QAAATEAAAAZgAAAJCTcMc2eJxVjbEOgjAURU+hFRBK1dGRL+ALnAiToyMLEzFpnPz/eAshwSa97517c/MwwJmeB9kwPl+0cf5+uGPZXsqPu4nvZabcSZldZ6kfyWnomFY/eScKqZNWupKJO6kXN3K9uCVoL7iInPr1X5baXs3tjuMqCtzEuagm/AAlzQgPAAB4nGNgYRBlnMDAysDAYM/gBiT5oLQBAwuDJAMDEwMrMwNWEJDmmsJwgCFeXZghBcjlZMgFCzOiKOIFAB71Bb8AeJy1kjFuwkAQRZ+DwRAwBtNQRUGKQ8OdKCAWUhAgKLhIuAsVSpWz5Bbkj3dEgYiUIszqWdpZe+Z7/wB1oCYmIoboiwiLT2WjKl/jscrHfGg/pKdMkyklC5Zs2LEfHYpjcRoPzme9MWWmk3dWbK9ObkWkikOetJ554fWyoEsmdSlt+uR0pCJR34b6t/TVg1SY3sYvdf8vuiKrpyaDXDISiegp17p7579Gp3p++y7HPAiY9pmTibljrr85qSidtlg4+l25GLCaS8e6rRxNBmsnERunKbaOObRz7N72ju5vdAjYpBXHgJylOAVsMseDAPEP8LYoUHicY2BiAAEfhiAGJgZWBgZ7RnFRdnVJELCQlBSRlATJMoLV2DK4glSYs6ubq5vbKrJLSbGrgEmovDuDJVhe3VzcXFwNLCOILB/C4IuQ1xTn5FPilBTj5FPmBAB4WwoqAHicY2BkYGAA4sk1sR/j+W2+MnAzpDBgAyEMQUCSg4EJxAEAwUgFHgB4nGNgZGBgSGFggJMhDIwMqEAYAByHATJ4nGNgAIIUNEwmAABl3AGReJxjYAACIQYlBiMGJ3wQAEcQBEV4nGNgZGBgEGZgY2BiAAEQyQWEDAz/wXwGAAsPATIAAHicXdBNSsNAHAXwl35iA0UQXYnMShfS9GPZA7T7LgIu03SSpkwzYTIt1BN4Ak/gKTyAeCxfw39jZkjymzcvAwmAW/wgwHUEGDb36+jQQ3GXGot79L24jxCP4gHzF/EIr4jEIe7wxhOC3g2TMYy4Q7+Lu/SHuEd/ivt4wJd4wPxbPEKMX3GI5+DJFGaSn4qNzk8mcbKSR6xdXdhSzaOZJGtdapd4vVPbi6rP+cL7TGXOHtXKll4bY1Xl7EGnPtp7Xy2n00zyKLVHfkHBa4IcJ2oD3cgggWvt/V/FbDrUlEUJhTn/0azVWbNTNr0Ens8de1tceK9xZmfB1CPjOmPH4kitmvOubcNpmVTN3oFJyjzCvnmrwhJTzqzVj9jiSX911FjeAAB4nG3HMRKCMBBA0f0giiKi4DU8k0V2GWbIZDOh4PoWWvq6J5V8If9NVNQcaDhyouXMhY4rPTcG7jwYmXhKq8Wz+p762aNaeYXom2n3m2dLTVgsrCgFJ7OTmIkYbwIbC6vIB7WmFfAAAA==") format("woff")}@media (pointer:coarse){.lil-gui.allow-touch-styles{--widget-height:28px;--padding:6px;--spacing:6px;--font-size:13px;--input-font-size:16px;--folder-indent:10px;--scrollbar-width:7px;--slider-input-min-width:50px;--color-input-min-width:65px}}@media (hover:hover){.lil-gui .controller.color .display:hover:before{border:1px solid #fff9;border-radius:var(--widget-border-radius);bottom:0;content:" ";display:block;left:0;position:absolute;right:0;top:0}.lil-gui .controller.option .display.focus{background:var(--focus-color)}.lil-gui .controller.option .widget:hover .display{background:var(--hover-color)}.lil-gui .controller.number .slider:hover{background-color:var(--hover-color)}body:not(.lil-gui-dragging) .lil-gui .title:hover{background:var(--title-background-color);opacity:.85}.lil-gui .title:focus{text-decoration:underline var(--focus-color)}.lil-gui input:hover{background:var(--hover-color)}.lil-gui input:active{background:var(--focus-color)}.lil-gui input[type=checkbox]:focus{box-shadow:inset 0 0 0 1px var(--focus-color)}.lil-gui button:hover{background:var(--hover-color);border-color:var(--hover-color)}.lil-gui button:focus{border-color:var(--focus-color)}}</style><link rel="stylesheet" type="text/css" href="./main.css">
+		<style>
+			canvas {
+				display: block;
+				width: 100%;
+				height: 100%;
+			}
+
+			#newWindow {
+				display: block;
+				position: absolute;
+				bottom: 0.3em;
+				left: 0.5em;
+				color: #fff;
+			}
+		</style>
+	</head>
+	<body>
+		<script type="importmap">
+			{
+				"imports": {
+					"three": "../../build/three.module.js",
+					"three/addons/": "../../examples/jsm/"
+				}
+			}
+		</script>
+
+		<a id="newWindow" href="https://threejs.org/docs/scenes/material-browser.html#MeshStandardMaterial" target="_blank">Open in New Window</a>
+
+		<script type="module">
+
+			import * as THREE from 'three';
+			import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
+			import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+			const constants = {
+
+				combine: {
+
+					'THREE.MultiplyOperation': THREE.MultiplyOperation,
+					'THREE.MixOperation': THREE.MixOperation,
+					'THREE.AddOperation': THREE.AddOperation
+
+				},
+
+				side: {
+
+					'THREE.FrontSide': THREE.FrontSide,
+					'THREE.BackSide': THREE.BackSide,
+					'THREE.DoubleSide': THREE.DoubleSide
+
+				},
+
+				blendingMode: {
+
+					'THREE.NoBlending': THREE.NoBlending,
+					'THREE.NormalBlending': THREE.NormalBlending,
+					'THREE.AdditiveBlending': THREE.AdditiveBlending,
+					'THREE.SubtractiveBlending': THREE.SubtractiveBlending,
+					'THREE.MultiplyBlending': THREE.MultiplyBlending,
+					'THREE.CustomBlending': THREE.CustomBlending
+
+				},
+
+				equations: {
+
+					'THREE.AddEquation': THREE.AddEquation,
+					'THREE.SubtractEquation': THREE.SubtractEquation,
+					'THREE.ReverseSubtractEquation': THREE.ReverseSubtractEquation
+
+				},
+
+				destinationFactors: {
+
+					'THREE.ZeroFactor': THREE.ZeroFactor,
+					'THREE.OneFactor': THREE.OneFactor,
+					'THREE.SrcColorFactor': THREE.SrcColorFactor,
+					'THREE.OneMinusSrcColorFactor': THREE.OneMinusSrcColorFactor,
+					'THREE.SrcAlphaFactor': THREE.SrcAlphaFactor,
+					'THREE.OneMinusSrcAlphaFactor': THREE.OneMinusSrcAlphaFactor,
+					'THREE.DstAlphaFactor': THREE.DstAlphaFactor,
+					'THREE.OneMinusDstAlphaFactor': THREE.OneMinusDstAlphaFactor
+
+				},
+
+				sourceFactors: {
+
+					'THREE.DstColorFactor': THREE.DstColorFactor,
+					'THREE.OneMinusDstColorFactor': THREE.OneMinusDstColorFactor,
+					'THREE.SrcAlphaSaturateFactor': THREE.SrcAlphaSaturateFactor
+
+				}
+
+			};
+
+			function getObjectsKeys( obj ) {
+
+				const keys = [];
+
+				for ( const key in obj ) {
+
+					if ( obj.hasOwnProperty( key ) ) {
+
+						keys.push( key );
+
+					}
+
+				}
+
+				return keys;
+
+			}
+
+			const textureLoader = new THREE.TextureLoader();
+			const cubeTextureLoader = new THREE.CubeTextureLoader();
+
+			const envMaps = ( function () {
+
+				const path = '../../examples/textures/cube/SwedishRoyalCastle/';
+				const format = '.jpg';
+				const urls = [
+					path + 'px' + format, path + 'nx' + format,
+					path + 'py' + format, path + 'ny' + format,
+					path + 'pz' + format, path + 'nz' + format
+				];
+
+				const reflectionCube = cubeTextureLoader.load( urls );
+
+				const refractionCube = cubeTextureLoader.load( urls );
+				refractionCube.mapping = THREE.CubeRefractionMapping;
+
+				return {
+					none: null,
+					reflection: reflectionCube,
+					refraction: refractionCube
+				};
+
+			} )();
+
+			const diffuseMaps = ( function () {
+
+				const bricks = textureLoader.load( '../../examples/textures/brick_diffuse.jpg' );
+				bricks.wrapS = THREE.RepeatWrapping;
+				bricks.wrapT = THREE.RepeatWrapping;
+				bricks.repeat.set( 9, 1 );
+
+				return {
+					none: null,
+					bricks: bricks
+				};
+
+			} )();
+
+			const roughnessMaps = ( function () {
+
+				const bricks = textureLoader.load( '../../examples/textures/brick_roughness.jpg' );
+				bricks.wrapT = THREE.RepeatWrapping;
+				bricks.wrapS = THREE.RepeatWrapping;
+				bricks.repeat.set( 9, 1 );
+
+				return {
+					none: null,
+					bricks: bricks
+				};
+
+			} )();
+
+			const matcaps = ( function () {
+
+				return {
+					none: null,
+					porcelainWhite: textureLoader.load( '../../examples/textures/matcaps/matcap-porcelain-white.jpg' )
+				};
+
+			} )();
+
+			const alphaMaps = ( function () {
+
+				const fibers = textureLoader.load( '../../examples/textures/alphaMap.jpg' );
+				fibers.wrapT = THREE.RepeatWrapping;
+				fibers.wrapS = THREE.RepeatWrapping;
+				fibers.repeat.set( 9, 1 );
+
+				return {
+					none: null,
+					fibers: fibers
+				};
+
+			} )();
+
+			const gradientMaps = ( function () {
+
+				const threeTone = textureLoader.load( '../../examples/textures/gradientMaps/threeTone.jpg' );
+				threeTone.minFilter = THREE.NearestFilter;
+				threeTone.magFilter = THREE.NearestFilter;
+
+				const fiveTone = textureLoader.load( '../../examples/textures/gradientMaps/fiveTone.jpg' );
+				fiveTone.minFilter = THREE.NearestFilter;
+				fiveTone.magFilter = THREE.NearestFilter;
+
+				return {
+					none: null,
+					threeTone: threeTone,
+					fiveTone: fiveTone
+				};
+
+			} )();
+
+			const envMapKeys = getObjectsKeys( envMaps );
+			const envMapKeysPBR = envMapKeys.slice( 0, 2 );
+			const diffuseMapKeys = getObjectsKeys( diffuseMaps );
+			const roughnessMapKeys = getObjectsKeys( roughnessMaps );
+			const matcapKeys = getObjectsKeys( matcaps );
+			const alphaMapKeys = getObjectsKeys( alphaMaps );
+			const gradientMapKeys = getObjectsKeys( gradientMaps );
+
+			function generateVertexColors( geometry ) {
+
+				const positionAttribute = geometry.attributes.position;
+
+				const colors = [];
+				const color = new THREE.Color();
+
+				for ( let i = 0, il = positionAttribute.count; i < il; i ++ ) {
+
+					color.setHSL( i / il * Math.random(), 0.5, 0.5 );
+					colors.push( color.r, color.g, color.b );
+
+				}
+
+				geometry.setAttribute( 'color', new THREE.Float32BufferAttribute( colors, 3 ) );
+
+			}
+
+			function handleColorChange( color ) {
+
+				return function ( value ) {
+
+					if ( typeof value === 'string' ) {
+
+						value = value.replace( '#', '0x' );
+
+					}
+
+					color.setHex( value );
+
+				};
+
+			}
+
+			function needsUpdate( material, geometry ) {
+
+				return function () {
+
+					material.side = parseInt( material.side ); //Ensure number
+					material.needsUpdate = true;
+					geometry.attributes.position.needsUpdate = true;
+					geometry.attributes.normal.needsUpdate = true;
+					geometry.attributes.color.needsUpdate = true;
+
+				};
+
+			}
+
+			function updateCombine( material ) {
+
+				return function ( combine ) {
+
+					material.combine = parseInt( combine );
+					material.needsUpdate = true;
+
+				};
+
+			}
+
+			function updateTexture( material, materialKey, textures ) {
+
+				return function ( key ) {
+
+					material[ materialKey ] = textures[ key ];
+					material.needsUpdate = true;
+
+				};
+
+			}
+
+			function guiScene( gui, scene ) {
+
+				const folder = gui.addFolder( 'Scene' );
+
+				const data = {
+					background: '#000000',
+					'ambient light': ambientLight.color.getHex()
+				};
+
+				folder.addColor( data, 'ambient light' ).onChange( handleColorChange( ambientLight.color ) );
+
+				guiSceneFog( folder, scene );
+
+			}
+
+			function guiSceneFog( folder, scene ) {
+
+				const fogFolder = folder.addFolder( 'scene.fog' );
+
+				const fog = new THREE.Fog( 0x3f7b9d, 0, 60 );
+
+				const data = {
+					fog: {
+						'THREE.Fog()': false,
+						'scene.fog.color': fog.color.getHex()
+					}
+				};
+
+				fogFolder.add( data.fog, 'THREE.Fog()' ).onChange( function ( useFog ) {
+
+					if ( useFog ) {
+
+						scene.fog = fog;
+
+					} else {
+
+						scene.fog = null;
+
+					}
+
+				} );
+
+				fogFolder.addColor( data.fog, 'scene.fog.color' ).onChange( handleColorChange( fog.color ) );
+
+			}
+
+			function guiMaterial( gui, mesh, material, geometry ) {
+
+				const folder = gui.addFolder( 'THREE.Material' );
+
+				folder.add( material, 'transparent' ).onChange( needsUpdate( material, geometry ) );
+				folder.add( material, 'opacity', 0, 1 ).step( 0.01 );
+				// folder.add( material, 'blending', constants.blendingMode );
+				// folder.add( material, 'blendSrc', constants.destinationFactors );
+				// folder.add( material, 'blendDst', constants.destinationFactors );
+				// folder.add( material, 'blendEquation', constants.equations );
+				folder.add( material, 'depthTest' );
+				folder.add( material, 'depthWrite' );
+				// folder.add( material, 'polygonOffset' );
+				// folder.add( material, 'polygonOffsetFactor' );
+				// folder.add( material, 'polygonOffsetUnits' );
+				folder.add( material, 'alphaTest', 0, 1 ).step( 0.01 ).onChange( needsUpdate( material, geometry ) );
+				folder.add( material, 'alphaHash' ).onChange( needsUpdate( material, geometry ) );
+				folder.add( material, 'visible' );
+				folder.add( material, 'side', constants.side ).onChange( needsUpdate( material, geometry ) );
+
+			}
+
+			function guiMeshBasicMaterial( gui, mesh, material, geometry ) {
+
+				const data = {
+					color: material.color.getHex(),
+					envMaps: envMapKeys[ 0 ],
+					map: diffuseMapKeys[ 0 ],
+					alphaMap: alphaMapKeys[ 0 ]
+				};
+
+				const folder = gui.addFolder( 'THREE.MeshBasicMaterial' );
+
+				folder.addColor( data, 'color' ).onChange( handleColorChange( material.color ) );
+				folder.add( material, 'wireframe' ).onChange( needsUpdate( material, geometry ) );
+				folder.add( material, 'vertexColors' ).onChange( needsUpdate( material, geometry ) );
+				folder.add( material, 'fog' ).onChange( needsUpdate( material, geometry ) );
+
+				folder.add( data, 'envMaps', envMapKeys ).onChange( updateTexture( material, 'envMap', envMaps ) );
+				folder.add( data, 'map', diffuseMapKeys ).onChange( updateTexture( material, 'map', diffuseMaps ) );
+				folder.add( data, 'alphaMap', alphaMapKeys ).onChange( updateTexture( material, 'alphaMap', alphaMaps ) );
+				folder.add( material, 'combine', constants.combine ).onChange( updateCombine( material ) );
+				folder.add( material, 'reflectivity', 0, 1 );
+				folder.add( material, 'refractionRatio', 0, 1 );
+
+			}
+
+			function guiMeshDepthMaterial( gui, mesh, material ) {
+
+				const data = {
+					alphaMap: alphaMapKeys[ 0 ]
+				};
+
+				const folder = gui.addFolder( 'THREE.MeshDepthMaterial' );
+
+				folder.add( material, 'wireframe' ).onChange( needsUpdate( material, geometry ) );
+
+				folder.add( data, 'alphaMap', alphaMapKeys ).onChange( updateTexture( material, 'alphaMap', alphaMaps ) );
+
+			}
+
+			function guiMeshNormalMaterial( gui, mesh, material, geometry ) {
+
+				const folder = gui.addFolder( 'THREE.MeshNormalMaterial' );
+
+				folder.add( material, 'flatShading' ).onChange( needsUpdate( material, geometry ) );
+				folder.add( material, 'wireframe' ).onChange( needsUpdate( material, geometry ) );
+
+			}
+
+			function guiLineBasicMaterial( gui, mesh, material, geometry ) {
+
+				const data = {
+					color: material.color.getHex()
+				};
+
+				const folder = gui.addFolder( 'THREE.LineBasicMaterial' );
+
+				folder.addColor( data, 'color' ).onChange( handleColorChange( material.color ) );
+				folder.add( material, 'linewidth', 0, 10 );
+				folder.add( material, 'linecap', [ 'butt', 'round', 'square' ] );
+				folder.add( material, 'linejoin', [ 'round', 'bevel', 'miter' ] );
+				folder.add( material, 'vertexColors' ).onChange( needsUpdate( material, geometry ) );
+				folder.add( material, 'fog' ).onChange( needsUpdate( material, geometry ) );
+
+			}
+
+			function guiMeshLambertMaterial( gui, mesh, material, geometry ) {
+
+				const data = {
+					color: material.color.getHex(),
+					emissive: material.emissive.getHex(),
+					envMaps: envMapKeys[ 0 ],
+					map: diffuseMapKeys[ 0 ],
+					alphaMap: alphaMapKeys[ 0 ]
+				};
+
+				const folder = gui.addFolder( 'THREE.MeshLambertMaterial' );
+
+				folder.addColor( data, 'color' ).onChange( handleColorChange( material.color ) );
+				folder.addColor( data, 'emissive' ).onChange( handleColorChange( material.emissive ) );
+
+				folder.add( material, 'wireframe' ).onChange( needsUpdate( material, geometry ) );
+				folder.add( material, 'vertexColors' ).onChange( needsUpdate( material, geometry ) );
+				folder.add( material, 'fog' ).onChange( needsUpdate( material, geometry ) );
+
+				folder.add( data, 'envMaps', envMapKeys ).onChange( updateTexture( material, 'envMap', envMaps ) );
+				folder.add( data, 'map', diffuseMapKeys ).onChange( updateTexture( material, 'map', diffuseMaps ) );
+				folder.add( data, 'alphaMap', alphaMapKeys ).onChange( updateTexture( material, 'alphaMap', alphaMaps ) );
+				folder.add( material, 'combine', constants.combine ).onChange( updateCombine( material ) );
+				folder.add( material, 'reflectivity', 0, 1 );
+				folder.add( material, 'refractionRatio', 0, 1 );
+
+			}
+
+			function guiMeshMatcapMaterial( gui, mesh, material, geometry ) {
+
+				const data = {
+					color: material.color.getHex(),
+					matcap: matcapKeys[ 1 ],
+					alphaMap: alphaMapKeys[ 0 ]
+				};
+
+				const folder = gui.addFolder( 'THREE.MeshMatcapMaterial' );
+
+				folder.addColor( data, 'color' ).onChange( handleColorChange( material.color ) );
+
+				folder.add( material, 'flatShading' ).onChange( needsUpdate( material, geometry ) );
+				folder.add( data, 'matcap', matcapKeys ).onChange( updateTexture( material, 'matcap', matcaps ) );
+				folder.add( data, 'alphaMap', alphaMapKeys ).onChange( updateTexture( material, 'alphaMap', alphaMaps ) );
+
+			}
+
+			function guiMeshPhongMaterial( gui, mesh, material, geometry ) {
+
+				const data = {
+					color: material.color.getHex(),
+					emissive: material.emissive.getHex(),
+					specular: material.specular.getHex(),
+					envMaps: envMapKeys[ 0 ],
+					map: diffuseMapKeys[ 0 ],
+					alphaMap: alphaMapKeys[ 0 ]
+				};
+
+				const folder = gui.addFolder( 'THREE.MeshPhongMaterial' );
+
+				folder.addColor( data, 'color' ).onChange( handleColorChange( material.color ) );
+				folder.addColor( data, 'emissive' ).onChange( handleColorChange( material.emissive ) );
+				folder.addColor( data, 'specular' ).onChange( handleColorChange( material.specular ) );
+
+				folder.add( material, 'shininess', 0, 100 );
+				folder.add( material, 'flatShading' ).onChange( needsUpdate( material, geometry ) );
+				folder.add( material, 'wireframe' ).onChange( needsUpdate( material, geometry ) );
+				folder.add( material, 'vertexColors' ).onChange( needsUpdate( material, geometry ) );
+				folder.add( material, 'fog' ).onChange( needsUpdate( material, geometry ) );
+				folder.add( data, 'envMaps', envMapKeys ).onChange( updateTexture( material, 'envMap', envMaps ) );
+				folder.add( data, 'map', diffuseMapKeys ).onChange( updateTexture( material, 'map', diffuseMaps ) );
+				folder.add( data, 'alphaMap', alphaMapKeys ).onChange( updateTexture( material, 'alphaMap', alphaMaps ) );
+				folder.add( material, 'combine', constants.combine ).onChange( updateCombine( material ) );
+				folder.add( material, 'reflectivity', 0, 1 );
+				folder.add( material, 'refractionRatio', 0, 1 );
+
+			}
+
+			function guiMeshToonMaterial( gui, mesh, material ) {
+
+				const data = {
+					color: material.color.getHex(),
+					map: diffuseMapKeys[ 0 ],
+					gradientMap: gradientMapKeys[ 1 ],
+					alphaMap: alphaMapKeys[ 0 ]
+				};
+
+				const folder = gui.addFolder( 'THREE.MeshToonMaterial' );
+
+				folder.addColor( data, 'color' ).onChange( handleColorChange( material.color ) );
+				folder.add( data, 'map', diffuseMapKeys ).onChange( updateTexture( material, 'map', diffuseMaps ) );
+				folder.add( data, 'gradientMap', gradientMapKeys ).onChange( updateTexture( material, 'gradientMap', gradientMaps ) );
+				folder.add( data, 'alphaMap', alphaMapKeys ).onChange( updateTexture( material, 'alphaMap', alphaMaps ) );
+
+			}
+
+			function guiMeshStandardMaterial( gui, mesh, material, geometry ) {
+
+				const data = {
+					color: material.color.getHex(),
+					emissive: material.emissive.getHex(),
+					envMaps: envMapKeysPBR[ 0 ],
+					map: diffuseMapKeys[ 0 ],
+					roughnessMap: roughnessMapKeys[ 0 ],
+					alphaMap: alphaMapKeys[ 0 ],
+					metalnessMap: alphaMapKeys[ 0 ]
+				};
+
+				const folder = gui.addFolder( 'THREE.MeshStandardMaterial' );
+
+				folder.addColor( data, 'color' ).onChange( handleColorChange( material.color ) );
+				folder.addColor( data, 'emissive' ).onChange( handleColorChange( material.emissive ) );
+
+				folder.add( material, 'roughness', 0, 1 );
+				folder.add( material, 'metalness', 0, 1 );
+				folder.add( material, 'flatShading' ).onChange( needsUpdate( material, geometry ) );
+				folder.add( material, 'wireframe' ).onChange( needsUpdate( material, geometry ) );
+				folder.add( material, 'vertexColors' ).onChange( needsUpdate( material, geometry ) );
+				folder.add( material, 'fog' ).onChange( needsUpdate( material, geometry ) );
+				folder.add( data, 'envMaps', envMapKeysPBR ).onChange( updateTexture( material, 'envMap', envMaps ) );
+				folder.add( data, 'map', diffuseMapKeys ).onChange( updateTexture( material, 'map', diffuseMaps ) );
+				folder.add( data, 'roughnessMap', roughnessMapKeys ).onChange( updateTexture( material, 'roughnessMap', roughnessMaps ) );
+				folder.add( data, 'alphaMap', alphaMapKeys ).onChange( updateTexture( material, 'alphaMap', alphaMaps ) );
+				folder.add( data, 'metalnessMap', alphaMapKeys ).onChange( updateTexture( material, 'metalnessMap', alphaMaps ) );
+
+			}
+
+			function guiMeshPhysicalMaterial( gui, mesh, material, geometry ) {
+
+				const data = {
+					color: material.color.getHex(),
+					emissive: material.emissive.getHex(),
+					envMaps: envMapKeys[ 0 ],
+					map: diffuseMapKeys[ 0 ],
+					roughnessMap: roughnessMapKeys[ 0 ],
+					alphaMap: alphaMapKeys[ 0 ],
+					metalnessMap: alphaMapKeys[ 0 ],
+					sheenColor: material.sheenColor.getHex(),
+					specularColor: material.specularColor.getHex(),
+					iridescenceMap: alphaMapKeys[ 0 ]
+				};
+
+				const folder = gui.addFolder( 'THREE.MeshPhysicalMaterial' );
+
+				folder.addColor( data, 'color' ).onChange( handleColorChange( material.color ) );
+				folder.addColor( data, 'emissive' ).onChange( handleColorChange( material.emissive ) );
+
+				folder.add( material, 'roughness', 0, 1 );
+				folder.add( material, 'metalness', 0, 1 );
+				folder.add( material, 'ior', 1, 2.333 );
+				folder.add( material, 'reflectivity', 0, 1 );
+				folder.add( material, 'iridescence', 0, 1 );
+				folder.add( material, 'iridescenceIOR', 1, 2.333 );
+				folder.add( material, 'sheen', 0, 1 );
+				folder.add( material, 'sheenRoughness', 0, 1 );
+				folder.addColor( data, 'sheenColor' ).onChange( handleColorChange( material.sheenColor ) );
+				folder.add( material, 'clearcoat', 0, 1 ).step( 0.01 );
+				folder.add( material, 'clearcoatRoughness', 0, 1 ).step( 0.01 );
+				folder.add( material, 'specularIntensity', 0, 1 );
+				folder.addColor( data, 'specularColor' ).onChange( handleColorChange( material.specularColor ) );
+				folder.add( material, 'flatShading' ).onChange( needsUpdate( material, geometry ) );
+				folder.add( material, 'wireframe' ).onChange( needsUpdate( material, geometry ) );
+				folder.add( material, 'vertexColors' ).onChange( needsUpdate( material, geometry ) );
+				folder.add( material, 'fog' ).onChange( needsUpdate( material, geometry ) );
+				folder.add( data, 'envMaps', envMapKeysPBR ).onChange( updateTexture( material, 'envMap', envMaps ) );
+				folder.add( data, 'map', diffuseMapKeys ).onChange( updateTexture( material, 'map', diffuseMaps ) );
+				folder.add( data, 'roughnessMap', roughnessMapKeys ).onChange( updateTexture( material, 'roughnessMap', roughnessMaps ) );
+				folder.add( data, 'alphaMap', alphaMapKeys ).onChange( updateTexture( material, 'alphaMap', alphaMaps ) );
+				folder.add( data, 'metalnessMap', alphaMapKeys ).onChange( updateTexture( material, 'metalnessMap', alphaMaps ) );
+				folder.add( data, 'iridescenceMap', alphaMapKeys ).onChange( updateTexture( material, 'iridescenceMap', alphaMaps ) );
+
+			}
+
+			function chooseFromHash( gui, mesh, geometry ) {
+
+				const selectedMaterial = window.location.hash.substring( 1 ) || 'MeshBasicMaterial';
+
+				let material;
+
+				switch ( selectedMaterial ) {
+
+					case 'MeshBasicMaterial' :
+
+						material = new THREE.MeshBasicMaterial( { color: 0x049EF4 } );
+						guiMaterial( gui, mesh, material, geometry );
+						guiMeshBasicMaterial( gui, mesh, material, geometry );
+
+						return material;
+
+						break;
+
+					case 'MeshLambertMaterial' :
+
+						material = new THREE.MeshLambertMaterial( { color: 0x049EF4 } );
+						guiMaterial( gui, mesh, material, geometry );
+						guiMeshLambertMaterial( gui, mesh, material, geometry );
+
+						return material;
+
+						break;
+
+					case 'MeshMatcapMaterial' :
+
+						material = new THREE.MeshMatcapMaterial( { matcap: matcaps.porcelainWhite } );
+						guiMaterial( gui, mesh, material, geometry );
+						guiMeshMatcapMaterial( gui, mesh, material, geometry );
+
+						// no need for lights
+
+						light1.visible = false;
+						light2.visible = false;
+						light3.visible = false;
+
+						return material;
+
+						break;
+
+					case 'MeshPhongMaterial' :
+
+						material = new THREE.MeshPhongMaterial( { color: 0x049EF4 } );
+						guiMaterial( gui, mesh, material, geometry );
+						guiMeshPhongMaterial( gui, mesh, material, geometry );
+
+						return material;
+
+						break;
+
+					case 'MeshToonMaterial' :
+
+						material = new THREE.MeshToonMaterial( { color: 0x049EF4, gradientMap: gradientMaps.threeTone } );
+						guiMaterial( gui, mesh, material, geometry );
+						guiMeshToonMaterial( gui, mesh, material );
+
+						// only use a single point light
+
+						light1.visible = false;
+						light3.visible = false;
+
+						return material;
+
+						break;
+
+					case 'MeshStandardMaterial' :
+
+						material = new THREE.MeshStandardMaterial( { color: 0x049EF4 } );
+						guiMaterial( gui, mesh, material, geometry );
+						guiMeshStandardMaterial( gui, mesh, material, geometry );
+
+						// only use scene environment
+
+						light1.visible = false;
+						light2.visible = false;
+						light3.visible = false;
+
+						return material;
+
+						break;
+
+					case 'MeshPhysicalMaterial' :
+
+						material = new THREE.MeshPhysicalMaterial( { color: 0x049EF4 } );
+						guiMaterial( gui, mesh, material, geometry );
+						guiMeshPhysicalMaterial( gui, mesh, material, geometry );
+
+						// only use scene environment
+
+						light1.visible = false;
+						light2.visible = false;
+						light3.visible = false;
+
+						return material;
+
+						break;
+
+					case 'MeshDepthMaterial' :
+
+						material = new THREE.MeshDepthMaterial();
+						guiMaterial( gui, mesh, material, geometry );
+						guiMeshDepthMaterial( gui, mesh, material );
+
+						return material;
+
+						break;
+
+					case 'MeshNormalMaterial' :
+
+						material = new THREE.MeshNormalMaterial();
+						guiMaterial( gui, mesh, material, geometry );
+						guiMeshNormalMaterial( gui, mesh, material, geometry );
+
+						return material;
+
+						break;
+
+					case 'LineBasicMaterial' :
+
+						material = new THREE.LineBasicMaterial( { color: 0x2194CE } );
+						guiMaterial( gui, mesh, material, geometry );
+						guiLineBasicMaterial( gui, mesh, material, geometry );
+
+						return material;
+
+						break;
+
+				}
+
+			}
+
+			//
+
+			const selectedMaterial = window.location.hash.substring( 1 );
+
+			if ( THREE[ selectedMaterial ] !== undefined ) {
+
+				document.getElementById( 'newWindow' ).href += '#' + selectedMaterial;
+
+			}
+
+			const gui = new GUI();
+
+			const renderer = new THREE.WebGLRenderer( { antialias: true } );
+			renderer.setPixelRatio( window.devicePixelRatio );
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+
+			const pmremGenerator = new THREE.PMREMGenerator( renderer );
+
+			const scene = new THREE.Scene();
+			scene.background = new THREE.Color( 0x444444 );
+			scene.environment = pmremGenerator.fromScene( new RoomEnvironment(), 0.04 ).texture;
+
+			const camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 10, 100 );
+			camera.position.z = 35;
+
+			const ambientLight = new THREE.AmbientLight( 0x000000 );
+			scene.add( ambientLight );
+
+			const light1 = new THREE.DirectionalLight( 0xffffff, 3 );
+			light1.position.set( 0, 200, 0 );
+			scene.add( light1 );
+
+			const light2 = new THREE.DirectionalLight( 0xffffff, 3 );
+			light2.position.set( 100, 200, 100 );
+			scene.add( light2 );
+
+			const light3 = new THREE.DirectionalLight( 0xffffff, 3 );
+			light3.position.set( - 100, - 200, - 100 );
+			scene.add( light3 );
+
+			guiScene( gui, scene );
+
+			const geometry = new THREE.TorusKnotGeometry( 10, 3, 200, 32 ).toNonIndexed();
+
+			generateVertexColors( geometry );
+
+			const mesh = new THREE.Mesh( geometry );
+			mesh.material = chooseFromHash( gui, mesh, geometry );
+
+			scene.add( mesh );
+
+			let prevFog = false;
+
+			function render() {
+
+				requestAnimationFrame( render );
+
+				mesh.rotation.x += 0.005;
+				mesh.rotation.y += 0.005;
+
+				if ( prevFog !== scene.fog ) {
+
+					mesh.material.needsUpdate = true;
+					prevFog = scene.fog;
+
+				}
+
+				renderer.render( scene, camera );
+
+			}
+
+			window.addEventListener( 'resize', function () {
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+			}, false );
+
+			render();
+
+		</script>
+	
+
+<div class="lil-gui allow-touch-styles root autoPlace"><div class="title" role="button" aria-expanded="true" tabindex="0">Controls</div><div class="children"><div class="lil-gui allow-touch-styles"><div class="title" role="button" aria-expanded="true" tabindex="0">Scene</div><div class="children"><div class="controller color"><div class="name" id="lil-gui-name-1">ambient light</div><div class="widget"><div class="display" style="background-color: rgb(0, 0, 0);"><input type="color" tabindex="-1" aria-labelledby="lil-gui-name-1"></div><input type="text" spellcheck="false" aria-labelledby="lil-gui-name-1"></div></div><div class="lil-gui allow-touch-styles"><div class="title" role="button" aria-expanded="true" tabindex="0">scene.fog</div><div class="children"><div class="controller boolean"><div class="name" id="lil-gui-name-2">THREE.Fog()</div><label class="widget"><input type="checkbox" aria-labelledby="lil-gui-name-2"></label></div><div class="controller color"><div class="name" id="lil-gui-name-3">scene.fog.color</div><div class="widget"><div class="display" style="background-color: rgb(63, 123, 157);"><input type="color" tabindex="-1" aria-labelledby="lil-gui-name-3"></div><input type="text" spellcheck="false" aria-labelledby="lil-gui-name-3"></div></div></div></div></div></div><div class="lil-gui allow-touch-styles"><div class="title" role="button" aria-expanded="true" tabindex="0">THREE.Material</div><div class="children"><div class="controller boolean"><div class="name" id="lil-gui-name-4">transparent</div><label class="widget"><input type="checkbox" aria-labelledby="lil-gui-name-4"></label></div><div class="controller number hasSlider"><div class="name" id="lil-gui-name-5">opacity</div><div class="widget"><div class="slider"><div class="fill" style="width: 100%;"></div></div><input type="number" step="any" aria-labelledby="lil-gui-name-5"></div></div><div class="controller boolean"><div class="name" id="lil-gui-name-6">depthTest</div><label class="widget"><input type="checkbox" aria-labelledby="lil-gui-name-6"></label></div><div class="controller boolean"><div class="name" id="lil-gui-name-7">depthWrite</div><label class="widget"><input type="checkbox" aria-labelledby="lil-gui-name-7"></label></div><div class="controller number hasSlider"><div class="name" id="lil-gui-name-8">alphaTest</div><div class="widget"><div class="slider"><div class="fill" style="width: 0%;"></div></div><input type="number" step="any" aria-labelledby="lil-gui-name-8"></div></div><div class="controller boolean"><div class="name" id="lil-gui-name-9">alphaHash</div><label class="widget"><input type="checkbox" aria-labelledby="lil-gui-name-9"></label></div><div class="controller boolean"><div class="name" id="lil-gui-name-10">visible</div><label class="widget"><input type="checkbox" aria-labelledby="lil-gui-name-10"></label></div><div class="controller option"><div class="name" id="lil-gui-name-11">side</div><div class="widget"><select aria-labelledby="lil-gui-name-11"><option>THREE.FrontSide</option><option>THREE.BackSide</option><option>THREE.DoubleSide</option></select><div class="display">THREE.FrontSide</div></div></div></div></div><div class="lil-gui allow-touch-styles"><div class="title" role="button" aria-expanded="true" tabindex="0">THREE.MeshStandardMaterial</div><div class="children"><div class="controller color"><div class="name" id="lil-gui-name-12">color</div><div class="widget"><div class="display" style="background-color: rgb(4, 158, 244);"><input type="color" tabindex="-1" aria-labelledby="lil-gui-name-12"></div><input type="text" spellcheck="false" aria-labelledby="lil-gui-name-12"></div></div><div class="controller color"><div class="name" id="lil-gui-name-13">emissive</div><div class="widget"><div class="display" style="background-color: rgb(0, 0, 0);"><input type="color" tabindex="-1" aria-labelledby="lil-gui-name-13"></div><input type="text" spellcheck="false" aria-labelledby="lil-gui-name-13"></div></div><div class="controller number hasSlider"><div class="name" id="lil-gui-name-14">roughness</div><div class="widget"><div class="slider"><div class="fill" style="width: 100%;"></div></div><input type="number" step="any" aria-labelledby="lil-gui-name-14"></div></div><div class="controller number hasSlider"><div class="name" id="lil-gui-name-15">metalness</div><div class="widget"><div class="slider"><div class="fill" style="width: 0%;"></div></div><input type="number" step="any" aria-labelledby="lil-gui-name-15"></div></div><div class="controller boolean"><div class="name" id="lil-gui-name-16">flatShading</div><label class="widget"><input type="checkbox" aria-labelledby="lil-gui-name-16"></label></div><div class="controller boolean"><div class="name" id="lil-gui-name-17">wireframe</div><label class="widget"><input type="checkbox" aria-labelledby="lil-gui-name-17"></label></div><div class="controller boolean"><div class="name" id="lil-gui-name-18">vertexColors</div><label class="widget"><input type="checkbox" aria-labelledby="lil-gui-name-18"></label></div><div class="controller boolean"><div class="name" id="lil-gui-name-19">fog</div><label class="widget"><input type="checkbox" aria-labelledby="lil-gui-name-19"></label></div><div class="controller option"><div class="name" id="lil-gui-name-20">envMaps</div><div class="widget"><select aria-labelledby="lil-gui-name-20"><option>none</option><option>reflection</option></select><div class="display">none</div></div></div><div class="controller option"><div class="name" id="lil-gui-name-21">map</div><div class="widget"><select aria-labelledby="lil-gui-name-21"><option>none</option><option>bricks</option></select><div class="display">none</div></div></div><div class="controller option"><div class="name" id="lil-gui-name-22">roughnessMap</div><div class="widget"><select aria-labelledby="lil-gui-name-22"><option>none</option><option>bricks</option></select><div class="display">none</div></div></div><div class="controller option"><div class="name" id="lil-gui-name-23">alphaMap</div><div class="widget"><select aria-labelledby="lil-gui-name-23"><option>none</option><option>fibers</option></select><div class="display">none</div></div></div><div class="controller option"><div class="name" id="lil-gui-name-24">metalnessMap</div><div class="widget"><select aria-labelledby="lil-gui-name-24"><option>none</option><option>fibers</option></select><div class="display">none</div></div></div></div></div></div></div><canvas data-engine="three.js r180" width="880" height="420" style="display: block; width: 880px; height: 420px;"></canvas></body></html>

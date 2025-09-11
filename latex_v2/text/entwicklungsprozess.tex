@@ -326,7 +326,7 @@ Darauf aufbauend wurde ein neuer Algorithmus entworfen, der in jeder Iteration d
 mehrerer Gelenke $j = \{j_0,j_1,...j_n\}$ um die entsprechene Drehachse interpoliert:
 
 \vspace{1em}
-\begin{algorithm}
+\begin{algorithm}[H]
     \caption{Gleichzeitige Interpolation mehrerer Gelenke}
     \begin{algorithmic}[1]
     \State $t \gets 0$
@@ -432,7 +432,7 @@ Darunter befinden sich Textfelder, um die aktuelle Pose des TCP anzuzeigen, die 
 
 
 \subsection{Denavit-Hartenberg-Konvention}
-Um den didaktischen Mehrwert des Frameworks zu erhöhen, wurde die Denavit-Hartenberg-Konvention aufgegriffen und grafisch nachvollziehbar umgesetzt.
+Um den didaktischen Mehrwert des Frameworks zu erhöhen, wurde die Denavit-Har\-ten\-berg-Konvention aufgegriffen und grafisch nachvollziehbar umgesetzt.
 Hierzu wurde eine eigene Klasse mit dem Namen DHKinematicModel entwickelt. Ziel war es, die grafische Darstellung vom mathematischen Berechnungsmodell klar zu trennen,
 um die Wartbarkeit und Lesbarkeit des Codes zu verbessern.
 Die Klasse ermöglicht die Erstellung von homogenen Transformationsmatrizen anhand der jeweiligen DH-Parameter:
@@ -478,7 +478,7 @@ wobei \( R \in \mathbb{R}^{3 \times 3} \) eine Rotationsmatrix und \( \mathbf{p}
 Die Matrix platziert die Roboterbasis bezüglich des globalen Koordinatensystems und kann der Klasse DHKinematicModel im Konstruktor übergeben werden.
 
 
-Die Berechnung der Transformation vom letzten Denavit-Hartenberg-Koordinatensystem zum Koordinatensystem des Endeffektors 
+Die Berechnung der Transformation vom letzten Denavit-Har\-ten\-berg-Ko\-or\-di\-na\-ten\-sys\-tem zum Koordinatensystem des Endeffektors 
 erfolgt über das Invertieren der Transformation vom globalen Basiskoordinatensystem zum letzten DH-Koordinatensystem und der nachfolgenden
 Multiplikation mit der bekannten Pose des Werkzeugs:
 
@@ -488,11 +488,9 @@ Multiplikation mit der bekannten Pose des Werkzeugs:
 
 Dabei bezeichnet \( T_{\text{global} \rightarrow \text{dh}_n} \) die gesamte Vorwärtstransformation vom globalen Koordinatensystem bis zum letzten DH-Koordinatensystem,
 die sich zusammensetzt aus der Matrix \( T_{\text{global} \rightarrow \text{base}} \cdot A_1 \cdot A_2 \cdots A_n \).
-Die resultierende Transformation \( T_{\text{dh}_n \rightarrow \text{ee}} \) beschreibt somit die relative Lage des Werkzeugs bezogen auf das letzte DH-Koordinatensystem.
-
+Die resultierende Transformation \( T_{\text{dh}_n \rightarrow \text{ee}} \) beschreibt somit die relative Lage des Werkzeugs bezogen auf das letzte DH-Koordinaten\-system.
 Damit ist die gesamte Vorwärtstransformation nach der Denavit-Hartenberg-Konvention in dieser Klasse gekapselt und modular verfügbar.
-
-Die partiellen Vorwärtstransformationen
+Die partiellen Vor\-wärts\-trans\-for\-ma\-tio\-nen
 
 
 \[
@@ -695,7 +693,8 @@ Es ergibt sich folgender Algorithmus für die implementierung:
 Der in Algorithmus~\ref{alg:inverse_kinematik} dargestellte Ablauf kombiniert die zuvor erläuterten symbolischen und numerischen Schritte zu einem konsistenten IK-Verfahren. 
 Ziel ist es, für eine gegebene Zielpose eine Konfiguration der Gelenkwinkel zu finden, welche diese Pose möglichst genau erreicht.
 
-Nach Initialisierung des Gelenkwinkelvektors $\mathbf{q}$ wird in jeder Iteration zunächst die aktuelle Pose des TCP berechnet, indem die transformierte symbolische Vorwärtstransformation mit den aktuellen Gelenkwerten ausgewertet wird. 
+Nach Initialisierung des Gelenkwinkelvektors $\mathbf{q}$ wird in jeder Iteration zunächst die aktuelle Pose des TCP berechnet,
+indem die transformierte symbolische Vor\-wärts\-trans\-for\-ma\-tion mit den aktuellen Gelenkwerten ausgewertet wird. 
 Aus der resultierenden Position und Orientierung wird anschließend der Fehlervektor $\mathbf{e}$ gebildet, der die Differenz zur Zielpose beschreibt.
 
 Zur Bestimmung eines Korrekturvorschlags für die Gelenkwinkel wird die zusammengesetzte Jacobi-Matrix $J_{\text{gesamt}}$ berechnet.

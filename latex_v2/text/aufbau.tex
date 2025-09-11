@@ -8,7 +8,7 @@ Das entwickelte Framework ist als eigenständiges Python-Paket organisiert und w
 Diese Struktur ermöglicht eine modulare Organisation des Quellcodes,
 die saubere Trennung von Abhängigkeiten sowie eine einfache Verteilung und Wiederverwendbarkeit des Frameworks \doublecite[1]{python_packages}.
 Die Verzeichnisstruktur folgt dem üblichen Aufbau für Python-Pakete mit einem root directory, den entsprechenden Python Modulen,
-einer pyproject.toml, einer README.md sowie verschiedenen Tests \doublecite[22]{python_packages}:
+einer pyproject.toml, einer README.md sowie einem Verzeichnis für Tests \doublecite[22]{python_packages}:
 
 \vspace{1em}
 \begin{figure}[H]
@@ -49,7 +49,7 @@ sowie von mobilen Robotern in Form von Übungsaufgaben demonstrieren.
 Das Beispiel-Notebook industrial\_robot\_example.ipynb stellt die Nutzung des Frameworks zur Simulation von Industrierobotern dar.
 Alle Beispiel-Notebooks greifen direkt auf den Quellcode des Pakets zu.
 
-Der Quellcode befindet sich im Verzeichnis visualkinematics\_v2/src/visualkinematics\_v2.
+Der Quellcode befindet sich im Verzeichnis visualkinematics\_v2/src/visual\-ki\-ne\-ma\-tics\_v2.
 Dieser ist in einzelne Module gegliedert, die jeweils einer bestimmten Verantwortlichkeit zugeordnet sind. 
 Ein Überblick über die zentralen Module und deren Beziehungen ist in Abbildung \ref{fig:package_diagramm} (siehe Anhang) in Form eines Paketdiagramms dargestellt. 
 Es wurde darauf geachtet, dass zwischen den Modulen keine bidirektionalen oder zyklischen Abhängigkeiten bestehen.
@@ -88,9 +88,9 @@ Diese Daten bilden die Grundlage für die spätere grafische Darstellung und Ani
 Die Denavit-Hartenberg-Konvention sowie die darauf basierende Berechnung der Vorwärts- und Rückwärtstransformation wurden in die Klasse DHKinematicModel ausgelagert.
 Dadurch wird eine saubere Trennung der Zuständigkeiten erreicht und gleichzeitig die Wartbarkeit sowie die Lesbarkeit des Codes verbessert.
 
-Innerhalb der Model-Komponente wird die Datenhaltung und somit der Zugriff auf den persistenten Speicher in das Modul manager entkoppelt.
+Innerhalb der Model-Komponente wird die Datenhaltung und somit der Zugriff auf den persistenten Speicher in das Modul manager.py entkoppelt.
 Hier befinden sich Funktionen zum Laden und Speichern von 3D-Modellen sowie URDF-Dateien.
-Darüber hinaus erzeugt das Modul manager eine Datei namens config.toml in einem standardisierten Verzeichnis für benutzerspezifische Konfigurationsdaten.
+Darüber hinaus erzeugt das Modul manager.py eine Datei namens config.toml in einem standardisierten Verzeichnis für benutzerspezifische Konfigurationsdaten.
 Der genaue Speicherort ist betriebssystemabhängig. Unter Windows befindet sich dieser beispielsweise unter
 C:/Users/\textless{}Benutzername\textgreater{}/AppData/Local/visualkinematics\_v2,
 während auf Linux-Systemen typischerweise das Verzeichnis
@@ -100,12 +100,12 @@ In der Datei config.toml werden die Speicherorte für Ressourcen und Assets defi
 diese Pfade bei Bedarf manuell anzupassen, um beispielsweise benutzerdefinierte Verzeichnisse zu verwenden.
 In den konfigurierten Verzeichnissen können benutzereigene 3D-Modelle und URDF-Beschreibungen abgelegt werden.
 Diese stehen dem Framework anschließend zur Verfügung und können direkt geladen werden.
-Damit das bereitgestellte Beispiel-Notebook industrial\_robot\_example.ipynb ohne weitere Anpassungen („out of the box“) lauffähig ist,
-werden mit dem Paket im Verzeichnis \_package\_data bereits einige 3D-Modelle und URDF-Beschreibungen mitgeliefert.
+Damit das bereitgestellte Beispiel-Notebook industrial\_robot\_ex\-am\-ple.ipynb ohne weitere Anpassungen („out of the box“) lauffähig ist,
+werden mit dem Paket im Verzeichnis \_package\_data bereits einige 3D-Modelle und URDF-Be\-schrei\-bun\-gen mitgeliefert.
 
 
 \subsubsection{View-Komponente}
-Die View ist für die Darstellung der Szene im Jupyter Notebook zuständig und wird durch das Modul show dargestellt.
+Die View ist für die Darstellung der Szene im Jupyter Notebook zuständig und wird durch das Modul show.py dargestellt.
 Sie verwendet pythreejs sowie ipywidgets zur visuellen Repräsentation und enthält folgende Klassen und Funktionen:
 
 \begin{itemize}
@@ -119,11 +119,11 @@ Sie verwendet pythreejs sowie ipywidgets zur visuellen Repräsentation und enth�
 Der Controller bildet die Schnittstelle zwischen der Benutzerinteraktion und dem zugrunde liegenden Datenmodell.
 Er verknüpft die GUI-Elemente der View mit den Funktionen des Models und steuert das Verhalten des Frameworks in Abhängigkeit von Benutzereingaben.
 Dabei kommt das Modul ipyevents zum Einsatz, das eine Ereignisverarbeitung in Jupyter Notebooks ermöglicht.
-Der Controller ist wie die View-Komponente ebenfalls im Modul show implementiert und wird dort in den folgenden Klassen gekapselt:
+Der Controller ist wie die View-Komponente ebenfalls im Modul show.py implementiert und wird dort in den folgenden Klassen gekapselt:
 
 \begin{itemize}
     \item \texttt{Inspector\_Controller}: Verbindet die GUI-Elemente von Inspector\_View mit Funktionen und speichert Zustände wie mouse\_down.
-    \item \texttt{Gizmo\_Controls\_Controller}: Verbindet die GUI-Elemente der Gizmo\_Con\-trols\_View mit Funktionen.
+    \item \texttt{Gizmo\_Controls\_Controller}: Verbindet die GUI-Elemente der \\Giz\-mo\_Con\-trols\_View mit Funktionen.
 \end{itemize}
 
 Zwischen der View und dem Controller sowie zwischen dem Model und dem Controller besteht eine lose Kopplung.

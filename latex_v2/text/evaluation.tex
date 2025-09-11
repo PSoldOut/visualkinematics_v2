@@ -1,14 +1,15 @@
 \section{Evaluation}
 In diesem Kapitel wird untersucht, inwieweit die im Rahmen dieser Arbeit definierten funktionalen und nicht-funktionalen Anforderungen durch das entwickelte Framework erfüllt werden.  
-Die funktionalen Anforderungen werden dabei einzeln überprüft und deren Umsetzung anhand konkreter Beispiele dargestellt.  
+Die funktionalen Anforderungen werden dabei einzeln überprüft und deren Umsetzung dargestellt.  
 Die nicht-funktionalen Anforderungen werden ebenfalls bewertet; die Anforderung der effizienten Ausführung wird aufgrund ihrer besonderen Relevanz und des hierfür durchgeführten Stresstests in einem gesonderten Kapitel behandelt.
 
 \begin{itemize}
     \item \textbf{Funktionale Anforderungen:}
     \begin{itemize}
         \item \textbf{Integration eines Knickarmroboters:} \\
-        Die Integration eines Knickarmroboters erfolgt durch das Laden von URDF-Beschreibungen und den zugehörigen 3D-Modellen.
-        Im Framework sind bereits Beispielmodelle enthalten, es können jedoch auch weitere URDF-Beschreibungen und 3D-Modelle hinzugefügt werden, sodass verschiedene Knickarmroboter integriert werden können. Damit ist diese Anforderung erfüllt.
+        Die Integration eines Knickarmroboters erfolgt durch das Laden von URDF-Be\-schrei\-bun\-gen und den zugehörigen 3D-Modellen.
+        Im Framework sind bereits Beispielmodelle enthalten, es können jedoch auch weitere URDF-Be\-schrei\-bun\-gen und 3D-Modelle hinzugefügt werden,
+        sodass verschiedene Knick\-arm\-ro\-bo\-ter integriert werden können. Damit ist diese Anforderung erfüllt.
 
         \item \textbf{Vorwärts- und Rückwärtstransformation:} \\
         Das Framework ermöglicht die Berechnung der Endeffektorposition mittels Vorwärtstransformation sowie die Bestimmung der Gelenkkonfiguration aus einer gegebenen Endeffektorposition mittels Rückwärtstransformation. Die Anforderung ist somit erfüllt.
@@ -30,8 +31,9 @@ Die nicht-funktionalen Anforderungen werden ebenfalls bewertet; die Anforderung 
     \begin{itemize}
         \item \textbf{Benutzerfreundliche Bedienbarkeit:} \\
         Die Benutzeroberfläche des Frameworks orientiert sich an der Bedienoberfläche von PolyScope5 und ist so gestaltet, dass sie intuitiv und ohne vorherige Schulung nutzbar ist.
-        Die Hauptfunktionen sind innerhalb von 3 Klicks erreichbar. 
-        Eine abschließende Bewertung der Benutzerfreundlichkeit erfordert jedoch eine Untersuchung durch Experten oder Nutzerstudien, welche in dieser Arbeit nicht durchgeführt wurden.
+        Die Hauptfunktionen sind innerhalb von 3 Klicks erreichbar.
+        Bei Fehlbedienung erscheint eine Fehlermeldung.
+        Eine abschließende Bewertung der Benutzerfreundlichkeit erfordert eine Untersuchung durch Experten oder Nutzerstudien, welche in dieser Arbeit nicht durchgeführt wurden.
 
         \item \textbf{Intuitive Vermittlung kinematischer Konzepte:} \\
         Die Vermittlung kinematischer Konzepte ist möglichst intuitiv gestaltet worden, indem bei der Steuerung des Roboters über die Benutzeroberfläche der Roboter in Echtzeit mitbewegt wird
@@ -100,7 +102,7 @@ wobei jede Instanz mit einem eigenen Kernel-Prozess verbunden war.
 Parallel dazu wurde auf acht Clients jeweils ein Browser-Tab in Google Chrome geöffnet, der mit genau einer dieser Kernel-Instanzen kommunizierte.
 Dann wurde auf jedem Client eine Endlosschleife ausgeführt,
 in der kontinuierlich eine Rückwärtstransformation berechnet und eine Animation ausgeführt wurde.
-Die Rückwärtstransformation beinhaltet auch die Berechnung der Vorwärtstransformation.
+Die Rückwärtstransformation beinhaltet auch die Berechnung der Vor\-wärts\-trans\-for\-ma\-tion.
 Währenddessen wurde die Systemauslastung auf dem Server über einen Zeitraum von 3 Minuten gemessen,
 und zwar entsprechend der in Abschnitt \ref{chap:messmethoden} beschriebenen Methode.
 Gleichzeitig wurden auf einem der Clients zusätzlich die Auslastungswerte aus dem Taskmanager mithilfe des Snipping Tools dokumentiert.
@@ -146,7 +148,7 @@ Tabelle \ref{tab:jupyterlab} fasst die Ergebnisse zusammen.
 
 
 Die Aktualisierungsrate der Animation (siehe Anhang) unterlag deutlichen Schwankungen.
-Der Mittelwert lag bei 216{,}7 SPS bei 8 Clients, 79{,}25 SPS bei 4 Clients und 40{,}9 SPS bei einem einzelnen Client.
+Der Mittelwert lag bei 40{,}9 SPS bei 8 Clients, 79{,}25 SPS bei 4 Clients und 216{,}7 SPS bei einem einzelnen Client.
 Abbildung \ref{fig:sps_boxplot} zeigt ein Boxplot-Diagramm der erhobenen Messwerte.
 
 \vspace{1em}
@@ -206,4 +208,3 @@ wurden bei der Entwicklung berücksichtigt, sollten aber in Zukunft anhand von N
 Die nicht-funktionale Anforderung der effizienten Ausführung wurde durch einen Stresstest überprüft,
 bei dem mehrere Instanzen des Frameworks gleichzeitig auf einem Server ausgeführt worden sind.
 Auch hier konnten die Anforderungen vollständig erfüllt werden.
-Damit konnten alle für diese Arbeit formulierten Anforderungen erfüllt werden.

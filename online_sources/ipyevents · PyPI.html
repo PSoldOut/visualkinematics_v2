@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<!-- saved from url=(0035)https://pypi.org/project/ipyevents/ -->
+<html lang="de" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="defaultLanguage" content="en">
+    <meta name="availableLanguages" content="en, es, fr, ja, pt_BR, uk, el, de, zh_Hans, zh_Hant, ru, he, eo, ko">
+    <title>ipyevents · PyPI</title>
+    <meta name="description" content="A custom widget for returning mouse and keyboard events to Python">
+    <link rel="stylesheet" href="./ipyevents · PyPI_files/warehouse-ltr.9c2acdac.css">
+    <link rel="stylesheet" href="./ipyevents · PyPI_files/fontawesome.080e1050.css">
+    <link rel="stylesheet" href="./ipyevents · PyPI_files/css">
+    <noscript>
+      <link rel="stylesheet"
+            href="/static/css/noscript.0673c9ea.css">
+    </noscript>
+    <link rel="icon" href="https://pypi.org/static/images/favicon.35549fe8.ico" type="image/x-icon">
+    <link rel="alternate" type="application/rss+xml" title="RSS: Letzte 40 Aktualisierungen" href="https://pypi.org/rss/updates.xml">
+    <link rel="alternate" type="application/rss+xml" title="RSS: 40 neueste Pakete" href="https://pypi.org/rss/packages.xml">
+<link rel="alternate" type="application/rss+xml" title="RSS: latest releases for ipyevents" href="https://pypi.org/rss/project/ipyevents/releases.xml">      <link rel="canonical" href="https://pypi.org/project/ipyevents/">
+    <meta property="og:url" content="https://pypi.org/project/ipyevents/">
+    <meta property="og:site_name" content="PyPI">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://pypi.org/static/images/twitter.abaf4b19.webp">
+    <meta property="og:title" content="ipyevents">
+    <meta property="og:description" content="A custom widget for returning mouse and keyboard events to Python">
+    <link rel="search" type="application/opensearchdescription+xml" title="PyPI" href="https://pypi.org/opensearch.xml">
+    <script async="" src="./ipyevents · PyPI_files/warehouse.de.c2c3169c.js.Herunterladen">
+    </script>
+  <script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  },
+};
+  </script>
+  <script async="" src="./ipyevents · PyPI_files/tex-svg.js.Herunterladen" integrity="sha256-1CldwzdEg2k1wTmf7s5RWVd7NMXI/7nxxjJM2C4DqII=" crossorigin="anonymous"></script>
+      <script defer="" data-domain="pypi.org" src="./ipyevents · PyPI_files/script.js.Herunterladen"></script>
+    <script defer="" src="./ipyevents · PyPI_files/insights.js.Herunterladen"></script>
+    <script async="" src="./ipyevents · PyPI_files/ethicalads.min.js.Herunterladen" integrity="sha256-U3hKDidudIaxBDEzwGJApJgPEf2mWk6cfMWghrAa6i0= sha384-UcmsCqcNRSLW/dV3Lo1oCi2/VaurXbib6p4HyUEOeIa/4OpsrnucrugAefzVZJfI sha512-q4t1L4xEjGV2R4hzqCa41P8jrgFUS8xTb8rdNv4FGvw7FpydVj/kkxBJHOiaoxHa8olCcx1Slk9K+3sNbsM4ug==" crossorigin="anonymous"></script>
+  <style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style><style id="MJX-SVG-styles">
+mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+  min-height: 1px;
+  min-width: 1px;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][display="true"][width="full"] {
+  display: flex;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line], svg[data-table] > g > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame], svg[data-table] > g > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed, svg[data-table] > g > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted, svg[data-table] > g > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > g > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] path[data-c], mjx-container[jax="SVG"] use[data-c] {
+  stroke-width: 3;
+}
+</style></head>
+  <body data-controller="viewport-toggle" data-allowed-domains="ce2d5b46dff5bdf9252e783017f42c8d84c9d0867c882a43374ee54fd4474fed,8fd59c7269bd1e2edf00cca210ca2e58c0061e808c1ddd2886d637a2dffda8ca,64016e1c7fda95b6dbfbf4446c8d96aad8768305942e7f9f9b6cea6c2497c7d5,e51768b25558177f5845e539e36cdd623a051e8541557064689ec67abef96754,5b5949bdae9c541c4ff961075351d29354a70cc5d88cc14535d9155664756290" data-request-nonce="dJ3kUqYiseC9ZwVB7G0TSV4Neg5jbDTgT8mx4clWGww" style="padding-top: 0px;">
+      <!-- Accessibility: this link should always be the first piece of content inside the body-->
+      <a href="https://pypi.org/project/ipyevents/#content" class="skip-to-content">Zum Hauptinhalt springen</a>
+      <button type="button" class="button button--primary button--switch-to-mobile hidden" data-viewport-toggle-target="switchToMobile" data-action="viewport-toggle#switchToMobile">Zur mobilen Version wechseln</button>
+      <div id="sticky-notifications" class="stick-to-top js-stick-to-top">
+        <!-- Add browser warning. Will show for ie9 and below -->
+        <!--[if IE]>
+      <div class="notification-bar notification-bar--warning" role="status">
+        <span class="notification-bar__icon">
+          <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+          <span class="sr-only">Warnung</span>
+        </span>
+        <span class="notification-bar__message">Sie verwenden einen nicht unterstützten Browser, aktualisieren Sie auf eine neuere Version.</span>
+      </div>
+      <![endif]-->
+        <noscript>
+          <div class="notification-bar notification-bar--warning" role="status">
+            <span class="notification-bar__icon">
+              <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+              <span class="sr-only">Warnung</span>
+            </span>
+            <span class="notification-bar__message">Einige Funktionen sind möglicherweise ohne JavaScript nicht nutzbar. Bitte versuchen Sie es mit aktiviertem JavaScript, falls Probleme auftreten.</span>
+          </div>
+        </noscript>
+<div data-html-include="/_includes/unauthed/notification-banners/"></div>    </div>
+<div data-html-include="/_includes/unauthed/flash-messages/"></div><div data-html-include="/_includes/authed/session-notifications/"></div><header class="site-header ">
+  <div class="site-container">
+    <div class="split-layout">
+        <div class="split-layout">
+          <div>
+            <a class="site-header__logo" href="https://pypi.org/">
+              <img alt="PyPI" src="./ipyevents · PyPI_files/logo-small.8998e9d1.svg">
+            </a>
+          </div>
+          <form class="search-form search-form--primary" action="https://pypi.org/search/" role="search">
+            <label for="search" class="sr-only">PyPI durchsuchen</label>
+            <input id="search" class="search-form__search" type="text" name="q" placeholder="Type &#39;/&#39; to search projects" value="" autocomplete="off" autocapitalize="off" spellcheck="false" data-controller="search-focus" data-action="keydown@window-&gt;search-focus#focusSearchField" data-search-focus-target="searchField">
+            <button type="submit" class="search-form__button">
+              <i class="fa fa-search" aria-hidden="true"></i>
+              <span class="sr-only">Suche</span>
+            </button>
+          </form>
+        </div>
+<div data-html-include="/_includes/authed/current-user-indicator/">      <div id="user-indicator" class="horizontal-menu horizontal-menu--light horizontal-menu--tall">
+    <nav class="horizontal-menu horizontal-menu--light horizontal-menu--tall hide-on-tablet" aria-label="Hauptnavigation">
+      <ul>
+        <li class="horizontal-menu__item">
+          <a href="https://pypi.org/help/" class="horizontal-menu__link">Hilfe</a>
+        </li>
+        <li class="horizontal-menu__item">
+          <a href="https://docs.pypi.org/" class="horizontal-menu__link">Docs</a>
+        </li>
+        <li class="horizontal-menu__item">
+          <a href="https://pypi.org/sponsors/" class="horizontal-menu__link">Sponsoren</a>
+        </li>
+        <li class="horizontal-menu__item">
+          <a href="https://pypi.org/account/login/?next=https%3A%2F%2Fpypi.org%2Fproject%2Fipyevents%2F" class="horizontal-menu__link">Einloggen</a>
+        </li>
+        <li class="horizontal-menu__item">
+          <a href="https://pypi.org/account/register/" class="horizontal-menu__link">Registrieren</a>
+        </li>
+      </ul>
+    </nav>
+    <nav class="dropdown dropdown--on-menu hidden show-on-tablet" aria-label="Hauptnavigation">
+      <button type="button" class="horizontal-menu__link dropdown__trigger" aria-haspopup="true" aria-expanded="false" aria-label="Menü anzeigen" data-dropdown-bound="true">
+Menü        <span class="dropdown__trigger-caret">
+          <i class="fa fa-caret-down" aria-hidden="true"></i>
+        </span>
+      </button>
+      <ul class="dropdown__content" aria-hidden="true" aria-label="Hauptmenü">
+        <li>
+          <a class="dropdown__link" href="https://pypi.org/help/">Hilfe</a>
+        </li>
+        <li>
+          <a class="dropdown__link" href="https://docs.pypi.org/">Docs</a>
+        </li>
+        <li>
+          <a class="dropdown__link" href="https://pypi.org/sponsors/">Sponsoren</a>
+        </li>
+        <li>
+          <a class="dropdown__link" href="https://pypi.org/account/login/">Einloggen</a>
+        </li>
+        <li>
+          <a class="dropdown__link" href="https://pypi.org/account/register/">Registrieren</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>  </div>
+</div>
+</header>
+  <div class="mobile-search">
+    <form class="search-form search-form--fullwidth" action="https://pypi.org/search/" role="search">
+      <label for="mobile-search" class="sr-only">PyPI durchsuchen</label>
+      <input id="mobile-search" class="search-form__search" type="text" name="q" placeholder="Projekte suchen" value="" autocomplete="off" autocapitalize="off" spellcheck="false">
+      
+      <button type="submit" class="search-form__button">
+        <i class="fa fa-search" aria-hidden="true"></i>
+        <span class="sr-only">Suche</span>
+      </button>
+    </form>
+  </div>
+<main id="content">
+  <div class="banner">
+    <div class="package-header">
+      <div class="package-header__left">
+        <h1 class="package-header__name">ipyevents 2.0.2</h1>
+          <div data-controller="clipboard">
+            <p class="package-header__pip-instructions">
+              <span id="pip-command" data-clipboard-target="source">pip install ipyevents</span>
+              <button type="button" class="copy-tooltip copy-tooltip-s" data-action="clipboard#copy" data-clipboard-target="tooltip" data-clipboard-tooltip-value="In die Zwischenablage kopieren">
+                <i class="fa fa-copy" aria-hidden="true"></i>
+                <span class="sr-only">PIP Anweisungen kopieren</span>
+              </button>
+            </p>
+          </div>
+      </div>
+      <div class="package-header__right">
+            <a class="status-badge status-badge--good" href="https://pypi.org/project/ipyevents/">
+              <span>Neueste Version</span>
+            </a>
+        <p class="package-header__date">
+Veröffentlicht: <time datetime="2023-08-21T03:36:59+0000" data-controller="localized-time" data-localized-time-relative="true" data-localized-time-show-time="false" title="2023-08-21 05:36:59 (+02:00)" aria-label="2023-08-21 05:36:59 (+02:00)">21. Aug. 2023</time>        </p>
+      </div>
+    </div>
+  </div>
+  <div class="horizontal-section horizontal-section--grey horizontal-section--thin">
+    <div class="site-container">
+<div data-html-include="/_includes/authed/administer-project-include/ipyevents"></div>    <div class="split-layout split-layout--middle package-description">
+        <p class="package-description__summary">A custom widget for returning mouse and keyboard events to Python</p>
+<div data-html-include="/_includes/authed/edit-project-button/ipyevents"></div>  </div>
+</div>
+</div>
+<div data-controller="project-tabs" data-project-tabs-content="description">
+  <div class="tabs-container">
+    <div class="vertical-tabs">
+      <div class="vertical-tabs__tabs">
+        <div class="sidebar-section">
+          <h3 class="sidebar-section__title">Navigation</h3>
+          <nav aria-label="Navigation für ipyevents">
+            <ul class="vertical-tabs__list" role="tablist">
+              <li role="tab">
+                <a id="description-tab" href="https://pypi.org/project/ipyevents/#description" data-project-tabs-target="tab" data-action="project-tabs#onTabClick" class="vertical-tabs__tab vertical-tabs__tab--with-icon vertical-tabs__tab--is-active" aria-selected="true" aria-label="Projektbeschreibung. Der Fokus wird auf die Beschreibung verschoben.">
+                  <i class="fa fa-align-left" aria-hidden="true"></i>
+Projekt-Beschreibung                </a>
+              </li>
+              <li role="tab">
+                <a id="history-tab" href="https://pypi.org/project/ipyevents/#history" data-project-tabs-target="tab" data-action="project-tabs#onTabClick" class="vertical-tabs__tab vertical-tabs__tab--with-icon" aria-label="Veröffentlichungs-Historie. Der Fokus wird auf den Historien-Verlauf gelegt.">
+                  <i class="fa fa-history" aria-hidden="true"></i>
+Veröffentlichungs-Historie                </a>
+              </li>
+                <li role="tab">
+                  <a id="files-tab" href="https://pypi.org/project/ipyevents/#files" data-project-tabs-target="tab" data-action="project-tabs#onTabClick" class="vertical-tabs__tab vertical-tabs__tab--with-icon" aria-label="Dateien zum Herunterladen. Der Fokus wird auf die Projekt-Dateien gelenkt.">
+                    <i class="fa fa-download" aria-hidden="true"></i>
+Dateien zum Herunterladen                  </a>
+                </li>
+            </ul>
+          </nav>
+        </div>
+<div class="sidebar-section verified">
+  <h3 class="sidebar-section__title">
+Verifizierte Details    <i class="fa fa-circle-check check" title="Überprüft von PyPI am 2023-08-21"></i>
+  </h3>
+  <small><i>Diese Angaben wurden <a href="https://docs.pypi.org/project_metadata/#verified-details">von PyPI überprüft</a></i></small>
+    <h6>Betreuer</h6>
+      <span class="sidebar-section__maintainer">
+        <a href="https://pypi.org/user/mwcraig/" aria-label="">
+          <span class="sidebar-section__user-gravatar">
+            <img src="./ipyevents · PyPI_files/68747470733a2f2f7365637572652e67726176617461722e636f6d2f6176617461722f65383063646336386266373639383738343565313362636439623963646263623f73697a653d3530" height="50" width="50" alt="Profilbild für mwcraig von gravatar.com" title="Profilbild für mwcraig von gravatar.com">
+          </span>
+          <span class="sidebar-section__user-gravatar-text">mwcraig</span>
+        </a>
+      </span>
+</div>
+<div class="sidebar-section unverified">
+  <h3 class="sidebar-section__title">Unbestätigte Details</h3>
+  <small><i>Diese Angaben wurden <b>nicht</b> von PyPI überprüft</i></small>
+    <h6>Projekt-Links</h6>
+    <ul class="vertical-tabs__list">
+          <li>
+            <a class="vertical-tabs__tab vertical-tabs__tab--with-icon vertical-tabs__tab--condensed" href="https://github.com/mwcraig/ipyevents" rel="nofollow">  <i class="fas fa-home" aria-hidden="true"></i>Homepage</a>
+          </li>
+    </ul>
+    <div class="sidebar-section unverified">
+      <h6>Meta</h6>
+      <ul>
+          <li>
+            <span>
+              <strong>Lizenz:</strong> BSD License (BSD 3-clause)
+            </span>
+          </li>
+          <li>
+            <span>
+              <strong>Autor:</strong> <a href="mailto:mattwcraig@gmail.com">Matt Craig</a>
+            </span>
+          </li>
+          <li class="tags">
+            <span>
+              <i class="fa fa-tags" aria-hidden="true"></i>
+              <span class="sr-only">Schlagwörter</span>
+                <span class="package-keyword">
+                  IPython
+,                </span>
+                <span class="package-keyword">
+                  Jupyter
+,                </span>
+                <span class="package-keyword">
+                  Widgets
+                </span>
+            </span>
+          </li>
+          <li>
+            <span>
+              <strong>Benötigt:</strong> Python &gt;=3.6
+            </span>
+          </li>
+      </ul>
+    </div>
+    <div class="sidebar-section unverified">
+      <h6 class="sidebar-section__title">Kategorien</h6>
+      <ul class="sidebar-section__classifiers">
+          <li>
+            <strong>Framework</strong>
+            <ul>
+                <li>
+                  <a href="https://pypi.org/search/?c=Framework+%3A%3A+Jupyter">
+                    Jupyter
+                  </a>
+                </li>
+            </ul>
+          </li>
+          <li>
+            <strong>Intended Audience</strong>
+            <ul>
+                <li>
+                  <a href="https://pypi.org/search/?c=Intended+Audience+%3A%3A+Developers">
+                    Developers
+                  </a>
+                </li>
+                <li>
+                  <a href="https://pypi.org/search/?c=Intended+Audience+%3A%3A+Science%2FResearch">
+                    Science/Research
+                  </a>
+                </li>
+            </ul>
+          </li>
+          <li>
+            <strong>License</strong>
+            <ul>
+                <li>
+                  <a href="https://pypi.org/search/?c=License+%3A%3A+OSI+Approved+%3A%3A+BSD+License">
+                    OSI Approved :: BSD License
+                  </a>
+                </li>
+            </ul>
+          </li>
+          <li>
+            <strong>Programming Language</strong>
+            <ul>
+                <li>
+                  <a href="https://pypi.org/search/?c=Programming+Language+%3A%3A+Python">
+                    Python
+                  </a>
+                </li>
+                <li>
+                  <a href="https://pypi.org/search/?c=Programming+Language+%3A%3A+Python+%3A%3A+3">
+                    Python :: 3
+                  </a>
+                </li>
+                <li>
+                  <a href="https://pypi.org/search/?c=Programming+Language+%3A%3A+Python+%3A%3A+3.6">
+                    Python :: 3.6
+                  </a>
+                </li>
+                <li>
+                  <a href="https://pypi.org/search/?c=Programming+Language+%3A%3A+Python+%3A%3A+3.7">
+                    Python :: 3.7
+                  </a>
+                </li>
+                <li>
+                  <a href="https://pypi.org/search/?c=Programming+Language+%3A%3A+Python+%3A%3A+3.8">
+                    Python :: 3.8
+                  </a>
+                </li>
+                <li>
+                  <a href="https://pypi.org/search/?c=Programming+Language+%3A%3A+Python+%3A%3A+3.9">
+                    Python :: 3.9
+                  </a>
+                </li>
+            </ul>
+          </li>
+      </ul>
+    </div>
+</div>  <div class="sidebar-section" data-ea-publisher="psf" data-ea-type="psf" data-ea-keywords="pypi-sidebar"></div>
+        <div class="sidebar-section">
+          <a class="button button--full-width button--warning" href="https://pypi.org/project/ipyevents/submit-malware-report/" role="button">Report project as malware</a>
+        </div>
+      </div>
+      <div class="vertical-tabs__panel">
+        <!-- mobile menu -->
+        <nav aria-label="Navigation für ipyevents">
+          <ul class="vertical-tabs__list" role="tablist">
+            <li role="tab">
+              <a id="mobile-description-tab" href="https://pypi.org/project/ipyevents/#description" data-project-tabs-target="mobileTab" data-action="project-tabs#onTabClick" class="vertical-tabs__tab vertical-tabs__tab--with-icon vertical-tabs__tab--mobile vertical-tabs__tab--no-top-border vertical-tabs__tab--is-active" aria-selected="true" aria-label="Projektbeschreibung. Der Fokus wird auf die Beschreibung verschoben.">
+                <i class="fa fa-align-left" aria-hidden="true"></i>
+Projekt-Beschreibung              </a>
+            </li>
+            <li role="tab">
+              <a id="mobile-data-tab" href="https://pypi.org/project/ipyevents/#data" data-project-tabs-target="mobileTab" data-action="project-tabs#onTabClick" class="vertical-tabs__tab vertical-tabs__tab--with-icon vertical-tabs__tab--mobile" aria-label="Projekt-Details. Der Fokus wird auf die Projekt-Details verschoben.">
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+Projekt-Details              </a>
+            </li>
+            <li role="tab">
+              <a id="mobile-history-tab" href="https://pypi.org/project/ipyevents/#history" data-project-tabs-target="mobileTab" data-action="project-tabs#onTabClick" class="vertical-tabs__tab vertical-tabs__tab--with-icon vertical-tabs__tab--mobile" aria-label="Veröffentlichungs-Historie. Der Fokus wird auf den Historien-Verlauf gelegt.">
+                <i class="fa fa-history" aria-hidden="true"></i>
+Veröffentlichungs-Historie              </a>
+            </li>
+              <li role="tab">
+                <a id="mobile-files-tab" href="https://pypi.org/project/ipyevents/#files" data-project-tabs-target="mobileTab" data-action="project-tabs#onTabClick" class="vertical-tabs__tab vertical-tabs__tab--with-icon vertical-tabs__tab--mobile" aria-label="Dateien zum Herunterladen. Der Fokus wird auf die Projekt-Dateien gelenkt.">
+                  <i class="fa fa-download" aria-hidden="true"></i>
+Dateien zum Herunterladen                </a>
+              </li>
+          </ul>
+        </nav>
+        <div id="description" data-project-tabs-target="content" class="vertical-tabs__content" role="tabpanel" aria-labelledby="description-tab mobile-description-tab" tabindex="-1" style="display: block;">
+    <h2 class="page-title">Projekt-Beschreibung</h2>
+      <div class="project-description"><h1>ipyevents</h1>
+<h2>Browsers events for your jupyter widgets</h2>
+<p><em>ipyevents</em> provides a custom widget for returning mouse and keyboard events to
+Python. Use it to:</p>
+<ul>
+<li>add keyboard shortcuts to an existing widget;</li>
+<li>react to the user clicking on an image;</li>
+<li>add callbacks on arbitrary mouse and keyboard events.</li>
+</ul>
+<p>See <a href="https://pypi.org/project/ipyevents/docs/events.ipynb" rel="nofollow">this demo notebook</a> for documentation.</p>
+<p>Special thanks to the <a href="https://pypi.org/project/ipyevents/CONTRIBUTORS.md" rel="nofollow">contributors to <code>ipyevents</code></a>!</p>
+<h2>Try it on binder:</h2>
+<p>Dev version:
+<a href="https://mybinder.org/v2/gh/mwcraig/ipyevents/HEAD?filepath=docs%2Fevents.ipynb" rel="nofollow"><img src="./ipyevents · PyPI_files/68747470733a2f2f6d7962696e6465722e6f72672f62616467655f6c6f676f2e737667" alt="Binder"></a></p>
+<h2>Documentation</h2>
+<p><a href="https://ipyevents.readthedocs.io/en/latest/?badge=latest" rel="nofollow"><img src="./ipyevents · PyPI_files/68747470733a2f2f72656164746865646f63732e6f72672f70726f6a656374732f6970796576656e74732f62616467652f3f76657273696f6e3d6c6174657374" alt="Documentation Status"></a></p>
+<h2>Installation</h2>
+<p>To install using <code>conda</code>:</p>
+<pre lang="bash">$<span class="w"> </span>conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>ipyevents
+</pre>
+<p>To install use <code>pip</code>:</p>
+<pre><code>$ pip install ipyevents
+</code></pre>
+<p>Using with JupyterLab (whether you installed with <code>conda</code> or <code>pip</code>):</p>
+<ul>
+<li>The stable releases of ipyevents (<code>2.0.0</code> and higher) are only built for JupyterLab 3 and up.</li>
+<li>The last release that is built for JupyterLab 2 is 0.9.0. See the <a href="https://github.com/mwcraig/ipyevents/tree/0.9.0" rel="nofollow">README for that version</a> for installation instructions.</li>
+</ul>
+<pre lang="bash">$<span class="w"> </span>jupyter<span class="w"> </span>labextension<span class="w"> </span>install<span class="w"> </span>@jupyter-widgets/jupyterlab-manager<span class="w"> </span>ipyevents
+</pre>
+<h3>For a development installation (requires npm),</h3>
+<pre lang="bash">$<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/mwcraig/ipyevents.git
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>ipyevents
+$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+$<span class="w"> </span>jupyter<span class="w"> </span>nbextension<span class="w"> </span>install<span class="w"> </span>--py<span class="w"> </span>--symlink<span class="w"> </span>--sys-prefix<span class="w"> </span>ipyevents
+$<span class="w"> </span>jupyter<span class="w"> </span>nbextension<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--py<span class="w"> </span>--sys-prefix<span class="w"> </span>ipyevents
+</pre>
+<p>For Jupyter Lab also do this:</p>
+<pre lang="bash">$<span class="w"> </span>npm<span class="w"> </span>install
+$<span class="w"> </span>npm<span class="w"> </span>run<span class="w"> </span>build
+$<span class="w"> </span>jupyter<span class="w"> </span>labextension<span class="w"> </span>install
+</pre>
+</div>
+  </div>
+  <div id="data" data-project-tabs-target="content" class="vertical-tabs__content" role="tabpanel" aria-labelledby="mobile-data-tab" tabindex="-1" style="display: none;">
+    <h2 class="page-title">Projekt-Details</h2>
+<div class="sidebar-section verified">
+  <h3 class="sidebar-section__title">
+Verifizierte Details    <i class="fa fa-circle-check check" title="Überprüft von PyPI am 2023-08-21"></i>
+  </h3>
+  <small><i>Diese Angaben wurden <a href="https://docs.pypi.org/project_metadata/#verified-details">von PyPI überprüft</a></i></small>
+    <h6>Betreuer</h6>
+      <span class="sidebar-section__maintainer">
+        <a href="https://pypi.org/user/mwcraig/" aria-label="">
+          <span class="sidebar-section__user-gravatar">
+            <img src="./ipyevents · PyPI_files/68747470733a2f2f7365637572652e67726176617461722e636f6d2f6176617461722f65383063646336386266373639383738343565313362636439623963646263623f73697a653d3530" height="50" width="50" alt="Profilbild für mwcraig von gravatar.com" title="Profilbild für mwcraig von gravatar.com">
+          </span>
+          <span class="sidebar-section__user-gravatar-text">mwcraig</span>
+        </a>
+      </span>
+</div>
+<div class="sidebar-section unverified">
+  <h3 class="sidebar-section__title">Unbestätigte Details</h3>
+  <small><i>Diese Angaben wurden <b>nicht</b> von PyPI überprüft</i></small>
+    <h6>Projekt-Links</h6>
+    <ul class="vertical-tabs__list">
+          <li>
+            <a class="vertical-tabs__tab vertical-tabs__tab--with-icon vertical-tabs__tab--condensed" href="https://github.com/mwcraig/ipyevents" rel="nofollow">  <i class="fas fa-home" aria-hidden="true"></i>Homepage</a>
+          </li>
+    </ul>
+    <div class="sidebar-section unverified">
+      <h6>Meta</h6>
+      <ul>
+          <li>
+            <span>
+              <strong>Lizenz:</strong> BSD License (BSD 3-clause)
+            </span>
+          </li>
+          <li>
+            <span>
+              <strong>Autor:</strong> <a href="mailto:mattwcraig@gmail.com">Matt Craig</a>
+            </span>
+          </li>
+          <li class="tags">
+            <span>
+              <i class="fa fa-tags" aria-hidden="true"></i>
+              <span class="sr-only">Schlagwörter</span>
+                <span class="package-keyword">
+                  IPython
+,                </span>
+                <span class="package-keyword">
+                  Jupyter
+,                </span>
+                <span class="package-keyword">
+                  Widgets
+                </span>
+            </span>
+          </li>
+          <li>
+            <span>
+              <strong>Benötigt:</strong> Python &gt;=3.6
+            </span>
+          </li>
+      </ul>
+    </div>
+    <div class="sidebar-section unverified">
+      <h6 class="sidebar-section__title">Kategorien</h6>
+      <ul class="sidebar-section__classifiers">
+          <li>
+            <strong>Framework</strong>
+            <ul>
+                <li>
+                  <a href="https://pypi.org/search/?c=Framework+%3A%3A+Jupyter">
+                    Jupyter
+                  </a>
+                </li>
+            </ul>
+          </li>
+          <li>
+            <strong>Intended Audience</strong>
+            <ul>
+                <li>
+                  <a href="https://pypi.org/search/?c=Intended+Audience+%3A%3A+Developers">
+                    Developers
+                  </a>
+                </li>
+                <li>
+                  <a href="https://pypi.org/search/?c=Intended+Audience+%3A%3A+Science%2FResearch">
+                    Science/Research
+                  </a>
+                </li>
+            </ul>
+          </li>
+          <li>
+            <strong>License</strong>
+            <ul>
+                <li>
+                  <a href="https://pypi.org/search/?c=License+%3A%3A+OSI+Approved+%3A%3A+BSD+License">
+                    OSI Approved :: BSD License
+                  </a>
+                </li>
+            </ul>
+          </li>
+          <li>
+            <strong>Programming Language</strong>
+            <ul>
+                <li>
+                  <a href="https://pypi.org/search/?c=Programming+Language+%3A%3A+Python">
+                    Python
+                  </a>
+                </li>
+                <li>
+                  <a href="https://pypi.org/search/?c=Programming+Language+%3A%3A+Python+%3A%3A+3">
+                    Python :: 3
+                  </a>
+                </li>
+                <li>
+                  <a href="https://pypi.org/search/?c=Programming+Language+%3A%3A+Python+%3A%3A+3.6">
+                    Python :: 3.6
+                  </a>
+                </li>
+                <li>
+                  <a href="https://pypi.org/search/?c=Programming+Language+%3A%3A+Python+%3A%3A+3.7">
+                    Python :: 3.7
+                  </a>
+                </li>
+                <li>
+                  <a href="https://pypi.org/search/?c=Programming+Language+%3A%3A+Python+%3A%3A+3.8">
+                    Python :: 3.8
+                  </a>
+                </li>
+                <li>
+                  <a href="https://pypi.org/search/?c=Programming+Language+%3A%3A+Python+%3A%3A+3.9">
+                    Python :: 3.9
+                  </a>
+                </li>
+            </ul>
+          </li>
+      </ul>
+    </div>
+</div>    <br>
+  </div>
+  <div id="history" data-project-tabs-target="content" class="vertical-tabs__content" role="tabpanel" aria-labelledby="history-tab mobile-history-tab" tabindex="-1" style="display: none;">
+    <h2 class="page-title split-layout">
+      <span>Veröffentlichungs-Historie</span>
+      <span class="reset-text margin-top">
+        <a href="https://pypi.org/help/#project-release-notifications">Veröffentlichungs-Benachrichtigungen</a> |
+        <a href="https://pypi.org/rss/project/ipyevents/releases.xml">RSS-Feed <i class="fa fa-rss" aria-hidden="true"></i></a>
+      </span>
+    </h2>
+    <div class="release-timeline">
+        <div class="release release--latest release--current">
+          <div class="release__meta">
+              <span class="badge">Diese Version</span>
+          </div>
+          <div class="release__graphic">
+<div class="release__line"></div>              <img class="release__node" alt="" src="./ipyevents · PyPI_files/blue-cube.572a5bfb.svg">
+          </div>
+          <a class="card release__card" href="https://pypi.org/project/ipyevents/2.0.2/">
+            <p class="release__version">
+              2.0.2
+            </p>
+            <p class="release__version-date"><time datetime="2023-08-21T03:36:59+0000" data-controller="localized-time" data-localized-time-relative="true" data-localized-time-show-time="false" title="2023-08-21 05:36:59 (+02:00)" aria-label="2023-08-21 05:36:59 (+02:00)">21. Aug. 2023</time></p>
+          </a>
+        </div>
+        <div class="release">
+          <div class="release__meta">
+          </div>
+          <div class="release__graphic">
+<div class="release__line"></div>              <img class="release__node" alt="" src="./ipyevents · PyPI_files/white-cube.2351a86c.svg">
+          </div>
+          <a class="card release__card" href="https://pypi.org/project/ipyevents/2.0.1/">
+            <p class="release__version">
+              2.0.1
+            </p>
+            <p class="release__version-date"><time datetime="2021-07-15T19:13:04+0000" data-controller="localized-time" data-localized-time-relative="true" data-localized-time-show-time="false" title="2021-07-15 21:13:04 (+02:00)" aria-label="2021-07-15 21:13:04 (+02:00)">15. Juli 2021</time></p>
+          </a>
+        </div>
+        <div class="release">
+          <div class="release__meta">
+          </div>
+          <div class="release__graphic">
+<div class="release__line"></div>              <img class="release__node" alt="" src="./ipyevents · PyPI_files/white-cube.2351a86c.svg">
+          </div>
+          <a class="card release__card" href="https://pypi.org/project/ipyevents/2.0.0/">
+            <p class="release__version">
+              2.0.0
+            </p>
+            <p class="release__version-date"><time datetime="2021-07-15T18:50:57+0000" data-controller="localized-time" data-localized-time-relative="true" data-localized-time-show-time="false" title="2021-07-15 20:50:57 (+02:00)" aria-label="2021-07-15 20:50:57 (+02:00)">15. Juli 2021</time></p>
+          </a>
+        </div>
+        <div class="release">
+          <div class="release__meta">
+          </div>
+          <div class="release__graphic">
+<div class="release__line"></div>              <img class="release__node" alt="" src="./ipyevents · PyPI_files/white-cube.2351a86c.svg">
+          </div>
+          <a class="card release__card" href="https://pypi.org/project/ipyevents/0.9.0/">
+            <p class="release__version">
+              0.9.0
+            </p>
+            <p class="release__version-date"><time datetime="2021-07-14T17:58:38+0000" data-controller="localized-time" data-localized-time-relative="true" data-localized-time-show-time="false" title="2021-07-14 19:58:38 (+02:00)" aria-label="2021-07-14 19:58:38 (+02:00)">14. Juli 2021</time></p>
+          </a>
+        </div>
+        <div class="release">
+          <div class="release__meta">
+          </div>
+          <div class="release__graphic">
+<div class="release__line"></div>              <img class="release__node" alt="" src="./ipyevents · PyPI_files/white-cube.2351a86c.svg">
+          </div>
+          <a class="card release__card" href="https://pypi.org/project/ipyevents/0.8.2/">
+            <p class="release__version">
+              0.8.2
+            </p>
+            <p class="release__version-date"><time datetime="2021-02-18T03:12:33+0000" data-controller="localized-time" data-localized-time-relative="true" data-localized-time-show-time="false" title="2021-02-18 04:12:33 (+01:00)" aria-label="2021-02-18 04:12:33 (+01:00)">18. Feb. 2021</time></p>
+          </a>
+        </div>
+        <div class="release">
+          <div class="release__meta">
+          </div>
+          <div class="release__graphic">
+<div class="release__line"></div>              <img class="release__node" alt="" src="./ipyevents · PyPI_files/white-cube.2351a86c.svg">
+          </div>
+          <a class="card release__card" href="https://pypi.org/project/ipyevents/0.8.1/">
+            <p class="release__version">
+              0.8.1
+            </p>
+            <p class="release__version-date"><time datetime="2020-10-18T18:35:10+0000" data-controller="localized-time" data-localized-time-relative="true" data-localized-time-show-time="false" title="2020-10-18 20:35:10 (+02:00)" aria-label="2020-10-18 20:35:10 (+02:00)">18. Okt. 2020</time></p>
+          </a>
+        </div>
+        <div class="release">
+          <div class="release__meta">
+          </div>
+          <div class="release__graphic">
+<div class="release__line"></div>              <img class="release__node" alt="" src="./ipyevents · PyPI_files/white-cube.2351a86c.svg">
+          </div>
+          <a class="card release__card" href="https://pypi.org/project/ipyevents/0.8.0/">
+            <p class="release__version">
+              0.8.0
+            </p>
+            <p class="release__version-date"><time datetime="2020-07-08T03:17:01+0000" data-controller="localized-time" data-localized-time-relative="true" data-localized-time-show-time="false" title="2020-07-08 05:17:01 (+02:00)" aria-label="2020-07-08 05:17:01 (+02:00)">8. Juli 2020</time></p>
+          </a>
+        </div>
+        <div class="release">
+          <div class="release__meta">
+          </div>
+          <div class="release__graphic">
+<div class="release__line"></div>              <img class="release__node" alt="" src="./ipyevents · PyPI_files/white-cube.2351a86c.svg">
+          </div>
+          <a class="card release__card" href="https://pypi.org/project/ipyevents/0.7.1/">
+            <p class="release__version">
+              0.7.1
+            </p>
+            <p class="release__version-date"><time datetime="2020-04-02T02:49:35+0000" data-controller="localized-time" data-localized-time-relative="true" data-localized-time-show-time="false" title="2020-04-02 04:49:35 (+02:00)" aria-label="2020-04-02 04:49:35 (+02:00)">2. Apr. 2020</time></p>
+          </a>
+        </div>
+        <div class="release">
+          <div class="release__meta">
+          </div>
+          <div class="release__graphic">
+<div class="release__line"></div>              <img class="release__node" alt="" src="./ipyevents · PyPI_files/white-cube.2351a86c.svg">
+          </div>
+          <a class="card release__card" href="https://pypi.org/project/ipyevents/0.7.0/">
+            <p class="release__version">
+              0.7.0
+            </p>
+            <p class="release__version-date"><time datetime="2019-10-05T17:25:25+0000" data-controller="localized-time" data-localized-time-relative="true" data-localized-time-show-time="false" title="2019-10-05 19:25:25 (+02:00)" aria-label="2019-10-05 19:25:25 (+02:00)">5. Okt. 2019</time></p>
+          </a>
+        </div>
+        <div class="release">
+          <div class="release__meta">
+          </div>
+          <div class="release__graphic">
+<div class="release__line"></div>              <img class="release__node" alt="" src="./ipyevents · PyPI_files/white-cube.2351a86c.svg">
+          </div>
+          <a class="card release__card" href="https://pypi.org/project/ipyevents/0.6.3/">
+            <p class="release__version">
+              0.6.3
+            </p>
+            <p class="release__version-date"><time datetime="2019-07-29T17:46:45+0000" data-controller="localized-time" data-localized-time-relative="true" data-localized-time-show-time="false" title="2019-07-29 19:46:45 (+02:00)" aria-label="2019-07-29 19:46:45 (+02:00)">29. Juli 2019</time></p>
+          </a>
+        </div>
+        <div class="release">
+          <div class="release__meta">
+          </div>
+          <div class="release__graphic">
+<div class="release__line"></div>              <img class="release__node" alt="" src="./ipyevents · PyPI_files/white-cube.2351a86c.svg">
+          </div>
+          <a class="card release__card" href="https://pypi.org/project/ipyevents/0.6.2/">
+            <p class="release__version">
+              0.6.2
+            </p>
+            <p class="release__version-date"><time datetime="2019-07-18T01:22:34+0000" data-controller="localized-time" data-localized-time-relative="true" data-localized-time-show-time="false" title="2019-07-18 03:22:34 (+02:00)" aria-label="2019-07-18 03:22:34 (+02:00)">18. Juli 2019</time></p>
+          </a>
+        </div>
+        <div class="release">
+          <div class="release__meta">
+          </div>
+          <div class="release__graphic">
+<div class="release__line"></div>              <img class="release__node" alt="" src="./ipyevents · PyPI_files/white-cube.2351a86c.svg">
+          </div>
+          <a class="card release__card" href="https://pypi.org/project/ipyevents/0.6.1/">
+            <p class="release__version">
+              0.6.1
+            </p>
+            <p class="release__version-date"><time datetime="2019-07-09T22:02:36+0000" data-controller="localized-time" data-localized-time-relative="true" data-localized-time-show-time="false" title="2019-07-10 00:02:36 (+02:00)" aria-label="2019-07-10 00:02:36 (+02:00)">10. Juli 2019</time></p>
+          </a>
+        </div>
+        <div class="release">
+          <div class="release__meta">
+          </div>
+          <div class="release__graphic">
+<div class="release__line"></div>              <img class="release__node" alt="" src="./ipyevents · PyPI_files/white-cube.2351a86c.svg">
+          </div>
+          <a class="card release__card" href="https://pypi.org/project/ipyevents/0.6.0/">
+            <p class="release__version">
+              0.6.0
+            </p>
+            <p class="release__version-date"><time datetime="2019-07-09T21:15:06+0000" data-controller="localized-time" data-localized-time-relative="true" data-localized-time-show-time="false" title="2019-07-09 23:15:06 (+02:00)" aria-label="2019-07-09 23:15:06 (+02:00)">9. Juli 2019</time></p>
+          </a>
+        </div>
+        <div class="release">
+          <div class="release__meta">
+          </div>
+          <div class="release__graphic">
+<div class="release__line"></div>              <img class="release__node" alt="" src="./ipyevents · PyPI_files/white-cube.2351a86c.svg">
+          </div>
+          <a class="card release__card" href="https://pypi.org/project/ipyevents/0.5.0/">
+            <p class="release__version">
+              0.5.0
+            </p>
+            <p class="release__version-date"><time datetime="2019-04-27T16:55:22+0000" data-controller="localized-time" data-localized-time-relative="true" data-localized-time-show-time="false" title="2019-04-27 18:55:22 (+02:00)" aria-label="2019-04-27 18:55:22 (+02:00)">27. Apr. 2019</time></p>
+          </a>
+        </div>
+        <div class="release">
+          <div class="release__meta">
+          </div>
+          <div class="release__graphic">
+<div class="release__line"></div>              <img class="release__node" alt="" src="./ipyevents · PyPI_files/white-cube.2351a86c.svg">
+          </div>
+          <a class="card release__card" href="https://pypi.org/project/ipyevents/0.4.1/">
+            <p class="release__version">
+              0.4.1
+            </p>
+            <p class="release__version-date"><time datetime="2019-02-25T03:45:47+0000" data-controller="localized-time" data-localized-time-relative="true" data-localized-time-show-time="false" title="2019-02-25 04:45:47 (+01:00)" aria-label="2019-02-25 04:45:47 (+01:00)">25. Feb. 2019</time></p>
+          </a>
+        </div>
+        <div class="release">
+          <div class="release__meta">
+          </div>
+          <div class="release__graphic">
+<div class="release__line"></div>              <img class="release__node" alt="" src="./ipyevents · PyPI_files/white-cube.2351a86c.svg">
+          </div>
+          <a class="card release__card" href="https://pypi.org/project/ipyevents/0.4.0/">
+            <p class="release__version">
+              0.4.0
+            </p>
+            <p class="release__version-date"><time datetime="2019-01-01T22:57:26+0000" data-controller="localized-time" data-localized-time-relative="true" data-localized-time-show-time="false" title="2019-01-01 23:57:26 (+01:00)" aria-label="2019-01-01 23:57:26 (+01:00)">1. Jan. 2019</time></p>
+          </a>
+        </div>
+        <div class="release">
+          <div class="release__meta">
+          </div>
+          <div class="release__graphic">
+<div class="release__line"></div>              <img class="release__node" alt="" src="./ipyevents · PyPI_files/white-cube.2351a86c.svg">
+          </div>
+          <a class="card release__card" href="https://pypi.org/project/ipyevents/0.3.2/">
+            <p class="release__version">
+              0.3.2
+            </p>
+            <p class="release__version-date"><time datetime="2018-11-20T20:40:16+0000" data-controller="localized-time" data-localized-time-relative="true" data-localized-time-show-time="false" title="2018-11-20 21:40:16 (+01:00)" aria-label="2018-11-20 21:40:16 (+01:00)">20. Nov. 2018</time></p>
+          </a>
+        </div>
+        <div class="release">
+          <div class="release__meta">
+          </div>
+          <div class="release__graphic">
+<div class="release__line"></div>              <img class="release__node" alt="" src="./ipyevents · PyPI_files/white-cube.2351a86c.svg">
+          </div>
+          <a class="card release__card" href="https://pypi.org/project/ipyevents/0.3.1/">
+            <p class="release__version">
+              0.3.1
+            </p>
+            <p class="release__version-date"><time datetime="2018-06-29T15:30:04+0000" data-controller="localized-time" data-localized-time-relative="true" data-localized-time-show-time="false" title="2018-06-29 17:30:04 (+02:00)" aria-label="2018-06-29 17:30:04 (+02:00)">29. Juni 2018</time></p>
+          </a>
+        </div>
+        <div class="release">
+          <div class="release__meta">
+          </div>
+          <div class="release__graphic">
+<div class="release__line"></div>              <img class="release__node" alt="" src="./ipyevents · PyPI_files/white-cube.2351a86c.svg">
+          </div>
+          <a class="card release__card" href="https://pypi.org/project/ipyevents/0.3.0/">
+            <p class="release__version">
+              0.3.0
+            </p>
+            <p class="release__version-date"><time datetime="2018-05-01T14:58:23+0000" data-controller="localized-time" data-localized-time-relative="true" data-localized-time-show-time="false" title="2018-05-01 16:58:23 (+02:00)" aria-label="2018-05-01 16:58:23 (+02:00)">1. Mai 2018</time></p>
+          </a>
+        </div>
+        <div class="release">
+          <div class="release__meta">
+          </div>
+          <div class="release__graphic">
+<div class="release__line"></div>              <img class="release__node" alt="" src="./ipyevents · PyPI_files/white-cube.2351a86c.svg">
+          </div>
+          <a class="card release__card" href="https://pypi.org/project/ipyevents/0.2.0/">
+            <p class="release__version">
+              0.2.0
+            </p>
+            <p class="release__version-date"><time datetime="2018-01-25T16:49:30+0000" data-controller="localized-time" data-localized-time-relative="true" data-localized-time-show-time="false" title="2018-01-25 17:49:30 (+01:00)" aria-label="2018-01-25 17:49:30 (+01:00)">25. Jan. 2018</time></p>
+          </a>
+        </div>
+        <div class="release release--oldest">
+          <div class="release__meta">
+          </div>
+          <div class="release__graphic">
+<div class="release__line"></div>              <img class="release__node" alt="" src="./ipyevents · PyPI_files/white-cube.2351a86c.svg">
+          </div>
+          <a class="card release__card" href="https://pypi.org/project/ipyevents/0.0.1/">
+            <p class="release__version">
+              0.0.1
+            </p>
+            <p class="release__version-date"><time datetime="2017-10-29T22:10:03+0000" data-controller="localized-time" data-localized-time-relative="true" data-localized-time-show-time="false" title="2017-10-29 23:10:03 (+01:00)" aria-label="2017-10-29 23:10:03 (+01:00)">29. Okt. 2017</time></p>
+          </a>
+        </div>
+    </div>
+  </div>
+    <div id="files" data-project-tabs-target="content" class="vertical-tabs__content" role="tabpanel" aria-labelledby="files-tab mobile-files-tab" tabindex="-1" style="display: none;">
+      <h2 class="page-title">Dateien zum Herunterladen</h2>
+      <p>
+Laden Sie die Datei für Ihre Plattform herunter. Wenn Sie nicht sicher sind, was Sie auswählen sollen, lesen Sie <a href="https://packaging.python.org/tutorials/installing-packages/" title="Externer Link" target="_blank" rel="noopener">Installation von Paketen</a>.      </p>
+      <h3>
+Quelle Distribution    </h3>
+          <div class="file">
+      <div class="file__graphic">
+        <i class="far fa-file" aria-hidden="true"></i>
+      </div>
+      <div class="card file__card">
+        <a href="https://files.pythonhosted.org/packages/85/d8/254c3d2ed96b2c562d3a0365909a20a5faa40c5d55ca2b403cdf008a9c90/ipyevents-2.0.2.tar.gz">ipyevents-2.0.2.tar.gz</a>
+        (227.3 kB
+        <a href="https://pypi.org/project/ipyevents/#ipyevents-2.0.2.tar.gz" data-project-tabs-target="tab" data-action="project-tabs#onTabClick">Details ansehen</a>)
+        <p class="file__meta">
+          Uploaded <time datetime="2023-08-21T03:37:00+0000" data-controller="localized-time" data-localized-time-relative="true" data-localized-time-show-time="false" title="2023-08-21 05:37:00 (+02:00)" aria-label="2023-08-21 05:37:00 (+02:00)">21. Aug. 2023</time>
+<code>Source</code>        </p>
+      </div>
+    </div>
+
+      <h3>
+Gebaute Distribution    </h3>
+        <div class="file">
+      <div class="file__graphic">
+        <i class="far fa-file" aria-hidden="true"></i>
+      </div>
+      <div class="card file__card">
+        <a href="https://files.pythonhosted.org/packages/af/49/5692d363a82838282f5c33a787922f07115d7ba4b452391e51db95c9d247/ipyevents-2.0.2-py3-none-any.whl">ipyevents-2.0.2-py3-none-any.whl</a>
+        (101.8 kB
+        <a href="https://pypi.org/project/ipyevents/#ipyevents-2.0.2-py3-none-any.whl" data-project-tabs-target="tab" data-action="project-tabs#onTabClick">Details ansehen</a>)
+        <p class="file__meta">
+          Uploaded <time datetime="2023-08-21T03:36:59+0000" data-controller="localized-time" data-localized-time-relative="true" data-localized-time-show-time="false" title="2023-08-21 05:36:59 (+02:00)" aria-label="2023-08-21 05:36:59 (+02:00)">21. Aug. 2023</time>
+<code>Python 3</code>        </p>
+      </div>
+    </div>
+
+</div>
+<div id="ipyevents-2.0.2.tar.gz" data-project-tabs-target="content" class="vertical-tabs__content" role="tabpanel" aria-labelledby="file-tab mobile-file-tab" tabindex="-1" style="display: none;">
+  <h2 class="page-title">Datei-Details</h2>
+  <p>
+    Details for the file <code>ipyevents-2.0.2.tar.gz</code>.
+  </p>
+  <h3>File metadata</h3>
+  <div>
+    <ul>
+      <li>
+        Download URL: <a href="https://files.pythonhosted.org/packages/85/d8/254c3d2ed96b2c562d3a0365909a20a5faa40c5d55ca2b403cdf008a9c90/ipyevents-2.0.2.tar.gz">ipyevents-2.0.2.tar.gz</a>
+      </li>
+      <li>Hochladedatum: <time datetime="2023-08-21T03:37:00+0000" data-controller="localized-time" data-localized-time-relative="true" data-localized-time-show-time="false" title="2023-08-21 05:37:00 (+02:00)" aria-label="2023-08-21 05:37:00 (+02:00)">21. Aug. 2023</time></li>
+      <li>
+Größe: 227.3 kB      </li>
+      <li>Schlagwörter: Source</li>
+      <li>
+Durch vertrauenswürdige Herausgeber hochgeladen? No    </li>
+      <li>Hochgeladen über: twine/4.0.2 CPython/3.11.4</li>
+  </ul>
+</div>
+<h3>File hashes</h3>
+<div>
+  <table class="table table--hashes">
+    <caption class="sr-only">Hash-Codes für ipyevents-2.0.2.tar.gz</caption>
+    <thead>
+      <tr>
+        <th scope="col">Algorithmus</th>
+        <th scope="col">Prüfsumme</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr data-controller="clipboard">
+        <th scope="row">SHA256</th>
+        <td>
+          <code data-clipboard-target="source">26e878b0c5854bc8b6bd6a2bd2c89b314ebe86fda642f4d2434051545bab258f</code>
+        </td>
+        <td class="table__align-right">
+          <button type="button" class="button button--small copy-tooltip copy-tooltip-w" data-action="clipboard#copy" data-clipboard-target="tooltip" data-clipboard-tooltip-value="In die Zwischenablage kopieren">
+Kopieren          </button>
+        </td>
+      </tr>
+      <tr data-controller="clipboard">
+        <th scope="row">MD5</th>
+        <td>
+          <code data-clipboard-target="source">8e0b10102b66f7df6d1cb7b95f1523b4</code>
+        </td>
+        <td class="table__align-right">
+          <button type="button" class="button button--small copy-tooltip copy-tooltip-w" data-action="clipboard#copy" data-clipboard-target="tooltip" data-clipboard-tooltip-value="In die Zwischenablage kopieren">
+Kopieren          </button>
+        </td>
+      </tr>
+      <tr data-controller="clipboard">
+        <th scope="row">BLAKE2b-256</th>
+        <td>
+          <code data-clipboard-target="source">85d8254c3d2ed96b2c562d3a0365909a20a5faa40c5d55ca2b403cdf008a9c90</code>
+        </td>
+        <td class="table__align-right">
+          <button type="button" class="button button--small copy-tooltip copy-tooltip-w" data-action="clipboard#copy" data-clipboard-target="tooltip" data-clipboard-tooltip-value="In die Zwischenablage kopieren">
+Kopieren          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+<a href="https://pip.pypa.io/en/stable/topics/secure-installs/#hash-checking-mode" title="Externer Link" target="_blank" rel="noopener">Weitere Informationen zur Verwendung von Prüfsummen finden Sie hier.</a></p>
+</div>
+</div><div id="ipyevents-2.0.2-py3-none-any.whl" data-project-tabs-target="content" class="vertical-tabs__content" role="tabpanel" aria-labelledby="file-tab mobile-file-tab" tabindex="-1" style="display: none;">
+  <h2 class="page-title">Datei-Details</h2>
+  <p>
+    Details for the file <code>ipyevents-2.0.2-py3-none-any.whl</code>.
+  </p>
+  <h3>File metadata</h3>
+  <div>
+    <ul>
+      <li>
+        Download URL: <a href="https://files.pythonhosted.org/packages/af/49/5692d363a82838282f5c33a787922f07115d7ba4b452391e51db95c9d247/ipyevents-2.0.2-py3-none-any.whl">ipyevents-2.0.2-py3-none-any.whl</a>
+      </li>
+      <li>Hochladedatum: <time datetime="2023-08-21T03:36:59+0000" data-controller="localized-time" data-localized-time-relative="true" data-localized-time-show-time="false" title="2023-08-21 05:36:59 (+02:00)" aria-label="2023-08-21 05:36:59 (+02:00)">21. Aug. 2023</time></li>
+      <li>
+Größe: 101.8 kB      </li>
+      <li>Schlagwörter: Python 3</li>
+      <li>
+Durch vertrauenswürdige Herausgeber hochgeladen? No    </li>
+      <li>Hochgeladen über: twine/4.0.2 CPython/3.11.4</li>
+  </ul>
+</div>
+<h3>File hashes</h3>
+<div>
+  <table class="table table--hashes">
+    <caption class="sr-only">Hash-Codes für ipyevents-2.0.2-py3-none-any.whl</caption>
+    <thead>
+      <tr>
+        <th scope="col">Algorithmus</th>
+        <th scope="col">Prüfsumme</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr data-controller="clipboard">
+        <th scope="row">SHA256</th>
+        <td>
+          <code data-clipboard-target="source">60c2a9e992bdc41e8577aa27e57b124efafa48a59a3bff886029fe5700d546b3</code>
+        </td>
+        <td class="table__align-right">
+          <button type="button" class="button button--small copy-tooltip copy-tooltip-w" data-action="clipboard#copy" data-clipboard-target="tooltip" data-clipboard-tooltip-value="In die Zwischenablage kopieren">
+Kopieren          </button>
+        </td>
+      </tr>
+      <tr data-controller="clipboard">
+        <th scope="row">MD5</th>
+        <td>
+          <code data-clipboard-target="source">e84dfb76841b93cfb47a87da017e1443</code>
+        </td>
+        <td class="table__align-right">
+          <button type="button" class="button button--small copy-tooltip copy-tooltip-w" data-action="clipboard#copy" data-clipboard-target="tooltip" data-clipboard-tooltip-value="In die Zwischenablage kopieren">
+Kopieren          </button>
+        </td>
+      </tr>
+      <tr data-controller="clipboard">
+        <th scope="row">BLAKE2b-256</th>
+        <td>
+          <code data-clipboard-target="source">af495692d363a82838282f5c33a787922f07115d7ba4b452391e51db95c9d247</code>
+        </td>
+        <td class="table__align-right">
+          <button type="button" class="button button--small copy-tooltip copy-tooltip-w" data-action="clipboard#copy" data-clipboard-target="tooltip" data-clipboard-tooltip-value="In die Zwischenablage kopieren">
+Kopieren          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+<a href="https://pip.pypa.io/en/stable/topics/secure-installs/#hash-checking-mode" title="Externer Link" target="_blank" rel="noopener">Weitere Informationen zur Verwendung von Prüfsummen finden Sie hier.</a></p>
+</div>
+</div></div>
+</div>
+</div>
+</div>
+</main>
+<footer class="footer">
+  <div class="footer__logo">
+    <img src="./ipyevents · PyPI_files/white-cube.2351a86c.svg" alt="" class="-js-white-cube">
+  </div>
+  <div class="footer__menus">
+    <div class="footer__menu">
+      <h2>Hilfe</h2>
+      <nav aria-label="Hilfe-Navigation">
+        <ul>
+          <li>
+            <a href="https://packaging.python.org/tutorials/installing-packages/" title="Externer Link" target="_blank" rel="noopener">Installieren von Paketen</a>
+          </li>
+          <li>
+            <a href="https://packaging.python.org/tutorials/packaging-projects/" title="Externer Link" target="_blank" rel="noopener">Hochladen von Paketen</a>
+          </li>
+          <li>
+            <a href="https://packaging.python.org/" title="Externer Link" target="_blank" rel="noopener">Bedienungsanleitung</a>
+          </li>
+          <li>
+            <a href="https://www.python.org/dev/peps/pep-0541/" title="Externer Link" target="_blank" rel="noopener">Beibehaltung des Projektnamens</a>
+          </li>
+          <li>
+            <a href="https://pypi.org/help/">Häufige Fragen</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer__menu">
+      <h2>Über PyPI</h2>
+      <nav aria-label="Navigation in " Über="" pypi""="">
+        <ul>
+          <li>
+            <a href="https://blog.pypi.org/" title="Externer Link" target="_blank" rel="noopener">PyPI Blog</a>
+          </li>
+          <li>
+            <a href="https://dtdg.co/pypi" title="Externer Link" target="_blank" rel="noopener">Infrastruktur Übersicht</a>
+          </li>
+          <li>
+            <a href="https://pypi.org/stats/">Statistiken</a>
+          </li>
+          <li>
+            <a href="https://pypi.org/trademarks/">Logos und Markenzeichen</a>
+          </li>
+          <li>
+            <a href="https://pypi.org/sponsors/">Unsere Sponsoren</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer__menu">
+      <h2>Mitwirken bei PyPI</h2>
+      <nav aria-label="Navigation im Bereich " mitwirken="" bei="" pypi""="">
+        <ul>
+          <li>
+            <a href="https://pypi.org/help/#feedback">Fehler und Rückmeldungen</a>
+          </li>
+          <li>
+            <a href="https://github.com/pypi/warehouse" title="Externer Link" target="_blank" rel="noopener">Mitwirken auf GitHub</a>
+          </li>
+          <li>
+            <a href="https://hosted.weblate.org/projects/pypa/warehouse/" title="Externer Link" target="_blank" rel="noopener">PyPI übersetzen</a>
+          </li>
+          <li>
+            <a href="https://pypi.org/sponsors/">Sponsor PyPI</a>
+          </li>
+          <li>
+            <a href="https://github.com/pypi/warehouse/graphs/contributors" title="Externer Link" target="_blank" rel="noopener">Entwicklungs-Anerkennungen</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer__menu">
+      <h2>PyPI verwenden</h2>
+      <nav aria-label="Navigation in " pypi="" verwenden""="">
+        <ul>
+          <li>
+            <a href="https://policies.python.org/pypi.org/Terms-of-Service/" title="Externer Link" target="_blank" rel="noopener">Terms of Service</a>
+          </li>
+          <li>
+            <a href="https://pypi.org/security/">Sicherheitsproblem melden</a>
+          </li>
+          <li>
+            <a href="https://policies.python.org/python.org/code-of-conduct/" title="Externer Link" target="_blank" rel="noopener">Verhaltensrichtlinien</a>
+          </li>
+          <li>
+            <a href="https://policies.python.org/pypi.org/Privacy-Notice/" title="Externer Link" target="_blank" rel="noopener">Privacy Notice</a>
+          </li>
+          <li>
+            <a href="https://policies.python.org/pypi.org/Acceptable-Use-Policy/" title="Externer Link" target="_blank" rel="noopener">Richtlinie zur akzeptablen Nutzung</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <hr class="footer__divider">
+  <div class="footer__text">
+      <p>
+Status:<a href="https://status.python.org/" title="Externer Link" target="_blank" rel="noopener">
+        <span data-statuspage-domain="https://2p66nmmycsj3.statuspage.io">All Systems Operational</span></a>
+    </p>
+  <p>
+Entwickelt und gepflegt von der Python-Gemeinschaft, für die Python-Gemeinschaft.    <br>
+    <a href="https://donate.pypi.org/">Spenden Sie noch heute!</a>
+  </p>
+  <p>
+    "PyPI", "Python Package Index" und die Logos der Blöcke sind eingetragene <a href="https://pypi.org/trademarks/">Marken</a> der <a href="https://www.python.org/psf-landing" target="_blank" rel="noopener">Python Software Foundation</a>.
+    <br>
+  </p>
+  <p>
+    © 2025 <a href="https://www.python.org/psf-landing/" title="Externer Link" target="_blank" rel="noopener">Python Software Foundation</a>
+    <br>
+    <a href="https://pypi.org/sitemap/">Sitemap</a>
+  </p>
+</div>
+<div class="centered hide-on-desktop">
+  <button type="button" class="button button--switch-to-desktop" data-viewport-toggle-target="switchToDesktop" data-action="viewport-toggle#switchToDesktop">Zur Desktop-Version wechseln</button>
+</div>
+</footer>
+<div class="language-switcher">
+  <form action="https://pypi.org/locale/">
+    <ul>
+        <li>
+          <button name="locale_id" value="en" type="submit">English</button>
+        </li>
+        <li>
+          <button name="locale_id" value="es" type="submit">español</button>
+        </li>
+        <li>
+          <button name="locale_id" value="fr" type="submit">français</button>
+        </li>
+        <li>
+          <button name="locale_id" value="ja" type="submit">日本語</button>
+        </li>
+        <li>
+          <button name="locale_id" value="pt_BR" type="submit">português (Brasil)</button>
+        </li>
+        <li>
+          <button name="locale_id" value="uk" type="submit">українська</button>
+        </li>
+        <li>
+          <button name="locale_id" value="el" type="submit">Ελληνικά</button>
+        </li>
+        <li>
+          <button class="language-switcher__selected" name="locale_id" value="de" type="submit">Deutsch</button>
+        </li>
+        <li>
+          <button name="locale_id" value="zh_Hans" type="submit">中文 (简体)</button>
+        </li>
+        <li>
+          <button name="locale_id" value="zh_Hant" type="submit">中文 (繁體)</button>
+        </li>
+        <li>
+          <button name="locale_id" value="ru" type="submit">русский</button>
+        </li>
+        <li>
+          <button name="locale_id" value="he" type="submit">עברית</button>
+        </li>
+        <li>
+          <button name="locale_id" value="eo" type="submit">Esperanto</button>
+        </li>
+        <li>
+          <button name="locale_id" value="ko" type="submit">한국어</button>
+        </li>
+    </ul>
+  </form>
+</div>
+<div class="sponsors">
+  <p class="sponsors__title">Supported by</p>
+  <div class="sponsors__divider"></div>
+        <a class="sponsors__sponsor" target="_blank" rel="noopener" href="https://aws.amazon.com/">
+          <img class="sponsors__image" src="./ipyevents · PyPI_files/68747470733a2f2f73746f726167652e676f6f676c65617069732e636f6d2f707970692d6173736574732f73706f6e736f726c6f676f732f6177732d77686974652d6c6f676f2d7443615473387a432e706e" alt="" loading="lazy">
+          <span class="sponsors__name">AWS</span>
+          <span class="sponsors__service">
+              Cloud computing and Security Sponsor
+          </span>
+        </a>
+        <a class="sponsors__sponsor" target="_blank" rel="noopener" href="https://www.datadoghq.com/">
+          <img class="sponsors__image" src="./ipyevents · PyPI_files/68747470733a2f2f73746f726167652e676f6f676c65617069732e636f6d2f707970692d6173736574732f73706f6e736f726c6f676f732f64617461646f672d77686974652d6c6f676f2d6668644c4e666c" alt="" loading="lazy">
+          <span class="sponsors__name">Datadog</span>
+          <span class="sponsors__service">
+              Monitoring
+          </span>
+        </a>
+        <a class="sponsors__sponsor" target="_blank" rel="noopener" href="https://www.fastly.com/">
+          <img class="sponsors__image" src="./ipyevents · PyPI_files/68747470733a2f2f73746f726167652e676f6f676c65617069732e636f6d2f707970692d6173736574732f73706f6e736f726c6f676f732f666173746c792d77686974652d6c6f676f2d65684d3077735f6f" alt="" loading="lazy">
+          <span class="sponsors__name">Fastly</span>
+          <span class="sponsors__service">
+              CDN
+          </span>
+        </a>
+        <a class="sponsors__sponsor" target="_blank" rel="noopener" href="https://careers.google.com/">
+          <img class="sponsors__image" src="./ipyevents · PyPI_files/68747470733a2f2f73746f726167652e676f6f676c65617069732e636f6d2f707970692d6173736574732f73706f6e736f726c6f676f732f676f6f676c652d77686974652d6c6f676f2d616734424e377433" alt="" loading="lazy">
+          <span class="sponsors__name">Google</span>
+          <span class="sponsors__service">
+              Download Analytics
+          </span>
+        </a>
+        <a class="sponsors__sponsor" target="_blank" rel="noopener" href="https://www.pingdom.com/">
+          <img class="sponsors__image" src="./ipyevents · PyPI_files/68747470733a2f2f73746f726167652e676f6f676c65617069732e636f6d2f707970692d6173736574732f73706f6e736f726c6f676f732f70696e67646f6d2d77686974652d6c6f676f2d67355831547546" alt="" loading="lazy">
+          <span class="sponsors__name">Pingdom</span>
+          <span class="sponsors__service">
+              Monitoring
+          </span>
+        </a>
+        <a class="sponsors__sponsor" target="_blank" rel="noopener" href="https://getsentry.com/for/python">
+          <img class="sponsors__image" src="./ipyevents · PyPI_files/68747470733a2f2f73746f726167652e676f6f676c65617069732e636f6d2f707970692d6173736574732f73706f6e736f726c6f676f732f73656e7472792d77686974652d6c6f676f2d4a2d6b64742d706e" alt="" loading="lazy">
+          <span class="sponsors__name">Sentry</span>
+          <span class="sponsors__service">
+              Error logging
+          </span>
+        </a>
+        <a class="sponsors__sponsor" target="_blank" rel="noopener" href="https://statuspage.io/">
+          <img class="sponsors__image" src="./ipyevents · PyPI_files/68747470733a2f2f73746f726167652e676f6f676c65617069732e636f6d2f707970692d6173736574732f73706f6e736f726c6f676f732f737461747573706167652d77686974652d6c6f676f2d5467476c" alt="" loading="lazy">
+          <span class="sponsors__name">StatusPage</span>
+          <span class="sponsors__service">
+              Status page
+          </span>
+        </a>
+</div>
+</body></html>
