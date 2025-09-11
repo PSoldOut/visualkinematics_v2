@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 1757586093.96048 "main.bcf" "main.bbl" "main" 1757586099.76562 0
-  "main.bcf" 1757520486 114016 fd43e10dea3dbfc91200652ed7e49006 "pdflatex"
-  "quellen.bib" 1757586093 10982 8e015f1954f7f134b5bc2a66a778880c ""
+["biber main"] 1757586093.96048 "main.bcf" "main.bbl" "main" 1757587855.86627 0
+  "main.bcf" 1757587855 114016 fd43e10dea3dbfc91200652ed7e49006 "pdflatex"
+  "quellen.bib" 1757586166 10982 8e015f1954f7f134b5bc2a66a778880c ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1757520483.57792 "c:/Users/Philipp/Desktop/gitProjects/visualkinematics_v2/latex_v2/main.tex" "main.pdf" "main" 1757586099.76581 0
+["pdflatex"] 1757587851.94637 "c:/Users/Philipp/Desktop/gitProjects/visualkinematics_v2/latex_v2/main.tex" "main.pdf" "main" 1757587855.86693 0
   "C:/Users/Philipp/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1754048852 82686 2381c3433487640bf26aa76a10db7eb2 ""
   "C:/Users/Philipp/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1744032231 12037097 f1aaf3e725f1267bdc89a46b152a8116 ""
   "C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc" 1256929440 3486 c7eadf5dcc57b3b2d11736679f6636ba ""
@@ -249,7 +249,8 @@
   "C:/Users/Philipp/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
   "C:/Users/Philipp/AppData/Local/Programs/MiKTeX/tex/latex/xfor/xfor.sty" 1233849756 2689 44855b72da58344b1c1d9b3087bce6ca ""
   "C:/Users/Philipp/AppData/Local/Programs/MiKTeX/tex/latex/xkeyval/xkeyval.sty" 1656236919 4937 4ce600ce9bd4ec84d0250eb6892fcf4f ""
-  "c:/Users/Philipp/Desktop/gitProjects/visualkinematics_v2/latex_v2/main.tex" 1757431616 4753 6bf19ffa1467730e67123548ed924b4f ""
+  "Eigenständigkeitserklärung_ausgefüllt.pdf" 1757587569 602703 86407fa6408bdb00f8bc187d76549f8e ""
+  "c:/Users/Philipp/Desktop/gitProjects/visualkinematics_v2/latex_v2/main.tex" 1757587846 4810 0cfe8199d30422297404076e3d13a7c9 ""
   "images/DH_explain2.PNG" 1751644916 40335 384db3432eb0290d0c25ee40b7e0a101 ""
   "images/DOF_exp.PNG" 1751573881 58837 0369d78f5759ca592dc4820463d12228 ""
   "images/SPS_Boxplot.png" 1754572369 24508 c5a45e068a471baa74f179aab8d05b78 ""
@@ -266,15 +267,15 @@
   "images/package_diagramm.png" 1754053295 15091 3b31a426983d3c85bfb46b8489a73ec7 ""
   "images/polyscope5.PNG" 1752583001 475285 153d9c68a02fdb2f451e6f83d95da2e1 ""
   "images/robot_with_dh.PNG" 1752779078 103835 35d386bfe29ad524a75b17b80210f30c ""
-  "main.aux" 1757520486 23576 1605a3f9896706867622ef0b95b30db3 "pdflatex"
+  "main.aux" 1757587855 23576 382de230580bc5f053d64e2a00a63940 "pdflatex"
   "main.bbl" 1757586099 46702 d6ce028a11454113c8dc43ee4a58bd10 "biber main"
-  "main.loa" 1757520486 506 d6a14d26f26d19a4c9acfec2cbce5ca5 "pdflatex"
-  "main.lof" 1757520486 2640 112149e8d4ec3fc8e9665b733b8e83e6 "pdflatex"
-  "main.lot" 1757520486 903 e3c4de96e0059365c6b96ac21852ca2c "pdflatex"
-  "main.out" 1757520486 6232 a2ef3c6d406b68fae71325fd5cee38d6 "pdflatex"
-  "main.run.xml" 1757520486 2307 3de67e6f1ed5bca0492f00cf768167cb "pdflatex"
-  "main.tex" 1757431616 4753 6bf19ffa1467730e67123548ed924b4f ""
-  "main.toc" 1757520486 3251 ce84deaf091302daa66968208cbf251f "pdflatex"
+  "main.loa" 1757587855 506 d6a14d26f26d19a4c9acfec2cbce5ca5 "pdflatex"
+  "main.lof" 1757587855 2640 112149e8d4ec3fc8e9665b733b8e83e6 "pdflatex"
+  "main.lot" 1757587855 903 e3c4de96e0059365c6b96ac21852ca2c "pdflatex"
+  "main.out" 1757587855 6232 a2ef3c6d406b68fae71325fd5cee38d6 "pdflatex"
+  "main.run.xml" 1757587855 2307 3de67e6f1ed5bca0492f00cf768167cb "pdflatex"
+  "main.tex" 1757587846 4810 0cfe8199d30422297404076e3d13a7c9 ""
+  "main.toc" 1757587855 3251 ce84deaf091302daa66968208cbf251f "pdflatex"
   "text/abstract.tex" 1757429950 1168 5c554ef13b49c99ac746dd84fc6dbad7 ""
   "text/anforderungen.tex" 1757423932 4137 a7aeafa36c5eea124fbeadc67fbbec3b ""
   "text/anhang.tex" 1756637049 4533 a37ed186aee6cf206ea596fc4e308643 ""
