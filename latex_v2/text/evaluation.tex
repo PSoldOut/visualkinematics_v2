@@ -1,7 +1,8 @@
 \section{Evaluation}
 In diesem Kapitel wird untersucht, inwieweit die im Rahmen dieser Arbeit definierten funktionalen und nicht-funktionalen Anforderungen durch das entwickelte Framework erfüllt werden.  
 Die funktionalen Anforderungen werden dabei einzeln überprüft und deren Umsetzung dargestellt.  
-Die nicht-funktionalen Anforderungen werden ebenfalls bewertet; die Anforderung der effizienten Ausführung wird aufgrund ihrer besonderen Relevanz und des hierfür durchgeführten Stresstests in einem gesonderten Kapitel behandelt.
+Die nicht-funktionalen Anforderungen werden ebenfalls bewertet.
+Die Anforderung der effizienten Ausführung wird aufgrund ihrer besonderen Relevanz und des hierfür durchgeführten Stresstests in einem gesonderten Kapitel behandelt.
 
 \begin{itemize}
     \item \textbf{Funktionale Anforderungen:}
@@ -16,6 +17,9 @@ Die nicht-funktionalen Anforderungen werden ebenfalls bewertet; die Anforderung 
 
         \item \textbf{Endeffektorsteuerung durch interaktive Bewegung des Koordinatensystems:} \\
         Das Framework bietet die Möglichkeit, das Koordinatensystem des Endeffektors interaktiv zu verschieben. Die Rückwärtstransformation wird dabei genutzt, um eine passende Gelenkkonfiguration zu berechnen. Die Anforderung ist erfüllt.
+
+        \item \textbf{Integration einer Teach-In Funktion:} \\
+        Das Framework bietet die Möglichkeit die aktuelle Gelenkkonfiguration zu speichern und zu einem späteren Zeitpunkt wieder einzunehmen, daher ist diese Anforderung erfüllt.
 
         \item \textbf{Bewegung im lokalen und globalen Koordinatensystem:} \\
         Die Bewegung des Endeffektors kann sowohl im lokalen als auch im globalen Koordinatensystem erfolgen, wodurch diese Anforderung erfüllt wird.
@@ -62,7 +66,7 @@ da es lediglich einmalig beim Start des Frameworks erfolgt.
 Der Stresstest wurde am 25.07.2025 und 06.08.2025 im Computerraum C.1.30 des Fachbereichs Informatik der Fachhochschule Dortmund durchgeführt.
 Dabei kam ein Laptop der Marke HP (System B LT, siehe Tabelle \ref{tab:system_b_lt}) als Server zum Einsatz.
 Als Clients wurden acht Workstations der Marke Dell (System C WS, siehe Tabelle \ref{tab:system_c_ws}) verwendet.
-Für die Netzwerkkommunikation wurde ein Access Point der Marke TP-Link (System D AP, siehe Tabelle \ref{tab:system_d_ap}) mit einem Frequenzbereich von 2.4GHz eingesetzt.
+Für die Netzwerkkommunikation wurde ein Access Point der Marke TP-Link (System D AP, siehe Tabelle \ref{tab:system_d_ap}) mit einem Frequenzbereich von 2.4\,GHz eingesetzt.
 Dieser wurde ausschließlich für den Test verwendet, sodass keine zusätzliche Auslastung des WLANs vorlag.
 Server und Clients waren alle gleichzeitig über WLAN mit dem Access Point verbunden.
 Für die Kommunikation zwischen Clients und Server wurde JupyterLab verwendet.
@@ -147,7 +151,7 @@ Tabelle \ref{tab:jupyterlab} fasst die Ergebnisse zusammen.
 
 
 
-Die Aktualisierungsrate der Animation (siehe Anhang) unterlag deutlichen Schwankungen.
+Die Aktualisierungsrate der Animation unterlag deutlichen Schwankungen.
 Der Mittelwert lag bei 40{,}9 SPS bei 8 Clients, 79{,}25 SPS bei 4 Clients und 216{,}7 SPS bei einem einzelnen Client.
 Abbildung \ref{fig:sps_boxplot} zeigt ein Boxplot-Diagramm der erhobenen Messwerte.
 
