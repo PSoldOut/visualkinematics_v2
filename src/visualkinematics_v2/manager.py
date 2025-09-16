@@ -20,6 +20,7 @@ from appdirs import user_config_dir
 import toml
 from pathlib import Path
 import visualkinematics_v2
+import io
 
 
 #Datenhaltung (Model)
@@ -373,13 +374,11 @@ def _clean_dae(filepath):
     if end_index != -1:
         clean_content = content[:end_index + len("</COLLADA>")]
 
-        # Temporäre Datei erzeugen
-        temp_path = filepath.replace(".dae", "_cleaned.dae")
-        with open(temp_path, "w", encoding="utf-8") as f:
-            f.write(clean_content)
+        # statt Datei schreiben -> BytesIO nutzen
+        file_obj = io.BytesIO(clean_content.encode("utf-8"))
 
-        print(f"[INFO] Neuversuch mit bereinigter Datei: {temp_path}")
-        return trimesh.load(temp_path, force='mesh')
+        print(f"[INFO] Neuversuch mit bereinigter Datei aus Speicher")
+        return trimesh.load(file_obj, force='mesh')
     else:
         raise RuntimeError("Kein </COLLADA>-Tag gefunden. Datei ist möglicherweise komplett beschädigt.")
     
