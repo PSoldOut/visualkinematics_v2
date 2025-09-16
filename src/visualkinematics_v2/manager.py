@@ -378,7 +378,7 @@ def _clean_dae(filepath):
         file_obj = io.BytesIO(clean_content.encode("utf-8"))
 
         print(f"[INFO] Neuversuch mit bereinigter Datei aus Speicher")
-        return trimesh.load(file_obj, force='mesh')
+        return trimesh.load(file_obj, file_type="dae", force='mesh')
     else:
         raise RuntimeError("Kein </COLLADA>-Tag gefunden. Datei ist möglicherweise komplett beschädigt.")
     
