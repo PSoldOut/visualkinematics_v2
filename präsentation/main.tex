@@ -120,11 +120,11 @@
 %Um die Anforderungen zu erfüllen wurde zunächst die Verfügbarkeit von 3D-Modellen für solche Industrieroboter geprüft.
 %Nach längerer Recherche stellten sich ROS-Industrial und die Robotics Toolbox von Peter Corke als geeignete Quelle für die 3D-Modelle heraus.
 %Der ausschlaggebene Vorteil den diese beiden Quellen gegenüber anderen Quellen hatten, war der, dass diese Quellen auch URDF-Beschreibungen zu den 3D-Modellen mitliefern,
-%die im weiteren Verlauf der Entwicklung benötigt werden. Diese 3D-Modelle lagen hauptsächlich im stl format vor.
+%die im weiteren Verlauf der Entwicklung benötigt werden. Die 3D-Modelle lagen hauptsächlich im stl format vor.
 
 %Anschließend musste eine performante Lösung gefunden werden die 3D-Modelle über das framework in den Arbeitsspeicher zu laden,
 %da das Laden der stl-Dateien selbst pro Roboter auf herkömmlicher hardware im extremfall bis zu einer minute dauern konnte.
-%Daher werden die 3D-Modelle mithilfe eines lazy-loading algorithmus in das Binäre NPZ-Format übertragen und auf dem persistenten speicher abgelegt.
+%Daher werden die stl-Dateien mithilfe eines lazy-loading algorithmus in das Binäre NPZ-Format übertragen und auf dem persistenten speicher abgelegt.
 %Das laden dieser NPZ-Dateien war dann c.a 2800 mal schneller. So konnten übermäßig lange ladezeiten vermieden werden.
 
 %Nachdem die 3D-Modelle nun performant in den Arbeitsspeicher geladen werden konnten, war es möglich diese mithilfe der wrapper-library pythreejs zu rendern.
@@ -144,7 +144,7 @@
 %Das Framework soll laut den Anforderungen die Möglichkeit bieten, die Pose des End-
 %effektors (TCP) sowohl über globale als auch lokale Koordinaten zu steuern. Damit
 %sich die Glieder des Roboters entsprechend mitbewegen, müssen aus der Zielpose des
-%TCP die Gelenkkoordinaten q0, q1, . . . , qn im Konfigurationsraum bestimmt werden. Da
+%TCP die Gelenkkoordinaten im Konfigurationsraum bestimmt werden. Da
 %auch Roboter mit mehr als 6 Gelenken, wie der LBR iiwa von KUKA, unterstützt wer-
 %den sollen, wurde ein numerisches Verfahren auf Basis der Newton-Raphson-Methode
 %implementiert.

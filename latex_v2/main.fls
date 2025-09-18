@@ -445,10 +445,10 @@ OUTPUT main.loa
 INPUT .\text\einleitung.tex
 INPUT .\text\einleitung.tex
 INPUT text\einleitung.tex
-INPUT C:\Users\Philipp\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\rm-lmbx12.tfm
 INPUT .\text\theoretischer_hintergrund.tex
 INPUT .\text\theoretischer_hintergrund.tex
 INPUT text\theoretischer_hintergrund.tex
+INPUT C:\Users\Philipp\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\rm-lmbx12.tfm
 INPUT .\images\DOF_exp.PNG
 INPUT .\images\DOF_exp.PNG
 INPUT .\images\DOF_exp.PNG
@@ -456,6 +456,8 @@ INPUT .\images\DOF_exp.PNG
 INPUT .\images\DOF_exp.PNG
 INPUT .\images\DOF_exp.PNG
 INPUT .\images\DOF_exp.PNG
+INPUT C:\Users\Philipp\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\rm-lmbx8.tfm
+INPUT C:\Users\Philipp\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\rm-lmbx6.tfm
 INPUT C:\Users\Philipp\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\lm\lm-mathit.enc
 INPUT C:\Users\Philipp\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\lm\lm-mathsy.enc
 INPUT .\images\kuka-ir.PNG
@@ -549,8 +551,6 @@ INPUT .\images\UI.PNG
 INPUT .\images\UI.PNG
 INPUT .\images\UI.PNG
 INPUT .\images\UI.PNG
-INPUT C:\Users\Philipp\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\rm-lmbx8.tfm
-INPUT C:\Users\Philipp\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\rm-lmbx6.tfm
 INPUT .\images\robot_with_dh.PNG
 INPUT .\images\robot_with_dh.PNG
 INPUT .\images\robot_with_dh.PNG

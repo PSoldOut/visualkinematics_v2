@@ -203,20 +203,20 @@ Ein Vertex ist ein Punkt im Raum der durch seine Koordinaten eindeutig beschrieb
 Eine Vertex-Normale ist ein normalisierter Richtungsvektor der zusammen mit dem Vertex gespeichert wird und eine Ausrichtung der Oberfläche an diesem Punkt beschreibt.
 die Vertex-Normalen werden dann im Hintergrund von pythreejs baryzentrisch interpoliert, um einen Normalenvektor pro Pixel zu bestimmen \doublecite[9]{mileff2024per}.
 Für die Berechnung der Normalen ist ein gängiger Algorithmus implementiert worden.
-Dabei wird für jeden Vertex $v_i \in \{v_0, v_1,...,v_n\} \subset \mathbb{R}^3$ eine gemittelte Normale $n_i \in \mathbb{R}^3$ bestimmt,
-indem zunächst für jedes Dreieck $t_k = (\alpha_k,\beta_k,\gamma_k)$ die Flächennormale $n^{(k)}_{face}$ berechnet wird:
+Dabei wird für jeden Vertex $\mathbf{v}_i \in \{\mathbf{v}_0, \mathbf{v}_1,...,\mathbf{v}_n\} \subset \mathbb{R}^3$ eine gemittelte Normale $\mathbf{n}_i \in \mathbb{R}^3$ bestimmt,
+indem zunächst für jedes Dreieck $\mathbf{t}_k = (\alpha_k,\beta_k,\gamma_k)$ die Flächennormale $\mathbf{n}^{(k)}_{face}$ berechnet wird:
 \begin{align*}
-    e^{(k)}_1 = v_{\beta_k} - v_{\alpha_k}\\
-    e^{(k)}_2 = v_{\gamma_k} - v_{\alpha_k}\\
-    n^{(k)}_{face} = e^{(k)}_1 \times e^{(k)}_2
+    \mathbf{e}^{(k)}_1 = \mathbf{v}_{\beta_k} - \mathbf{v}_{\alpha_k}\\
+    \mathbf{e}^{(k)}_2 = \mathbf{v}_{\gamma_k} - \mathbf{v}_{\alpha_k}\\
+    \mathbf{n}^{(k)}_{face} = \mathbf{e}^{(k)}_1 \times \mathbf{e}^{(k)}_2
 \end{align*}
 
-Die Flächennormalen werden aufsummiert und es ergibt sich für jeden $v_i$:
+Die Flächennormalen werden aufsummiert und es ergibt sich für jeden $\mathbf{v}_i$:
 \begin{align*}
-    n_i := \sum_{k : v_i \in t_k} n^{(k)}_{\text{face}} 
+    \mathbf{n}_i := \sum_{k : v_i \in t_k} \mathbf{n}^{(k)}_{\text{face}} 
 \end{align*}
 
-Zuletzt wird $n_i$ mit $n_i \leftarrow \frac{n_i}{||n_i||}$ normiert, sofern $||n_i|| \neq 0$.
+Zuletzt wird $\mathbf{n}_i$ mit $\mathbf{n}_i \leftarrow \frac{\mathbf{n}_i}{||\mathbf{n}_i||}$ normiert, sofern $||\mathbf{n}_i|| \neq 0$.
 
 
 \vspace{1em}
@@ -227,14 +227,14 @@ Zuletzt wird $n_i$ mit $n_i \leftarrow \frac{n_i}{||n_i||}$ normiert, sofern $||
         \State $normals \gets$ Nullmatrix der Form $N \times 3$
         \State $triangles \gets$ Umgeformt aus \textit{indices} zu $M \times 3$
         \For{$k = 0$ \textbf{to} $M-1$}
-            \State $v_0 \gets vertices[triangles[k, 0]]$
-            \State $v_1 \gets vertices[triangles[k, 1]]$
-            \State $v_2 \gets vertices[triangles[k, 2]]$
-            \State $e_1 \gets v_1 - v_0$
-            \State $e_2 \gets v_2 - v_0$
-            \State $n_{\text{face}}^{(k)} \gets e_1 \times e_2$
+            \State $\mathbf{v}_0 \gets vertices[triangles[k, 0]]$
+            \State $\mathbf{v}_1 \gets vertices[triangles[k, 1]]$
+            \State $\mathbf{v}_2 \gets vertices[triangles[k, 2]]$
+            \State $\mathbf{e}_1 \gets \mathbf{v}_1 - \mathbf{v}_0$
+            \State $\mathbf{e}_2 \gets \mathbf{v}_2 - \mathbf{v}_0$
+            \State $\mathbf{n}_{\text{face}}^{(k)} \gets \mathbf{e}_1 \times \mathbf{e}_2$
             \For{$i \in \{0,1,2\}$}
-                \State $normals[triangles[k, i]] \mathrel{+}= n_{\text{face}}^{(k)}$
+                \State $normals[triangles[k, i]] \mathrel{+}= \mathbf{n}_{\text{face}}^{(k)}$
             \EndFor
         \EndFor
         \For{$i = 0$ \textbf{to} $N-1$}
@@ -446,7 +446,7 @@ Die Klasse ermöglicht die Erstellung von homogenen Transformationsmatrizen anha
 Die Berechnung erfolgt mithilfe der standardisierten DH-Transformationsmatrix, wie sie beispielsweise in \doublecite[275]{Robotics_Vision_and_Control} dargestellt ist:
 
 \[
-    A_i =
+    \mathbf{A}_i =
     \begin{bmatrix}
     \cos\theta_i & -\sin\theta_i\cos\alpha_i & \sin\theta_i\sin\alpha_i & a_i\cos\theta_i \\
     \sin\theta_i & \cos\theta_i\cos\alpha_i  & -\cos\theta_i\sin\alpha_i & a_i\sin\theta_i \\
@@ -467,14 +467,14 @@ Diese Transformation wird durch folgende homogene Matrix beschrieben:
 
 
 \[
-    T_{\text{global} \rightarrow \text{base}} =
+    \mathbf{T}_{\text{global} \rightarrow \text{base}} =
     \begin{bmatrix}
-    R & \mathbf{p} \\
+    \mathbf{R} & \mathbf{p} \\
     \mathbf{0}^\top & 1
     \end{bmatrix}
 \]
 
-wobei \( R \in \mathbb{R}^{3 \times 3} \) eine Rotationsmatrix und \( \mathbf{p} \in \mathbb{R}^3 \) ein Translationsvektor ist.
+wobei \( \mathbf{R} \in \mathbb{R}^{3 \times 3} \) eine Rotationsmatrix und \( \mathbf{p} \in \mathbb{R}^3 \) ein Translationsvektor ist.
 Die Matrix platziert die Roboterbasis bezüglich des globalen Koordinatensystems und kann der Klasse DHKinematicModel im Konstruktor übergeben werden.
 
 
@@ -483,12 +483,12 @@ erfolgt über das Invertieren der Transformation vom globalen Basiskoordinatensy
 Multiplikation mit der bekannten Pose des Werkzeugs:
 
 \[
-    T_{\text{dh}_n \rightarrow \text{ee}} = T_{\text{global} \rightarrow \text{dh}_n}^{-1} \cdot T_{\text{global} \rightarrow \text{ee}}
+    \mathbf{T}_{\text{dh}_n \rightarrow \text{ee}} = \mathbf{T}_{\text{global} \rightarrow \text{dh}_n}^{-1} \cdot \mathbf{T}_{\text{global} \rightarrow \text{ee}}
 \]
 
-Dabei bezeichnet \( T_{\text{global} \rightarrow \text{dh}_n} \) die gesamte Vorwärtstransformation vom globalen Koordinatensystem bis zum letzten DH-Koordinatensystem,
-die sich zusammensetzt aus der Matrix \( T_{\text{global} \rightarrow \text{base}} \cdot A_1 \cdot A_2 \cdots A_n \).
-Die resultierende Transformation \( T_{\text{dh}_n \rightarrow \text{ee}} \) beschreibt somit die relative Lage des Werkzeugs bezogen auf das letzte DH-Koordinaten\-system.
+Dabei bezeichnet \( \mathbf{T}_{\text{global} \rightarrow \text{dh}_n} \) die gesamte Vorwärtstransformation vom globalen Koordinatensystem bis zum letzten DH-Koordinatensystem,
+die sich zusammensetzt aus der Matrix \( \mathbf{T}_{\text{global} \rightarrow \text{base}} \cdot \mathbf{A}_1 \cdot \mathbf{A}_2 \cdots \mathbf{A}_n \).
+Die resultierende Transformation \( \mathbf{T}_{\text{dh}_n \rightarrow \text{ee}} \) beschreibt somit die relative Lage des Werkzeugs bezogen auf das letzte DH-Koordinaten\-system.
 Damit ist die gesamte Vorwärtstransformation nach der Denavit-Hartenberg-Konvention in dieser Klasse gekapselt und modular verfügbar.
 Die partiellen Vor\-wärts\-trans\-for\-ma\-tio\-nen
 
@@ -496,10 +496,10 @@ Die partiellen Vor\-wärts\-trans\-for\-ma\-tio\-nen
 \[
 \mathcal{F}^{(i)} = 
 \left\{
-T_{\text{global} \rightarrow \text{base}} \cdot A_1,\ 
-T_{\text{global} \rightarrow \text{base}} \cdot A_1 A_2,\ 
+\mathbf{T}_{\text{global} \rightarrow \text{base}} \cdot \mathbf{A}_1,\ 
+\mathbf{T}_{\text{global} \rightarrow \text{base}} \cdot \mathbf{A}_1 \mathbf{A}_2,\ 
 \dots,\ 
-T_{\text{global} \rightarrow \text{base}} \cdot \prod_{j=1}^{i} A_j
+\mathbf{T}_{\text{global} \rightarrow \text{base}} \cdot \prod_{j=1}^{i} \mathbf{A}_j
 \right\}
 \]
 
@@ -519,16 +519,16 @@ dargestellt wird.
 Dazu ist eine Funktion des Frameworks genutzt worden, die bereits im Rahmen der Projektarbeit entwickelt wurde und eine grafische Repräsentation eines Koordinatensystems erstellt.
 Diese Koordinatensysteme sind aber nicht direkt anhand der Transformationsmatrizen $\mathcal{F}^{(i)}$ transformiert worden.
 Das hätte den Nachteil, dass die Berechnung nach jeder Bewegung des Roboters wiederholt werden müsste.
-Stattdessen wurde der Joint-Klasse eine Variable zur Verwaltung des Koordinatensystems $K_i$ hinzugefügt und diese dem Group-Objekt (grafische Repräsentation) des vorherhigen Gelenks $j_{i-1}$ in der kinematischen Kette als Child zugewiesen,
-sodass die Transformation von $j_{i-1}$ an das Koordinatensystem $K_i$ weitergegeben wird.
-Da die Transformation von $K_i$ nun relativ zur Transformation des Gelenks $j_{i-1}$ angewendet wird,
-ist es notwendig die relative Transformation $T_{rel}$ zu berechnen, die auf das Koordinatensystem $K_i$
+Stattdessen wurde der Joint-Klasse eine Variable zur Verwaltung des Koordinatensystems $\mathbf{K}_i$ hinzugefügt und diese dem Group-Objekt (grafische Repräsentation) des vorherhigen Gelenks $j_{i-1}$ in der kinematischen Kette als Child zugewiesen,
+sodass die Transformation von $j_{i-1}$ an das Koordinatensystem $\mathbf{K}_i$ weitergegeben wird.
+Da die Transformation von $\mathbf{K}_i$ nun relativ zur Transformation des Gelenks $j_{i-1}$ angewendet wird,
+ist es notwendig die relative Transformation $\mathbf{T}_{rel}$ zu berechnen, die auf das Koordinatensystem $\mathbf{K}_i$
 anzuwenden ist, um die korrekte Lage zu erhalten.
-Dazu wird die globale Transformation des Gelenks bzw. des Group-Objekts $T_{j_{i-1}}$ invertiert und mit der globalen Transformation des DH-Koordinatensystems $T_{glob_i}$ multipliziert:
+Dazu wird die globale Transformation des Gelenks bzw. des Group-Objekts $\mathbf{T}_{j_{i-1}}$ invertiert und mit der globalen Transformation des DH-Koordinatensystems $\mathbf{T}_{glob_i}$ multipliziert:
 \[
-    T_{rel_i} = T_{j_{i-1}}^{-1} \cdot T_{glob_i}
+    \mathbf{T}_{rel_i} = \mathbf{T}_{j_{i-1}}^{-1} \cdot \mathbf{T}_{glob_i}
 \] 
-Die relative Transformation $T_{rel_i}$ kann dann einmalig auf $K_i$ angewendet werden,
+Die relative Transformation $\mathbf{T}_{rel_i}$ kann dann einmalig auf $\mathbf{K}_i$ angewendet werden,
 sodass dieses anschließend die korrekte Lage im Raum einnimmt und bei der Bewegung des Roboters automatisch durch die Transformationshierarchie mittransformiert wird.
 Zur besseren Sichtbarkeit der Koordinatensysteme wurde in der Manipulator-Klasse mit pythreejs eine Funktion ergänzt, die das Robotermodell transparent erscheinen lässt (s. Abbildung \ref{fig:robot_with_dh}), indem dem Material ein opacity-Wert zugewiesen wird.
 Durch die visuelle Darstellung der DH-Koordinatensysteme kann jede Zwischenkonfiguration entlang der kinematischen Kette nachvollziehbar in der Szene gerendert und analysiert werden, was den abstrakten Berechnungsprozess greifbar und anschaulich macht.
@@ -538,7 +538,7 @@ Durch die visuelle Darstellung der DH-Koordinatensysteme kann jede Zwischenkonfi
 \subsection{Rückwärtstransformation (inverse Kinematik)}
 
 Das Framework soll laut den Anforderungen die Möglichkeit bieten, die Pose des Endeffektors (TCP) sowohl über globale als auch lokale Koordinaten zu steuern.
-Damit sich die Glieder des Roboters entsprechend mitbewegen, müssen aus der Zielpose des TCP die Gelenkkoordinaten $q_0, q_1, \dots, q_n$ im Konfigurationsraum bestimmt werden.
+Damit sich die Glieder des Roboters entsprechend mitbewegen, müssen aus der Zielpose des TCP die Gelenkkoordinaten $\mathbf{q}_0, \mathbf{q}_1, \dots, \mathbf{q}_n$ im Konfigurationsraum bestimmt werden.
 Da auch Roboter mit mehr als 6 Gelenken, wie der \textit{LBR iiwa} von KUKA, unterstützt werden sollen, wurde ein numerisches Verfahren auf Basis der Newton-Raphson-Methode implementiert.
 
 \vspace{1em}
@@ -548,17 +548,17 @@ Da auch Roboter mit mehr als 6 Gelenken, wie der \textit{LBR iiwa} von KUKA, unt
 Um die symbolischen Ausdrücke für die Vorwärtstransformation effizient aufzubauen, wird die Mathematik-Library SymPy in Kombination mit NumPy verwendet.
 SymPy erlaubt die symbolische Definition der Denavit-Hartenberg-Matrizen
 \[
-A_1^{\text{sym}}, A_2^{\text{sym}}, \dots, A_n^{\text{sym}},
+\mathbf{A}_1^{\text{sym}}, \mathbf{A}_2^{\text{sym}}, \dots, \mathbf{A}_n^{\text{sym}},
 \]
 welche sukzessive zur Gesamttransformation multipliziert werden:
 
 \[
-A_{\text{ges}}^{\text{sym}} = A_1^{\text{sym}} \cdot A_2^{\text{sym}} \cdots A_n^{\text{sym}}
+\mathbf{A}_{\text{ges}}^{\text{sym}} = \mathbf{A}_1^{\text{sym}} \cdot \mathbf{A}_2^{\text{sym}} \cdots \mathbf{A}_n^{\text{sym}}
 \]
 
 Die symbolische Transformationsmatrix des TCP ergibt sich somit zu:
 \[
-T_{\text{TCP}}^{\text{sym}} = T_{\text{global} \rightarrow \text{base}} \cdot A_{\text{ges}}^{\text{sym}} \cdot T_{\text{DH}_n \rightarrow \text{EE}}
+\mathbf{T}_{\text{TCP}}^{\text{sym}} = \mathbf{T}_{\text{global} \rightarrow \text{base}} \cdot \mathbf{A}_{\text{ges}}^{\text{sym}} \cdot \mathbf{T}_{\text{DH}_n \rightarrow \text{EE}}
 \]
 
 \vspace{1em}
@@ -568,16 +568,16 @@ T_{\text{TCP}}^{\text{sym}} = T_{\text{global} \rightarrow \text{base}} \cdot A_
 Die Position des Endeffektors $\mathbf{p}_{\text{sym}}$ ist in der vierten Spalte von $T_{\text{TCP}}^{\text{sym}}$ enthalten:
 
 \[
-T_{\text{TCP}}^{\text{sym}} =
+\mathbf{T}_{\text{TCP}}^{\text{sym}} =
 \begin{bmatrix}
-R_{\text{sym}} & \mathbf{p}_{\text{sym}} \\
+\mathbf{R}_{\text{sym}} & \mathbf{p}_{\text{sym}} \\
 \mathbf{0}^\top & 1
 \end{bmatrix}
 \]
 
 Durch symbolische Ableitung von $\mathbf{p}_{\text{sym}}$ nach den Gelenkwinkeln entsteht die symbolische Jacobi-Matrix für die Position:
 \[
-J_{\text{pos}}^{\text{sym}} =
+\mathbf{J}_{\text{pos}}^{\text{sym}} =
 \begin{bmatrix}
 \frac{\partial p_x}{\partial q_0} & \cdots & \frac{\partial p_x}{\partial q_n} \\
 \frac{\partial p_y}{\partial q_0} & \cdots & \frac{\partial p_y}{\partial q_n} \\
@@ -595,16 +595,16 @@ Da die analytische Ableitung der Orientierung (Rotationsmatrix) aufwendig und po
 Für jede Komponente $q_i$ wird die Orientierung durch kleine Änderungen von $q_i$ variiert und die Änderung als Rotationsvektor $\Delta \boldsymbol{\theta}$ interpretiert:
 
 \[
-J_{\text{rot}}[:,i] \approx \frac{\boldsymbol{\theta}(R(q_i + \delta) R(q)^{-1})}{\delta}
+\mathbf{J}_{\text{rot}}[:,i] \approx \frac{\boldsymbol{\theta}(R(q_i + \delta) R(q)^{-1})}{\delta}
 \]
 
-Die daraus resultierende numerische Rotations-Jacobi-Matrix $J_{\text{rot}}$ hat ebenfalls Dimension $3 \times n$ und wird mit dem analytischen Positionsteil zu einer vollständigen Jacobi-Matrix zusammengeführt:
+Die daraus resultierende numerische Rotations-Jacobi-Matrix $\mathbf{J}_{\text{rot}}$ hat ebenfalls Dimension $3 \times n$ und wird mit dem analytischen Positionsteil zu einer vollständigen Jacobi-Matrix zusammengeführt:
 
 \[
-J_{\text{gesamt}} =
+\mathbf{J}_{\text{gesamt}} =
 \begin{bmatrix}
-J_{\text{pos}} \\
-J_{\text{rot}}
+\mathbf{J}_{\text{pos}} \\
+\mathbf{J}_{\text{rot}}
 \end{bmatrix}
 \]
 
@@ -618,14 +618,14 @@ Die Lösung der inversen Kinematik erfolgt iterativ. In jedem Schritt wird die D
 \mathbf{e} =
 \begin{bmatrix}
 \mathbf{p}_{\text{ziel}} - \mathbf{p}_{\text{aktuell}} \\
-\boldsymbol{\theta}(R_{\text{ziel}} R_{\text{aktuell}}^{-1})
+\boldsymbol{\theta}(\mathbf{R}_{\text{ziel}} \mathbf{R}_{\text{aktuell}}^{-1})
 \end{bmatrix}
 \]
 
-Mithilfe der Pseudoinversen der vollständigen Jacobi-Matrix $J_{\text{gesamt}}$ wird dann ein Gelenkwinkel-Inkrement $\Delta \mathbf{q}$ bestimmt:
+Mithilfe der Pseudoinversen der vollständigen Jacobi-Matrix $\mathbf{J}_{\text{gesamt}}$ wird dann ein Gelenkwinkel-Inkrement $\Delta \mathbf{q}$ bestimmt:
 
 \[
-\Delta \mathbf{q} = J_{\text{gesamt}}^{+} \cdot \mathbf{e}
+\Delta \mathbf{q} = \mathbf{J}_{\text{gesamt}}^{+} \cdot \mathbf{e}
 \]
 
 Der Gelenkwinkelvektor wird entsprechend aktualisiert:
@@ -644,41 +644,42 @@ Es ergibt sich folgender Algorithmus für die implementierung:
     \label{alg:inverse_kinematik}
     \begin{algorithmic}[1]
         \State \textbf{Symbolische Vorbereitung:}
-        \State $A_i^{\text{sym}} \gets$ DH-Matrix für jedes Gelenk $i$
-        \State $A_{\text{ges}}^{\text{sym}} \gets A_1^{\text{sym}} \cdot A_2^{\text{sym}} \cdots A_n^{\text{sym}}$
-        \State $T_{\text{TCP}}^{\text{sym}} \gets T_{\text{global} \rightarrow \text{base}} \cdot A_{\text{ges}}^{\text{sym}} \cdot T_{\text{DH}_n \rightarrow \text{EE}}$
-        \State $\mathbf{p}_{\text{sym}} \gets T_{\text{TCP}}^{\text{sym}}[0{:}3,\, 3]$
-        \State $R_{\text{sym}} \gets T_{\text{TCP}}^{\text{sym}}[0{:}3,\, 0{:}3]$
-        \State $J_{\text{pos}}^{\text{sym}} \gets \frac{\partial \mathbf{p}_{\text{sym}}}{\partial \mathbf{q}}$
+        \State $\mathbf{A}_i^{\text{sym}} \gets$ DH-Matrix für jedes Gelenk $i$
+        \State $\mathbf{A}_{\text{ges}}^{\text{sym}} \gets \mathbf{A}_1^{\text{sym}} \cdot \mathbf{A}_2^{\text{sym}} \cdots \mathbf{A}_n^{\text{sym}}$
+        \State $\mathbf{T}_{\text{TCP}}^{\text{sym}} \gets \mathbf{T}_{\text{global} \rightarrow \text{base}} \cdot \mathbf{A}_{\text{ges}}^{\text{sym}} \cdot \mathbf{T}_{\text{DH}_n \rightarrow \text{EE}}$
+        \State $\mathbf{p}_{\text{sym}} \gets \mathbf{T}_{\text{TCP}}^{\text{sym}}[0{:}3,\, 3]$
+        \State $\mathbf{R}_{\text{sym}} \gets \mathbf{T}_{\text{TCP}}^{\text{sym}}[0{:}3,\, 0{:}3]$
+        \State $\mathbf{J}_{\text{pos}}^{\text{sym}} \gets \frac{\partial \mathbf{p}_{\text{sym}}}{\partial \mathbf{q}}$
         \State $\mathit{fk\_pos},\, \mathit{fk\_rot},\, \mathit{jacobian\_pos} \gets \texttt{lambdify}(...)$
 
         \Statex
         \State \textbf{Iterative Lösung:}
         \State $q \gets q_0$ \Comment{Initialer Gelenkwinkelvektor}
         \For{$i \in \{0, \dots, \mathit{max\_iters}\}$}
-            \State $p_{\text{aktuell}} \gets \mathit{fk\_pos}(q)$
-            \State $R_{\text{aktuell}} \gets \mathit{fk\_rot}(q)$
-            \State $e_p \gets p_{\text{ziel}} - p_{\text{aktuell}}$
-            \State $R_{\text{fehler}} \gets R_{\text{ziel}} \cdot R_{\text{aktuell}}^{-1}$
-            \State $e_r \gets \mathit{asRotVec}(R_{\text{fehler}})$
-            \State $e \gets \begin{bmatrix} e_p \\ e_r \end{bmatrix}$ \Comment{Gesamter Fehlervektor}
-            \If{$\|e\| < \mathit{tol}$}
-                \State \Return $q$
+            \State $\mathbf{p}_{\text{aktuell}} \gets \mathit{fk\_pos}(\mathbf{q})$
+            \State $\mathbf{R}_{\text{aktuell}} \gets \mathit{fk\_rot}(\mathbf{q})$
+            \State $\mathbf{e}_p \gets \mathbf{p}_{\text{ziel}} - \mathbf{p}_{\text{aktuell}}$
+            \State $\mathbf{R}_{\text{fehler}} \gets \mathbf{R}_{\text{ziel}} \cdot \mathbf{R}_{\text{aktuell}}^{-1}$
+            \State $\mathbf{e}_r \gets \mathit{asRotVec}(\mathbf{R}_{\text{fehler}})$
+            \State $\mathbf{e} \gets \begin{bmatrix} \mathbf{e}_p \\ \mathbf{e}_r \end{bmatrix}$ \Comment{Gesamter Fehlervektor}
+            \If{$\|\mathbf{e}\| < \mathit{tol}$}
+                \State \Return $\mathbf{q}$
             \EndIf
-            \State $J_{\text{pos}} \gets \mathit{jacobian\_pos}(q)$
-            \State $J_{\text{rot}} \gets \text{zeros}(3,\, \text{len}(q))$
+            \State $\mathbf{J}_{\text{pos}} \gets \mathit{jacobian\_pos}(\mathbf{q})$
+            \State $\mathbf{J}_{\text{rot}} \gets \text{zeros}(3,\, \text{len}(\mathbf{q}))$
+            \State $\delta = 0.000001$
             \For{$j \in \{0, \dots, \text{len}(q)-1\}$}
-                \State $\delta q \gets \text{zeros\_like}(q)$
-                \State $\delta q[j] \gets \delta$
-                \State $R^+ \gets \mathit{fk\_rot}(q + \delta q)$
-                \State $R_{\Delta} \gets R^+ \cdot R_{\text{aktuell}}^{-1}$
-                \State $J_{\text{rot}}[:, j] \gets \mathit{asRotVec}(R_{\Delta}) / \delta$
+                \State $\Delta\mathbf{q} \gets \text{zeros\_like}(\mathbf{q})$
+                \State $\Delta\mathbf{q}[j] \gets \delta$
+                \State $\mathbf{R}^+ \gets \mathit{fk\_rot}(\mathbf{q} + \Delta\mathbf{q})$
+                \State $\mathbf{R}_{\Delta} \gets \mathbf{R}^+ \cdot \mathbf{R}_{\text{aktuell}}^{-1}$
+                \State $\mathbf{J}_{\text{rot}}[:, j] \gets \mathit{asRotVec}(\mathbf{R}_{\Delta}) / \delta$
             \EndFor
-            \State $J_{\text{gesamt}} \gets \begin{bmatrix} J_{\text{pos}} \\ J_{\text{rot}} \end{bmatrix}$
-            \State $\Delta q \gets J_{\text{gesamt}}^{+} \cdot e$
-            \State $q \gets q + \Delta q$
-            \If{$\mathit{joint\_mins} \neq \mathit{None}$ \textbf{and} $\mathit{joint\_maxs} \neq \mathit{None}$}
-                \State $q \gets \mathit{clip}(q,\, \mathit{joint\_mins},\, \mathit{joint\_maxs})$
+            \State $\mathbf{J}_{\text{gesamt}} \gets \begin{bmatrix} \mathbf{J}_{\text{pos}} \\ \mathbf{J}_{\text{rot}} \end{bmatrix}$
+            \State $\Delta\mathbf{q} \gets \mathbf{J}_{\text{gesamt}}^{+} \cdot \mathbf{e}$
+            \State $\mathbf{q} \gets \mathbf{q} + \Delta\mathbf{q}$
+            \If{$\mathbf{joint\_mins} \neq \mathit{None}$ \textbf{and} $\mathbf{joint\_maxs} \neq \mathit{None}$}
+                \State $\mathbf{q} \gets \mathit{clip}(\mathbf{q},\, \mathbf{joint\_mins},\, \mathbf{joint\_maxs})$
             \EndIf
         \EndFor
         \State \Return \texttt{Fehler: keine Konvergenz innerhalb max\_iters}
@@ -697,7 +698,7 @@ Nach Initialisierung des Gelenkwinkelvektors $\mathbf{q}$ wird in jeder Iteratio
 indem die transformierte symbolische Vor\-wärts\-trans\-for\-ma\-tion mit den aktuellen Gelenkwerten ausgewertet wird. 
 Aus der resultierenden Position und Orientierung wird anschließend der Fehlervektor $\mathbf{e}$ gebildet, der die Differenz zur Zielpose beschreibt.
 
-Zur Bestimmung eines Korrekturvorschlags für die Gelenkwinkel wird die zusammengesetzte Jacobi-Matrix $J_{\text{gesamt}}$ berechnet.
+Zur Bestimmung eines Korrekturvorschlags für die Gelenkwinkel wird die zusammengesetzte Jacobi-Matrix $\mathbf{J}_{\text{gesamt}}$ berechnet.
 Diese besteht aus einem analytischen Positionsteil sowie einem numerisch approximierten Rotationsanteil.
 Die dabei verwendeten Funktionen wurden in einem separaten symbolischen Vorbereitungsschritt mit \textit{SymPy} erzeugt und zur Laufzeit mit \textit{NumPy} effizient ausgewertet.
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.3) (preloaded format=pdflatex 2025.4.7)  14 SEP 2025 17:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.3) (preloaded format=pdflatex 2025.4.7)  18 SEP 2025 17:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1021,29 +1021,29 @@ File: ot1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 [1] (text/zusammenfassung.tex)
 
 [2] (main.toc
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 3.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 4.
  (C:\Users\Philipp\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 3.
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 4.
  (C:\Users\Philipp\AppData\Local\Programs\MiKTeX\tex/latex/lm\omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 3.
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 4.
  (C:\Users\Philipp\AppData\Local\Programs\MiKTeX\tex/latex/lm\omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 3.
+(Font)              <12> on input line 4.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 3.
+(Font)              <8> on input line 4.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 3.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 3.
+(Font)              <6> on input line 4.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 4.
  (C:\Users\Philipp\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 3.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 4.
  (C:\Users\Philipp\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
@@ -1081,14 +1081,19 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has b
 l.30 
       [1
 
-])
+]
+Overfull \hbox (1.88036pt too wide) in paragraph at lines 35--42
+[]\OT1/lmr/m/n/12 Kapitel 2 be-han-delt zun[]achst den theo-re-ti-schen Hin-ter-grund, der f[]ur das Verst[]andnis
+ []
+
+)
 
 [2] (text/theoretischer_hintergrund.tex
 Overfull \hbox (2.7285pt too wide) in paragraph at lines 2--9
 \OT1/lmr/m/n/12 so-wie die Denavit-Hartenberg-Konvention erl[]autert, be-vor die R[]uckw[]artstransformation
  []
 
-<images/DOF_exp.PNG, id=316, 1193.96063pt x 508.90125pt>
+<images/DOF_exp.PNG, id=311, 1193.96063pt x 508.90125pt>
 File: images/DOF_exp.PNG Graphic file (type png)
 <use images/DOF_exp.PNG>
 Package pdftex.def Info: images/DOF_exp.PNG  used on input line 23.
@@ -1103,7 +1108,7 @@ l.34
       <./images/DOF_exp.PNG>]
 
 [4{C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}]
-<images/kuka-ir.PNG, id=342, 658.71094pt x 593.96906pt>
+<images/kuka-ir.PNG, id=337, 658.71094pt x 593.96906pt>
 File: images/kuka-ir.PNG Graphic file (type png)
 <use images/kuka-ir.PNG>
 Package pdftex.def Info: images/kuka-ir.PNG  used on input line 76.
@@ -1116,7 +1121,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has
                                                   \__shipout_drop_firstpage_...
 l.107 
        <./images/kuka-ir.PNG>]
-<images/lbr2.png, id=357, 1907.125pt x 1073.00874pt>
+<images/lbr2.png, id=352, 1907.125pt x 1073.00874pt>
 File: images/lbr2.png Graphic file (type png)
 <use images/lbr2.png>
 Package pdftex.def Info: images/lbr2.png  used on input line 112.
@@ -1131,7 +1136,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has
                                                   \__shipout_drop_firstpage_...
 l.136 I
        n der heutigen Zeit findet die simulationsgestützte Programmierung, ... <./images/lbr2.png (PNG copy)>]
-<images/forward_kin.PNG, id=375, 674.52pt x 280.04625pt>
+<images/forward_kin.PNG, id=370, 674.52pt x 280.04625pt>
 File: images/forward_kin.PNG Graphic file (type png)
 <use images/forward_kin.PNG>
 Package pdftex.def Info: images/forward_kin.PNG  used on input line 156.
@@ -1148,7 +1153,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 192--197
 
  []
 
-<images/DH_explain2.PNG, id=386, 444.15938pt x 402.75468pt>
+<images/DH_explain2.PNG, id=381, 444.15938pt x 402.75468pt>
 File: images/DH_explain2.PNG Graphic file (type png)
 <use images/DH_explain2.PNG>
 Package pdftex.def Info: images/DH_explain2.PNG  used on input line 202.
@@ -1163,12 +1168,12 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) has
                                                   \__shipout_drop_firstpage_...
 l.235 
        <./images/DH_explain2.PNG>]
-<images/ik_planar_exp.PNG, id=401, 621.07031pt x 530.73282pt>
+<images/ik_planar_exp.PNG, id=396, 621.07031pt x 530.73282pt>
 File: images/ik_planar_exp.PNG Graphic file (type png)
 <use images/ik_planar_exp.PNG>
 Package pdftex.def Info: images/ik_planar_exp.PNG  used on input line 241.
 (pdftex.def)             Requested size: 220.50887pt x 188.43172pt.
-<images/ik_singularity_explain.PNG, id=405, 336.50719pt x 101.62968pt>
+<images/ik_singularity_explain.PNG, id=400, 336.50719pt x 101.62968pt>
 File: images/ik_singularity_explain.PNG Graphic file (type png)
 <use images/ik_singularity_explain.PNG>
 Package pdftex.def Info: images/ik_singularity_explain.PNG  used on input line 258.
@@ -1260,7 +1265,7 @@ Overfull \hbox (5.09149pt too wide) in paragraph at lines 254--257
 []\OT1/lmr/m/n/12 Die so be-rech-ne-ten Vertex-Normalen m[]ussen dem BufferGeometry-Objekt []ubergeben
  []
 
-<images/load_links.PNG, id=499, 517.18219pt x 368.1253pt>
+<images/load_links.PNG, id=494, 517.18219pt x 368.1253pt>
 File: images/load_links.PNG Graphic file (type png)
 <use images/load_links.PNG>
 Package pdftex.def Info: images/load_links.PNG  used on input line 261.
@@ -1275,7 +1280,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.8}) has
                                                   \__shipout_drop_firstpage_...
 l.287 
        <./images/load_links.PNG>]
-<images/load_robot.PNG, id=515, 519.44063pt x 370.38374pt>
+<images/load_robot.PNG, id=511, 519.44063pt x 370.38374pt>
 File: images/load_robot.PNG Graphic file (type png)
 <use images/load_robot.PNG>
 Package pdftex.def Info: images/load_robot.PNG  used on input line 308.
@@ -1292,7 +1297,7 @@ l.352
        <./images/load_robot.PNG>]
 
 [26]
-<images/polyscope5.PNG, id=532, 791.20593pt x 598.48593pt>
+<images/polyscope5.PNG, id=528, 791.20593pt x 598.48593pt>
 File: images/polyscope5.PNG Graphic file (type png)
 <use images/polyscope5.PNG>
 Package pdftex.def Info: images/polyscope5.PNG  used on input line 382.
@@ -1305,7 +1310,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.10}) ha
                                                   \__shipout_drop_firstpage_...
 l.406 
        <./images/polyscope5.PNG>]
-<images/UI.PNG, id=542, 1041.8925pt x 559.33969pt>
+<images/UI.PNG, id=538, 1041.8925pt x 559.33969pt>
 File: images/UI.PNG Graphic file (type png)
 <use images/UI.PNG>
 Package pdftex.def Info: images/UI.PNG  used on input line 411.
@@ -1322,7 +1327,7 @@ l.434 \subsection{Denavit-Hartenberg-Konvention}
                                                  <./images/UI.PNG>]
 
 [30]
-<images/robot_with_dh.PNG, id=561, 521.69907pt x 372.64218pt>
+<images/robot_with_dh.PNG, id=557, 521.69907pt x 372.64218pt>
 File: images/robot_with_dh.PNG Graphic file (type png)
 <use images/robot_with_dh.PNG>
 Package pdftex.def Info: images/robot_with_dh.PNG  used on input line 513.
@@ -1394,7 +1399,7 @@ Overfull \hbox (7.0078pt too wide) in paragraph at lines 10--14
 [46]
 
 [47]
-<images/aufbau.JPG, id=652, 4047.12pt x 3035.34pt>
+<images/aufbau.JPG, id=647, 4047.12pt x 3035.34pt>
 File: images/aufbau.JPG Graphic file (type jpg)
 <use images/aufbau.JPG>
 Package pdftex.def Info: images/aufbau.JPG  used on input line 82.
@@ -1420,7 +1425,7 @@ Overfull \hbox (13.05804pt too wide) in paragraph at lines 140--148
  [][] 
  []
 
-<images/SPS_Boxplot.png, id=668, 578.16pt x 361.35pt>
+<images/SPS_Boxplot.png, id=663, 578.16pt x 361.35pt>
 File: images/SPS_Boxplot.png Graphic file (type png)
 <use images/SPS_Boxplot.png>
 Package pdftex.def Info: images/SPS_Boxplot.png  used on input line 161.
@@ -1464,7 +1469,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{table.4}) has 
                                                   \__shipout_drop_firstpage_...
 l.103 
       ]
-<images/class_diagramm.png, id=688, 2074.75125pt x 2326.6925pt>
+<images/class_diagramm.png, id=683, 2074.75125pt x 2326.6925pt>
 File: images/class_diagramm.png Graphic file (type png)
 <use images/class_diagramm.png>
 Package pdftex.def Info: images/class_diagramm.png  used on input line 179.
@@ -1492,7 +1497,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{table.7}) has 
                                                   \__shipout_drop_firstpage_...
 l.183 
       ]
-<images/package_diagramm.png, id=693, 451.6875pt x 371.3875pt>
+<images/package_diagramm.png, id=688, 451.6875pt x 371.3875pt>
 File: images/package_diagramm.png Graphic file (type png)
 <use images/package_diagramm.png>
 Package pdftex.def Info: images/package_diagramm.png  used on input line 187.
@@ -1548,12 +1553,12 @@ Overfull \hbox (15.67506pt too wide) in paragraph at lines 193--193
 [59]
 
 [60]
-<Eigenständigkeitserklärung_ausgefüllt.pdf, id=762, 560.0925pt x 794.97pt>
+<Eigenständigkeitserklärung_ausgefüllt.pdf, id=757, 560.0925pt x 794.97pt>
 File: Eigenständigkeitserklärung_ausgefüllt.pdf Graphic file (type pdf)
 <use Eigenständigkeitserklärung_ausgefüllt.pdf>
 Package pdftex.def Info: Eigenständigkeitserklärung_ausgefüllt.pdf  used on input line 196.
 (pdftex.def)             Requested size: 560.09113pt x 794.96806pt.
-<Eigenständigkeitserklärung_ausgefüllt.pdf, id=764, page=1, 560.0925pt x 794.97pt>
+<Eigenständigkeitserklärung_ausgefüllt.pdf, id=759, page=1, 560.0925pt x 794.97pt>
 File: Eigenständigkeitserklärung_ausgefüllt.pdf Graphic file (type pdf)
 <use Eigenständigkeitserklärung_ausgefüllt.pdf, page 1>
 Package pdftex.def Info: Eigenständigkeitserklärung_ausgefüllt.pdf , page1 used on input line 196.
@@ -1590,23 +1595,23 @@ LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: A2EF3C6D406B68FAE71325FD5CEE38D6;6232.
+(rerunfilecheck)             Checksum: D4BA9D2F7283AFFD52AC755BD446C097;6083.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 31206 strings out of 473522
- 580806 string characters out of 5713642
- 1470907 words of memory out of 5000000
- 53762 multiletter control sequences out of 15000+600000
+ 31204 strings out of 473522
+ 580776 string characters out of 5713642
+ 1470904 words of memory out of 5000000
+ 53761 multiletter control sequences out of 15000+600000
  643067 words of font info for 139 fonts, out of 8000000 for 9000
  1143 hyphenation exceptions out of 8191
  78i,17n,81p,2448b,2748s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx8.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi6.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmib10.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy6.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb><C:/Users/Philipp/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (69 pages, 5305567 bytes).
+Output written on main.pdf (69 pages, 5306697 bytes).
 PDF statistics:
- 911 PDF objects out of 1000 (max. 8388607)
- 160 named destinations out of 1000 (max. 500000)
- 384 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 906 PDF objects out of 1000 (max. 8388607)
+ 159 named destinations out of 1000 (max. 500000)
+ 376 words of extra memory for PDF output out of 10000 (max. 10000000)
 

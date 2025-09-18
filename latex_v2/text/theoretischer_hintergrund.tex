@@ -29,11 +29,11 @@ Abbildung \ref{fig:DOF_explanation} zeigt jeweils einen Quader mit dem Freiheits
 
 Der Quader in Abbildung \ref{fig:DOF_explanation} a) hat den Freiheitsgrad 3 und kann nur auf einer Ebene bewegt werden, die durch den grauen Bereich dargestellt wird.
 Die Position des Quaders wird durch einen Ortsvektor eindeutig beschrieben.
-Zusätzlich kann der Quader noch um eine Achse gedreht werden, die senkrecht zur Ebene steht und durch den Punkt $P$ geht.
+Zusätzlich kann der Quader noch um eine Achse gedreht werden, die senkrecht zur Ebene steht und durch den Punkt $\mathbf{P}$ geht.
 Anhand des Ortsvektors und des Drehwinkels wird die Lage des Quaders auf der Ebene eindeutig beschrieben.
 
 Der Quader in Abbildung \ref{fig:DOF_explanation} b) hat den Freiheitsgrad 6 und kann sich frei im Raum bewegen.
-Die Position eines Punktes $P$, für den sich der Schwerpunkt des Quaders eignet, wird durch einen Ortsvektor mit 3 Komponenten beschrieben.
+Die Position eines Punktes $\mathbf{P}$, für den sich der Schwerpunkt des Quaders eignet, wird durch einen Ortsvektor mit 3 Komponenten beschrieben.
 Das sind die 3 Freiheitsgrade der Translation. Hinzu kommen die 3 Freiheitsgrade der Rotation, da der Quader frei um 3 Achsen im Raum rotieren kann
 \doublecite[35]{weber-Industrieroboter}.
 
@@ -42,7 +42,7 @@ Ein Roboter der sich im euklidischen Raum bewegt hätte den Arbeitsraum $T \subs
 
 Neben dem zuvor erwähnten Freiheitsgrad, der sich auf den Arbeitsraum bezieht, gibt es noch den Freiheitsgrad im Konfigurationsraum.
 In der Mechanik bezeichnet man die kleinste Menge von Parametern, die benötigt wird um die Lage eines Systems im Arbeitsraum zu beschreiben,
-als Konfiguration eines Systems. Diese kann durch einen Punkt $q$ dargestellt werden.
+als Konfiguration eines Systems. Diese kann durch einen Punkt $\mathbf{q}$ dargestellt werden.
 Die Menge aller möglichen Konfigurationen bildet den sogenannten Konfigurationsraum (c-space) $C$, sodass $q \in C$.
 Ein Roboter mit 2 Drehgelenken hätte beispielsweise den Konfigurationsraum $C \subset SO(1) \times SO(1)$ und seine Konfiguration könnte anhand von zwei Parametern $(q_1,q_2)$ beschrieben werden.
 Folglich hätte dieser Roboter einen Freiheitsgrad von 2 im Konfigurationsraum.
@@ -160,13 +160,13 @@ Abbildung \ref{fig:forward_kinematic} zeigt den schematischen Ablauf der Vorwär
 
 \vspace{1em}
 
-Sei $q$ ein Tupel mit $q = (q_1,q_2,....,q_n)^T$, welches die Ge\-lenk\-koordinaten enthält.
-Der Ortsvektor $p$, ausgehend vom Ursprung des Bezugskoordinatensystems und die Orientierung, beschrieben durch die Basisvektoren $x_W,y_W,z_W$, beschreiben die Pose des Endeffektors.
-Durch die Vor\-wärts\-trans\-for\-ma\-tion können diese aus dem Tupel $q$ berechnet werden.
+Sei $\mathbf{q}$ ein Tupel mit $\mathbf{q} = (q_1,q_2,....,q_n)^T$, welches die Ge\-lenk\-koordinaten enthält.
+Der Ortsvektor $\mathbf{p}$, ausgehend vom Ursprung des Bezugskoordinatensystems und die Orientierung, beschrieben durch die Basisvektoren $x_W,y_W,z_W$, beschreiben die Pose des Endeffektors.
+Durch die Vor\-wärts\-trans\-for\-ma\-tion können diese aus dem Tupel $\mathbf{q}$ berechnet werden.
 Genauer betrachtet ist die Vorwärtstransformation die Multiplikation mehrerer homogener Transformationsmatrizen,
 die jeweils die Lage eines einzelnen Gelenks in Bezug auf das vorherige Gelenk beschreiben.
 \[
-T_W(q) = \prescript{n}{0}{T}(q) = \prescript{1}{0}{T}(q_1) \cdot \prescript{2}{1}{T}(q_2)\cdot\cdot\cdot\prescript{n-1}{n-2}{T}(q_{n-1}) \cdot \prescript{n}{n-1}{T}(q_n)
+\mathbf{T}_W(q) = \prescript{n}{0}{\mathbf{T}}(q) = \prescript{1}{0}{\mathbf{T}}(q_1) \cdot \prescript{2}{1}{\mathbf{T}}(q_2)\cdot\cdot\cdot\prescript{n-1}{n-2}{\mathbf{T}}(q_{n-1}) \cdot \prescript{n}{n-1}{\mathbf{T}}(q_n)
 \]
 Für die Berechnung der homogenen Transformationsmatrizen wird in der Robotik die sogenannte Denavit-Hartenberg-Notation verwendet,
 aus der dann die Denavit-Hartenberg-Matrizen resultieren.
@@ -206,20 +206,20 @@ Abbildung \ref{fig:DH_explanation} zeigt eine schematische Zeichnung eines Knick
 
 \vspace{1em}
 
-Die erste Transformationsmatrix beschreibt das Basiskoordinatensystem $K_0$ und ist fest mit der ruhenden Basis, also dem ersten Glied verbunden.
-Der Ursprung von $K_0$ muss dabei auf die erste Gelenkachse gelegt werden.
-Die $z_0$-Achse von $K_0$ zeigt entlang der ersten Gelenkachse.
-Die $x_0$- und $y_0$-Achse sind anschließend frei wählbar, unter der Bedingung dass die zugehörigen Einheitsvektoren $x_0, y_0$ und $z_0$ ein rechtshändiges Koordinatensystem bilden.
+Die erste Transformationsmatrix beschreibt das Basiskoordinatensystem $\mathbf{K}_0$ und ist fest mit der ruhenden Basis, also dem ersten Glied verbunden.
+Der Ursprung von $\mathbf{K}_0$ muss dabei auf die erste Gelenkachse gelegt werden.
+Die $\mathbf{z}_0$-Achse von $\mathbf{K}_0$ zeigt entlang der ersten Gelenkachse.
+Die $\mathbf{x}_0$- und $\mathbf{y}_0$-Achse sind anschließend frei wählbar, unter der Bedingung dass die zugehörigen Einheitsvektoren $\mathbf{x}_0, \mathbf{y}_0$ und $\mathbf{z}_0$ ein rechtshändiges Koordinatensystem bilden.
 
-Jedes weitere Koordinatensystem $K_i$,
+Jedes weitere Koordinatensystem $\mathbf{K}_i$,
 welches durch eine Transformationsmatrix repräsentiert wird und aus den DH-Parametern gebildet wird, muss einen Satz fest definierter Bedingungen erfüllen:
-Der Ursprung von $K_i$ sollte auf der Gelenkachse $i+1$ liegen.
-Wenn sich die Gelenkachsen $i$ und $i+1$ schneiden, muss der Ursprung von $K_i$ im Schnittpunkt dieser beiden Achsen liegen.
-Verlaufen die beiden Achsen jedoch parallel, kann der Ursprung von $K_i$ beliebig auf die Gelenkachse $i+1$ gelegt werden.
-Wenn die Achsen sich nicht schneiden und auch nicht parallel sind, wird die gemeinsame Normale der Gelenkachse $i$ und $i+1$ berechnet und der Ursprung von $K_i$ auf den
+Der Ursprung von $\mathbf{K}_i$ sollte auf der Gelenkachse $i+1$ liegen.
+Wenn sich die Gelenkachsen $i$ und $i+1$ schneiden, muss der Ursprung von $\mathbf{K}_i$ im Schnittpunkt dieser beiden Achsen liegen.
+Verlaufen die beiden Achsen jedoch parallel, kann der Ursprung von $\mathbf{K}_i$ beliebig auf die Gelenkachse $i+1$ gelegt werden.
+Wenn die Achsen sich nicht schneiden und auch nicht parallel sind, wird die gemeinsame Normale der Gelenkachse $i$ und $i+1$ berechnet und der Ursprung von $\mathbf{K}_i$ auf den
 Schnittpunkt der gemeinsamen Normalen mit der Gelenkachse $i+1$ gelegt.
 
-Die Gesamttransformation vom Basis-Koordinatensystem $K_0$ zum Koordinatensystem des Endeffektors $K_i$ ergibt sich durch sukzessive Multiplikation aller einzelnen Transformationsmatrizen $K_0, K_1, ..., K_n$ entlang der kinematischen Kette.
+Die Gesamttransformation vom Basis-Koordinatensystem $\mathbf{K}_0$ zum Koordinatensystem des Endeffektors $\mathbf{K}_i$ ergibt sich durch sukzessive Multiplikation aller einzelnen Transformationsmatrizen $\mathbf{K}_0, \mathbf{K}_1, ..., \mathbf{K}_n$ entlang der kinematischen Kette.
 Das entspricht der Durchführung der Vorwärtstransformation.
 \doublecite[38-44]{weber-Industrieroboter}
 
