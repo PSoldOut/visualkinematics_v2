@@ -85,6 +85,7 @@
     \item Umsetzung der Vorwärts- und Rückwärtstransformation
     \item Endeffektorsteuerung durch interaktive Bewegung des Koordinatensystems
     \item Bewegung im lokalen und globalen Koordinatensystem
+    \item Integration einer Teach-In Funktion
     \item Manuelle Konfiguration der Gelenkwinkel
   \end{itemize}
 \end{frame}
@@ -107,10 +108,23 @@
 \begin{frame}{Entwicklungsprozess}
   \begin{itemize}
     \setlength{\itemsep}{1em}
-    \item Entwicklung eines Frameworks zur Robotersimulation in Jupyterlab
-    \item Basiert auf einer Projektarbeit 
-    \item Erweiterung des Frameworks um Simulation eines Industrieroboter
-    \item Ziel: Einsatz in der Lehre
+    \item Beschaffung der 3D-Modelle von Industrierobotern
+    \item Geeignete Quellen: ROS-Industrial und die Robotics Toolbox von Peter Corke
+    \item 3D-Modelle performant über Framework in den Arbeitsspeicher laden mithilfe des NPZ-Formats
+    \item Rendering mit pythreejs mithilfe der Klasse "Environment" $\to$ Ausgabe der 3D-Szene mit 3D-Modellen direkt im Jupyter Notebook
+  \end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Entwicklungsprozess}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+    \item URDF-Beschreibungen laden und Parsen
+    \item Informationen aus URDF-Beschreibungen wichtig um 3D-Modelle richtig zu animieren
+    \item Algorithmus zu Animieren: Zeitvariable 0 $\le$ t solange um ein $\Delta$t erhöhen, wie t $\le$ 1 ist
+    \item in jeder Iteration wird Rotation mehrerer Gelenke um Drehachse interpoliert
+    \item Rückwärtstransformation umgesetzt auf Basis der Newton-Raphson-Methode um Roboter mit mehr als 6 Gelenken zu unterstützen
   \end{itemize}
 \end{frame}
 
@@ -137,26 +151,17 @@
 %Diese sind wichtig um die 3D-Modelle richtig zu Animieren.
 
 %Zum Animieren wurde bereits in der vorangegangenen Projektarbeit ein Algorithmus verwendet bei dem eine Zeitvariable 0 ≤ t solange um ein ∆t erhöht wird, wie t ≤ 1 ist.  
-%Bei jedem Iterationsschritt wird dann die Transformation des zu animierenden Objekts mit t zwischen der alten und der neuen Transformation interpoliert
+%Bei jedem Iterationsschritt wird dann die Transformation des zu animierenden Objekts mit t zwischen der alten und der neuen Transformation interpoliert.
 %Darauf aufbauend wurde ein neuer Algorithmus entworfen, der in jeder Iteration die Rotation mehrerer Gelenke um die entsprechende Drehachse interpoliert.
 
 %Kommen wir noch zur Rückwärtstransformation.
 %Das Framework soll laut den Anforderungen die Möglichkeit bieten, die Pose des End-
-%effektors (TCP) sowohl über globale als auch lokale Koordinaten zu steuern. Damit
+%effektors sowohl über globale als auch lokale Koordinaten zu steuern. Damit
 %sich die Glieder des Roboters entsprechend mitbewegen, müssen aus der Zielpose des
-%TCP die Gelenkkoordinaten im Konfigurationsraum bestimmt werden. Da
+%Endeffektors die Gelenkkoordinaten im Konfigurationsraum bestimmt werden. Da
 %auch Roboter mit mehr als 6 Gelenken, wie der LBR iiwa von KUKA, unterstützt wer-
 %den sollen, wurde ein numerisches Verfahren auf Basis der Newton-Raphson-Methode
 %implementiert.
-
-
-
-
-
-
-
-
-
 
 
 
@@ -184,52 +189,6 @@
 
 
 
-\begin{frame}{Aufbau}
-  \textbf{util.py:}\vspace{0.5em}
-  \begin{itemize}
-    \setlength{\itemsep}{1em}
-    \item Zentrale Datei util.py mit Kern- und Hilfsfunktionen
-    \item Geometrische Transformationen und Umrechnung der Darstellungsformen von Rotationen
-    \item Klasse Environment für konfigurierbare 3D-Szene mit Kamera, Licht und Gitter
-    \item Funktion move() zur Simulation von Roboterbewegungen in der Ebene
-  \end{itemize}
-\end{frame}
-
-
-\begin{frame}{Aufbau}
-  \textbf{Beispiel-Notebooks: rotations.ipynb}\vspace{0.5em}
-  \begin{itemize}
-    \setlength{\itemsep}{1em}
-    \item Würfel der interaktiv per GUI-Elementen transformiert werden kann
-    \item Möglichkeiten des Frameworks veranschaulichen
-    \item Grundtransformationen nachvollziehbar machen
-  \end{itemize}
-\end{frame}
-
-
-\begin{frame}{Aufbau}
-  \textbf{Beispiel-Notebooks: quader.ipynb}\vspace{0.5em}
-  \begin{itemize}
-    \setlength{\itemsep}{1em}
-    \item Quader der anhand von Rotationsmatrizen rotiert werden soll
-    \item Orientiert sich an einer Klausuraufgabe im Modul Robotik
-    \item Visuelle Simulation der Rotationen
-  \end{itemize}
-\end{frame}
-
-
-\begin{frame}{Aufbau}
-  \textbf{Beispiel-Notebooks: robot.ipynb}\vspace{0.5em}
-  \begin{itemize}
-    \setlength{\itemsep}{1em}
-    \item Veranschaulichung einer Steuerungsaufgabe
-    \item Orientiert sich an einer Übungsaufgabe im Modul Robotik
-    \item Nutzer kann beobachten ob der Roboter dem gewünschten Pfad folgt
-  \end{itemize}
-\end{frame}
-
-
-
 
 
 
@@ -238,27 +197,28 @@
 \begin{frame}{Evaluation}
   \begin{itemize}
     \setlength{\itemsep}{1em}
-    \item Erfolgreiche Integration in JupyterLab: einfache Nutzung und direkte Visualisierung
-    \item Unterstützung verschiedener Rotationsdarstellungen inkl. Umrechnungen
-    \item Simulation radgetriebener Roboter über move()-Funktion realisiert
-    \item Kompatibilität mit SymPy sichergestellt
-    \item Zentrale Anforderungen erfüllt. Grundlage für spätere Erweiterungen geschaffen
+    \item Integration eines Knickarmroboters wurde umgesetzt
+    \item Vorwärts- und Rückwärtstransformation ist implementiert worden 
+    \item Endeffektorsteuerung durch interaktive Bewegung des Koordinatensystems wurde umgesetzt
+    \item Bewegung im lokalen und globalen Koordinatensystem möglich
+    \item Teach-In Funktion wurde Integriert
+    \item Manuelle Konfiguration der Gelenkwinkel ist mithilfe von Schiebereglern umgesetzt worden
   \end{itemize}
 \end{frame}
 
 
 
-
-\section{Ausblick auf die Bachelorarbeit}
-\begin{frame}{Ausblick auf die Bachelorarbeit}
+\begin{frame}{Evaluation}
   \begin{itemize}
     \setlength{\itemsep}{1em}
-    \item Deployment auf den JupyterLab-Servern der FH Dortmund
-    \item Erweiterungen um Stationäre Robobter
-    \item Vorwärts- und rückwärts-Transformation
-    
+    \item Benutzerfreundliche Bedienbarkeit $\to$ müsste eine Untersuchung durch Experten oder eine Nutzerstudie erfolgen
+    \item Intuitive Vermittlung kinematischer Konzepte $\to$ müsste eine Untersuchung durch Experten oder eine Nutzerstudie erfolgen
+    \item performante Ausführung (60FPS und 60Hz bei aktualisierungsrate der Animation) konnte erfüllt werden
   \end{itemize}
 \end{frame}
+
+
+
 
 
 \begin{frame}{}
