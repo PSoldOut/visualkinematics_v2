@@ -96,9 +96,9 @@
   \textbf{Nicht-Funktionale Anforderungen:}\vspace{0.5em}
   \begin{itemize}
     \setlength{\itemsep}{1em}
-    \item 60 FPS und aktualisierungsrate der Animation von 60\,Hz unter typischen Systemvoraussetzungen
-    \item Die GUI soll intuitiv und ohne Schulung bedienbar sein. Hauptfunktionen mit maximal drei Klicks erreichbar sein. Visuelles Feedback bei Fehlbedienung
-    \item Die GUI soll so gestaltet sein, dass die Bedienung des Roboters gleichzeitig als Lernprozess dient.
+    \item 60 FPS und Aktualisierungsrate der Animation von 60\,Hz unter typischen Systemvoraussetzungen
+    \item Die GUI soll intuitiv und ohne Schulung bedienbar sein, Hauptfunktionen mit maximal drei Klicks erreichbar sein, visuelles Feedback bei Fehlbedienung
+    \item Die GUI soll so gestaltet sein, dass die Bedienung des Roboters gleichzeitig als Lernprozess dient
   \end{itemize}
 \end{frame}
 
@@ -120,10 +120,10 @@
 \begin{frame}{Entwicklungsprozess}
   \begin{itemize}
     \setlength{\itemsep}{1em}
-    \item URDF-Beschreibungen laden und Parsen
+    \item URDF-Beschreibungen laden und parsen
     \item Informationen aus URDF-Beschreibungen wichtig um 3D-Modelle richtig zu animieren
-    \item Algorithmus zu Animieren: Zeitvariable 0 $\le$ t solange um ein $\Delta$t erhöhen, wie t $\le$ 1 ist
-    \item in jeder Iteration wird Rotation mehrerer Gelenke um Drehachse interpoliert
+    \item Algorithmus zum Animieren: Zeitvariable 0 $\le$ t solange um ein $\Delta$t erhöhen, wie t $\le$ 1 ist
+    \item In jeder Iteration wird Rotation mehrerer Gelenke um Drehachse interpoliert
     \item Rückwärtstransformation umgesetzt auf Basis der Newton-Raphson-Methode um Roboter mit mehr als 6 Gelenken zu unterstützen
   \end{itemize}
 \end{frame}
@@ -201,7 +201,7 @@
     \item Vorwärts- und Rückwärtstransformation ist implementiert worden 
     \item Endeffektorsteuerung durch interaktive Bewegung des Koordinatensystems wurde umgesetzt
     \item Bewegung im lokalen und globalen Koordinatensystem möglich
-    \item Teach-In Funktion wurde Integriert
+    \item Teach-In Funktion wurde integriert
     \item Manuelle Konfiguration der Gelenkwinkel ist mithilfe von Schiebereglern umgesetzt worden
   \end{itemize}
 \end{frame}
@@ -213,7 +213,7 @@
     \setlength{\itemsep}{1em}
     \item Benutzerfreundliche Bedienbarkeit $\to$ müsste eine Untersuchung durch Experten oder eine Nutzerstudie erfolgen
     \item Intuitive Vermittlung kinematischer Konzepte $\to$ müsste eine Untersuchung durch Experten oder eine Nutzerstudie erfolgen
-    \item performante Ausführung (60FPS und 60Hz bei aktualisierungsrate der Animation) konnte erfüllt werden
+    \item Performante Ausführung (60FPS und 60Hz bei Aktualisierungsrate der Animation) konnte erfüllt werden
   \end{itemize}
 \end{frame}
 
